@@ -30,7 +30,7 @@ import { SENSORY_COLORS, INITIAL_POSTERS, getPosterSpecs, CLUSTER_PROJECTS } fro
 
 export default function App() {
   // Navigation mode (Gatekeeper splash vs deep content vs dedicated detail page)
-  const [viewMode, setViewMode] = useState<"splash" | "main" | "project-detail">("main");
+  const [viewMode, setViewMode] = useState<"splash" | "main" | "project-detail">("splash");
   const [previousViewMode, setPreviousViewMode] = useState<"splash" | "main">("splash");
   const [isWorkHovered, setIsWorkHovered] = useState<boolean>(false);
   const [isDetailGrayscale, setIsDetailGrayscale] = useState<boolean>(false);
