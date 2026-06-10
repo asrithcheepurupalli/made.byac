@@ -7,15 +7,15 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const app = express();
-const PORT = 3000;
+const PORT = Number(process.env.PORT) || 3000;
 
 app.use(express.json());
-app.use("/images", express.static(path.join(process.cwd(), "images")));
+app.use("/images", express.static(path.join(process.cwd(), "public", "images")));
 app.get("/favicon.png", (req, res) => {
-  res.sendFile(path.join(process.cwd(), "favicon.png"));
+  res.sendFile(path.join(process.cwd(), "public", "favicon.png"));
 });
 app.get("/favicon.ico", (req, res) => {
-  res.sendFile(path.join(process.cwd(), "favicon.png"));
+  res.sendFile(path.join(process.cwd(), "public", "favicon.png"));
 });
 
 // In-memory contact submission log
