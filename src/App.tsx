@@ -30,7 +30,7 @@ import { SENSORY_COLORS, INITIAL_POSTERS, getPosterSpecs, CLUSTER_PROJECTS } fro
 
 export default function App() {
   // Navigation mode (Gatekeeper splash vs deep content vs dedicated detail page)
-  const [viewMode, setViewMode] = useState<"splash" | "main" | "project-detail">("splash");
+  const [viewMode, setViewMode] = useState<"splash" | "main" | "project-detail">("main");
   const [previousViewMode, setPreviousViewMode] = useState<"splash" | "main">("splash");
   const [isWorkHovered, setIsWorkHovered] = useState<boolean>(false);
   const [isDetailGrayscale, setIsDetailGrayscale] = useState<boolean>(false);
@@ -93,7 +93,7 @@ export default function App() {
   const [chatMessages, setChatMessages] = useState([
     {
       role: "model",
-      text: "How may I help guide your design and computational goals today? Ask me about our typographic grid, selected case studies, or design estimations."
+      text: "How may we help guide your design and computational goals today? Ask us about our typographic grid, selected case studies, or design estimations."
     }
   ]);
   const [chatInput, setChatInput] = useState<string>("");
@@ -226,7 +226,7 @@ export default function App() {
         ...prev,
         {
           role: "model",
-          text: `Thank you for of-the-moment interest in my design cohorts. To activate real-time intelligence grids, enter your GEMINI_API_KEY in the Settings menu of the builder dashboard. I would love to shape this idea with you.`
+          text: `Thank you for your interest in our design cohorts. To activate real-time intelligence grids, enter your GEMINI_API_KEY in the Settings menu of the builder dashboard. We would love to shape this idea with you.`
         }
       ]);
     } finally {
@@ -810,7 +810,7 @@ export default function App() {
 
             {/* Core manifesto with deep editorial spacing */}
             <p className="text-lg md:text-xl font-serif leading-relaxed text-neutral-600 dark:text-[#b4afaa] max-w-xl transition-colors duration-500">
-              I craft ultra-premium visual brand systems, sensory digital interfaces, and physical confectionery packaging suites with absolute Swiss grid discipline.
+              We craft ultra-premium visual brand systems, sensory digital interfaces, and physical confectionery packaging suites with absolute Swiss grid discipline.
             </p>
 
             {/* Action buttons styled with the selected color preset */}
@@ -1573,7 +1573,7 @@ export default function App() {
           <span className="text-[10px] font-mono tracking-[0.3em] uppercase text-[#cfc4c5]">BLUEPRINT</span>
           <h2 className="text-3xl md:text-4xl font-extrabold font-serif tracking-tight mt-1">Symmetrical Process</h2>
           <p className="text-sm text-neutral-500 dark:text-neutral-400 mt-2">
-            Minimal luxury requires disciplined, transparent progression. I break every brief into 5 rigid client checkpoints.
+            Minimal luxury requires disciplined, transparent progression. We break every brief into 5 rigid client checkpoints.
           </p>
         </div>
 
@@ -1611,7 +1611,7 @@ export default function App() {
             
             <div className="space-y-6 text-base text-neutral-500 dark:text-neutral-400 font-serif leading-relaxed">
               <p>
-                I am Asrith Cheepurupalli of made. by ac. Combining tactile design fundamentals with responsive full-stack technology, I believe interfaces should be highly responsive yet calm; respectful of human memory and emotional capacity.
+                We are made. by ac — a design and development studio led by Asrith Cheepurupalli. Combining tactile design fundamentals with responsive full-stack technology, we believe interfaces should be highly responsive yet calm; respectful of human memory and emotional capacity.
               </p>
               
               <blockquote className="border-l-2 border-neutral-900 dark:border-white pl-4 italic text-sm text-neutral-650 dark:text-[#cfc4c5]">
@@ -1649,7 +1649,7 @@ export default function App() {
             Let's build something people remember.
           </h2>
           <p className="text-sm md:text-base text-neutral-500 dark:text-neutral-400 leading-relaxed font-serif max-w-2xl mx-auto">
-            I am always open to discussing new brand systems, custom digital architectures, or computational UI design assignments. All dispatches are processed directly inside the studio.
+            We are always open to discussing new brand systems, custom digital architectures, or computational UI design assignments. All dispatches are processed directly inside the studio.
           </p>
 
           <div className="inline-flex flex-col sm:flex-row items-center justify-center gap-6 pt-6 w-full">

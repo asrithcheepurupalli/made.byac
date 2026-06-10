@@ -25,15 +25,15 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
           The client '${name}' with email '${email}' left this message:
           "${message}"
 
-          As Asrith Cheepurupalli, write a short, extremely warm, specific 2-sentence and supportive acknowledgment feedback receipt for this idea.
-          Express subtle design interest in their specific field or idea. Do not refer to yourself as an AI. Keep it elegant.
+          As the made. by ac studio team, write a short, extremely warm, specific 2-sentence and supportive acknowledgment feedback receipt for this idea.
+          Use the first-person plural ("we" / "our studio"). Express subtle design interest in their specific field or idea. Do not refer to yourself as an AI. Keep it elegant.
         `;
         const response = await ai.models.generateContent({
           model: GEMINI_MODEL,
           contents: prompt,
           config: {
             systemInstruction:
-              "You are Asrith Cheepurupalli, responding to a collaborative inquiry with premium calm elegance.",
+              "You are the made. by ac studio team, responding to a collaborative inquiry with premium calm elegance in the first-person plural (we/our studio).",
             temperature: 0.8,
           },
         });
@@ -51,7 +51,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       timestamp: new Date().toISOString(),
       aiFeedback:
         aiFeedback ||
-        "Thank you. Your inquiry has been registered on my secure studio log. I will respond to you personally within 24 hours.",
+        "Thank you. Your inquiry has been registered on our secure studio log. We will respond to you personally within 24 hours.",
     };
 
     res.json({ success: true, submission });

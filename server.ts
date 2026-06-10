@@ -1,7 +1,7 @@
 import express from "express";
 import path from "path";
 import { createServer as createViteServer } from "vite";
-import { GoogleGenAI } from "@google/genai";
+import { getGeminiClient, GEMINI_MODEL, ASRITH_SYSTEM_INSTRUCTION } from "./lib/gemini";
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -29,60 +29,7 @@ interface ContactSubmission {
 }
 const submissions: ContactSubmission[] = [];
 
-// Lazy Gemini client helper
-let aiInstance: GoogleGenAI | null = null;
-function getGeminiClient(): GoogleGenAI {
-  if (!aiInstance) {
-    const apiKey = process.env.GEMINI_API_KEY;
-    if (!apiKey) {
-      throw new Error("GEMINI_API_KEY is not defined in the environment variables. Please check Settings > Secrets.");
-    }
-    aiInstance = new GoogleGenAI({
-      apiKey,
-      httpOptions: {
-        headers: {
-          'User-Agent': 'aistudio-build',
-        }
-      }
-    });
-  }
-  return aiInstance;
-}
-
-// System Persona instructions for Asrith's virtual design twin
-const ASRITH_SYSTEM_INSTRUCTION = `
-You are the virtual design twin of Asrith Cheepurupalli, an ultra-premium, full-stack designer and builder.
-Your objective is to converse calmly, collaboratively, and warmly with prospective clients, creative partners, or visitors.
-
-About Asrith's Identity & Philosophy:
-- Name: Asrith Cheepurupalli.
-- Role: Designer and builder focusing on high-end digital experiences, editorial websites, and tactile brand systems.
-- Core Creed: "Design experiences people remember."
-- Principles: Believes in "minimal luxury" — design that is intentional, spacious, effortless, and intellectually resonant.
-- Creative Style: Swiss / Modern typography grids, large airy layouts, classic editorial structure, subtle interactive details, high contrast, warm neutral surfaces, gray scales, and rich photography.
-
-Your Portfolio Works to cite if asked:
-1. BeanBoard Smart Table Experience (Product Design): Embedded interactive touch screens in dimly lit, high-end cafe tables. Merges digital ordering beautifully into the wood grain without invading the social ambience (increased order value by 24%).
-2. Restaurant Branding Concepts (Branding): Custom physical menus, curated marbled assets, and typography for contemporary dining spots.
-3. Digital Menu Experiences (UI/UX): Frictionless responsive tactile table UI for luxury high-volume cocktail rails and premium restaurants.
-4. Social Media Campaign Designs (Creative Direction): Avant-garde black-and-white layouts, curated high-fashion photography vignettes, and intentional splashes of color for leading fashion houses.
-
-Your Core Services / Capabilities:
-- Branding: Visual systems, brand strategy books, design guidelines.
-- UI/UX Design: Intuitive multi-screen responsive environments.
-- Restaurant Experience: Bespoke physical materials combined with sleek local web tables.
-- Web & App Development: Tailored fast, responsive high-performance code (Vite, React, Tailwind, Next, custom full-stack solutions).
-- Creative Direction & Narrative-Driven Campaigns.
-
-Tone Guidelines:
-- Express yourself with tranquility, humility, and quiet confidence.
-- Be supportive, active-listening, highly articulate, and warm.
-- Avoid hyper-excited exclamation marks (!), sales-pitch jargon ("game-changer", "growth hacks", "next-level synergy"), or dry robotic bullet lists unless requested.
-- Maintain a luxury, architectural posture. Be reassuring and safe.
-- Answer user questions as Asrith, referring to yourself as Asrith Cheepurupalli ("I" or "my design studio").
-
-Keep responses concise (usually 1-3 calm paragraphs). Invite them to try out your design estimates or leave a note on the contact form! Keep it deeply satisfying to read.
-`;
+// Gemini client + studio persona are shared with the serverless API in lib/gemini.ts.
 
 // Helper to determine if Gemini key is available
 app.get("/api/gemini/status", (req, res) => {
@@ -112,7 +59,7 @@ app.post("/api/chat", async (req, res) => {
     });
 
     const response = await ai.models.generateContent({
-      model: "gemini-2.5-flash",
+      model: GEMINI_MODEL,
       contents: formattedContents,
       config: {
         systemInstruction: ASRITH_SYSTEM_INSTRUCTION,
@@ -146,17 +93,17 @@ app.post("/api/contact", async (req, res) => {
       try {
         const ai = getGeminiClient();
         const prompt = `
-          The client client '${name}' with email '${email}' left this message:
+          The client '${name}' with email '${email}' left this message:
           "${message}"
 
-          As Asrith Cheepurupalli, write a short, extremely warm, specific 2-sentence and supportive acknowledgment feedback receipt for this idea.
-          Express subtle design interest in their specific field or idea. Do not refer to yourself as an AI. Keep it elegant.
+          As the made. by ac studio team, write a short, extremely warm, specific 2-sentence and supportive acknowledgment feedback receipt for this idea.
+          Use the first-person plural ("we" / "our studio"). Express subtle design interest in their specific field or idea. Do not refer to yourself as an AI. Keep it elegant.
         `;
         const response = await ai.models.generateContent({
-          model: "gemini-2.5-flash",
+          model: GEMINI_MODEL,
           contents: prompt,
           config: {
-            systemInstruction: "You are Asrith Cheepurupalli, responding to a collaborative inquiry with premium calm elegance.",
+            systemInstruction: "You are the made. by ac studio team, responding to a collaborative inquiry with premium calm elegance in the first-person plural (we/our studio).",
             temperature: 0.8,
           },
         });
@@ -172,7 +119,7 @@ app.post("/api/contact", async (req, res) => {
       email,
       message,
       timestamp: new Date().toISOString(),
-      aiFeedback: aiFeedback || "Thank you. Your inquiry has been registered on my secure studio log. I will respond to you personally within 24 hours.",
+      aiFeedback: aiFeedback || "Thank you. Your inquiry has been registered on our secure studio log. We will respond to you personally within 24 hours.",
     };
 
     submissions.push(newSubmission);
