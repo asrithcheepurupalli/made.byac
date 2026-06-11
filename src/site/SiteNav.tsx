@@ -35,7 +35,7 @@ export function SiteNav() {
               <li key={l.href}>
                 <a
                   href={l.href}
-                  className="label text-[10px] opacity-80 hover:opacity-100 transition-opacity"
+                  className="u-link label text-[10px] opacity-80 hover:opacity-100 transition-opacity"
                 >
                   {l.label}
                 </a>

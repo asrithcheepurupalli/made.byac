@@ -311,10 +311,10 @@ export function SomaaCaseStudy() {
             A guest can sit down, scan, and feel looked after — before a server says a word.
           </h2>
           <div className="mt-12 flex flex-wrap items-center justify-center gap-5">
-            <a href="https://somaa.made-by-ac.com" target="_blank" rel="noreferrer" className="label rounded-full px-7 py-4 flex items-center gap-2 transition-colors" style={{ background: C.amber, color: "#1a1206" }}>
-              Visit Somaa <ArrowUpRight className="w-4 h-4" />
+            <a href="https://somaa.made-by-ac.com" target="_blank" rel="noreferrer" className="group label rounded-full px-7 py-4 flex items-center gap-2 transition-transform duration-300 hover:-translate-y-0.5" style={{ background: C.amber, color: "#1a1206" }}>
+              Visit Somaa <ArrowUpRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </a>
-            <a href="#say-hi" className="label rounded-full px-7 py-4 transition-colors" style={{ border: `1px solid ${C.line}`, color: C.text }}>
+            <a href="#say-hi" className="label rounded-full px-7 py-4 transition-transform duration-300 hover:-translate-y-0.5" style={{ border: `1px solid ${C.line}`, color: C.text }}>
               Want one like this? →
             </a>
           </div>

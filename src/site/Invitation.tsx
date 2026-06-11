@@ -43,10 +43,10 @@ export function Invitation() {
           </p>
 
           <a
-            href="mailto:hello@made-by-ac.com"
-            className="mt-10 inline-flex items-center gap-3 font-display text-2xl md:text-3xl text-paper border-b border-gold/50 pb-1 hover:text-gold transition-colors"
+            href="mailto:thebrain@made-by-ac.com"
+            className="group mt-10 inline-flex items-center gap-3 font-display text-2xl md:text-3xl text-paper border-b border-gold/50 pb-1 hover:text-gold transition-colors"
           >
-            hello@made-by-ac.com <ArrowUpRight className="w-5 h-5" />
+            thebrain@made-by-ac.com <ArrowUpRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
           </a>
         </div>
 
@@ -95,7 +95,7 @@ export function Invitation() {
               <button
                 type="submit"
                 disabled={isSubmittingContact}
-                className="mt-2 self-start bg-red text-white label rounded-full px-7 py-3.5 hover:bg-red-deep transition-colors disabled:opacity-60"
+                className="mt-2 self-start bg-red text-white label rounded-full px-7 py-3.5 hover:bg-red-deep hover:-translate-y-0.5 transition-all duration-300 disabled:opacity-60 disabled:translate-y-0"
               >
                 {isSubmittingContact ? "Sending…" : "Send it over"}
               </button>

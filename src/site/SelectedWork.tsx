@@ -58,7 +58,7 @@ export function SelectedWork() {
               built: scan-to-order, an AI dining host, loyalty, and a POS-connected kitchen.
             </p>
             <span className="mt-7 inline-flex items-center gap-2 label text-paper border-b border-gold/50 pb-1 group-hover:text-gold transition-colors">
-              Read the case study <ArrowUpRight className="w-3.5 h-3.5" />
+              Read the case study <ArrowUpRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </span>
           </div>
         </motion.a>
@@ -71,7 +71,7 @@ export function SelectedWork() {
           </div>
           <div className="mt-10 grid grid-cols-2 lg:grid-cols-3 gap-4">
             {PROJECTS.slice(0, 9).map((p) => (
-              <div key={p.id} className="group">
+              <div key={p.id} className="group reveal-up">
                 <div className="relative overflow-hidden rounded-xl border border-ink-line bg-ink-soft aspect-[4/3]">
                   <img
                     src={p.imageUrl}

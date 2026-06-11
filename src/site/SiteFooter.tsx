@@ -8,8 +8,8 @@ export function SiteFooter() {
       <div className="mx-auto max-w-[1600px] px-6 md:px-10 py-14 md:py-20">
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-10">
           <div>
-            <a href="#top" className="font-display text-5xl md:text-7xl font-semibold italic tracking-tight">
-              made<span className="not-italic">.</span>
+            <a href="#top" className="group font-display text-5xl md:text-7xl font-semibold italic tracking-tight inline-block">
+              made<span className="not-italic group-hover:text-gold transition-colors duration-500">.</span>
             </a>
             <p className="mt-4 text-grey-dim max-w-sm leading-relaxed">
               A design &amp; development studio. We make brands impossible to ignore.
@@ -26,7 +26,7 @@ export function SiteFooter() {
               <span className="label text-grey">Elsewhere</span>
               <a href="https://www.instagram.com" target="_blank" rel="noreferrer" className="text-paper/80 hover:text-gold transition-colors text-sm">Instagram</a>
               <a href="https://www.behance.net" target="_blank" rel="noreferrer" className="text-paper/80 hover:text-gold transition-colors text-sm">Behance</a>
-              <a href="mailto:hello@made-by-ac.com" className="text-paper/80 hover:text-gold transition-colors text-sm">Email</a>
+              <a href="mailto:thebrain@made-by-ac.com" className="text-paper/80 hover:text-gold transition-colors text-sm">Email</a>
             </div>
           </div>
         </div>

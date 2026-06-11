@@ -58,6 +58,31 @@ body {
 ::-webkit-scrollbar-thumb { background: #cfc6b6; border-radius: 4px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--color-grey); }
 
+/* ---- subtle premium motion ---- */
+
+/* animated link underline (grows from left on hover) */
+.u-link { position: relative; }
+.u-link::after {
+  content: "";
+  position: absolute;
+  left: 0; bottom: -3px;
+  height: 1px; width: 100%;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.u-link:hover::after { transform: scaleX(1); transform-origin: left; }
+
+/* one-shot rise on mount — used for above-the-fold hero where scroll reveals don't apply */
+@keyframes rise-kf { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: none; } }
+.rise { opacity: 0; animation: rise-kf 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+
+@media (prefers-reduced-motion: reduce) {
+  .rise { opacity: 1; animation: none; }
+  .reveal-up { opacity: 1 !important; }
+}
+
 /* Lenis smooth scroll (same as the Somaa pages) */
 html.lenis,
 html.lenis body { height: auto; }

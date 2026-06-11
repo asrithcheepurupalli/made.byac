@@ -30,7 +30,7 @@ export function GridLab() {
               key={c.id}
               onMouseEnter={() => setHover(c.id)}
               onMouseLeave={() => setHover(null)}
-              className={`lg:col-span-3 rounded-2xl border p-7 md:p-8 min-h-[210px] flex flex-col justify-between transition-colors duration-300 cursor-default ${
+              className={`reveal-up lg:col-span-3 rounded-2xl border p-7 md:p-8 min-h-[210px] flex flex-col justify-between transition-[background-color,border-color,color,transform] duration-300 cursor-default hover:-translate-y-1 ${
                 hover === c.id
                   ? "bg-ink text-paper border-ink"
                   : "bg-paper border-paper-line text-ink"
