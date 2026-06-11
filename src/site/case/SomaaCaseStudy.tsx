@@ -1,6 +1,6 @@
 import type { FC, ReactNode } from "react";
 import { useEffect, useRef, useState } from "react";
-import { motion, useScroll, useTransform, useInView } from "motion/react";
+import { motion, useScroll, useTransform, useInView, useMotionValueEvent } from "motion/react";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
 
 // ---- Somaa's own world: dark charcoal, warm amber, cream. ----
@@ -54,12 +54,12 @@ const META = [
 ];
 
 const WALK = [
-  { n: "01", t: "Scan the table.", d: "Every table carries its own QR. One scan — no app, no download, no waiting for a server to be free." },
-  { n: "02", t: "Browse a menu that feels like Somaa.", d: "47 dishes across 10 sections, each with photography, ₹ pricing, veg & bar flags, bestsellers and today's specials." },
-  { n: "03", t: "Ask Raga, the AI host.", d: "A Claude-powered dining host that knows the live menu — suggests pairings and explains dishes in Somaa's own warm, slightly-loud voice." },
-  { n: "04", t: "Order together.", d: "A shared table cart lets the whole table add dishes; the host places one order. No more shouting items across the table." },
-  { n: "05", t: "Be remembered.", d: "Birthdays get 15% off, anniversaries get a perk, and a loyalty ladder rewards regulars — automatically, never stacked." },
-  { n: "06", t: "Close the loop.", d: "After the meal, a quick rating earns a coupon by SMS for next time. Feedback becomes the reason to return." },
+  { n: "01", t: "Scan the table.", d: "Every table carries its own QR. One scan — no app, no download, no waiting for a server to be free.", img: "step-scan" },
+  { n: "02", t: "Browse a menu that feels like Somaa.", d: "47 dishes across 10 sections, each with photography, ₹ pricing, veg & bar flags, bestsellers and today's specials.", img: "step-browse" },
+  { n: "03", t: "Ask Raga, the AI host.", d: "A Claude-powered dining host that knows the live menu — suggests pairings and explains dishes in Somaa's own warm, slightly-loud voice.", img: "step-host" },
+  { n: "04", t: "Order together.", d: "A shared table cart lets the whole table add dishes; the host places one order. No more shouting items across the table.", img: "step-order" },
+  { n: "05", t: "Be remembered.", d: "Birthdays get a discount, anniversaries get a perk, and a loyalty ladder rewards regulars — automatically, never stacked.", img: "step-remember" },
+  { n: "06", t: "Close the loop.", d: "After the meal, a quick rating earns a coupon by SMS for next time. Feedback becomes the reason to return.", img: "step-feedback" },
 ];
 
 const SYSTEMS = [
@@ -85,10 +85,29 @@ const Reveal: FC<{ children: ReactNode; className?: string; delay?: number }> = 
 };
 
 export function SomaaCaseStudy() {
+  const [active, setActive] = useState(0);
   const heroRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
   const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "28%"]);
   const fade = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+
+  // Walkthrough: the phone shows whichever step is nearest the viewport centre.
+  // Measuring the DOM directly keeps the screen perfectly in sync with the text.
+  const walkRef = useRef<HTMLDivElement>(null);
+  const stepRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const { scrollYProgress: walkP } = useScroll({ target: walkRef, offset: ["start start", "end end"] });
+  useMotionValueEvent(walkP, "change", () => {
+    const mid = window.innerHeight / 2;
+    let best = active;
+    let bestDist = Infinity;
+    stepRefs.current.forEach((el, i) => {
+      if (!el) return;
+      const r = el.getBoundingClientRect();
+      const d = Math.abs(r.top + r.height / 2 - mid);
+      if (d < bestDist) { bestDist = d; best = i; }
+    });
+    setActive(best);
+  });
 
   return (
     <div style={{ background: C.bg, color: C.text }} className="font-sans antialiased selection:bg-[#d99547] selection:text-black">
@@ -171,33 +190,48 @@ export function SomaaCaseStudy() {
         </div>
       </section>
 
-      {/* STICKY PRODUCT WALKTHROUGH */}
-      <section className="border-y" style={{ borderColor: C.line, background: C.surface }}>
+      {/* STICKY PRODUCT WALKTHROUGH — phone screen swaps per step on scroll */}
+      <section ref={walkRef} className="border-y" style={{ borderColor: C.line, background: C.surface }}>
         <div className="mx-auto max-w-[1400px] px-6 md:px-10 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
           {/* sticky phone */}
           <div className="lg:sticky lg:top-0 lg:h-screen flex items-center justify-center py-16 lg:py-0">
             <div className="relative">
-              <div className="rounded-[2.2rem] p-2.5 shadow-2xl" style={{ background: "#000", border: `1px solid ${C.line}` }}>
-                <img src={`${A}/shot-menu.png`} alt="Somaa at-table menu" className="w-[260px] md:w-[300px] rounded-[1.7rem]" />
+              <div className="relative rounded-[2.2rem] p-2.5 shadow-2xl" style={{ background: "#000", border: `1px solid ${C.line}` }}>
+                <div className="relative w-[256px] md:w-[300px] aspect-[430/932] rounded-[1.7rem] overflow-hidden bg-black">
+                  {WALK.map((s, i) => (
+                    <img
+                      key={s.img}
+                      src={`${A}/${s.img}.png`}
+                      alt={`Somaa — ${s.t}`}
+                      className="absolute inset-0 w-full h-full object-cover object-top transition-opacity duration-500 ease-out"
+                      style={{ opacity: active === i ? 1 : 0 }}
+                    />
+                  ))}
+                </div>
+              </div>
+              {/* step pips */}
+              <div className="absolute -right-6 top-1/2 -translate-y-1/2 hidden lg:flex flex-col gap-2">
+                {WALK.map((s, i) => (
+                  <span key={s.n} className="w-1.5 rounded-full transition-all duration-300" style={{ height: active === i ? 22 : 8, background: active === i ? C.amber : C.line }} />
+                ))}
               </div>
               <div className="absolute -inset-10 -z-10 rounded-full blur-3xl opacity-40" style={{ background: "radial-gradient(circle, rgba(217,149,71,0.5), transparent 70%)" }} />
             </div>
           </div>
 
           {/* scrolling steps */}
-          <div className="flex flex-col gap-[18vh] py-[20vh]">
-            {WALK.map((s) => (
-              <motion.div
+          <div className="flex flex-col gap-[26vh] py-[32vh]">
+            {WALK.map((s, i) => (
+              <div
                 key={s.n}
-                initial={{ opacity: 0.25, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ margin: "-45% 0px -45% 0px" }}
-                transition={{ duration: 0.5 }}
+                ref={(el) => { stepRefs.current[i] = el; }}
+                className="transition-opacity duration-500"
+                style={{ opacity: active === i ? 1 : 0.32 }}
               >
                 <span className="font-mono text-sm" style={{ color: C.amber }}>{s.n}</span>
                 <h3 className="mt-4 font-display text-3xl md:text-4xl leading-tight" style={{ color: C.text }}>{s.t}</h3>
                 <p className="mt-4 text-lg leading-relaxed max-w-md" style={{ color: C.muted }}>{s.d}</p>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
@@ -262,7 +296,7 @@ export function SomaaCaseStudy() {
         <div className="lg:col-span-7">
           <Reveal>
             <div className="rounded-2xl overflow-hidden shadow-2xl" style={{ border: `1px solid ${C.line}` }}>
-              <img src={`${A}/shot-home.png`} alt="Somaa marketing site" className="w-full" />
+              <img src={`${A}/og.png`} alt="Somaa brand — order from your table, talk to the AI host" className="w-full" />
             </div>
           </Reveal>
         </div>

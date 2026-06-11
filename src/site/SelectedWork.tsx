@@ -34,10 +34,10 @@ export function SelectedWork() {
           <div className="lg:col-span-7">
             <div className="relative overflow-hidden rounded-2xl border border-ink-line bg-ink-soft aspect-[16/10]">
               <img
-                src="/case/somaa/shot-home.png"
+                src="/case/somaa/hero.png"
                 alt="Somaa — QR dining platform"
                 loading="lazy"
-                className="w-full h-full object-cover object-top transition-transform duration-[1.1s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04]"
+                className="w-full h-full object-cover transition-transform duration-[1.1s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04]"
               />
               <span className="absolute top-5 left-6 label text-[10px] bg-red text-white rounded-full px-3 py-1.5">
                 Featured case study
