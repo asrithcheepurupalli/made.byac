@@ -8,9 +8,11 @@ export function GridLab() {
   const [hover, setHover] = useState<string | null>(null);
 
   return (
-    <section id="studio" className="relative bg-paper-dim text-ink py-28 md:py-40">
-      <div className="mx-auto max-w-[1600px] px-6 md:px-10">
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-14 md:mb-20">
+    <section id="studio" className="relative bg-paper-dim text-ink py-28 md:py-40 overflow-hidden">
+      {/* seam: blend down from the ink gallery above */}
+      <div aria-hidden className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-ink to-paper-dim pointer-events-none" />
+      <div className="relative mx-auto max-w-[1600px] px-6 md:px-10">
+        <div className="reveal-up flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-14 md:mb-20">
           <div>
             <span className="label text-red">·004 — the studio</span>
             <h2 className="mt-6 font-display text-6xl md:text-8xl leading-[0.9] tracking-[-0.02em]">

@@ -78,8 +78,12 @@ body {
 @keyframes rise-kf { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: none; } }
 .rise { opacity: 0; animation: rise-kf 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
 
+/* a rule/line that draws in from the left */
+@keyframes draw-x-kf { from { opacity: 0; transform: scaleX(0); } to { opacity: 1; transform: scaleX(1); } }
+.draw-x { opacity: 0; transform-origin: left; animation: draw-x-kf 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+
 @media (prefers-reduced-motion: reduce) {
-  .rise { opacity: 1; animation: none; }
+  .rise, .draw-x { opacity: 1; transform: none; animation: none; }
   .reveal-up { opacity: 1 !important; }
 }
 

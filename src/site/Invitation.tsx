@@ -15,6 +15,8 @@ export function Invitation() {
 
   return (
     <section id="say-hi" className="relative bg-ink text-paper py-28 md:py-44 overflow-hidden">
+      {/* seam: blend down from the paper-dim studio above */}
+      <div aria-hidden className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-paper-dim to-ink pointer-events-none" />
       {/* soft red glow */}
       <div
         className="pointer-events-none absolute -top-40 left-1/2 -translate-x-1/2 w-[80vw] h-[60vh] opacity-30"

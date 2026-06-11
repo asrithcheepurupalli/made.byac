@@ -7,9 +7,11 @@ import { PROJECTS } from "../data";
 export function SelectedWork() {
   return (
     <section id="work" className="relative bg-ink text-paper py-28 md:py-40 overflow-hidden">
-      <div className="mx-auto max-w-[1600px] px-6 md:px-10">
+      {/* seam: blend down from the paper manifesto above */}
+      <div aria-hidden className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-paper to-ink pointer-events-none" />
+      <div className="relative mx-auto max-w-[1600px] px-6 md:px-10">
         {/* header */}
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-16 md:mb-24">
+        <div className="reveal-up flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-16 md:mb-24">
           <div>
             <span className="label text-red">·003 — selected work</span>
             <h2 className="mt-6 font-display text-6xl md:text-8xl leading-[0.9] tracking-[-0.02em]">

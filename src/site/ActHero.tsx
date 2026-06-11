@@ -39,7 +39,7 @@ export function ActHero() {
             <br />
             to ignore<span className="text-red">.</span>
           </h1>
-          <div className="rise mt-8 h-[5px] w-40 md:w-56 bg-red rounded-full origin-left" style={{ animationDelay: "0.32s" }} />
+          <div className="draw-x mt-8 h-[5px] w-40 md:w-56 bg-red rounded-full" style={{ animationDelay: "0.32s" }} />
         </div>
       </div>
 
