@@ -16,6 +16,7 @@ export default defineConfig(() => {
         input: {
           main: path.resolve(__dirname, 'index.html'),
           offer: path.resolve(__dirname, 'offer.html'),
+          work: path.resolve(__dirname, 'work.html'),
         },
       },
     },

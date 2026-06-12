@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 // Fixed studio nav. Uses mix-blend-difference so the wordmark + links stay
 // legible against both the paper (light) acts and the ink (dark) gallery.
 const LINKS = [
-  { label: "Work", href: "#work" },
+  { label: "Work", href: "/work" },
   { label: "Offer", href: "/offer" },
   { label: "Why", href: "#why" },
   { label: "Studio", href: "#studio" },

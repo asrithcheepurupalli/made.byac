@@ -8,6 +8,7 @@ import { GridLab } from "./GridLab";
 import { Invitation } from "./Invitation";
 import { SiteFooter } from "./SiteFooter";
 import { OfferPage } from "./OfferPage";
+import { WorkPage } from "./WorkPage";
 import { SomaaCaseStudy } from "./case/SomaaCaseStudy";
 import { CampaignCaseStudy } from "./case/CampaignCaseStudy";
 import { CAMPAIGN_CASES } from "./case/caseData";
@@ -33,23 +34,17 @@ export function Site() {
   const route = useHashRoute();
 
   useEffect(() => {
-    if (route.startsWith("#/work/") || route === "#/offer") window.scrollTo(0, 0);
+    if (route.startsWith("#/work/") || route === "#/offer" || route === "#/work") window.scrollTo(0, 0);
   }, [route]);
 
-  // /offer is a real path (served by offer.html for correct share previews);
-  // #/offer is kept as an in-app fallback.
-  const onOfferPath =
-    typeof window !== "undefined" &&
-    window.location.pathname.replace(/\/$/, "").replace(/\.html$/, "") === "/offer";
-  if (onOfferPath || route === "#/offer") {
-    return (
-      <>
-        <SmoothScroll />
-        <OfferPage />
-      </>
-    );
-  }
+  // /offer and /work are real paths (served by their own .html for correct share
+  // previews); the #/ variants are kept as in-app fallbacks.
+  const path =
+    typeof window !== "undefined"
+      ? window.location.pathname.replace(/\/$/, "").replace(/\.html$/, "")
+      : "";
 
+  // Case studies first, so a #/work/<slug> deep link wins over the /work archive.
   if (route === "#/work/somaa") {
     return (
       <>
@@ -65,6 +60,24 @@ export function Site() {
       <>
         <SmoothScroll />
         <CampaignCaseStudy slug={campaignSlug} />
+      </>
+    );
+  }
+
+  if (path === "/offer" || route === "#/offer") {
+    return (
+      <>
+        <SmoothScroll />
+        <OfferPage />
+      </>
+    );
+  }
+
+  if (path === "/work" || route === "#/work") {
+    return (
+      <>
+        <SmoothScroll />
+        <WorkPage />
       </>
     );
   }
