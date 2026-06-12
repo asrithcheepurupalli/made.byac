@@ -7,6 +7,7 @@ import { SelectedWork } from "./SelectedWork";
 import { GridLab } from "./GridLab";
 import { Invitation } from "./Invitation";
 import { SiteFooter } from "./SiteFooter";
+import { OfferPage } from "./OfferPage";
 import { SomaaCaseStudy } from "./case/SomaaCaseStudy";
 import { CampaignCaseStudy } from "./case/CampaignCaseStudy";
 import { CAMPAIGN_CASES } from "./case/caseData";
@@ -32,8 +33,17 @@ export function Site() {
   const route = useHashRoute();
 
   useEffect(() => {
-    if (route.startsWith("#/work/")) window.scrollTo(0, 0);
+    if (route.startsWith("#/work/") || route === "#/offer") window.scrollTo(0, 0);
   }, [route]);
+
+  if (route === "#/offer") {
+    return (
+      <>
+        <SmoothScroll />
+        <OfferPage />
+      </>
+    );
+  }
 
   if (route === "#/work/somaa") {
     return (

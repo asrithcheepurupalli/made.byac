@@ -22,9 +22,15 @@ export function GridLab() {
               How we<br />make it<span className="text-red">.</span>
             </h2>
           </div>
-          <p className="font-display text-xl md:text-2xl text-grey max-w-md leading-relaxed">
-            One team, end to end: strategy, design and code. A system, not a service desk.
-          </p>
+          <div className="max-w-md">
+            <p className="font-display text-xl md:text-2xl text-grey leading-relaxed">
+              One team, end to end: strategy, design and code. A system, not a service desk.
+            </p>
+            <a href="#/offer" className="group mt-5 inline-flex items-center gap-2 label text-red">
+              See everything we offer
+              <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+            </a>
+          </div>
         </div>
 
         {/* ambient light control — warms/cools the paper acts (hero left untouched) */}
