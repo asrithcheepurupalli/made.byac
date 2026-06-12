@@ -35,7 +35,13 @@ export function ActHero() {
             We make
             <br />
             brands{" "}
-            <span className="italic lowercase font-normal text-grey">impossible</span>
+            <span className="group/imp relative inline-block italic lowercase font-normal align-baseline cursor-default">
+              <span
+                aria-hidden="true"
+                className="absolute inset-x-[-0.08em] top-[0.16em] bottom-[0.12em] bg-red rounded-[3px] origin-left scale-x-0 group-hover/imp:scale-x-100 transition-transform duration-[520ms] ease-[cubic-bezier(0.16,1,0.3,1)]"
+              />
+              <span className="relative z-10 text-grey group-hover/imp:text-paper transition-colors duration-300 delay-[120ms]">impossible</span>
+            </span>
             <br />
             to ignore<span className="text-red">.</span>
           </h1>
