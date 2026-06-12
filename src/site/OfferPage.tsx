@@ -37,30 +37,8 @@ type Offering = {
 // software + AI on the right. Honest scope, no invented metrics.
 const OFFERINGS: Offering[] = [
   {
-    id: "brand",
-    no: "01",
-    title: "Brand & Identity",
-    line: "The name, the mark, the rules.",
-    accent: "#bd9b4e",
-    icon: PenTool,
-    body:
-      "We build the whole system, not just a logo. Identity, typography, colour, art direction and the guidelines that keep a brand holding together everywhere it shows up.",
-    deliverables: ["Logo & wordmark", "Visual identity", "Typography system", "Art direction", "Brand guidelines"],
-  },
-  {
-    id: "packaging",
-    no: "02",
-    title: "Packaging & Print",
-    line: "Shelves worth winning, products worth gifting.",
-    accent: "#c8102e",
-    icon: Package,
-    body:
-      "Structure and surface designed together. Premium finishes, considered materials and print-ready production for products that earn a second look in the hand.",
-    deliverables: ["Structural design", "Surface & label", "Premium finishes", "Print production", "Dielines"],
-  },
-  {
     id: "web",
-    no: "03",
+    no: "01",
     title: "Websites & Experiences",
     line: "Sites that feel made, not assembled.",
     accent: "#2dd4bf",
@@ -71,7 +49,7 @@ const OFFERINGS: Offering[] = [
   },
   {
     id: "software",
-    no: "04",
+    no: "02",
     title: "Software Products",
     line: "Real products, actually shipped.",
     accent: "#6d7bf4",
@@ -82,7 +60,7 @@ const OFFERINGS: Offering[] = [
   },
   {
     id: "ai",
-    no: "05",
+    no: "03",
     title: "AI Sales Agents",
     line: "An AI that picks up every call, and never sleeps.",
     accent: "#27d17c",
@@ -99,6 +77,28 @@ const OFFERINGS: Offering[] = [
       "WhatsApp / SMS follow-up",
       "Call summaries & transcripts",
     ],
+  },
+  {
+    id: "brand",
+    no: "04",
+    title: "Brand & Identity",
+    line: "The name, the mark, the rules.",
+    accent: "#bd9b4e",
+    icon: PenTool,
+    body:
+      "We build the whole system, not just a logo. Identity, typography, colour, art direction and the guidelines that keep a brand holding together everywhere it shows up.",
+    deliverables: ["Logo & wordmark", "Visual identity", "Typography system", "Art direction", "Brand guidelines"],
+  },
+  {
+    id: "packaging",
+    no: "05",
+    title: "Packaging & Print",
+    line: "Shelves worth winning, products worth gifting.",
+    accent: "#c8102e",
+    icon: Package,
+    body:
+      "Structure and surface designed together. Premium finishes, considered materials and print-ready production for products that earn a second look in the hand.",
+    deliverables: ["Structural design", "Surface & label", "Premium finishes", "Print production", "Dielines"],
   },
   {
     id: "campaigns",
@@ -336,13 +336,13 @@ export function OfferPage() {
 
       {/* hero */}
       <section className="mx-auto max-w-[1400px] px-6 md:px-10 pt-36 md:pt-44 pb-10 md:pb-16">
-        <span className="label text-red">· what we offer</span>
-        <h1 className="mt-6 font-display text-6xl md:text-[8.5rem] leading-[0.88] tracking-[-0.02em]">
+        <span className="rise label text-red block" style={{ animationDelay: "0.05s" }}>· what we offer</span>
+        <h1 className="rise mt-6 font-display text-6xl md:text-[8.5rem] leading-[0.88] tracking-[-0.02em]" style={{ animationDelay: "0.13s" }}>
           Everything it<br />takes to be<br />
           <span className="italic font-normal text-gold">unignorable</span>
           <span className="text-red">.</span>
         </h1>
-        <p className="mt-9 font-display text-xl md:text-2xl leading-snug max-w-2xl text-paper/80">
+        <p className="rise mt-9 font-display text-xl md:text-2xl leading-snug max-w-2xl text-paper/80" style={{ animationDelay: "0.28s" }}>
           Design heritage, software muscle. One studio that takes a brand from a sketch to a shipping
           product, and now, an AI that answers the phone.
         </p>
@@ -355,21 +355,28 @@ export function OfferPage() {
             const isOpen = open === o.id;
             const Icon = o.icon;
             return (
-              <div key={o.id} className="border-b border-ink-line last:border-b-0" style={{ ["--a" as string]: o.accent }}>
+              <div key={o.id} className="reveal-up border-b border-ink-line last:border-b-0" style={{ ["--a" as string]: o.accent }}>
                 {/* row header */}
                 <button
                   onClick={() => setOpen(isOpen ? "" : o.id)}
-                  className="group w-full flex items-center gap-5 md:gap-8 py-7 md:py-9 text-left"
+                  className="group relative w-full flex items-center gap-5 md:gap-8 py-7 md:py-9 text-left"
                 >
-                  <span className="font-mono text-xs md:text-sm shrink-0 w-8 transition-colors" style={{ color: isOpen ? o.accent : undefined }}>
+                  {/* accent bar that slides in from the gutter on hover */}
+                  <span
+                    aria-hidden
+                    className="pointer-events-none absolute -left-3 md:-left-6 top-3 bottom-3 w-[3px] rounded-full origin-center scale-y-0 group-hover:scale-y-100 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
+                    style={{ background: o.accent }}
+                  />
+
+                  <span className={`font-mono text-xs md:text-sm shrink-0 w-8 transition-colors duration-300 ${isOpen ? "text-[var(--a)]" : "text-grey group-hover:text-[var(--a)]"}`}>
                     {o.no}
                   </span>
                   <span
-                    className="shrink-0 w-10 h-10 md:w-12 md:h-12 rounded-xl border flex items-center justify-center transition-colors"
-                    style={{
-                      borderColor: isOpen ? o.accent : "var(--color-ink-line)",
-                      color: isOpen ? o.accent : "var(--color-grey)",
-                    }}
+                    className={`shrink-0 w-10 h-10 md:w-12 md:h-12 rounded-xl border flex items-center justify-center transition-all duration-300 ${
+                      isOpen
+                        ? "border-[var(--a)] text-[var(--a)]"
+                        : "border-ink-line text-grey group-hover:bg-[var(--a)] group-hover:border-[var(--a)] group-hover:text-ink group-hover:-rotate-6"
+                    }`}
                   >
                     <Icon className="w-5 h-5" strokeWidth={1.6} />
                   </span>
@@ -377,10 +384,16 @@ export function OfferPage() {
                   <span className="flex-1 min-w-0">
                     <span className="flex items-center gap-3 flex-wrap">
                       <span
-                        className="font-display text-3xl md:text-5xl lg:text-6xl leading-none tracking-[-0.01em] transition-colors duration-300"
-                        style={{ color: isOpen ? o.accent : undefined }}
+                        className={`relative font-display text-3xl md:text-5xl lg:text-6xl leading-none tracking-[-0.01em] transition-all duration-300 group-hover:translate-x-2 ${
+                          isOpen ? "text-[var(--a)]" : "text-paper group-hover:text-[var(--a)]"
+                        }`}
                       >
                         {o.title}
+                        <span
+                          aria-hidden
+                          className="absolute left-0 -bottom-1.5 h-[2px] w-full origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
+                          style={{ background: o.accent }}
+                        />
                       </span>
                       {o.badge && (
                         <span
@@ -391,12 +404,15 @@ export function OfferPage() {
                         </span>
                       )}
                     </span>
-                    <span className="mt-2 hidden md:block text-grey-dim text-[15px]">{o.line}</span>
+                    <span className="mt-2 hidden md:block text-grey-dim text-[15px] transition-colors duration-300 group-hover:text-paper/80">{o.line}</span>
                   </span>
 
                   <span
-                    className="shrink-0 w-9 h-9 rounded-full border border-ink-line flex items-center justify-center transition-all duration-500 group-hover:border-grey"
-                    style={{ transform: isOpen ? "rotate(135deg)" : "rotate(0deg)", borderColor: isOpen ? o.accent : undefined, color: isOpen ? o.accent : "var(--color-grey)" }}
+                    className={`shrink-0 w-9 h-9 rounded-full border flex items-center justify-center transition-all duration-500 ${
+                      isOpen
+                        ? "border-[var(--a)] text-[var(--a)] rotate-[135deg]"
+                        : "border-ink-line text-grey group-hover:border-[var(--a)] group-hover:text-[var(--a)] group-hover:rotate-90"
+                    }`}
                   >
                     <Plus className="w-4 h-4" />
                   </span>
@@ -479,7 +495,7 @@ export function OfferPage() {
       {/* hear the agent */}
       <section className="border-b border-ink-line bg-ink-soft/20">
         <div className="mx-auto max-w-[1400px] px-6 md:px-10 py-20 md:py-28 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
-          <div className="lg:col-span-5">
+          <div className="reveal-up lg:col-span-5">
             <span className="label" style={{ color: "#27d17c" }}>· hear the agent</span>
             <h2 className="mt-6 font-display text-4xl md:text-6xl leading-[0.95] tracking-[-0.01em]">
               Don't take our<br />word for it.<br />
@@ -491,7 +507,7 @@ export function OfferPage() {
             </p>
             <p className="mt-4 label text-[9px] text-grey">Voice plays in your browser · nothing leaves this page</p>
           </div>
-          <div className="lg:col-span-7">
+          <div className="reveal-up lg:col-span-7">
             <CallDemo accent="#27d17c" />
           </div>
         </div>
@@ -506,7 +522,7 @@ export function OfferPage() {
             { k: "Studio on call", v: "An ongoing creative + build partner.", d: "Monthly retainer for brands that keep moving. Design and code, on tap." },
             { k: "Pilot", v: "Try the AI agent, low commitment.", d: "A short pilot of the sales agent on your real calls before you scale it up." },
           ].map((e) => (
-            <div key={e.k} className="rounded-2xl border border-ink-line bg-ink-soft/40 p-7 md:p-8 hover:border-grey transition-colors">
+            <div key={e.k} className="reveal-up rounded-2xl border border-ink-line bg-ink-soft/40 p-7 md:p-8 hover:border-grey transition-colors">
               <span className="label text-gold">{e.k}</span>
               <h3 className="mt-5 font-display text-2xl leading-tight">{e.v}</h3>
               <p className="mt-3 text-grey-dim text-[14px] leading-relaxed">{e.d}</p>
@@ -518,7 +534,7 @@ export function OfferPage() {
       {/* CTA */}
       <section className="relative overflow-hidden border-t border-ink-line">
         <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[70vw] h-[50vh] opacity-25" style={{ background: "radial-gradient(50% 50% at 50% 50%, #c8102e, transparent 70%)" }} />
-        <div className="relative z-10 mx-auto max-w-[1400px] px-6 md:px-10 py-24 md:py-32 text-center">
+        <div className="reveal-up relative z-10 mx-auto max-w-[1400px] px-6 md:px-10 py-24 md:py-32 text-center">
           <span className="label text-red">Next</span>
           <h2 className="mt-8 font-display text-4xl md:text-6xl leading-[1.02] max-w-3xl mx-auto">
             Not sure which of these you need? That's our favourite conversation.

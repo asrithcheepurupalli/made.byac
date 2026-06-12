@@ -63,17 +63,17 @@ export function WorkPage() {
 
       {/* hero */}
       <section className="mx-auto max-w-[1500px] px-6 md:px-10 pt-36 md:pt-44 pb-12 md:pb-16">
-        <span className="label text-red">· selected work</span>
-        <h1 className="mt-6 font-display text-6xl md:text-[9rem] leading-[0.86] tracking-[-0.02em]">
+        <span className="rise label text-red block" style={{ animationDelay: "0.05s" }}>· selected work</span>
+        <h1 className="rise mt-6 font-display text-6xl md:text-[9rem] leading-[0.86] tracking-[-0.02em]" style={{ animationDelay: "0.13s" }}>
           Work that refuses<br />to be{" "}
           <span className="italic font-normal text-gold">ignored</span>
           <span className="text-red">.</span>
         </h1>
-        <p className="mt-9 font-display text-xl md:text-2xl leading-snug max-w-2xl text-paper/80">
+        <p className="rise mt-9 font-display text-xl md:text-2xl leading-snug max-w-2xl text-paper/80" style={{ animationDelay: "0.28s" }}>
           Brands, packaging, campaigns and products, from a coastal studio in India for clients
           anywhere. Every piece drawn and shipped by the same team.
         </p>
-        <div className="mt-12 flex flex-wrap gap-x-12 gap-y-6">
+        <div className="rise mt-12 flex flex-wrap gap-x-12 gap-y-6" style={{ animationDelay: "0.4s" }}>
           {[
             { n: String(PROJECTS.length) + "+", l: "Projects shipped" },
             { n: "4", l: "Long-run clients" },
@@ -88,27 +88,47 @@ export function WorkPage() {
         </div>
       </section>
 
-      {/* featured case studies */}
+      {/* featured case studies — Somaa large, the other two small */}
       <section className="mx-auto max-w-[1500px] px-6 md:px-10 pb-8 md:pb-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6">
-          {FEATURED.map((f) => (
-            <a key={f.slug} href={`#/work/${f.slug}`} className="group relative rounded-2xl overflow-hidden border border-ink-line bg-ink-soft aspect-[4/5]">
-              <img src={f.img} alt={f.client} loading="lazy" referrerPolicy="no-referrer" className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1.1s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.06]" />
-              <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/30 to-ink/10" />
-              {f.overlay && (
-                <img src={f.overlay} alt="" className="absolute left-1/2 top-[42%] -translate-x-1/2 -translate-y-1/2 w-[52%] max-w-[220px] drop-shadow-[0_4px_24px_rgba(0,0,0,0.55)]" />
-              )}
-              <span className="absolute top-4 left-4 label text-[9px] rounded-full px-2.5 py-1" style={{ background: f.accent, color: "#0b0b0c" }}>Case study</span>
-              <div className="absolute inset-x-0 bottom-0 p-6">
-                <div className="label text-[9px]" style={{ color: f.accent }}>{f.tag}</div>
-                <h3 className="mt-2 font-display text-3xl md:text-4xl leading-[0.98] text-paper">{f.client}</h3>
-                <p className="mt-2 text-grey-dim text-[14px] leading-snug">{f.line}</p>
-                <span className="mt-4 inline-flex items-center gap-1.5 label text-[10px] text-paper/80 group-hover:text-paper transition-colors">
-                  Read the study <ArrowUpRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                </span>
-              </div>
-            </a>
-          ))}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 md:gap-6">
+          {/* Somaa — the hero study */}
+          {(() => {
+            const f = FEATURED[0];
+            return (
+              <a href={`#/work/${f.slug}`} className="reveal-up group relative rounded-2xl overflow-hidden border border-ink-line bg-ink-soft lg:col-span-8 aspect-[16/12] sm:aspect-[16/9] lg:aspect-auto lg:min-h-[480px]">
+                <img src={f.img} alt={f.client} loading="lazy" referrerPolicy="no-referrer" className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1.1s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.05]" />
+                <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/30 to-ink/15" />
+                {f.overlay && (
+                  <img src={f.overlay} alt="" className="absolute left-1/2 top-[40%] -translate-x-1/2 -translate-y-1/2 w-[46%] max-w-[300px] drop-shadow-[0_4px_24px_rgba(0,0,0,0.55)] transition-transform duration-[1.1s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]" />
+                )}
+                <span className="absolute top-5 left-5 label text-[10px] rounded-full px-3 py-1.5" style={{ background: f.accent, color: "#0b0b0c" }}>Featured case study</span>
+                <div className="absolute inset-x-0 bottom-0 p-7 md:p-9">
+                  <div className="label text-[10px]" style={{ color: f.accent }}>{f.tag}</div>
+                  <h3 className="mt-2 font-display text-4xl md:text-6xl leading-[0.96] text-paper">{f.client}</h3>
+                  <p className="mt-3 text-grey-dim text-[15px] md:text-base leading-snug max-w-sm">{f.line}</p>
+                  <span className="mt-5 inline-flex items-center gap-1.5 label text-[11px] text-paper/85 group-hover:text-paper transition-colors">
+                    Read the study <ArrowUpRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  </span>
+                </div>
+              </a>
+            );
+          })()}
+
+          {/* Innovolt + Mithai — small, stacked */}
+          <div className="lg:col-span-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-5 md:gap-6">
+            {FEATURED.slice(1).map((f) => (
+              <a key={f.slug} href={`#/work/${f.slug}`} className="reveal-up group relative rounded-2xl overflow-hidden border border-ink-line bg-ink-soft aspect-[16/10] lg:aspect-auto lg:min-h-[228px]">
+                <img src={f.img} alt={f.client} loading="lazy" referrerPolicy="no-referrer" className="absolute inset-0 w-full h-full object-cover opacity-90 transition-transform duration-[1.1s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.06]" />
+                <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/45 to-ink/15" />
+                <span className="absolute top-3.5 left-3.5 label text-[8px] rounded-full px-2.5 py-1" style={{ background: f.accent, color: "#0b0b0c" }}>Case study</span>
+                <div className="absolute inset-x-0 bottom-0 p-5">
+                  <h3 className="font-display text-2xl md:text-3xl leading-tight text-paper">{f.client}</h3>
+                  <p className="mt-1 text-grey-dim text-[12px] leading-snug">{f.tag}</p>
+                </div>
+                <ArrowUpRight className="absolute top-4 right-4 w-4 h-4 text-paper/70 group-hover:text-paper transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </a>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -116,7 +136,7 @@ export function WorkPage() {
       <section className="border-y border-ink-line bg-ink-soft/20">
         <div className="mx-auto max-w-[1500px] px-6 md:px-10 py-16 md:py-24">
           {/* controls */}
-          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-10 md:mb-14">
+          <div className="reveal-up flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-10 md:mb-14">
             <div>
               <span className="label text-red">· the full archive</span>
               <h2 className="mt-5 font-display text-4xl md:text-6xl leading-[0.95]">Everything else<span className="text-red">.</span></h2>
@@ -207,7 +227,7 @@ export function WorkPage() {
 
       {/* how we design — the system, shown not told */}
       <section className="mx-auto max-w-[1500px] px-6 md:px-10 py-20 md:py-32">
-        <div className="max-w-2xl">
+        <div className="reveal-up max-w-2xl">
           <span className="label text-red">· how we design</span>
           <h2 className="mt-6 font-display text-4xl md:text-6xl leading-[0.95]">Not a style. A system<span className="text-red">.</span></h2>
           <p className="mt-6 text-grey-dim text-base md:text-lg leading-relaxed">
@@ -218,7 +238,7 @@ export function WorkPage() {
 
         <div className="mt-12 grid grid-cols-1 lg:grid-cols-12 gap-4 md:gap-5">
           {/* palette */}
-          <div className="lg:col-span-5 rounded-2xl border border-ink-line p-7 md:p-8">
+          <div className="reveal-up lg:col-span-5 rounded-2xl border border-ink-line p-7 md:p-8">
             <span className="label text-grey">The palette</span>
             <div className="mt-6 grid grid-cols-4 gap-3">
               {PALETTE.map((c) => (
@@ -232,7 +252,7 @@ export function WorkPage() {
           </div>
 
           {/* type */}
-          <div className="lg:col-span-7 rounded-2xl border border-ink-line p-7 md:p-8">
+          <div className="reveal-up lg:col-span-7 rounded-2xl border border-ink-line p-7 md:p-8">
             <span className="label text-grey">The type</span>
             <div className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-5">
               {TYPESET.map((t) => (
@@ -248,7 +268,7 @@ export function WorkPage() {
 
           {/* principles */}
           {PRINCIPLES.map((p) => (
-            <div key={p.k} className="lg:col-span-4 rounded-2xl border border-ink-line p-7 md:p-8 hover:border-grey transition-colors">
+            <div key={p.k} className="reveal-up lg:col-span-4 rounded-2xl border border-ink-line p-7 md:p-8 hover:border-grey transition-colors">
               <span className="font-mono text-sm text-red">{p.k}</span>
               <h3 className="mt-4 font-display text-2xl leading-tight text-paper">{p.t}</h3>
               <p className="mt-3 text-grey-dim text-[14px] leading-relaxed">{p.d}</p>
@@ -260,7 +280,7 @@ export function WorkPage() {
       {/* CTA */}
       <section className="relative overflow-hidden border-t border-ink-line">
         <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[70vw] h-[50vh] opacity-25" style={{ background: "radial-gradient(50% 50% at 50% 50%, #c8102e, transparent 70%)" }} />
-        <div className="relative z-10 mx-auto max-w-[1500px] px-6 md:px-10 py-24 md:py-32 text-center">
+        <div className="reveal-up relative z-10 mx-auto max-w-[1500px] px-6 md:px-10 py-24 md:py-32 text-center">
           <span className="label text-red">Next</span>
           <h2 className="mt-8 font-display text-4xl md:text-6xl leading-[1.02] max-w-3xl mx-auto">Like what you see? The next one could be yours.</h2>
           <div className="mt-12 flex flex-wrap items-center justify-center gap-5">
