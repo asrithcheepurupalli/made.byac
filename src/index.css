@@ -87,6 +87,15 @@ body {
   .reveal-up { opacity: 1 !important; }
 }
 
+/* Ambient light temperature — toggled from the Studio section, warms/cools the
+   paper acts (manifesto + studio). The hero and the ink acts are left untouched. */
+[data-ambient] { transition: background-color 0.7s ease; }
+:root[data-temp="amber"] [data-ambient="paper"] { background-color: #f8f1e3; }
+:root[data-temp="amber"] [data-ambient="dim"]   { background-color: #f1e8d6; }
+:root[data-temp="slate"] [data-ambient="paper"] { background-color: #edf1f6; }
+:root[data-temp="slate"] [data-ambient="dim"]   { background-color: #e5eaf1; }
+@media (prefers-reduced-motion: reduce) { [data-ambient] { transition: none; } }
+
 /* Lenis smooth scroll (same as the Somaa pages) */
 html.lenis,
 html.lenis body { height: auto; }
