@@ -1,4 +1,4 @@
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Zap, Truck, Gift, Package } from "lucide-react";
 import { PROJECTS } from "../data";
 
 // ACT II — the work, under the lights. Three case studies carry it; everything
@@ -9,12 +9,18 @@ const CASE_STUDIES = [
   { slug: "mithai-maharaja", client: "Mithai Maharaja", line: "Sweets dressed\nlike heirlooms.", img: "/images/thumb_1778155198_f88efc2a-69f8-4b24-b07b-26e8a339b684.jpg", tag: "Luxury packaging" },
 ];
 
+// secondary case studies — small brand tiles, no design thumbnails (Somaa stays the hero)
+const MORE = [
+  { slug: "innovolt", client: "Innovolt", desc: "Commercial EV marketplace campaigns", accent: "#27d17c", icons: [Zap, Truck] },
+  { slug: "mithai-maharaja", client: "Mithai Maharaja", desc: "Luxury Indian sweets packaging", accent: "#c8a24b", icons: [Gift, Package] },
+];
+
 // quiet wall = clients without a dedicated case study (yet)
 const WALL = PROJECTS.filter((p) => p.client === "Telyport" || p.client === "Mr. Snapper International");
 const ROT = [-3, 2.5, -2, 3, -1.5, 2, -2.5, 1.5];
 
 export function SelectedWork() {
-  const [somaa, ...rest] = CASE_STUDIES;
+  const somaa = CASE_STUDIES[0];
 
   return (
     <section id="work" className="relative bg-ink text-paper py-28 md:py-40 overflow-hidden">
@@ -44,21 +50,28 @@ export function SelectedWork() {
           </div>
         </a>
 
-        {/* two more case studies */}
-        <div className="mt-20 md:mt-28 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-          {rest.map((c) => (
-            <a key={c.slug} href={`#/work/${c.slug}`} className="group reveal-up">
-              <div className="relative overflow-hidden rounded-2xl border border-ink-line bg-ink-soft aspect-[16/11]">
-                <img src={c.img} alt={c.client} loading="lazy" referrerPolicy="no-referrer" className="w-full h-full object-cover transition-transform duration-[1.1s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.05]" />
-                <div className="absolute inset-0 bg-gradient-to-t from-ink/70 to-transparent" />
-                <div className="absolute bottom-5 left-6 right-6 flex items-end justify-between">
-                  <div>
-                    <span className="label text-gold/90 text-[9px]">{c.tag}</span>
-                    <h3 className="mt-1.5 font-display text-3xl text-paper whitespace-pre-line leading-tight">{c.line}</h3>
-                  </div>
-                  <ArrowUpRight className="w-5 h-5 text-paper/70 group-hover:text-gold transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 shrink-0" />
+        {/* secondary case studies — small brand tiles, Somaa stays the hero */}
+        <div className="mt-10 md:mt-12 grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-3xl">
+          {MORE.map((c) => (
+            <a
+              key={c.slug}
+              href={`#/work/${c.slug}`}
+              className="group reveal-up rounded-xl border border-ink-line p-6 md:p-7 flex flex-col gap-4 transition-transform duration-300 hover:-translate-y-1"
+            >
+              <span className="block h-[3px] w-10 rounded-full" style={{ background: c.accent }} />
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2.5" style={{ color: c.accent }}>
+                  {c.icons.map((Icon, j) => (
+                    <Icon key={j} className="w-5 h-5" strokeWidth={1.75} />
+                  ))}
                 </div>
+                <ArrowUpRight className="w-4 h-4 text-grey-dim group-hover:text-paper transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </div>
+              <div>
+                <h3 className="font-display text-2xl text-paper">{c.client}</h3>
+                <p className="mt-1 text-grey-dim text-sm">{c.desc}</p>
+              </div>
+              <span className="label text-[9px]" style={{ color: c.accent }}>Read case study →</span>
             </a>
           ))}
         </div>
