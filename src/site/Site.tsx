@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { SmoothScroll } from "./SmoothScroll";
-import { AmbientPill } from "./AmbientPill";
 import { SiteNav } from "./SiteNav";
 import { ActHero } from "./ActHero";
 import { Manifesto } from "./Manifesto";
@@ -58,7 +57,6 @@ export function Site() {
   return (
     <>
       <SmoothScroll />
-      <AmbientPill />
       <div className="bg-paper text-ink font-sans antialiased">
         <SiteNav />
         <main>
