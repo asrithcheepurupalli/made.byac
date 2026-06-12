@@ -1,91 +1,90 @@
-import { motion } from "motion/react";
 import { ArrowUpRight } from "lucide-react";
 import { PROJECTS } from "../data";
 
-// ACT II — Cinematic Dark Gallery. The work, under the lights.
-// Somaa leads as the first full case study; the rest form the archive.
+// ACT II — the work, under the lights. Three case studies carry it; everything
+// else hangs on a quiet wall you can hover to view.
+const CASE_STUDIES = [
+  { slug: "somaa", client: "Somaa", line: "A restobar that\nremembers you.", img: "/case/somaa/hero.png", tag: "QR dining platform" },
+  { slug: "innovolt", client: "Innovolt", line: "Used EVs, made\na safe bet.", img: "/images/Hyd'Tel.png", tag: "EV campaigns" },
+  { slug: "mithai-maharaja", client: "Mithai Maharaja", line: "Sweets dressed\nlike heirlooms.", img: "/images/thumb_1778155198_f88efc2a-69f8-4b24-b07b-26e8a339b684.jpg", tag: "Luxury packaging" },
+];
+
+// quiet wall = clients without a dedicated case study (yet)
+const WALL = PROJECTS.filter((p) => p.client === "Telyport" || p.client === "Mr. Snapper International");
+const ROT = [-3, 2.5, -2, 3, -1.5, 2, -2.5, 1.5];
+
 export function SelectedWork() {
+  const [somaa, ...rest] = CASE_STUDIES;
+
   return (
     <section id="work" className="relative bg-ink text-paper py-28 md:py-40 overflow-hidden">
-      {/* seam: blend down from the paper manifesto above */}
       <div aria-hidden className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-paper to-ink pointer-events-none" />
       <div className="relative mx-auto max-w-[1600px] px-6 md:px-10">
         {/* header */}
         <div className="reveal-up flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-16 md:mb-24">
           <div>
             <span className="label text-red">·003 — selected work</span>
-            <h2 className="mt-6 font-display text-6xl md:text-8xl leading-[0.9] tracking-[-0.02em]">
-              The work<span className="text-red">.</span>
-            </h2>
+            <h2 className="mt-6 font-display text-6xl md:text-8xl leading-[0.9] tracking-[-0.02em]">The work<span className="text-red">.</span></h2>
           </div>
-          <p className="font-display text-xl md:text-2xl text-grey-dim max-w-md leading-relaxed">
-            Brand systems, packaging and products for clients across India — each made to be
-            remembered.
-          </p>
+          <p className="font-display text-xl md:text-2xl text-grey-dim max-w-md leading-relaxed">Three studies we're proud of — and a wall of everything else.</p>
         </div>
 
-        {/* FEATURED — Somaa case study */}
-        <motion.a
-          href="#/work/somaa"
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="group grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center"
-        >
+        {/* featured case study — Somaa */}
+        <a href={`#/work/${somaa.slug}`} className="group grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
           <div className="lg:col-span-7">
             <div className="relative overflow-hidden rounded-2xl border border-ink-line bg-ink-soft aspect-[16/10]">
-              <img
-                src="/case/somaa/hero.png"
-                alt="Somaa — QR dining platform"
-                loading="lazy"
-                className="w-full h-full object-cover transition-transform duration-[1.1s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04]"
-              />
-              <span className="absolute top-5 left-6 label text-[10px] bg-red text-white rounded-full px-3 py-1.5">
-                Featured case study
-              </span>
+              <img src={somaa.img} alt={somaa.client} loading="lazy" className="w-full h-full object-cover transition-transform duration-[1.1s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04]" />
+              <span className="absolute top-5 left-6 label text-[10px] bg-red text-white rounded-full px-3 py-1.5">Featured case study</span>
             </div>
           </div>
           <div className="lg:col-span-5">
-            <div className="flex items-center gap-3 label text-gold">
-              <span>Somaa</span>
-              <span className="w-6 h-px bg-gold/50" />
-              <span className="text-grey-dim">2026</span>
-            </div>
-            <h3 className="mt-5 font-display text-5xl md:text-6xl leading-[0.98] text-paper">
-              A restobar that<br />remembers you.
-            </h3>
-            <p className="mt-5 text-grey-dim leading-relaxed max-w-md">
-              A coastal-Andhra restobar in Vizag — and the full QR dining platform we designed and
-              built: scan-to-order, an AI dining host, loyalty, and a POS-connected kitchen.
-            </p>
-            <span className="mt-7 inline-flex items-center gap-2 label text-paper border-b border-gold/50 pb-1 group-hover:text-gold transition-colors">
-              Read the case study <ArrowUpRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-            </span>
+            <div className="flex items-center gap-3 label text-gold"><span>{somaa.client}</span><span className="w-6 h-px bg-gold/50" /><span className="text-grey-dim">{somaa.tag}</span></div>
+            <h3 className="mt-5 font-display text-5xl md:text-6xl leading-[0.98] text-paper whitespace-pre-line">{somaa.line}</h3>
+            <span className="mt-7 inline-flex items-center gap-2 label text-paper border-b border-gold/50 pb-1 group-hover:text-gold transition-colors">Read the case study <ArrowUpRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" /></span>
           </div>
-        </motion.a>
+        </a>
 
-        {/* ARCHIVE — the rest of the work (case studies coming) */}
-        <div className="mt-28 md:mt-40 border-t border-ink-line">
-          <div className="flex items-center justify-between pt-8">
-            <span className="label text-grey-dim">More from the studio</span>
-            <span className="label text-grey-dim/60">case studies in progress</span>
-          </div>
-          <div className="mt-10 grid grid-cols-2 lg:grid-cols-3 gap-4">
-            {PROJECTS.slice(0, 9).map((p) => (
-              <div key={p.id} className="group reveal-up">
-                <div className="relative overflow-hidden rounded-xl border border-ink-line bg-ink-soft aspect-[4/3]">
-                  <img
-                    src={p.imageUrl}
-                    alt={p.altText}
-                    loading="lazy"
-                    referrerPolicy="no-referrer"
-                    className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-500"
-                  />
+        {/* two more case studies */}
+        <div className="mt-20 md:mt-28 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+          {rest.map((c) => (
+            <a key={c.slug} href={`#/work/${c.slug}`} className="group reveal-up">
+              <div className="relative overflow-hidden rounded-2xl border border-ink-line bg-ink-soft aspect-[16/11]">
+                <img src={c.img} alt={c.client} loading="lazy" referrerPolicy="no-referrer" className="w-full h-full object-cover transition-transform duration-[1.1s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.05]" />
+                <div className="absolute inset-0 bg-gradient-to-t from-ink/70 to-transparent" />
+                <div className="absolute bottom-5 left-6 right-6 flex items-end justify-between">
+                  <div>
+                    <span className="label text-gold/90 text-[9px]">{c.tag}</span>
+                    <h3 className="mt-1.5 font-display text-3xl text-paper whitespace-pre-line leading-tight">{c.line}</h3>
+                  </div>
+                  <ArrowUpRight className="w-5 h-5 text-paper/70 group-hover:text-gold transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 shrink-0" />
                 </div>
-                <div className="mt-3 flex items-baseline justify-between gap-3">
-                  <span className="font-display text-lg text-paper/90 truncate">{p.title}</span>
-                  <span className="label text-[9px] text-grey-dim shrink-0">{p.client}</span>
+              </div>
+            </a>
+          ))}
+        </div>
+
+        {/* the quiet wall — hover to view */}
+        <div className="mt-28 md:mt-40 border-t border-ink-line">
+          <div className="flex items-center justify-between pt-8 mb-16">
+            <span className="label text-grey-dim">Also from the studio</span>
+            <span className="label text-grey-dim/60">hover to view</span>
+          </div>
+          <div className="flex flex-wrap justify-center gap-x-10 gap-y-16 md:gap-x-16 px-2">
+            {WALL.map((p, i) => (
+              <div
+                key={p.id}
+                className="group relative flex flex-col items-center"
+                style={{ transform: `rotate(${ROT[i % ROT.length]}deg)` }}
+              >
+                {/* the hanger */}
+                <span className="w-px h-7 bg-ink-line" />
+                <span className="w-1.5 h-1.5 rounded-full -mt-7 mb-5" style={{ background: "var(--color-gold)" }} />
+                <div className="relative w-28 md:w-36 aspect-[3/4] rounded-md overflow-hidden border border-ink-line bg-ink-soft shadow-lg transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.7] group-hover:-translate-y-2 group-hover:rotate-0 group-hover:z-30 group-hover:shadow-2xl">
+                  <img src={p.imageUrl} alt={p.altText} loading="lazy" referrerPolicy="no-referrer" className="w-full h-full object-cover grayscale opacity-70 transition-all duration-500 group-hover:grayscale-0 group-hover:opacity-100" />
+                </div>
+                <div className="mt-4 text-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <div className="font-display text-sm text-paper leading-tight">{p.title}</div>
+                  <div className="label text-[8px] text-grey-dim mt-1">{p.client}</div>
                 </div>
               </div>
             ))}

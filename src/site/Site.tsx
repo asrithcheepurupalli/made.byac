@@ -8,6 +8,8 @@ import { GridLab } from "./GridLab";
 import { Invitation } from "./Invitation";
 import { SiteFooter } from "./SiteFooter";
 import { SomaaCaseStudy } from "./case/SomaaCaseStudy";
+import { CampaignCaseStudy } from "./case/CampaignCaseStudy";
+import { CAMPAIGN_CASES } from "./case/caseData";
 
 // Tiny hash router so case-study pages get their own URL + back button,
 // without pulling in a routing dependency.
@@ -38,6 +40,16 @@ export function Site() {
       <>
         <SmoothScroll />
         <SomaaCaseStudy />
+      </>
+    );
+  }
+
+  const campaignSlug = route.startsWith("#/work/") ? route.slice("#/work/".length) : "";
+  if (campaignSlug && CAMPAIGN_CASES[campaignSlug]) {
+    return (
+      <>
+        <SmoothScroll />
+        <CampaignCaseStudy slug={campaignSlug} />
       </>
     );
   }
