@@ -50,28 +50,28 @@ export function SelectedWork() {
           </div>
         </a>
 
-        {/* secondary case studies — small brand tiles, Somaa stays the hero */}
-        <div className="mt-10 md:mt-12 grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-3xl">
+        {/* secondary case studies — wide brand tiles (only two for now; shrink the grid when more are added) */}
+        <div className="mt-12 md:mt-16 grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
           {MORE.map((c) => (
             <a
               key={c.slug}
               href={`#/work/${c.slug}`}
-              className="group reveal-up rounded-xl border border-ink-line p-6 md:p-7 flex flex-col gap-4 transition-transform duration-300 hover:-translate-y-1"
+              className="group reveal-up rounded-2xl border border-ink-line p-9 md:p-11 min-h-[200px] flex flex-col gap-6 transition-transform duration-300 hover:-translate-y-1"
             >
-              <span className="block h-[3px] w-10 rounded-full" style={{ background: c.accent }} />
+              <span className="block h-1 w-12 rounded-full" style={{ background: c.accent }} />
               <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2.5" style={{ color: c.accent }}>
+                <div className="flex items-center gap-3" style={{ color: c.accent }}>
                   {c.icons.map((Icon, j) => (
-                    <Icon key={j} className="w-5 h-5" strokeWidth={1.75} />
+                    <Icon key={j} className="w-6 h-6" strokeWidth={1.6} />
                   ))}
                 </div>
-                <ArrowUpRight className="w-4 h-4 text-grey-dim group-hover:text-paper transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                <ArrowUpRight className="w-5 h-5 text-grey-dim group-hover:text-paper transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </div>
-              <div>
-                <h3 className="font-display text-2xl text-paper">{c.client}</h3>
-                <p className="mt-1 text-grey-dim text-sm">{c.desc}</p>
+              <div className="mt-auto">
+                <h3 className="font-display text-3xl md:text-4xl text-paper">{c.client}</h3>
+                <p className="mt-2 text-grey-dim md:text-[15px]">{c.desc}</p>
               </div>
-              <span className="label text-[9px]" style={{ color: c.accent }}>Read case study →</span>
+              <span className="label text-[10px]" style={{ color: c.accent }}>Read case study →</span>
             </a>
           ))}
         </div>
