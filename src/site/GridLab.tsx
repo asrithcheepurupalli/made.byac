@@ -17,13 +17,13 @@ export function GridLab() {
       <div className="relative mx-auto max-w-[1600px] px-6 md:px-10">
         <div className="reveal-up flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-14 md:mb-20">
           <div>
-            <span className="label text-red">·004 — the studio</span>
+            <span className="label text-red">·004 / the studio</span>
             <h2 className="mt-6 font-display text-6xl md:text-8xl leading-[0.9] tracking-[-0.02em]">
               How we<br />make it<span className="text-red">.</span>
             </h2>
           </div>
           <p className="font-display text-xl md:text-2xl text-grey max-w-md leading-relaxed">
-            One team, end to end — strategy, design and code. A system, not a service desk.
+            One team, end to end: strategy, design and code. A system, not a service desk.
           </p>
         </div>
 

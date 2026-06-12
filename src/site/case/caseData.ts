@@ -28,12 +28,12 @@ export const CAMPAIGN_CASES: Record<string, CampaignCase> = {
     accent: "#27d17c",
     hero: "/images/Inv'08.png",
     brief: [
-      "Innovolt sells certified pre-owned commercial electric vehicles. The hard part was never the product — it was trust. Fleet buyers hesitate over second-hand batteries, warranty cover, financing and resale value.",
-      "The campaigns had to make a used commercial EV feel as safe and aspirational as a new one — and do it convincingly across very different regional audiences, from Telugu-first Hyderabad to Bengaluru's tech-corridor fleets.",
+      "Innovolt sells certified pre-owned commercial electric vehicles. The hard part was never the product. It was trust. Fleet buyers hesitate over second-hand batteries, warranty cover, financing and resale value.",
+      "The campaigns had to make a used commercial EV feel as safe and aspirational as a new one, and do it convincingly across very different regional audiences, from Telugu-first Hyderabad to Bengaluru's tech-corridor fleets.",
     ],
     approach: [
       "A benefit-led visual system: warranties, inspections, financing and roadside support pushed to the front on a strict industrial grid, so the reassurance is the first thing you read.",
-      "Regional adaptation done properly — custom Telugu typography for Hyderabad, an English set for broader urban reach, and city-specific landmarks and fleet contexts for each market. High-contrast, monochrome-leaning frames let the vehicle and the numbers do the talking.",
+      "Regional adaptation done properly: custom Telugu typography for Hyderabad, an English set for broader urban reach, and city-specific landmarks and fleet contexts for each market. High-contrast, monochrome-leaning frames let the vehicle and the numbers do the talking.",
     ],
   },
   "mithai-maharaja": {
@@ -48,10 +48,10 @@ export const CAMPAIGN_CASES: Record<string, CampaignCase> = {
     accent: "#c8a24b",
     hero: "/images/thumb_1778155199_93669484-0552-4a3e-971e-ed4287cc1b19.jpg",
     brief: [
-      "Traditional Indian sweets are sold in generic boxes that don't match what they mean to people. Mithai Maharaja wanted its mithai to feel like the heirloom gift it actually is — regal, regional, worth giving — without losing the warmth of a neighbourhood sweet shop.",
+      "Traditional Indian sweets are sold in generic boxes that don't match what they mean to people. Mithai Maharaja wanted its mithai to feel like the heirloom gift it actually is: regal, regional, worth giving, without losing the warmth of a neighbourhood sweet shop.",
     ],
     approach: [
-      "Each sweet gets dressed like the gift it is — royal colour, hot-stamped gold foil, and pattern work rooted in the region, from Karnataka maps to festive motifs.",
+      "Each sweet gets dressed like the gift it is: royal colour, hot-stamped gold foil, and pattern work rooted in the region, from Karnataka maps to festive motifs.",
       "Rigid, food-safe structures with sliding drawers and debossed detail, plus a festive sub-system for Raksha Bandhan and seasonal gifting that stays on-brand while feeling specific to the occasion.",
     ],
   },

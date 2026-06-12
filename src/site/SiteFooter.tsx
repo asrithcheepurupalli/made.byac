@@ -32,8 +32,8 @@ export function SiteFooter() {
         </div>
 
         <div className="mt-14 pt-7 border-t border-ink-line flex flex-col sm:flex-row justify-between gap-3 label text-grey">
-          <span>© 2026 made. by ac — all rights reserved</span>
-          <span>Vizag {vizagTime || "—"}</span>
+          <span>© 2026 made. by ac · all rights reserved</span>
+          <span>Vizag {vizagTime || "··"}</span>
           <span>made with intent</span>
         </div>
       </div>

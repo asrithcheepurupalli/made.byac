@@ -45,7 +45,7 @@ function CountUp({ to, suffix = "", prefix = "", dur = 1500 }: { to: number; suf
 }
 
 const META = [
-  { k: "Client", v: "Somaa — Restobar & Live Music" },
+  { k: "Client", v: "Somaa · Restobar & Live Music" },
   { k: "Location", v: "Yendada, Visakhapatnam" },
   { k: "Year", v: "2026" },
   { k: "Role", v: "Product · Brand · Full-stack build" },
@@ -54,28 +54,28 @@ const META = [
 ];
 
 const WALK = [
-  { n: "01", t: "Scan the table.", d: "Every table carries its own QR. One scan — no app, no download, no waiting for a server to be free.", img: "step-scan" },
+  { n: "01", t: "Scan the table.", d: "Every table carries its own QR. One scan, no app, no download, no waiting for a server to be free.", img: "step-scan" },
   { n: "02", t: "Browse a menu that feels like Somaa.", d: "47 dishes across 10 sections, each with photography, ₹ pricing, veg & bar flags, bestsellers and today's specials.", img: "step-browse" },
-  { n: "03", t: "Ask Raga, the AI host.", d: "A Claude-powered dining host that knows the live menu — suggests pairings and explains dishes in Somaa's own warm, slightly-loud voice.", img: "step-host" },
+  { n: "03", t: "Ask Raga, the AI host.", d: "A Claude-powered dining host that knows the live menu. It suggests pairings and explains dishes in Somaa's own warm, slightly-loud voice.", img: "step-host" },
   { n: "04", t: "Order together.", d: "A shared table cart lets the whole table add dishes; the host places one order. No more shouting items across the table.", img: "step-order" },
-  { n: "05", t: "Be remembered.", d: "Birthdays get a discount, anniversaries get a perk, and a loyalty ladder rewards regulars — automatically, never stacked.", img: "step-remember" },
+  { n: "05", t: "Be remembered.", d: "Birthdays get a discount, anniversaries get a perk, and a loyalty ladder rewards regulars, automatically and never stacked.", img: "step-remember" },
   { n: "06", t: "Close the loop.", d: "After the meal, a quick rating earns a coupon by SMS for next time. Feedback becomes the reason to return.", img: "step-feedback" },
 ];
 
 const SYSTEMS = [
-  { t: "Raga — the AI host", d: "Guest-side Claude Haiku that reads the live menu and recommends in-character.", tag: "Claude · Haiku" },
+  { t: "Raga · the AI host", d: "Guest-side Claude Haiku that reads the live menu and recommends in-character.", tag: "Claude · Haiku" },
   { t: "Group ordering", d: "Shared per-table cart with host-only checkout and 3-hour sessions.", tag: "Realtime" },
   { t: "Loyalty & occasions", d: "Four tiers, birthday & anniversary perks, best-single discount rule.", tag: "Engine" },
   { t: "Feedback → reward", d: "Signed post-order feedback issues a one-time coupon by SMS.", tag: "Growth loop" },
   { t: "Petpooja POS", d: "Orders forward straight to the kitchen's existing point-of-sale.", tag: "Integration" },
-  { t: "Somy — sales coach", d: "Admin-side Claude Sonnet that reads revenue & feedback and coaches the floor.", tag: "Claude · Sonnet" },
+  { t: "Somy · sales coach", d: "Admin-side Claude Sonnet that reads revenue & feedback and coaches the floor.", tag: "Claude · Sonnet" },
 ];
 
 const STATS = [
   { to: 47, suffix: "", label: "dishes on the live menu" },
   { to: 110, suffix: "+", label: "React components shipped" },
   { to: 16, suffix: "", label: "Postgres tables, RLS-secured" },
-  { to: 2, suffix: "", label: "AI copilots — Raga & Somy" },
+  { to: 2, suffix: "", label: "AI copilots · Raga & Somy" },
 ];
 
 // A reliable scroll-reveal: a CSS scroll-driven fade-up where supported
@@ -132,10 +132,10 @@ export function SomaaCaseStudy() {
         </motion.div>
 
         <motion.div style={{ opacity: fade }} className="relative z-10 mx-auto max-w-[1400px] w-full px-6 md:px-10 pb-16 md:pb-24">
-          <span className="label" style={{ color: C.amber }}>·01 — case study / hospitality</span>
+          <span className="label" style={{ color: C.amber }}>·01 · case study · hospitality</span>
           <img src={`${A}/wordmark-cream.png`} alt="Somaa" className="mt-8 h-16 md:h-28 w-auto object-contain object-left" />
           <p className="mt-8 font-display text-2xl md:text-4xl leading-snug max-w-2xl" style={{ color: C.text }}>
-            A coastal-Andhra restobar in Vizag — and the QR dining platform we designed and built to
+            A coastal-Andhra restobar in Vizag, and the QR dining platform we designed and built to
             match the room.
           </p>
           <div className="mt-10 flex items-center gap-3 label" style={{ color: C.muted }}>
@@ -149,7 +149,7 @@ export function SomaaCaseStudy() {
         <div className="whitespace-nowrap font-display text-xl md:text-2xl" style={{ color: C.dim }}>
           {Array.from({ length: 6 }).map((_, i) => (
             <span key={i} className="mx-6">
-              Where the Bay of Bengal meets the bar <span style={{ color: C.amber }}>—</span> unhurried, and a little loud.
+              Where the Bay of Bengal meets the bar <span style={{ color: C.amber }}>·</span> unhurried, and a little loud.
             </span>
           ))}
         </div>
@@ -182,7 +182,7 @@ export function SomaaCaseStudy() {
           <Reveal delay={0.1}>
             <p className="mt-8 text-lg leading-relaxed max-w-2xl" style={{ color: C.muted }}>
               Paper menus and a busy floor meant guests waited just to be noticed. Generic QR menus
-              would have worked — and felt like every other place. Somaa wanted the at-table
+              would have worked, and felt like every other place. Somaa wanted the at-table
               experience to carry the brand: warm, a little theatrical, unmistakably theirs. And it
               had to plug into the kitchen they already run on Petpooja.
             </p>
@@ -202,7 +202,7 @@ export function SomaaCaseStudy() {
                     <img
                       key={s.img}
                       src={`${A}/${s.img}.png`}
-                      alt={`Somaa — ${s.t}`}
+                      alt={`Somaa · ${s.t}`}
                       className="absolute inset-0 w-full h-full object-cover object-top transition-opacity duration-500 ease-out"
                       style={{ opacity: active === i ? 1 : 0 }}
                     />
@@ -283,7 +283,7 @@ export function SomaaCaseStudy() {
             We dressed it in candlelight.
           </h2>
           <p className="mt-7 text-lg leading-relaxed" style={{ color: C.muted }}>
-            A late-night palette — charcoal, cream and a single warm amber — with Fraunces serifs for
+            A late-night palette of charcoal, cream and a single warm amber, with Fraunces serifs for
             warmth and Inter for clarity. Parallax, smooth scrolling and slow Ken-Burns motion make a
             phone screen feel like stepping inside the room.
           </p>
@@ -296,7 +296,7 @@ export function SomaaCaseStudy() {
         <div className="lg:col-span-7">
           <Reveal>
             <div className="rounded-2xl overflow-hidden shadow-2xl" style={{ border: `1px solid ${C.line}` }}>
-              <img src={`${A}/og.png`} alt="Somaa brand — order from your table, talk to the AI host" className="w-full" />
+              <img src={`${A}/og.png`} alt="Somaa brand · order from your table, talk to the AI host" className="w-full" />
             </div>
           </Reveal>
         </div>
@@ -308,7 +308,7 @@ export function SomaaCaseStudy() {
         <div className="relative z-10 mx-auto max-w-[1400px] px-6 md:px-10 py-24 md:py-40 text-center">
           <span className="label" style={{ color: C.amber }}>The outcome</span>
           <h2 className="mt-8 font-display text-4xl md:text-7xl leading-[1.0] max-w-4xl mx-auto" style={{ color: C.text }}>
-            A guest can sit down, scan, and feel looked after — before a server says a word.
+            A guest can sit down, scan, and feel looked after before a server says a word.
           </h2>
           <div className="mt-12 flex flex-wrap items-center justify-center gap-5">
             <a href="https://somaa.made-by-ac.com" target="_blank" rel="noreferrer" className="group label rounded-full px-7 py-4 flex items-center gap-2 transition-transform duration-300 hover:-translate-y-0.5" style={{ background: C.amber, color: "#1a1206" }}>
@@ -325,7 +325,7 @@ export function SomaaCaseStudy() {
       <footer className="border-t" style={{ borderColor: C.line }}>
         <div className="mx-auto max-w-[1400px] px-6 md:px-10 py-10 flex flex-col sm:flex-row justify-between gap-3 label" style={{ color: C.dim }}>
           <a href="#" className="hover:opacity-80 flex items-center gap-2"><ArrowLeft className="w-3.5 h-3.5" /> back to made.</a>
-          <span>Somaa — made. by ac · 2026</span>
+          <span>Somaa · made. by ac · 2026</span>
         </div>
       </footer>
     </div>

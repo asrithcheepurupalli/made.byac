@@ -26,7 +26,7 @@ export function Invitation() {
       <div className="relative z-10 mx-auto max-w-[1600px] px-6 md:px-10 grid grid-cols-1 lg:grid-cols-12 gap-14 lg:gap-20 items-center">
         {/* the warm message */}
         <div className="lg:col-span-7">
-          <span className="label text-red">·005 — say hi</span>
+          <span className="label text-red">·005 / say hi</span>
           <motion.h2
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -39,7 +39,7 @@ export function Invitation() {
             <span className="italic font-normal text-gold">possible?</span>
           </motion.h2>
           <p className="mt-8 text-lg md:text-xl text-grey-dim leading-relaxed max-w-xl font-display">
-            That's our favourite kind. There's genuinely nothing to lose — tell us what you're
+            That's our favourite kind. There's genuinely nothing to lose. Tell us what you're
             imagining, and we'll tell you honestly whether we can make it.
             <span className="text-paper"> Most of the time, we can.</span>
           </p>

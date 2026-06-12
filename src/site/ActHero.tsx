@@ -23,14 +23,14 @@ export function ActHero() {
 
       {/* top meta row */}
       <div className="relative z-10 pt-28 md:pt-32 px-6 md:px-10 mx-auto max-w-[1600px] w-full flex items-start justify-between label text-grey">
-        <span>made.™ — design &amp; development studio</span>
-        <span className="hidden sm:inline">{currentTime || "—"}</span>
+        <span>made.™ · design &amp; development studio</span>
+        <span className="hidden sm:inline">{currentTime || "··"}</span>
       </div>
 
       {/* headline */}
       <div className="relative z-10 px-6 md:px-10 mx-auto max-w-[1600px] w-full">
         <div>
-          <span className="rise label text-red block" style={{ animationDelay: "0.05s" }}>·001 — a design practice from india, for the world</span>
+          <span className="rise label text-red block" style={{ animationDelay: "0.05s" }}>·001 / a design practice from india, for the world</span>
           <h1 className="rise mt-6 font-display font-semibold uppercase leading-[0.86] tracking-[-0.02em] text-[15.5vw] sm:text-[13vw] lg:text-[10.5rem]" style={{ animationDelay: "0.15s" }}>
             We make
             <br />
@@ -46,7 +46,7 @@ export function ActHero() {
       {/* bottom row: manifesto line + scroll cue + gold seal */}
       <div className="relative z-10 pb-12 md:pb-16 px-6 md:px-10 mx-auto max-w-[1600px] w-full flex flex-col md:flex-row md:items-end justify-between gap-10">
         <p className="rise font-display text-xl md:text-2xl leading-relaxed max-w-xl text-ink/80" style={{ animationDelay: "0.45s" }}>
-          We are <em className="text-red-deep">made.</em> — a studio crafting brand systems,
+          We are <em className="text-red-deep">made.</em> A studio crafting brand systems,
           packaging, and digital experiences that people remember.
         </p>
 

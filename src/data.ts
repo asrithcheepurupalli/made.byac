@@ -518,7 +518,7 @@ export const CAPABILITIES: Capability[] = [
   {
     id: "digital",
     title: "Digital Campaigns",
-    description: "Social and ad creative built to be seen — and to convert."
+    description: "Social and ad creative built to be seen, and to convert."
   }
 ];
 
@@ -539,7 +539,7 @@ export const PROCESS_STEPS: ProcessStep[] = [
     id: "design",
     stepNumber: "03",
     title: "Design",
-    description: "Type, layout, illustration — the visual system."
+    description: "Type, layout, illustration. The visual system."
   },
   {
     id: "prototype",

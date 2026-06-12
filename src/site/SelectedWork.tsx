@@ -29,17 +29,17 @@ export function SelectedWork() {
         {/* header */}
         <div className="reveal-up flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-16 md:mb-24">
           <div>
-            <span className="label text-red">·003 — selected work</span>
+            <span className="label text-red">·003 / selected work</span>
             <h2 className="mt-6 font-display text-6xl md:text-8xl leading-[0.9] tracking-[-0.02em]">The work<span className="text-red">.</span></h2>
           </div>
-          <p className="font-display text-xl md:text-2xl text-grey-dim max-w-md leading-relaxed">Three studies we're proud of — and a wall of everything else.</p>
+          <p className="font-display text-xl md:text-2xl text-grey-dim max-w-md leading-relaxed">Three studies we're proud of, and a wall of everything else.</p>
         </div>
 
         {/* featured case study — Somaa */}
         <a href={`#/work/${somaa.slug}`} className="group grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
           <div className="lg:col-span-7">
             <div className="relative overflow-hidden rounded-2xl border border-ink-line bg-ink-soft aspect-[16/10]">
-              <img src={somaa.img} alt="Somaa — chicken biryani" loading="lazy" className="w-full h-full object-cover transition-transform duration-[1.1s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.05]" />
+              <img src={somaa.img} alt="Somaa chicken biryani" loading="lazy" className="w-full h-full object-cover transition-transform duration-[1.1s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.05]" />
               {/* recreate the Somaa hero: wordmark over the biryani */}
               <div className="absolute inset-0 bg-gradient-to-t from-ink/75 via-ink/15 to-ink/35" />
               <img

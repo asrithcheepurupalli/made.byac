@@ -27,7 +27,7 @@ export function CampaignCaseStudy({ slug }: { slug: string }) {
 
       {/* hero */}
       <section className="mx-auto max-w-[1400px] px-6 md:px-10 pt-32 md:pt-40 pb-16">
-        <span className="label" style={{ color: a }}>{c.index} — case study / {c.sector}</span>
+        <span className="label" style={{ color: a }}>{c.index} · case study / {c.sector}</span>
         <h1 className="mt-6 font-display text-7xl md:text-[9rem] leading-[0.86] tracking-[-0.02em]">{c.client}<span style={{ color: a }}>.</span></h1>
         <p className="mt-7 font-display text-2xl md:text-4xl leading-snug max-w-3xl text-paper/85">{c.tagline}</p>
 
@@ -102,7 +102,7 @@ export function CampaignCaseStudy({ slug }: { slug: string }) {
       <footer className="border-t border-ink-line">
         <div className="mx-auto max-w-[1400px] px-6 md:px-10 py-10 flex flex-col sm:flex-row justify-between gap-3 label text-grey">
           <a href="#" className="hover:opacity-80 flex items-center gap-2"><ArrowLeft className="w-3.5 h-3.5" /> back to made.</a>
-          <span>{c.client} — made. by ac · {c.year}</span>
+          <span>{c.client} · made. by ac · {c.year}</span>
         </div>
       </footer>
     </div>
