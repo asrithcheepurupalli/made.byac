@@ -9,7 +9,7 @@ export function SiteFooter() {
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-10">
           <div>
             <a href="#top" className="group font-display text-5xl md:text-7xl font-semibold italic tracking-tight inline-block">
-              made<span className="not-italic group-hover:text-gold transition-colors duration-500">.</span>
+              made<span className="not-italic group-hover:text-red transition-colors duration-500">.</span>
             </a>
             <p className="mt-4 text-grey-dim max-w-sm leading-relaxed">
               A design &amp; development studio. We make brands impossible to ignore.
