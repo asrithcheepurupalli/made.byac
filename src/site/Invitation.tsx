@@ -4,7 +4,7 @@ import { useStudio } from "../StudioContext";
 
 // Drop the real number here (with country code) to light up the Call + WhatsApp
 // buttons. Same number powers both; until it's set, they stay hidden.
-const PHONE = "+91XXXXXXXXXX";
+const PHONE = "+917382699377";
 const HAS_PHONE = /^\+?\d[\d\s-]{7,}$/.test(PHONE) && !PHONE.toUpperCase().includes("X");
 const PHONE_TEL = PHONE.replace(/[^\d+]/g, "");
 const PHONE_WA = PHONE.replace(/[^\d]/g, "");
