@@ -36,7 +36,12 @@ export function Site() {
     if (route.startsWith("#/work/") || route === "#/offer") window.scrollTo(0, 0);
   }, [route]);
 
-  if (route === "#/offer") {
+  // /offer is a real path (served by offer.html for correct share previews);
+  // #/offer is kept as an in-app fallback.
+  const onOfferPath =
+    typeof window !== "undefined" &&
+    window.location.pathname.replace(/\/$/, "").replace(/\.html$/, "") === "/offer";
+  if (onOfferPath || route === "#/offer") {
     return (
       <>
         <SmoothScroll />

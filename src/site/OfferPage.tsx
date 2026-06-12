@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import {
   ArrowLeft,
@@ -13,6 +13,11 @@ import {
   CalendarCheck,
   MessageSquareText,
   Sparkles,
+  Play,
+  RotateCcw,
+  Volume2,
+  VolumeX,
+  Check,
 } from "lucide-react";
 
 type Offering = {
@@ -116,6 +121,201 @@ const CALL_FLOW = [
   { icon: MessageSquareText, label: "Logs it & summarises", sub: "Straight to your team" },
 ];
 
+// A scripted inbound call the AI agent handles end to end — books the table,
+// captures the details, confirms by text. Plays out as a live transcript, and
+// (sound on) the agent's lines are spoken aloud in the browser. No backend.
+const CALL_SCRIPT: { role: "ai" | "caller"; text: string }[] = [
+  { role: "ai", text: "Good evening, thanks for calling. This is the front desk. How can I help?" },
+  { role: "caller", text: "Hi, I'd like to book a table for four this Friday at eight." },
+  { role: "ai", text: "Lovely. A table for four, this Friday at eight. Can I take a name for the booking?" },
+  { role: "caller", text: "Sure, it's Priya." },
+  { role: "ai", text: "Got it, Priya. You're booked for Friday at eight. I've just texted you a confirmation. Anything else?" },
+  { role: "caller", text: "No, that's perfect. Thank you!" },
+  { role: "ai", text: "Wonderful. See you Friday, Priya. Have a great evening." },
+];
+
+const CALL_RESULTS = ["Table booked", "Synced to calendar", "Confirmation texted", "Summary sent to team"];
+
+function CallDemo({ accent }: { accent: string }) {
+  const [shown, setShown] = useState(0);
+  const [status, setStatus] = useState<"idle" | "playing" | "done">("idle");
+  const [sound, setSound] = useState(true);
+  const [secs, setSecs] = useState(0);
+  const runRef = useRef(0);
+
+  // warm the speech-synthesis voice list (loads async on some browsers)
+  useEffect(() => {
+    try {
+      window.speechSynthesis?.getVoices();
+    } catch { /* no speech support */ }
+  }, []);
+
+  // call timer
+  useEffect(() => {
+    if (status !== "playing") return;
+    const t = setInterval(() => setSecs((s) => s + 1), 1000);
+    return () => clearInterval(t);
+  }, [status]);
+
+  // stop any speech if the user navigates away mid-call
+  useEffect(() => () => { try { window.speechSynthesis?.cancel(); } catch { /* noop */ } }, []);
+
+  const pickVoice = () => {
+    try {
+      const vs = window.speechSynthesis.getVoices();
+      return (
+        vs.find((v) => /en-IN/i.test(v.lang)) ||
+        vs.find((v) => /en-GB/i.test(v.lang) && /female|aria|libby|sonia/i.test(v.name)) ||
+        vs.find((v) => /en-GB/i.test(v.lang)) ||
+        vs.find((v) => /^en/i.test(v.lang)) ||
+        null
+      );
+    } catch {
+      return null;
+    }
+  };
+
+  const speak = (text: string) =>
+    new Promise<void>((res) => {
+      if (!sound || typeof window === "undefined" || !window.speechSynthesis) return res();
+      try {
+        const u = new SpeechSynthesisUtterance(text);
+        const v = pickVoice();
+        if (v) u.voice = v;
+        u.rate = 1.03;
+        u.pitch = 1.0;
+        u.onend = () => res();
+        u.onerror = () => res();
+        window.speechSynthesis.speak(u);
+      } catch {
+        res();
+      }
+    });
+
+  const wait = (ms: number) => new Promise<void>((res) => setTimeout(res, ms));
+
+  async function play() {
+    const id = ++runRef.current;
+    try { window.speechSynthesis?.cancel(); } catch { /* noop */ }
+    setShown(0);
+    setSecs(0);
+    setStatus("playing");
+    await wait(450);
+    for (let i = 0; i < CALL_SCRIPT.length; i++) {
+      if (runRef.current !== id) return;
+      setShown(i + 1);
+      const line = CALL_SCRIPT[i];
+      if (line.role === "ai") {
+        await speak(line.text);
+        await wait(280);
+      } else {
+        await wait(Math.min(2400, 850 + line.text.length * 34));
+      }
+      if (runRef.current !== id) return;
+    }
+    if (runRef.current === id) setStatus("done");
+  }
+
+  const mmss = `${String(Math.floor(secs / 60)).padStart(2, "0")}:${String(secs % 60).padStart(2, "0")}`;
+
+  return (
+    <div className="rounded-3xl border border-ink-line bg-ink-soft/50 overflow-hidden">
+      {/* call header */}
+      <div className="flex items-center justify-between px-5 md:px-7 py-4 border-b border-ink-line">
+        <div className="flex items-center gap-3">
+          <span className="relative flex w-2.5 h-2.5">
+            {status === "playing" && (
+              <span className="absolute inline-flex h-full w-full rounded-full opacity-60 animate-ping" style={{ background: accent }} />
+            )}
+            <span className="relative inline-flex rounded-full w-2.5 h-2.5" style={{ background: status === "idle" ? "var(--color-grey)" : accent }} />
+          </span>
+          <span className="label text-[10px] text-paper">
+            {status === "idle" ? "Sample call" : status === "playing" ? "Live call" : "Call ended"}
+            <span className="text-grey"> · made. AI agent</span>
+          </span>
+        </div>
+        <span className="font-mono text-xs text-grey">{mmss}</span>
+      </div>
+
+      {/* transcript */}
+      <div className="px-5 md:px-7 py-6 min-h-[280px] flex flex-col gap-3">
+        {status === "idle" && (
+          <div className="flex-1 flex flex-col items-start justify-center gap-4 py-6">
+            <PhoneCall className="w-7 h-7" style={{ color: accent }} strokeWidth={1.5} />
+            <p className="font-display text-xl md:text-2xl text-paper/85 max-w-md leading-snug">
+              A real call, start to finish. The agent answers, books the table and texts the confirmation.
+            </p>
+          </div>
+        )}
+
+        {CALL_SCRIPT.slice(0, shown).map((line, i) => (
+          <motion.div
+            key={i}
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+            className={`max-w-[82%] ${line.role === "caller" ? "self-end items-end" : "self-start"}`}
+          >
+            <span className={`label text-[8px] ${line.role === "caller" ? "text-grey" : ""}`} style={line.role === "ai" ? { color: accent } : undefined}>
+              {line.role === "ai" ? "Agent" : "Caller"}
+            </span>
+            <div
+              className={`mt-1.5 rounded-2xl px-4 py-3 text-[15px] leading-relaxed ${
+                line.role === "ai" ? "bg-ink text-paper rounded-tl-sm" : "bg-paper text-ink rounded-tr-sm"
+              }`}
+              style={line.role === "ai" ? { borderLeft: `2px solid ${accent}` } : undefined}
+            >
+              {line.text}
+            </div>
+          </motion.div>
+        ))}
+
+        {/* result chips */}
+        <AnimatePresence>
+          {status === "done" && (
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4 }}
+              className="mt-3 flex flex-wrap gap-2"
+            >
+              {CALL_RESULTS.map((r) => (
+                <span key={r} className="inline-flex items-center gap-1.5 text-[12px] rounded-full px-3 py-1.5 border" style={{ borderColor: accent + "66", color: accent }}>
+                  <Check className="w-3.5 h-3.5" /> {r}
+                </span>
+              ))}
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+
+      {/* controls */}
+      <div className="flex items-center justify-between px-5 md:px-7 py-4 border-t border-ink-line">
+        <button
+          onClick={play}
+          disabled={status === "playing"}
+          className="group inline-flex items-center gap-2.5 label text-[11px] rounded-full px-5 py-3 transition-all duration-300 disabled:opacity-50"
+          style={{ background: accent, color: "#0b0b0c" }}
+        >
+          {status === "idle" ? <Play className="w-4 h-4 fill-current" /> : status === "playing" ? <Play className="w-4 h-4 fill-current" /> : <RotateCcw className="w-4 h-4" />}
+          {status === "idle" ? "Play the call" : status === "playing" ? "On the line…" : "Replay the call"}
+        </button>
+        <button
+          onClick={() => {
+            if (sound) { try { window.speechSynthesis?.cancel(); } catch { /* noop */ } }
+            setSound((s) => !s);
+          }}
+          className="inline-flex items-center gap-2 label text-[10px] text-grey hover:text-paper transition-colors"
+          aria-pressed={sound}
+        >
+          {sound ? <Volume2 className="w-4 h-4" /> : <VolumeX className="w-4 h-4" />}
+          {sound ? "Sound on" : "Muted"}
+        </button>
+      </div>
+    </div>
+  );
+}
+
 export function OfferPage() {
   const [open, setOpen] = useState<string>("ai");
 
@@ -124,11 +324,11 @@ export function OfferPage() {
       {/* back nav */}
       <header className="fixed top-0 inset-x-0 z-50 backdrop-blur-md bg-ink/60 border-b border-ink-line">
         <div className="mx-auto max-w-[1400px] px-6 md:px-10 h-16 flex items-center justify-between">
-          <a href="#" className="label flex items-center gap-2 text-[10px] text-grey-dim hover:text-paper transition-colors">
+          <a href="/" className="label flex items-center gap-2 text-[10px] text-grey-dim hover:text-paper transition-colors">
             <ArrowLeft className="w-4 h-4" /> made.
           </a>
           <span className="label text-[10px] text-grey">What we offer</span>
-          <a href="#say-hi" className="label text-[10px] rounded-full px-4 py-2 border border-red text-red hover:bg-red hover:text-white transition-colors">
+          <a href="/#say-hi" className="label text-[10px] rounded-full px-4 py-2 border border-red text-red hover:bg-red hover:text-white transition-colors">
             Start a project
           </a>
         </div>
@@ -216,7 +416,7 @@ export function OfferPage() {
                         <div className="lg:col-span-6">
                           <p className="font-display text-xl md:text-2xl leading-relaxed text-paper/90 max-w-xl">{o.body}</p>
                           <a
-                            href="#say-hi"
+                            href="/#say-hi"
                             className="group mt-7 inline-flex items-center gap-2 label text-[11px]"
                             style={{ color: o.accent }}
                           >
@@ -276,6 +476,27 @@ export function OfferPage() {
         </div>
       </section>
 
+      {/* hear the agent */}
+      <section className="border-b border-ink-line bg-ink-soft/20">
+        <div className="mx-auto max-w-[1400px] px-6 md:px-10 py-20 md:py-28 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+          <div className="lg:col-span-5">
+            <span className="label" style={{ color: "#27d17c" }}>· hear the agent</span>
+            <h2 className="mt-6 font-display text-4xl md:text-6xl leading-[0.95] tracking-[-0.01em]">
+              Don't take our<br />word for it.<br />
+              <span className="italic font-normal" style={{ color: "#27d17c" }}>Hear it.</span>
+            </h2>
+            <p className="mt-7 text-grey-dim text-[15px] md:text-base leading-relaxed max-w-md">
+              Press play. The agent picks up, understands the request, books the table and confirms by text,
+              all on its own. Turn your sound on to hear the voice.
+            </p>
+            <p className="mt-4 label text-[9px] text-grey">Voice plays in your browser · nothing leaves this page</p>
+          </div>
+          <div className="lg:col-span-7">
+            <CallDemo accent="#27d17c" />
+          </div>
+        </div>
+      </section>
+
       {/* how we engage */}
       <section className="mx-auto max-w-[1400px] px-6 md:px-10 py-20 md:py-28">
         <span className="label text-red">· how we work with you</span>
@@ -303,17 +524,17 @@ export function OfferPage() {
             Not sure which of these you need? That's our favourite conversation.
           </h2>
           <div className="mt-12 flex flex-wrap items-center justify-center gap-5">
-            <a href="#say-hi" className="group label rounded-full px-7 py-4 flex items-center gap-2 bg-red text-white hover:bg-red-deep hover:-translate-y-0.5 transition-all duration-300">
+            <a href="/#say-hi" className="group label rounded-full px-7 py-4 flex items-center gap-2 bg-red text-white hover:bg-red-deep hover:-translate-y-0.5 transition-all duration-300">
               Start a project <ArrowUpRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </a>
-            <a href="#" className="label rounded-full px-7 py-4 border border-ink-line text-paper hover:border-grey transition-colors">Back to made.</a>
+            <a href="/" className="label rounded-full px-7 py-4 border border-ink-line text-paper hover:border-grey transition-colors">Back to made.</a>
           </div>
         </div>
       </section>
 
       <footer className="border-t border-ink-line">
         <div className="mx-auto max-w-[1400px] px-6 md:px-10 py-10 flex flex-col sm:flex-row justify-between gap-3 label text-grey">
-          <a href="#" className="hover:opacity-80 flex items-center gap-2"><ArrowLeft className="w-3.5 h-3.5" /> back to made.</a>
+          <a href="/" className="hover:opacity-80 flex items-center gap-2"><ArrowLeft className="w-3.5 h-3.5" /> back to made.</a>
           <span>made. by ac · what we offer</span>
         </div>
       </footer>
