@@ -51,7 +51,7 @@ export const CAMPAIGN_CASES: Record<string, CampaignCase> = {
       "Traditional Indian sweets are sold in generic boxes that don't match what they mean to people. Mithai Maharaja wanted its mithai to feel like the heirloom gift it actually is — regal, regional, worth giving — without losing the warmth of a neighbourhood sweet shop.",
     ],
     approach: [
-      "A packaging system that treats each sweet as a specimen worth dressing: royal colour fields, hot-stamped gold marks, and region-rooted pattern work — Karnataka cartography, festive ochres, classic editorial layouts.",
+      "Each sweet gets dressed like the gift it is — royal colour, hot-stamped gold foil, and pattern work rooted in the region, from Karnataka maps to festive motifs.",
       "Rigid, food-safe structures with sliding drawers and debossed detail, plus a festive sub-system for Raksha Bandhan and seasonal gifting that stays on-brand while feeling specific to the occasion.",
     ],
   },
