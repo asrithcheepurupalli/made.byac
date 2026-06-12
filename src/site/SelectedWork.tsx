@@ -4,7 +4,7 @@ import { PROJECTS } from "../data";
 // ACT II — the work, under the lights. Three case studies carry it; everything
 // else hangs on a quiet wall you can hover to view.
 const CASE_STUDIES = [
-  { slug: "somaa", client: "Somaa", line: "A restobar that\nremembers you.", img: "/case/somaa/hero.png", tag: "QR dining platform" },
+  { slug: "somaa", client: "Somaa", line: "A restobar that\nremembers you.", img: "/case/somaa/biryani.webp", tag: "QR dining platform" },
   { slug: "innovolt", client: "Innovolt", line: "Used EVs, made\na safe bet.", img: "/images/Hyd'Tel.png", tag: "EV campaigns" },
   { slug: "mithai-maharaja", client: "Mithai Maharaja", line: "Sweets dressed\nlike heirlooms.", img: "/images/thumb_1778155198_f88efc2a-69f8-4b24-b07b-26e8a339b684.jpg", tag: "Luxury packaging" },
 ];
@@ -39,8 +39,15 @@ export function SelectedWork() {
         <a href={`#/work/${somaa.slug}`} className="group grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
           <div className="lg:col-span-7">
             <div className="relative overflow-hidden rounded-2xl border border-ink-line bg-ink-soft aspect-[16/10]">
-              <img src={somaa.img} alt={somaa.client} loading="lazy" className="w-full h-full object-cover transition-transform duration-[1.1s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04]" />
-              <span className="absolute top-5 left-6 label text-[10px] bg-red text-white rounded-full px-3 py-1.5">Featured case study</span>
+              <img src={somaa.img} alt="Somaa — chicken biryani" loading="lazy" className="w-full h-full object-cover transition-transform duration-[1.1s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.05]" />
+              {/* recreate the Somaa hero: wordmark over the biryani */}
+              <div className="absolute inset-0 bg-gradient-to-t from-ink/75 via-ink/15 to-ink/35" />
+              <img
+                src="/case/somaa/wordmark-cream.png"
+                alt="Somaa"
+                className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[46%] max-w-[280px] drop-shadow-[0_4px_24px_rgba(0,0,0,0.55)] transition-transform duration-[1.1s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]"
+              />
+              <span className="absolute top-5 left-6 label text-[10px] bg-red text-white rounded-full px-3 py-1.5 z-10">Featured case study</span>
             </div>
           </div>
           <div className="lg:col-span-5">
