@@ -126,7 +126,6 @@ const WorkPiece: FC<{ project: Project; reversed: boolean; accent: string }> = (
     <div className={`lg:col-span-5 ${reversed ? "lg:order-1" : ""}`}>
       <span className="label" style={{ color: accent }}>{project.category}</span>
       <h3 className="mt-4 font-display text-3xl md:text-4xl leading-tight text-paper">{project.title}</h3>
-      <p className="mt-5 text-grey-dim leading-relaxed max-w-md">{project.description}</p>
     </div>
   </div>
 );

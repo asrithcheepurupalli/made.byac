@@ -503,22 +503,22 @@ export const CAPABILITIES: Capability[] = [
   {
     id: "branding",
     title: "Branding Systems",
-    description: "Developing consistent, evocative visual systems, complete brand rule guidelines, and bespoke layouts."
+    description: "Logos, identity and the type and rules that keep them consistent."
   },
   {
     id: "packaging",
     title: "Luxury Packaging",
-    description: "Crafting beautiful print confections, greaseproof structures, gold foils, and sliding handoff boxes."
+    description: "Premium print, structure and finishes for products worth gifting."
   },
   {
     id: "regional",
     title: "Regional Expansion",
-    description: "Integrating cultural illustrations, localized scripts, and city-oriented visual touchpoints."
+    description: "Local languages, scripts and references for new markets."
   },
   {
     id: "digital",
     title: "Digital Campaigns",
-    description: "High impact mobile advertisement hierarchies, benefit-led grid layouts, and active user generation campaigns."
+    description: "Social and ad creative built to be seen — and to convert."
   }
 ];
 
@@ -527,31 +527,31 @@ export const PROCESS_STEPS: ProcessStep[] = [
     id: "discover",
     stepNumber: "01",
     title: "Discover",
-    description: "Understanding the brand goal, user psychology, and market environment."
+    description: "Understand the brand, the audience and the market."
   },
   {
     id: "research",
     stepNumber: "02",
-    title: "Formulate Strategy",
-    description: "Mapping out specific collection lines, campaign deliverables, and specimen dossiers."
+    title: "Strategy",
+    description: "Map the deliverables, the system and the timeline."
   },
   {
     id: "design",
     stepNumber: "03",
-    title: "Design & Illustrate",
-    description: "Creating precise typographic systems, luxury print patterns, and high-impact media banners."
+    title: "Design",
+    description: "Type, layout, illustration — the visual system."
   },
   {
     id: "prototype",
     stepNumber: "04",
-    title: "Sensory Refinement",
-    description: "Simulating beautiful client handoffs and testing physical/digital unboxing ergonomics."
+    title: "Refine",
+    description: "Prototype, review and sweat the details."
   },
   {
     id: "launch",
     stepNumber: "05",
-    title: "Transmit Launch",
-    description: "Deploying high-fidelity assets across regional, offline, and social channels."
+    title: "Launch",
+    description: "Ship the assets across every channel."
   }
 ];
 
