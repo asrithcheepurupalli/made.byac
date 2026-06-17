@@ -21,7 +21,10 @@ export function useScrollReveal(routeKey: unknown) {
     // still needs the class so its nth-child child delays apply — its containers
     // are static, so they're safe.)
     const reveal = (el: HTMLElement) => {
-      if (el.classList.contains("reveal-stagger")) {
+      if (el.classList.contains("reveal-clip")) {
+        el.style.clipPath = "inset(0 0 0 0)";
+        el.style.transform = "none";
+      } else if (el.classList.contains("reveal-stagger")) {
         el.classList.add("in-view");
       } else {
         el.style.opacity = "1";
@@ -29,10 +32,10 @@ export function useScrollReveal(routeKey: unknown) {
       }
     };
 
-    const selector = ".reveal-up, .reveal-stagger";
+    const selector = ".reveal-up, .reveal-stagger, .reveal-clip";
     const collect = () =>
       Array.from(document.querySelectorAll<HTMLElement>(selector)).filter(
-        (el) => !el.classList.contains("in-view") && el.style.opacity !== "1",
+        (el) => !el.classList.contains("in-view") && el.style.opacity !== "1" && !el.style.clipPath,
       );
 
     // Let the freshly-rendered route paint before we query + observe.

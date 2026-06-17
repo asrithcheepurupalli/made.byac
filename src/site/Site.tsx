@@ -2,7 +2,9 @@ import { useEffect, useState, type ReactNode } from "react";
 import { SmoothScroll } from "./SmoothScroll";
 import { ScrollProgress } from "./ScrollProgress";
 import { Cursor } from "./Cursor";
+import { Intro } from "./Intro";
 import { useScrollReveal } from "./useScrollReveal";
+import { useMagnetic } from "./useMagnetic";
 import { SiteNav } from "./SiteNav";
 import { ActHero } from "./ActHero";
 import { Manifesto } from "./Manifesto";
@@ -43,8 +45,9 @@ export function Site() {
       ? window.location.pathname.replace(/\/$/, "").replace(/\.html$/, "")
       : "";
 
-  // Re-arm scroll reveals whenever the route swaps the page content.
+  // Re-arm scroll reveals + magnetic elements whenever the route swaps content.
   useScrollReveal(`${route}|${path}`);
+  useMagnetic(`${route}|${path}`);
 
   useEffect(() => {
     if (route.startsWith("#/work/") || route === "#/offer" || route === "#/work") window.scrollTo(0, 0);
@@ -65,6 +68,7 @@ export function Site() {
   } else {
     content = (
       <div className="bg-paper text-ink font-sans antialiased">
+        <Intro />
         <SiteNav />
         <main>
           <ActHero />
@@ -85,6 +89,7 @@ export function Site() {
       <Cursor />
       <ScrollProgress />
       <SmoothScroll />
+      <div className="grain" aria-hidden />
       <div key={`${route}|${path}`} className="route-fade">
         {content}
       </div>

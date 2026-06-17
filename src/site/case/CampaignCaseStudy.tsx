@@ -31,7 +31,7 @@ export function CampaignCaseStudy({ slug }: { slug: string }) {
         <h1 className="mt-6 font-display text-[clamp(2.75rem,11vw,9rem)] leading-[0.9] md:leading-[0.86] tracking-[-0.02em] break-words">{c.client}<span style={{ color: a }}>.</span></h1>
         <p className="mt-7 font-display text-2xl md:text-4xl leading-snug max-w-3xl text-paper/85">{c.tagline}</p>
 
-        <div className="reveal-up mt-14 rounded-2xl overflow-hidden border border-ink-line bg-ink-soft relative">
+        <div className="reveal-clip mt-14 rounded-2xl overflow-hidden border border-ink-line bg-ink-soft relative">
           <img src={c.hero} alt={`${c.client} campaign work`} loading="lazy" referrerPolicy="no-referrer" className="w-full max-h-[70vh] object-contain bg-black" />
         </div>
       </section>

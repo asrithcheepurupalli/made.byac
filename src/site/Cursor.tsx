@@ -3,15 +3,16 @@ import { useEffect } from "react";
 // The made. cursor — our signature pointer.
 //  • a precise dot that tracks 1:1
 //  • a ring that eases behind it (liquid lag) + a fainter trailing ring
-//  • over anything interactive: the ring morphs into a brand-red disc, shows a
-//    contextual label, and *magnetises* toward small targets (buttons/links)
+//  • over an interactive element: the ring morphs into a brand-red disc that
+//    magnetises toward small targets and shows a contextual label (data-cursor),
+//    or a clean white brand dot when there's no label
+//  • over a work item (data-cursor-img): floats that project's thumbnail,
+//    velocity-skewed, instead of the disc
 //
-// Label is read from data-cursor on the element (or an ancestor); links/buttons
-// without one get a ↗. Desktop / fine-pointer only; fully off under reduced
-// motion (both gated in CSS). To retune: tweak EASE / TRAIL_EASE / MAGNET below.
-const HOT = 'a, button, [role="button"], summary, [data-cursor]';
-const EASE = 0.2; // ring follow (higher = snappier)
-const TRAIL_EASE = 0.12; // trailing ring (lower = longer tail)
+// Desktop / fine-pointer only; fully off under reduced motion (gated in CSS).
+const HOT = 'a, button, [role="button"], summary, [data-cursor], [data-cursor-img]';
+const EASE = 0.2; // ring follow
+const TRAIL_EASE = 0.12; // trailing ring + image
 const MAGNET = 0.45; // pull toward a small target's centre
 
 export function Cursor() {
@@ -25,38 +26,64 @@ export function Cursor() {
     const ring = document.createElement("div");
     const label = document.createElement("span");
     const dot = document.createElement("div");
+    const imgWrap = document.createElement("div");
+    const img = document.createElement("img");
     trail.className = "mc-trail mc-idle";
     ring.className = "mc-ring mc-idle";
     label.className = "mc-label";
     dot.className = "mc-dot mc-idle";
+    imgWrap.className = "mc-imgwrap";
+    img.className = "mc-img";
+    img.alt = "";
     ring.appendChild(label);
-    document.body.append(trail, ring, dot);
+    imgWrap.appendChild(img);
+    document.body.append(trail, ring, dot, imgWrap);
     document.documentElement.classList.add("has-cursor");
 
     let mx = innerWidth / 2,
-      my = innerHeight / 2; // raw pointer
+      my = innerHeight / 2,
+      pmx = mx; // previous x (for velocity skew)
     let tx = mx,
-      ty = my; // ring target (pointer, or magnetised toward a target centre)
+      ty = my; // ring target
     let rx = mx,
-      ry = my; // ring eased position
+      ry = my; // ring eased
     let lx = mx,
-      ly = my; // trail eased position
+      ly = my; // trail + image eased
+    let imgOn = false;
     let started = false;
     let raf = 0;
-
-    const setT = (el: HTMLElement, x: number, y: number) => {
-      el.style.transform = `translate3d(${x}px, ${y}px, 0)`;
-    };
 
     const loop = () => {
       rx += (tx - rx) * EASE;
       ry += (ty - ry) * EASE;
-      lx += (tx - lx) * TRAIL_EASE;
-      ly += (ty - ly) * TRAIL_EASE;
-      setT(dot, mx, my);
-      setT(ring, rx, ry);
-      setT(trail, lx, ly);
+      lx += (mx - lx) * TRAIL_EASE;
+      ly += (my - ly) * TRAIL_EASE;
+      dot.style.transform = `translate3d(${mx}px, ${my}px, 0)`;
+      ring.style.transform = `translate3d(${rx}px, ${ry}px, 0)`;
+      trail.style.transform = `translate3d(${lx}px, ${ly}px, 0)`;
+      if (imgOn) {
+        const skew = Math.max(-14, Math.min(14, (mx - pmx) * 0.6));
+        imgWrap.style.transform = `translate3d(${lx}px, ${ly}px, 0) rotate(${skew}deg)`;
+      }
+      pmx = mx;
       raf = requestAnimationFrame(loop);
+    };
+
+    const setImg = (on: boolean, src?: string) => {
+      if (on && src) {
+        if (img.getAttribute("src") !== src) img.src = src;
+        img.classList.add("show");
+        imgOn = true;
+        ring.classList.add("imgmode");
+        dot.classList.add("imgmode");
+        trail.classList.add("imgmode");
+      } else {
+        img.classList.remove("show");
+        imgOn = false;
+        ring.classList.remove("imgmode");
+        dot.classList.remove("imgmode");
+        trail.classList.remove("imgmode");
+      }
     };
 
     const onMove = (e: MouseEvent) => {
@@ -67,27 +94,38 @@ export function Cursor() {
         [dot, ring, trail].forEach((el) => el.classList.remove("mc-idle"));
       }
       const el = (e.target as Element | null)?.closest(HOT) as HTMLElement | null;
-      if (el) {
-        ring.classList.add("hot");
-        dot.classList.add("hot");
-        trail.classList.add("hot");
-        label.textContent = el.dataset.cursor || "↗";
-        // magnetise toward small targets; large cards just follow the pointer
-        const r = el.getBoundingClientRect();
-        const small = r.width <= 280 && r.height <= 140;
-        if (small) {
-          const cx = r.left + r.width / 2;
-          const cy = r.top + r.height / 2;
-          tx = mx + (cx - mx) * MAGNET;
-          ty = my + (cy - my) * MAGNET;
-        } else {
-          tx = mx;
-          ty = my;
-        }
-      } else {
-        ring.classList.remove("hot");
+      if (!el) {
+        ring.classList.remove("hot", "plain");
         dot.classList.remove("hot");
         trail.classList.remove("hot");
+        setImg(false);
+        tx = mx;
+        ty = my;
+        return;
+      }
+      const imgSrc = el.dataset.cursorImg;
+      if (imgSrc) {
+        setImg(true, imgSrc);
+        ring.classList.remove("hot", "plain");
+        dot.classList.remove("hot");
+        trail.classList.remove("hot");
+        tx = mx;
+        ty = my;
+        return;
+      }
+      setImg(false);
+      ring.classList.add("hot");
+      dot.classList.add("hot");
+      trail.classList.add("hot");
+      const text = el.dataset.cursor || "";
+      label.textContent = text;
+      ring.classList.toggle("plain", !text);
+      // magnetise toward small targets; large cards just follow the pointer
+      const r = el.getBoundingClientRect();
+      if (r.width <= 280 && r.height <= 140) {
+        tx = mx + (r.left + r.width / 2 - mx) * MAGNET;
+        ty = my + (r.top + r.height / 2 - my) * MAGNET;
+      } else {
         tx = mx;
         ty = my;
       }
@@ -100,7 +138,10 @@ export function Cursor() {
     window.addEventListener("mousemove", onMove, { passive: true });
     window.addEventListener("mousedown", onDown);
     window.addEventListener("mouseup", onUp);
-    document.addEventListener("mouseleave", () => setIdle(true));
+    document.addEventListener("mouseleave", () => {
+      setIdle(true);
+      setImg(false);
+    });
     document.addEventListener("mouseenter", () => setIdle(false));
     raf = requestAnimationFrame(loop);
 
@@ -109,9 +150,7 @@ export function Cursor() {
       window.removeEventListener("mousemove", onMove);
       window.removeEventListener("mousedown", onDown);
       window.removeEventListener("mouseup", onUp);
-      trail.remove();
-      ring.remove();
-      dot.remove();
+      [trail, ring, dot, imgWrap].forEach((el) => el.remove());
       document.documentElement.classList.remove("has-cursor");
     };
   }, []);

@@ -270,13 +270,144 @@ html.js-reveal .reveal-stagger.in-view > *:nth-child(n + 9) { transition-delay: 
   .mc-ring.hot .mc-label { opacity: 1; transform: none; }
   .mc-dot.hot { opacity: 0; }
   .mc-trail.hot { opacity: 0; }
+  /* default disc (interactive element with no contextual label): a clean white
+     brand dot — echoes the "made." period — instead of an arrow */
+  .mc-ring.hot.plain .mc-label { display: none; }
+  .mc-ring.hot.plain::after {
+    content: "";
+    width: 7px; height: 7px;
+    border-radius: 9999px;
+    background: #fff;
+  }
   /* press feedback — quick contract */
   .mc-ring.down { width: 30px; height: 30px; margin: -15px 0 0 -15px; }
   .mc-ring.down.hot { width: 66px; height: 66px; margin: -33px 0 0 -33px; }
+
+  /* image preview — over a work item the cursor floats the project thumbnail
+     (wrap is positioned + velocity-skewed by JS; the img scales/fades via .show) */
+  .mc-imgwrap {
+    position: fixed; top: 0; left: 0;
+    width: 200px; height: 134px;
+    margin: -67px 0 0 -100px;
+    pointer-events: none;
+    z-index: 79;
+    will-change: transform;
+  }
+  .mc-img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 24px 60px rgba(11, 11, 12, 0.4);
+    opacity: 0;
+    transform: scale(0.82);
+    transition: opacity 0.3s ease, transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .mc-img.show { opacity: 1; transform: scale(1); }
+  /* while a preview is up, suppress the disc/dot/trail */
+  .mc-ring.imgmode, .mc-dot.imgmode, .mc-trail.imgmode { opacity: 0 !important; }
+
   /* hidden before first move / when the pointer leaves the window */
   .mc-idle { opacity: 0 !important; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .mc-dot, .mc-ring, .mc-trail { display: none; }
+  .mc-dot, .mc-ring, .mc-trail, .mc-imgwrap { display: none; }
   .has-cursor, .has-cursor * { cursor: auto !important; }
+}
+
+/* ============================================================
+   Premium pass — grain, cursor-lit grid, intro, kinetic type
+   ============================================================ */
+
+/* ---- film grain: a faint print-studio texture over everything ---- */
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: 55;
+  pointer-events: none;
+  opacity: 0.045;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 160px 160px;
+}
+@media (prefers-reduced-motion: reduce) { .grain { opacity: 0.03; } }
+
+/* ---- hero cursor-lit grid: a gold spotlight on the architect grid ---- */
+.hero-grid-lit {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(var(--color-gold) 1px, transparent 1px),
+    linear-gradient(90deg, var(--color-gold) 1px, transparent 1px);
+  background-size: clamp(48px, 7vw, 92px) clamp(48px, 7vw, 92px);
+  -webkit-mask: radial-gradient(circle 150px at var(--mx, -300px) var(--my, -300px), #000 0%, transparent 72%);
+  mask: radial-gradient(circle 150px at var(--mx, -300px) var(--my, -300px), #000 0%, transparent 72%);
+  opacity: 0.55;
+}
+@media (hover: none), (prefers-reduced-motion: reduce) { .hero-grid-lit { display: none; } }
+
+/* ---- intro curtain: first-load branded entrance ---- */
+.intro {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: var(--color-paper);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.1rem;
+  transform: translateY(0);
+  transition: transform 0.95s cubic-bezier(0.76, 0, 0.24, 1);
+}
+.intro.lift { transform: translateY(-100%); }
+.intro-word {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-style: italic;
+  font-size: clamp(3rem, 9vw, 6rem);
+  letter-spacing: -0.02em;
+  color: var(--color-ink);
+  opacity: 0;
+  transform: translateY(18px);
+  animation: intro-word-kf 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards;
+}
+.intro-word .dot { color: var(--color-red); font-style: normal; }
+.intro-rule {
+  height: 3px;
+  width: clamp(120px, 20vw, 240px);
+  background: var(--color-red);
+  border-radius: 9999px;
+  transform: scaleX(0);
+  transform-origin: left;
+  animation: intro-rule-kf 0.7s cubic-bezier(0.76, 0, 0.24, 1) 0.5s forwards;
+}
+@keyframes intro-word-kf { to { opacity: 1; transform: none; } }
+@keyframes intro-rule-kf { to { transform: scaleX(1); } }
+
+/* ---- kinetic headline: each line rises from behind a mask ---- */
+.line-mask { display: block; overflow: hidden; padding-block: 0.06em; }
+.line-inner {
+  display: block;
+  transform: translateY(110%);
+}
+html.js-reveal .line-inner { animation: line-rise-kf 0.95s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: var(--line-delay, 0ms); }
+@keyframes line-rise-kf { to { transform: none; } }
+@media (prefers-reduced-motion: reduce) { .line-inner { transform: none; animation: none; } }
+
+/* ---- clip-path image reveal: media uncovers upward on scroll ---- */
+html.js-reveal .reveal-clip {
+  clip-path: inset(0 0 100% 0);
+  transform: scale(1.06);
+  transition:
+    clip-path 1.05s cubic-bezier(0.76, 0, 0.24, 1),
+    transform 1.15s cubic-bezier(0.16, 1, 0.3, 1);
+}
+@media (prefers-reduced-motion: reduce) {
+  html.js-reveal .reveal-clip { clip-path: none; transform: none; }
+}
+
+/* magnetic elements ease back into place when the cursor leaves */
+@media (hover: hover) and (pointer: fine) {
+  [data-magnetic] { transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
 }

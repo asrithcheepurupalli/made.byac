@@ -209,7 +209,7 @@ export function WorkPage() {
                   const Tag = slug ? "a" : "div";
                   return (
                     <motion.div key={p.id} layout initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }}>
-                      <Tag {...(slug ? { href: `#/work/${slug}` } : {})} className="group grid grid-cols-12 items-center gap-4 py-5 border-b border-ink-line hover:bg-ink/40 transition-colors px-2">
+                      <Tag {...(slug ? { href: `#/work/${slug}` } : {})} data-cursor-img={p.imageUrl} className="group grid grid-cols-12 items-center gap-4 py-5 border-b border-ink-line hover:bg-ink/40 transition-colors px-2">
                         <span className="col-span-1 font-mono text-xs text-grey">{String(i + 1).padStart(2, "0")}</span>
                         <span className="col-span-6 md:col-span-5 font-display text-xl md:text-2xl text-paper group-hover:text-gold transition-colors">{p.title}</span>
                         <span className="hidden md:block col-span-3 text-grey-dim text-sm">{p.category}</span>

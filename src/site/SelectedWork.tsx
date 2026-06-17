@@ -19,6 +19,9 @@ const MORE = [
 const WALL = PROJECTS.filter((p) => p.client === "Telyport" || p.client === "Mr. Snapper International");
 const ROT = [-3, 2.5, -2, 3, -1.5, 2, -2.5, 1.5];
 
+// thumbnail the cursor floats when hovering a secondary case-study card
+const CASE_IMG: Record<string, string> = Object.fromEntries(CASE_STUDIES.map((c) => [c.slug, c.img]));
+
 export function SelectedWork() {
   const somaa = CASE_STUDIES[0];
 
@@ -38,7 +41,7 @@ export function SelectedWork() {
         {/* featured case study — Somaa */}
         <a href={`#/work/${somaa.slug}`} data-cursor="View" className="group grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
           <div className="lg:col-span-7">
-            <div className="relative overflow-hidden rounded-2xl border border-ink-line bg-ink-soft aspect-[16/10]">
+            <div className="reveal-clip relative overflow-hidden rounded-2xl border border-ink-line bg-ink-soft aspect-[16/10]">
               <img src={somaa.img} alt="Somaa chicken biryani" loading="lazy" className="w-full h-full object-cover transition-transform duration-[1.1s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.05]" />
               {/* recreate the Somaa hero: wordmark over the biryani */}
               <div className="absolute inset-0 bg-gradient-to-t from-ink/75 via-ink/15 to-ink/35" />
@@ -64,6 +67,7 @@ export function SelectedWork() {
               key={c.slug}
               href={`#/work/${c.slug}`}
               data-cursor="View"
+              data-cursor-img={CASE_IMG[c.slug]}
               className="group reveal-up rounded-2xl border border-ink-line p-9 md:p-11 min-h-[200px] flex flex-col gap-6 transition-transform duration-300 hover:-translate-y-1"
             >
               <span className="block h-1 w-12 rounded-full" style={{ background: c.accent }} />
