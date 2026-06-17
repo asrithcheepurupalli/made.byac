@@ -49,9 +49,10 @@ export function SiteNav() {
     <>
       <header
         className={`fixed top-0 inset-x-0 z-50 mix-blend-difference text-white transition-[transform,padding] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-          scrolled ? "py-4" : "py-6"
+          scrolled ? "pb-5" : "pb-8"
         } ${hidden && !menuOpen ? "-translate-y-full" : "translate-y-0"}`}
-        style={{ paddingTop: "max(env(safe-area-inset-top), 0px)" }}
+        // top padding includes the safe-area inset so it isn't flush to the top
+        style={{ paddingTop: `calc(env(safe-area-inset-top) + ${scrolled ? "1.25rem" : "2rem"})` }}
       >
         <nav className="mx-auto max-w-[1600px] px-6 md:px-10 flex items-center justify-between">
           <a href="#top" className="font-display text-2xl font-semibold italic tracking-tight leading-none">
