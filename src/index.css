@@ -104,23 +104,152 @@ html.lenis body { height: auto; }
 .lenis.lenis-stopped { overflow: hidden; }
 .lenis.lenis-smooth iframe { pointer-events: none; }
 
-/* Scroll-driven reveal — used in case studies. Deterministic (no JS/observer),
-   and only hides content where the animation can actually run, so it can never
-   get stuck invisible. */
-@keyframes reveal-up-kf {
-  from { opacity: 0; transform: translateY(26px); }
-  to { opacity: 1; transform: none; }
+/* Scroll-reveal — IntersectionObserver-driven (see useScrollReveal). Runs
+   identically on every browser; the old animation-timeline approach only shipped
+   on Chromium + Safari 26+, so Firefox / older Safari got no reveal at all.
+   Content is hidden ONLY once JS marks the document ready (html.js-reveal, set by
+   an inline <head> script before paint and skipped under reduced-motion / no-JS),
+   so it can never get stuck invisible. */
+html.js-reveal .reveal-up {
+  opacity: 0;
+  transform: translateY(26px);
+  transition:
+    opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: var(--reveal-delay, 0ms);
 }
-@supports (animation-timeline: view()) {
-  @media (prefers-reduced-motion: no-preference) {
-    .reveal-up {
-      animation: reveal-up-kf linear both;
-      animation-timeline: view();
-      animation-range: entry 0% entry 32%;
-    }
+html.js-reveal .reveal-up.in-view {
+  opacity: 1;
+  transform: none;
+}
+
+/* Stagger — direct children of .reveal-stagger rise in sequence once the group
+   enters view. Covers up to 12 children; beyond that they share the last delay. */
+html.js-reveal .reveal-stagger > * {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+html.js-reveal .reveal-stagger.in-view > * {
+  opacity: 1;
+  transform: none;
+}
+html.js-reveal .reveal-stagger.in-view > *:nth-child(1) { transition-delay: 0ms; }
+html.js-reveal .reveal-stagger.in-view > *:nth-child(2) { transition-delay: 70ms; }
+html.js-reveal .reveal-stagger.in-view > *:nth-child(3) { transition-delay: 140ms; }
+html.js-reveal .reveal-stagger.in-view > *:nth-child(4) { transition-delay: 210ms; }
+html.js-reveal .reveal-stagger.in-view > *:nth-child(5) { transition-delay: 280ms; }
+html.js-reveal .reveal-stagger.in-view > *:nth-child(6) { transition-delay: 350ms; }
+html.js-reveal .reveal-stagger.in-view > *:nth-child(7) { transition-delay: 420ms; }
+html.js-reveal .reveal-stagger.in-view > *:nth-child(8) { transition-delay: 490ms; }
+html.js-reveal .reveal-stagger.in-view > *:nth-child(n + 9) { transition-delay: 560ms; }
+
+/* Reduced motion: never hide, never animate (also belt-and-suspenders — the head
+   script won't add js-reveal here, so these mostly won't match). */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  html.js-reveal .reveal-up,
+  html.js-reveal .reveal-stagger > * {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
   }
 }
 
+/* ---- route transition: gentle fade of page content on navigation ----
+   Opacity only — a transform here would re-base the fixed navs inside each page
+   to this wrapper for the duration of the animation. */
+@keyframes route-in-kf { from { opacity: 0; } to { opacity: 1; } }
+.route-fade { animation: route-in-kf 0.45s ease both; }
+@media (prefers-reduced-motion: reduce) { .route-fade { animation: none; } }
+
+/* ---- touch fallbacks: surface hover-only content where there's no hover ----
+   Tailwind v4 gates hover: behind @media (hover:hover), so on touch the hover
+   states never fire and reveal-on-hover content would stay hidden. These bring it
+   forward on touch devices. */
+@media (hover: none) {
+  /* SelectedWork "quiet wall": show captions and full-colour thumbnails */
+  .wall-item .wall-caption { opacity: 1 !important; }
+  .wall-item .wall-thumb { filter: none !important; opacity: 1 !important; }
+  /* WorkPage gallery: show the card info that otherwise only appears on hover */
+  .tile-info { opacity: 1 !important; transform: none !important; }
+}
+
+/* ---- Somaa case-study walkthrough steps ----
+   Mobile: all steps fully legible (no sticky phone to sync against).
+   Desktop: dim inactive steps, highlight the active one as the phone swaps. */
+.walk-step { opacity: 1; transition: opacity 0.5s ease; }
+@media (min-width: 1024px) {
+  .walk-step { opacity: 0.32; }
+  .walk-step[data-active="true"] { opacity: 1; }
+}
+
+/* ---- scroll progress bar (thin, top) ---- */
+.scroll-progress {
+  position: fixed;
+  top: 0; left: 0;
+  height: 2px;
+  width: 100%;
+  transform: scaleX(var(--p, 0));
+  transform-origin: left;
+  background: linear-gradient(90deg, var(--color-red), var(--color-gold));
+  z-index: 60;
+  pointer-events: none;
+  will-change: transform;
+}
+@media (prefers-reduced-motion: reduce) { .scroll-progress { display: none; } }
+
+/* ---- subtle custom cursor (desktop / fine-pointer only) ----
+   mix-blend-difference keeps the ring + dot legible over both the paper (light)
+   and ink (dark) acts without any per-section tagging. */
+@media (hover: hover) and (pointer: fine) {
+  .has-cursor { cursor: none; }
+  .has-cursor a,
+  .has-cursor button,
+  .has-cursor [role="button"],
+  .has-cursor input,
+  .has-cursor textarea,
+  .has-cursor label { cursor: none; }
+  .cursor-dot,
+  .cursor-ring {
+    position: fixed;
+    top: 0; left: 0;
+    border-radius: 9999px;
+    pointer-events: none;
+    z-index: 70;
+    translate: -50% -50%;
+    mix-blend-mode: difference;
+  }
+  .cursor-dot {
+    width: 6px; height: 6px;
+    background: #fff;
+    transition: opacity 0.2s ease;
+  }
+  .cursor-ring {
+    width: 34px; height: 34px;
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    transition:
+      width 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+      height 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+      border-color 0.25s ease,
+      background-color 0.25s ease,
+      opacity 0.2s ease;
+  }
+  /* grow + fill faintly when hovering something interactive */
+  .cursor-ring.cursor-hot {
+    width: 58px; height: 58px;
+    border-color: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.12);
+  }
+  /* press feedback */
+  .cursor-ring.cursor-down { width: 26px; height: 26px; }
+  /* hide until the first mouse move, and when the pointer leaves the window */
+  .cursor-dot.cursor-idle,
+  .cursor-ring.cursor-idle { opacity: 0; }
+}
 @media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
+  .cursor-dot, .cursor-ring { display: none; }
+  .has-cursor { cursor: auto; }
 }

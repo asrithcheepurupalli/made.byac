@@ -1,5 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { SmoothScroll } from "./SmoothScroll";
+import { ScrollProgress } from "./ScrollProgress";
+import { Cursor } from "./Cursor";
+import { useScrollReveal } from "./useScrollReveal";
 import { SiteNav } from "./SiteNav";
 import { ActHero } from "./ActHero";
 import { Manifesto } from "./Manifesto";
@@ -33,10 +36,6 @@ function useHashRoute() {
 export function Site() {
   const route = useHashRoute();
 
-  useEffect(() => {
-    if (route.startsWith("#/work/") || route === "#/offer" || route === "#/work") window.scrollTo(0, 0);
-  }, [route]);
-
   // /offer and /work are real paths (served by their own .html for correct share
   // previews); the #/ variants are kept as in-app fallbacks.
   const path =
@@ -44,47 +43,27 @@ export function Site() {
       ? window.location.pathname.replace(/\/$/, "").replace(/\.html$/, "")
       : "";
 
-  // Case studies first, so a #/work/<slug> deep link wins over the /work archive.
-  if (route === "#/work/somaa") {
-    return (
-      <>
-        <SmoothScroll />
-        <SomaaCaseStudy />
-      </>
-    );
-  }
+  // Re-arm scroll reveals whenever the route swaps the page content.
+  useScrollReveal(`${route}|${path}`);
 
+  useEffect(() => {
+    if (route.startsWith("#/work/") || route === "#/offer" || route === "#/work") window.scrollTo(0, 0);
+  }, [route]);
+
+  // Pick the page for the current route. Case studies first, so a #/work/<slug>
+  // deep link wins over the /work archive.
   const campaignSlug = route.startsWith("#/work/") ? route.slice("#/work/".length) : "";
-  if (campaignSlug && CAMPAIGN_CASES[campaignSlug]) {
-    return (
-      <>
-        <SmoothScroll />
-        <CampaignCaseStudy slug={campaignSlug} />
-      </>
-    );
-  }
-
-  if (path === "/offer" || route === "#/offer") {
-    return (
-      <>
-        <SmoothScroll />
-        <OfferPage />
-      </>
-    );
-  }
-
-  if (path === "/work" || route === "#/work") {
-    return (
-      <>
-        <SmoothScroll />
-        <WorkPage />
-      </>
-    );
-  }
-
-  return (
-    <>
-      <SmoothScroll />
+  let content: ReactNode;
+  if (route === "#/work/somaa") {
+    content = <SomaaCaseStudy />;
+  } else if (campaignSlug && CAMPAIGN_CASES[campaignSlug]) {
+    content = <CampaignCaseStudy slug={campaignSlug} />;
+  } else if (path === "/offer" || route === "#/offer") {
+    content = <OfferPage />;
+  } else if (path === "/work" || route === "#/work") {
+    content = <WorkPage />;
+  } else {
+    content = (
       <div className="bg-paper text-ink font-sans antialiased">
         <SiteNav />
         <main>
@@ -95,6 +74,19 @@ export function Site() {
           <Invitation />
         </main>
         <SiteFooter />
+      </div>
+    );
+  }
+
+  // Cursor / progress / smooth-scroll are singletons (mounted once, never
+  // remounted on navigation); only the page content fades + re-keys per route.
+  return (
+    <>
+      <Cursor />
+      <ScrollProgress />
+      <SmoothScroll />
+      <div key={`${route}|${path}`} className="route-fade">
+        {content}
       </div>
     </>
   );

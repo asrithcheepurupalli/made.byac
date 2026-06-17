@@ -187,7 +187,7 @@ export function WorkPage() {
                       >
                         <img src={p.imageUrl} alt={p.altText} loading="lazy" referrerPolicy="no-referrer" className="absolute inset-0 w-full h-full object-cover grayscale-[0.4] opacity-85 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-[1.05]" />
                         <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/10 to-transparent opacity-80 group-hover:opacity-95 transition-opacity" />
-                        <div className="absolute inset-x-0 bottom-0 p-4 translate-y-1 opacity-0 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-400">
+                        <div className="tile-info absolute inset-x-0 bottom-0 p-4 translate-y-1 opacity-0 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-400">
                           <div className="font-display text-lg leading-tight text-paper">{p.title}</div>
                           <div className="mt-1 flex items-center gap-2">
                             <span className="label text-[8px] text-gold">{p.client}</span>

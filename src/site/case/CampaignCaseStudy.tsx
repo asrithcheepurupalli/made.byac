@@ -13,7 +13,7 @@ export function CampaignCaseStudy({ slug }: { slug: string }) {
   return (
     <div className="bg-ink text-paper font-sans antialiased min-h-screen" style={{ ["--a" as string]: a }}>
       {/* back nav */}
-      <header className="fixed top-0 inset-x-0 z-50 backdrop-blur-md bg-ink/60 border-b border-ink-line">
+      <header className="fixed top-0 inset-x-0 z-50 backdrop-blur-md bg-ink/60 border-b border-ink-line" style={{ paddingTop: "env(safe-area-inset-top)" }}>
         <div className="mx-auto max-w-[1400px] px-6 md:px-10 h-16 flex items-center justify-between">
           <a href="#" className="label flex items-center gap-2 text-[10px] text-grey-dim hover:text-paper transition-colors">
             <ArrowLeft className="w-4 h-4" /> made.
@@ -28,7 +28,7 @@ export function CampaignCaseStudy({ slug }: { slug: string }) {
       {/* hero */}
       <section className="mx-auto max-w-[1400px] px-6 md:px-10 pt-32 md:pt-40 pb-16">
         <span className="label" style={{ color: a }}>{c.index} · case study / {c.sector}</span>
-        <h1 className="mt-6 font-display text-7xl md:text-[9rem] leading-[0.86] tracking-[-0.02em]">{c.client}<span style={{ color: a }}>.</span></h1>
+        <h1 className="mt-6 font-display text-[clamp(2.75rem,11vw,9rem)] leading-[0.9] md:leading-[0.86] tracking-[-0.02em] break-words">{c.client}<span style={{ color: a }}>.</span></h1>
         <p className="mt-7 font-display text-2xl md:text-4xl leading-snug max-w-3xl text-paper/85">{c.tagline}</p>
 
         <div className="reveal-up mt-14 rounded-2xl overflow-hidden border border-ink-line bg-ink-soft relative">

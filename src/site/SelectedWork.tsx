@@ -93,7 +93,7 @@ export function SelectedWork() {
             {WALL.map((p, i) => (
               <div
                 key={p.id}
-                className="group relative flex flex-col items-center hover:z-40"
+                className="wall-item group relative flex flex-col items-center hover:z-40"
                 style={{ transform: `rotate(${ROT[i % ROT.length]}deg)` }}
               >
                 {/* the hanger */}
@@ -101,9 +101,9 @@ export function SelectedWork() {
                 <span className="w-1.5 h-1.5 rounded-full -mt-7 mb-5" style={{ background: "var(--color-gold)" }} />
                 {/* grows upward from its bottom edge so it never covers the caption below */}
                 <div className="relative w-28 md:w-36 aspect-[3/4] rounded-md overflow-hidden border border-ink-line bg-ink-soft shadow-lg origin-bottom transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.5] group-hover:rotate-0 group-hover:shadow-2xl">
-                  <img src={p.imageUrl} alt={p.altText} loading="lazy" referrerPolicy="no-referrer" className="w-full h-full object-cover grayscale opacity-70 transition-all duration-500 group-hover:grayscale-0 group-hover:opacity-100" />
+                  <img src={p.imageUrl} alt={p.altText} loading="lazy" referrerPolicy="no-referrer" className="wall-thumb w-full h-full object-cover grayscale opacity-70 transition-all duration-500 group-hover:grayscale-0 group-hover:opacity-100" />
                 </div>
-                <div className="relative z-40 mt-4 text-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <div className="wall-caption relative z-40 mt-4 text-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <div className="font-display text-sm text-paper leading-tight">{p.title}</div>
                   <div className="label text-[8px] text-grey-dim mt-1">{p.client}</div>
                 </div>

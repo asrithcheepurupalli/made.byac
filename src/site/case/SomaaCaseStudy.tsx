@@ -112,7 +112,7 @@ export function SomaaCaseStudy() {
   return (
     <div style={{ background: C.bg, color: C.text }} className="font-sans antialiased selection:bg-[#d99547] selection:text-black">
       {/* back nav */}
-      <header className="fixed top-0 inset-x-0 z-50 backdrop-blur-md" style={{ background: "rgba(12,10,9,0.6)", borderBottom: `1px solid ${C.line}` }}>
+      <header className="fixed top-0 inset-x-0 z-50 backdrop-blur-md" style={{ background: "rgba(12,10,9,0.6)", borderBottom: `1px solid ${C.line}`, paddingTop: "env(safe-area-inset-top)" }}>
         <div className="mx-auto max-w-[1400px] px-6 md:px-10 h-16 flex items-center justify-between">
           <a href="#" className="label flex items-center gap-2 text-[10px]" style={{ color: C.muted }}>
             <ArrowLeft className="w-4 h-4" /> made.
@@ -219,14 +219,15 @@ export function SomaaCaseStudy() {
             </div>
           </div>
 
-          {/* scrolling steps */}
-          <div className="flex flex-col gap-[26vh] py-[32vh]">
+          {/* scrolling steps — generous vh rhythm on desktop (synced to the sticky
+              phone); tight + full-opacity on mobile, where the phone isn't sticky */}
+          <div className="flex flex-col gap-14 py-12 lg:gap-[26vh] lg:py-[32vh]">
             {WALK.map((s, i) => (
               <div
                 key={s.n}
                 ref={(el) => { stepRefs.current[i] = el; }}
-                className="transition-opacity duration-500"
-                style={{ opacity: active === i ? 1 : 0.32 }}
+                className="walk-step"
+                data-active={active === i}
               >
                 <span className="font-mono text-sm" style={{ color: C.amber }}>{s.n}</span>
                 <h3 className="mt-4 font-display text-3xl md:text-4xl leading-tight" style={{ color: C.text }}>{s.t}</h3>
