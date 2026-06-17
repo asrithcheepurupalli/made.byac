@@ -14,24 +14,39 @@ export function useScrollReveal(routeKey: unknown) {
     // Without it, content is already visible and there's nothing to reveal.
     if (!document.documentElement.classList.contains("js-reveal")) return;
 
+    // Reveal via INLINE STYLES, not a class. Many of these elements live in
+    // components that re-render (hover, filters, scroll-synced state); React
+    // rewrites their className on every render and would wipe a JS-added class,
+    // snapping them back to hidden. Inline styles survive that. (.reveal-stagger
+    // still needs the class so its nth-child child delays apply — its containers
+    // are static, so they're safe.)
+    const reveal = (el: HTMLElement) => {
+      if (el.classList.contains("reveal-stagger")) {
+        el.classList.add("in-view");
+      } else {
+        el.style.opacity = "1";
+        el.style.transform = "none";
+      }
+    };
+
     const selector = ".reveal-up, .reveal-stagger";
     const collect = () =>
       Array.from(document.querySelectorAll<HTMLElement>(selector)).filter(
-        (el) => !el.classList.contains("in-view"),
+        (el) => !el.classList.contains("in-view") && el.style.opacity !== "1",
       );
 
     // Let the freshly-rendered route paint before we query + observe.
     const raf = requestAnimationFrame(() => {
       const els = collect();
       if (!("IntersectionObserver" in window)) {
-        els.forEach((el) => el.classList.add("in-view"));
+        els.forEach(reveal);
         return;
       }
       const io = new IntersectionObserver(
         (entries) => {
           for (const entry of entries) {
             if (entry.isIntersecting) {
-              entry.target.classList.add("in-view");
+              reveal(entry.target as HTMLElement);
               io.unobserve(entry.target);
             }
           }

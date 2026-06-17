@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { motion } from "motion/react";
 import { Sun } from "lucide-react";
 import { CAPABILITIES, PROCESS_STEPS } from "../data";
 import { useAmbient, TEMPS } from "./useAmbient";
@@ -58,11 +57,11 @@ export function GridLab() {
         <div className="grid grid-cols-2 lg:grid-cols-12 auto-rows-[minmax(0,1fr)] gap-3 md:gap-4">
           {/* capability cells */}
           {CAPABILITIES.map((c, i) => (
-            <motion.div
+            <div
               key={c.id}
               onMouseEnter={() => setHover(c.id)}
               onMouseLeave={() => setHover(null)}
-              className={`reveal-up lg:col-span-3 rounded-2xl border p-7 md:p-8 min-h-[210px] flex flex-col justify-between transition-[background-color,border-color,color,transform] duration-300 cursor-default hover:-translate-y-1 ${
+              className={`reveal-up lg:col-span-3 rounded-2xl border p-7 md:p-8 min-h-[210px] flex flex-col justify-between transition-[background-color,border-color,color] duration-300 cursor-default ${
                 hover === c.id
                   ? "bg-ink text-paper border-ink"
                   : "bg-paper border-paper-line text-ink"
@@ -81,7 +80,7 @@ export function GridLab() {
                   {c.description}
                 </p>
               </div>
-            </motion.div>
+            </div>
           ))}
 
           {/* red accent statement */}
