@@ -61,6 +61,7 @@ export function Invitation() {
 
           <a
             href="mailto:thebrain@made-by-ac.com"
+            data-cursor="Email"
             className="group mt-10 inline-flex items-center gap-3 font-display text-2xl md:text-3xl text-paper border-b border-gold/50 pb-1 hover:text-gold transition-colors"
           >
             thebrain@made-by-ac.com <ArrowUpRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
@@ -76,6 +77,7 @@ export function Invitation() {
                   target="_blank"
                   rel="noreferrer"
                   aria-label="Message us on WhatsApp"
+                  data-cursor="Chat"
                   className="group flex items-center gap-2.5 rounded-full border border-ink-line pl-4 pr-5 py-3 text-paper/85 hover:text-[#25D366] hover:border-[#25D366]/60 transition-colors"
                 >
                   <WhatsAppIcon className="w-5 h-5" />
@@ -166,6 +168,7 @@ export function Invitation() {
               <button
                 type="submit"
                 disabled={isSubmittingContact}
+                data-cursor="Send"
                 className="mt-2 self-start bg-red text-white label rounded-full px-7 py-3.5 hover:bg-red-deep hover:-translate-y-0.5 transition-all duration-300 disabled:opacity-60 disabled:translate-y-0"
               >
                 {isSubmittingContact ? "Sending…" : "Send it over"}

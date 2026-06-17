@@ -36,7 +36,7 @@ export function SelectedWork() {
         </div>
 
         {/* featured case study — Somaa */}
-        <a href={`#/work/${somaa.slug}`} className="group grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
+        <a href={`#/work/${somaa.slug}`} data-cursor="View" className="group grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
           <div className="lg:col-span-7">
             <div className="relative overflow-hidden rounded-2xl border border-ink-line bg-ink-soft aspect-[16/10]">
               <img src={somaa.img} alt="Somaa chicken biryani" loading="lazy" className="w-full h-full object-cover transition-transform duration-[1.1s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.05]" />
@@ -63,6 +63,7 @@ export function SelectedWork() {
             <a
               key={c.slug}
               href={`#/work/${c.slug}`}
+              data-cursor="View"
               className="group reveal-up rounded-2xl border border-ink-line p-9 md:p-11 min-h-[200px] flex flex-col gap-6 transition-transform duration-300 hover:-translate-y-1"
             >
               <span className="block h-1 w-12 rounded-full" style={{ background: c.accent }} />

@@ -201,55 +201,82 @@ html.js-reveal .reveal-stagger.in-view > *:nth-child(n + 9) { transition-delay: 
 }
 @media (prefers-reduced-motion: reduce) { .scroll-progress { display: none; } }
 
-/* ---- subtle custom cursor (desktop / fine-pointer only) ----
-   mix-blend-difference keeps the ring + dot legible over both the paper (light)
-   and ink (dark) acts without any per-section tagging. */
+/* ---- the made. cursor (desktop / fine-pointer only) ----
+   A precise dot + a liquid-lagging ring + a fainter trailing ring. Idle, all
+   three use mix-blend-difference so they read on any background. Over anything
+   interactive the ring morphs into a brand-red disc that magnetises toward the
+   target and shows a contextual label (set via data-cursor; defaults to ↗).
+   JS positions each layer via transform (GPU); sizes/colours animate in CSS. */
 @media (hover: hover) and (pointer: fine) {
-  .has-cursor { cursor: none; }
-  .has-cursor a,
-  .has-cursor button,
-  .has-cursor [role="button"],
-  .has-cursor input,
-  .has-cursor textarea,
-  .has-cursor label { cursor: none; }
-  .cursor-dot,
-  .cursor-ring {
+  .has-cursor,
+  .has-cursor * { cursor: none !important; }
+
+  .mc-dot,
+  .mc-ring,
+  .mc-trail {
     position: fixed;
     top: 0; left: 0;
     border-radius: 9999px;
     pointer-events: none;
-    z-index: 70;
-    translate: -50% -50%;
-    mix-blend-mode: difference;
+    z-index: 80;
+    will-change: transform;
   }
-  .cursor-dot {
-    width: 6px; height: 6px;
+  .mc-dot {
+    width: 7px; height: 7px;
+    margin: -3.5px 0 0 -3.5px;
     background: #fff;
+    mix-blend-mode: difference;
     transition: opacity 0.2s ease;
   }
-  .cursor-ring {
-    width: 34px; height: 34px;
-    border: 1px solid rgba(255, 255, 255, 0.7);
+  .mc-ring {
+    width: 38px; height: 38px;
+    margin: -19px 0 0 -19px;
+    border: 1px solid rgba(255, 255, 255, 0.75);
+    mix-blend-mode: difference;
+    display: flex; align-items: center; justify-content: center;
     transition:
-      width 0.28s cubic-bezier(0.16, 1, 0.3, 1),
-      height 0.28s cubic-bezier(0.16, 1, 0.3, 1),
-      border-color 0.25s ease,
-      background-color 0.25s ease,
-      opacity 0.2s ease;
+      width 0.32s cubic-bezier(0.16, 1, 0.3, 1),
+      height 0.32s cubic-bezier(0.16, 1, 0.3, 1),
+      margin 0.32s cubic-bezier(0.16, 1, 0.3, 1),
+      background-color 0.28s ease,
+      border-color 0.28s ease;
   }
-  /* grow + fill faintly when hovering something interactive */
-  .cursor-ring.cursor-hot {
-    width: 58px; height: 58px;
-    border-color: rgba(255, 255, 255, 0.9);
-    background: rgba(255, 255, 255, 0.12);
+  .mc-trail {
+    width: 44px; height: 44px;
+    margin: -22px 0 0 -22px;
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    mix-blend-mode: difference;
+    transition: opacity 0.3s ease;
   }
-  /* press feedback */
-  .cursor-ring.cursor-down { width: 26px; height: 26px; }
-  /* hide until the first mouse move, and when the pointer leaves the window */
-  .cursor-dot.cursor-idle,
-  .cursor-ring.cursor-idle { opacity: 0; }
+  .mc-label {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    line-height: 1;
+    color: #fff;
+    opacity: 0;
+    transform: scale(0.5);
+    transition: opacity 0.18s ease, transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  /* hot — over something interactive: red disc + label, blend off so it reads true */
+  .mc-ring.hot {
+    width: 76px; height: 76px;
+    margin: -38px 0 0 -38px;
+    background: var(--color-red);
+    border-color: var(--color-red);
+    mix-blend-mode: normal;
+  }
+  .mc-ring.hot .mc-label { opacity: 1; transform: none; }
+  .mc-dot.hot { opacity: 0; }
+  .mc-trail.hot { opacity: 0; }
+  /* press feedback — quick contract */
+  .mc-ring.down { width: 30px; height: 30px; margin: -15px 0 0 -15px; }
+  .mc-ring.down.hot { width: 66px; height: 66px; margin: -33px 0 0 -33px; }
+  /* hidden before first move / when the pointer leaves the window */
+  .mc-idle { opacity: 0 !important; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .cursor-dot, .cursor-ring { display: none; }
-  .has-cursor { cursor: auto; }
+  .mc-dot, .mc-ring, .mc-trail { display: none; }
+  .has-cursor, .has-cursor * { cursor: auto !important; }
 }

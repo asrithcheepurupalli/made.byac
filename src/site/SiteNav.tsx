@@ -71,6 +71,7 @@ export function SiteNav() {
             </ul>
             <a
               href="#say-hi"
+              data-cursor="Hello"
               className="label text-[10px] border border-white/60 rounded-full px-4 py-2 hover:bg-white hover:text-black transition-colors"
             >
               Say hi
