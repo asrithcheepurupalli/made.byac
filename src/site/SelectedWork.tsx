@@ -41,7 +41,7 @@ export function SelectedWork() {
         {/* featured case study — Somaa */}
         <a href={`#/work/${somaa.slug}`} data-cursor="View" className="group grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
           <div className="lg:col-span-7">
-            <div className="reveal-clip relative overflow-hidden rounded-2xl border border-ink-line bg-ink-soft aspect-[16/10]">
+            <div className="relative overflow-hidden rounded-2xl border border-ink-line bg-ink-soft aspect-[16/10]">
               <img src={somaa.img} alt="Somaa chicken biryani" loading="lazy" className="w-full h-full object-cover transition-transform duration-[1.1s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.05]" />
               {/* recreate the Somaa hero: wordmark over the biryani */}
               <div className="absolute inset-0 bg-gradient-to-t from-ink/75 via-ink/15 to-ink/35" />

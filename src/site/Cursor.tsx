@@ -114,12 +114,15 @@ export function Cursor() {
         return;
       }
       setImg(false);
-      ring.classList.add("hot");
-      dot.classList.add("hot");
-      trail.classList.add("hot");
       const text = el.dataset.cursor || "";
+      const plain = !text;
+      ring.classList.add("hot");
+      trail.classList.add("hot");
       label.textContent = text;
-      ring.classList.toggle("plain", !text);
+      ring.classList.toggle("plain", plain);
+      // hide the precise dot only for the labelled red disc; keep it for the
+      // plain outline-ring state so there's still an exact pointer
+      dot.classList.toggle("hot", !plain);
       // magnetise toward small targets; large cards just follow the pointer
       const r = el.getBoundingClientRect();
       if (r.width <= 280 && r.height <= 140) {

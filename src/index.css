@@ -270,15 +270,17 @@ html.js-reveal .reveal-stagger.in-view > *:nth-child(n + 9) { transition-delay: 
   .mc-ring.hot .mc-label { opacity: 1; transform: none; }
   .mc-dot.hot { opacity: 0; }
   .mc-trail.hot { opacity: 0; }
-  /* default disc (interactive element with no contextual label): a clean white
-     brand dot — echoes the "made." period — instead of an arrow */
-  .mc-ring.hot.plain .mc-label { display: none; }
-  .mc-ring.hot.plain::after {
-    content: "";
-    width: 7px; height: 7px;
-    border-radius: 9999px;
-    background: #fff;
+  /* default (interactive element with no label): NO red disc — just a clean
+     growing outline ring (blend-difference, reads on any bg) with the precise
+     dot kept inside. The red disc + word is reserved for labelled actions. */
+  .mc-ring.hot.plain {
+    width: 52px; height: 52px;
+    margin: -26px 0 0 -26px;
+    background: transparent;
+    border-color: rgba(255, 255, 255, 0.9);
+    mix-blend-mode: difference;
   }
+  .mc-ring.hot.plain .mc-label { display: none; }
   /* press feedback — quick contract */
   .mc-ring.down { width: 30px; height: 30px; margin: -15px 0 0 -15px; }
   .mc-ring.down.hot { width: 66px; height: 66px; margin: -33px 0 0 -33px; }
@@ -394,18 +396,6 @@ html.js-reveal .reveal-stagger.in-view > *:nth-child(n + 9) { transition-delay: 
 html.js-reveal .line-inner { animation: line-rise-kf 0.95s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: var(--line-delay, 0ms); }
 @keyframes line-rise-kf { to { transform: none; } }
 @media (prefers-reduced-motion: reduce) { .line-inner { transform: none; animation: none; } }
-
-/* ---- clip-path image reveal: media uncovers upward on scroll ---- */
-html.js-reveal .reveal-clip {
-  clip-path: inset(0 0 100% 0);
-  transform: scale(1.06);
-  transition:
-    clip-path 1.05s cubic-bezier(0.76, 0, 0.24, 1),
-    transform 1.15s cubic-bezier(0.16, 1, 0.3, 1);
-}
-@media (prefers-reduced-motion: reduce) {
-  html.js-reveal .reveal-clip { clip-path: none; transform: none; }
-}
 
 /* magnetic elements ease back into place when the cursor leaves */
 @media (hover: hover) and (pointer: fine) {
