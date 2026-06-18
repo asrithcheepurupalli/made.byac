@@ -12,7 +12,9 @@ import { SelectedWork } from "./SelectedWork";
 import { GridLab } from "./GridLab";
 import { Invitation } from "./Invitation";
 import { SiteFooter } from "./SiteFooter";
+import { AiTease } from "./AiTease";
 import { OfferPage } from "./OfferPage";
+import { AiPage } from "./AiPage";
 import { WorkPage } from "./WorkPage";
 import { SomaaCaseStudy } from "./case/SomaaCaseStudy";
 import { CampaignCaseStudy } from "./case/CampaignCaseStudy";
@@ -50,7 +52,7 @@ export function Site() {
   useMagnetic(`${route}|${path}`);
 
   useEffect(() => {
-    if (route.startsWith("#/work/") || route === "#/offer" || route === "#/work") window.scrollTo(0, 0);
+    if (route.startsWith("#/work/") || route === "#/offer" || route === "#/work" || route === "#/ai") window.scrollTo(0, 0);
   }, [route]);
 
   // Pick the page for the current route. Case studies first, so a #/work/<slug>
@@ -63,6 +65,8 @@ export function Site() {
     content = <CampaignCaseStudy slug={campaignSlug} />;
   } else if (path === "/offer" || route === "#/offer") {
     content = <OfferPage />;
+  } else if (path === "/ai" || route === "#/ai") {
+    content = <AiPage />;
   } else if (path === "/work" || route === "#/work") {
     content = <WorkPage />;
   } else {
@@ -74,6 +78,7 @@ export function Site() {
           <ActHero />
           <Manifesto />
           <SelectedWork />
+          <AiTease />
           <GridLab />
           <Invitation />
         </main>
