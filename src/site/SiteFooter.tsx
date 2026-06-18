@@ -15,12 +15,18 @@ export function SiteFooter() {
               A design &amp; development studio. We make brands impossible to ignore.
             </p>
           </div>
-          <div className="flex gap-12">
+          <div className="flex flex-wrap gap-x-12 gap-y-8">
             <div className="flex flex-col gap-3">
               <span className="label text-grey">Studio</span>
               <a href="#work" className="text-paper/80 hover:text-gold transition-colors text-sm">Work</a>
               <a href="#why" className="text-paper/80 hover:text-gold transition-colors text-sm">Why</a>
               <a href="#studio" className="text-paper/80 hover:text-gold transition-colors text-sm">Studio</a>
+            </div>
+            <div className="flex flex-col gap-3">
+              <span className="label text-grey">Products</span>
+              <a href="https://table.made-by-ac.com" target="_blank" rel="noreferrer" className="text-paper/80 hover:text-gold transition-colors text-sm">made. table</a>
+              <a href="/ai" className="text-paper/80 hover:text-gold transition-colors text-sm">AI agents</a>
+              <a href="/offer" className="text-paper/80 hover:text-gold transition-colors text-sm">What we offer</a>
             </div>
             <div className="flex flex-col gap-3">
               <span className="label text-grey">Elsewhere</span>

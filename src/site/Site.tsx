@@ -13,6 +13,7 @@ import { GridLab } from "./GridLab";
 import { Invitation } from "./Invitation";
 import { SiteFooter } from "./SiteFooter";
 import { AiTease } from "./AiTease";
+import { MadeTableTease } from "./MadeTableTease";
 import { OfferPage } from "./OfferPage";
 import { AiPage } from "./AiPage";
 import { WorkPage } from "./WorkPage";
@@ -79,6 +80,7 @@ export function Site() {
           <Manifesto />
           <SelectedWork />
           <AiTease />
+          <MadeTableTease />
           <GridLab />
           <Invitation />
         </main>

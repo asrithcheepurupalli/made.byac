@@ -3,6 +3,9 @@
   "framework": "vite",
   "buildCommand": "vite build",
   "outputDirectory": "dist",
+  "redirects": [
+    { "source": "/table", "destination": "https://table.made-by-ac.com", "permanent": false }
+  ],
   "rewrites": [
     { "source": "/offer", "destination": "/offer.html" },
     { "source": "/ai", "destination": "/ai.html" },
