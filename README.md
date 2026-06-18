@@ -1,6 +1,6 @@
 # made. by ac
 
-A design & development studio. We make brands impossible to ignore — and then,
+A design & development studio. We make brands impossible to ignore, and then,
 one weekend, we had to make our own. Turns out being your own client is the
 hardest brief in the building.
 
@@ -16,13 +16,13 @@ The studio's own site: one long, deliberate scroll that moves the way we'd want 
 brand to sound. Editorial type, a lot of considered whitespace, motion that never
 raises its voice, and a cursor that has opinions.
 
-It is not a template. Nothing here was assembled. It was made — which is the whole
+It is not a template. Nothing here was assembled. It was made. which is the whole
 point, and also why it took longer than we'll admit.
 
 ## The work it shows
 
 Real projects, no invented metrics: Somaa (a full QR dining platform we designed
-*and* built), Innovolt, Mithai Maharaja, Telyport, Mr. Snapper — plus the part
+*and* built), Innovolt, Mithai Maharaja, Telyport, Mr. Snapper, plus the part
 where the studio quietly grew a software-and-AI side and started shipping products,
 not just decks. There's an `/ai` page for that. It has agents. They behave.
 
@@ -40,15 +40,11 @@ machines is permanently occupied by another tenant. So:
 PORT=3100 npm run dev
 ```
 
-You only need a `GEMINI_API_KEY` for the AI concierge and the contact-form
-pleasantries. Without it the site renders perfectly and simply declines to make
-conversation — which, frankly, is a mood.
 
 ## The stack
 
 - **React 19** + **Vite 6** + **Tailwind 4**
 - **Express** running Vite in middleware mode, with a small set of `/api/*` routes
-- A **Gemini**-backed studio concierge and an AI-acknowledged contact form
 - **Lenis** for the smooth scroll, because the alternative is rude
 - Hosted on **Vercel**; `main` deploys itself, which keeps us honest
 
@@ -56,7 +52,7 @@ conversation — which, frankly, is a mood.
 
 `package.json` says `"name": "react-example"`. It has said this since the beginning.
 We have a whole design system, a brand voice, and a manifesto about the 2% nobody
-asks for — and the package is named like a tutorial someone abandoned. We have
+asks for, and the package is named like a tutorial someone abandoned. We have
 decided this is character. We are not changing it. Please don't email us about it.
 
 ## House style
