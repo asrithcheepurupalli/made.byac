@@ -15,6 +15,7 @@ import { SiteFooter } from "./SiteFooter";
 import { AiTease } from "./AiTease";
 import { MadeTableTease } from "./MadeTableTease";
 import { KitchenTease } from "./KitchenTease";
+import { StaffTease } from "./StaffTease";
 import { OfferPage } from "./OfferPage";
 import { AiPage } from "./AiPage";
 import { KitchenPage } from "./KitchenPage";
@@ -86,6 +87,7 @@ export function Site() {
           <AiTease />
           <MadeTableTease />
           <KitchenTease />
+          <StaffTease />
           <GridLab />
           <Invitation />
         </main>

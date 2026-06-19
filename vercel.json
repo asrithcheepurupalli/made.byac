@@ -5,7 +5,8 @@
   "outputDirectory": "dist",
   "redirects": [
     { "source": "/table", "destination": "https://table.made-by-ac.com", "permanent": false },
-    { "source": "/kitchen", "destination": "https://kitchen.made-by-ac.com", "permanent": false }
+    { "source": "/kitchen", "destination": "https://kitchen.made-by-ac.com", "permanent": false },
+    { "source": "/staff", "destination": "https://staff.made-by-ac.com", "permanent": false }
   ],
   "rewrites": [
     { "source": "/offer", "destination": "/offer.html" },
