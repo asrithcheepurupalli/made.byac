@@ -9,6 +9,7 @@
   "rewrites": [
     { "source": "/offer", "destination": "/offer.html" },
     { "source": "/ai", "destination": "/ai.html" },
+    { "source": "/kitchen", "destination": "/kitchen.html" },
     { "source": "/work", "destination": "/work.html" },
     { "source": "/((?!api/).*)", "destination": "/index.html" }
   ]

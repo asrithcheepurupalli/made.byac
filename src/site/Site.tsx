@@ -16,6 +16,7 @@ import { AiTease } from "./AiTease";
 import { MadeTableTease } from "./MadeTableTease";
 import { OfferPage } from "./OfferPage";
 import { AiPage } from "./AiPage";
+import { KitchenPage } from "./KitchenPage";
 import { WorkPage } from "./WorkPage";
 import { SomaaCaseStudy } from "./case/SomaaCaseStudy";
 import { CampaignCaseStudy } from "./case/CampaignCaseStudy";
@@ -53,7 +54,7 @@ export function Site() {
   useMagnetic(`${route}|${path}`);
 
   useEffect(() => {
-    if (route.startsWith("#/work/") || route === "#/offer" || route === "#/work" || route === "#/ai") window.scrollTo(0, 0);
+    if (route.startsWith("#/work/") || route === "#/offer" || route === "#/work" || route === "#/ai" || route === "#/kitchen") window.scrollTo(0, 0);
   }, [route]);
 
   // Pick the page for the current route. Case studies first, so a #/work/<slug>
@@ -68,6 +69,8 @@ export function Site() {
     content = <OfferPage />;
   } else if (path === "/ai" || route === "#/ai") {
     content = <AiPage />;
+  } else if (path === "/kitchen" || route === "#/kitchen") {
+    content = <KitchenPage />;
   } else if (path === "/work" || route === "#/work") {
     content = <WorkPage />;
   } else {
