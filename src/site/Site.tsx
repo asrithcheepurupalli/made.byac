@@ -14,6 +14,7 @@ import { Invitation } from "./Invitation";
 import { SiteFooter } from "./SiteFooter";
 import { AiTease } from "./AiTease";
 import { MadeTableTease } from "./MadeTableTease";
+import { KitchenTease } from "./KitchenTease";
 import { OfferPage } from "./OfferPage";
 import { AiPage } from "./AiPage";
 import { KitchenPage } from "./KitchenPage";
@@ -60,8 +61,13 @@ export function Site() {
   // Pick the page for the current route. Case studies first, so a #/work/<slug>
   // deep link wins over the /work archive.
   const campaignSlug = route.startsWith("#/work/") ? route.slice("#/work/".length) : "";
+  // made. kitchen also lives at kitchen.made-by-ac.com (same codebase) — when served
+  // from that host, render the kitchen page at the root.
+  const onKitchenHost = typeof window !== "undefined" && window.location.hostname.startsWith("kitchen.");
   let content: ReactNode;
-  if (route === "#/work/somaa") {
+  if (onKitchenHost) {
+    content = <KitchenPage />;
+  } else if (route === "#/work/somaa") {
     content = <SomaaCaseStudy />;
   } else if (campaignSlug && CAMPAIGN_CASES[campaignSlug]) {
     content = <CampaignCaseStudy slug={campaignSlug} />;
@@ -84,6 +90,7 @@ export function Site() {
           <SelectedWork />
           <AiTease />
           <MadeTableTease />
+          <KitchenTease />
           <GridLab />
           <Invitation />
         </main>
