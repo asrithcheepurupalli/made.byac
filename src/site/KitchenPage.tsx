@@ -15,7 +15,7 @@ import {
 } from "lucide-react";
 
 // made. kitchen — a growth + customer-ownership platform for cloud kitchens.
-// The delivery-side sibling to made. table: acquire on Swiggy/Zomato, RETAIN on a
+// The delivery-side sibling to made. table: acquire on the food-delivery apps, RETAIN on a
 // direct channel you own. Studio brand (ink/paper/red/gold) with warm saffron +
 // coral accents. Service-led — we run it for you first, then automate.
 const SAFFRON = "#e8702a";
@@ -25,7 +25,7 @@ const PROBLEMS = [
   {
     n: "01",
     t: "You don't own your customers",
-    d: "An order comes through Swiggy or Zomato — and the platform keeps the customer data, the history, the notifications, the discovery. You just get the order.",
+    d: "An order comes through a food-delivery app — and the platform keeps the customer data, the history, the notifications, the discovery. You just get the order.",
   },
   {
     n: "02",
@@ -78,7 +78,7 @@ export function KitchenPage() {
           Own your<br />customers<span style={{ color: SAFFRON }}>.</span>
         </h1>
         <p className="rise mt-9 font-display text-xl md:text-2xl leading-snug max-w-2xl text-paper/80" style={{ animationDelay: "0.28s" }}>
-          A growth and retention platform built only for cloud kitchens — acquire on Swiggy and Zomato,
+          A growth and retention platform built only for cloud kitchens — acquire on the food-delivery apps,
           then keep those customers on a channel you actually own. We run it as a service first, then automate.
         </p>
       </section>
@@ -109,7 +109,7 @@ export function KitchenPage() {
         <div className="reveal-up max-w-4xl">
           <span className="label" style={{ color: SAFFRON }}>· the insight</span>
           <h2 className="mt-6 font-display text-3xl md:text-[3.4rem] leading-[1.06]">
-            Swiggy and Zomato aren't the enemy. They're your{" "}
+            The food-delivery apps aren't the enemy. They're your{" "}
             <span className="italic font-normal" style={{ color: SAFFRON }}>customer-acquisition channel.</span>
           </h2>
           <p className="mt-8 font-display text-xl md:text-2xl leading-snug max-w-3xl text-paper/80">
@@ -135,7 +135,7 @@ export function KitchenPage() {
             <div className="rounded-2xl border border-ink-line bg-ink p-8">
               <span className="label text-grey-dim">What we're not</span>
               <ul className="mt-5 flex flex-col gap-3">
-                {["Another Swiggy or Zomato", "A delivery company", "A logistics company", "A race we can't win against giants"].map((x) => (
+                {["Another food-delivery app", "A delivery company", "A logistics company", "A race we can't win against giants"].map((x) => (
                   <li key={x} className="flex items-start gap-3 text-grey-dim text-[15px]">
                     <Ban className="w-4 h-4 mt-1 shrink-0 text-grey" /> {x}
                   </li>

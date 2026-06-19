@@ -7,7 +7,7 @@ const SAFFRON = "#e8702a";
 // (served on the portfolio and at kitchen.made-by-ac.com from the same codebase).
 export function KitchenTease() {
   const steps = [
-    { icon: Megaphone, k: "Acquire", v: "Swiggy & Zomato bring the first order — they're the channel, not the enemy." },
+    { icon: Megaphone, k: "Acquire", v: "The food-delivery apps bring the first order — they're the channel, not the enemy." },
     { icon: UserCheck, k: "Own", v: "A QR in every package turns that order into a customer you actually keep." },
     { icon: TrendingUp, k: "Grow", v: "CRM, WhatsApp and loyalty turn one delivery into a regular." },
   ];
