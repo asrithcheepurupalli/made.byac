@@ -7,15 +7,14 @@ import { useScrollReveal } from "./useScrollReveal";
 import { useMagnetic } from "./useMagnetic";
 import { SiteNav } from "./SiteNav";
 import { ActHero } from "./ActHero";
+import { ProblemPicker } from "./ProblemPicker";
+import { LiveCompose } from "./LiveCompose";
+import { BeforeAfter } from "./BeforeAfter";
 import { Manifesto } from "./Manifesto";
 import { SelectedWork } from "./SelectedWork";
 import { GridLab } from "./GridLab";
 import { Invitation } from "./Invitation";
 import { SiteFooter } from "./SiteFooter";
-import { AiTease } from "./AiTease";
-import { MadeTableTease } from "./MadeTableTease";
-import { KitchenTease } from "./KitchenTease";
-import { StaffTease } from "./StaffTease";
 import { OfferPage } from "./OfferPage";
 import { AiPage } from "./AiPage";
 import { KitchenPage } from "./KitchenPage";
@@ -82,13 +81,12 @@ export function Site() {
         <SiteNav />
         <main>
           <ActHero />
-          <Manifesto />
+          <ProblemPicker />
+          <LiveCompose />
+          <BeforeAfter />
           <SelectedWork />
-          <AiTease />
-          <MadeTableTease />
-          <KitchenTease />
-          <StaffTease />
           <GridLab />
+          <Manifesto />
           <Invitation />
         </main>
         <SiteFooter />

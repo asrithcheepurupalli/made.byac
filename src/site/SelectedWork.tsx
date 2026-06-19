@@ -27,7 +27,7 @@ export function SelectedWork() {
 
   return (
     <section id="work" className="relative bg-ink text-paper py-28 md:py-40 overflow-hidden">
-      <div aria-hidden className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-paper to-ink pointer-events-none" />
+      {/* sits under the ink before/after section — no seam needed */}
       <div className="relative mx-auto max-w-[1600px] px-6 md:px-10">
         {/* header */}
         <div className="reveal-up flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-16 md:mb-24">
