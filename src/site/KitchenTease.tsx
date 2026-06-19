@@ -1,10 +1,11 @@
 import { ArrowUpRight, Megaphone, UserCheck, TrendingUp } from "lucide-react";
 
 const SAFFRON = "#e8702a";
+// Links out to the live standalone product site (like the made. table band).
+const PRODUCT_URL = "https://kitchen.made-by-ac.com";
 
 // Homepage band for made. kitchen — the studio's growth platform for cloud kitchens.
-// Sits under the made. table band (both ink, no seam) and links to the kitchen page
-// (served on the portfolio and at kitchen.made-by-ac.com from the same codebase).
+// Sits under the made. table band (both ink, no seam) and links out to the live site.
 export function KitchenTease() {
   const steps = [
     { icon: Megaphone, k: "Acquire", v: "The food-delivery apps bring the first order — they're the channel, not the enemy." },
@@ -31,7 +32,7 @@ export function KitchenTease() {
               A platform that helps cloud kitchens own their customers and grow beyond the delivery apps —
               we run it as a service first, then automate.
             </p>
-            <a href="/kitchen" data-cursor="See it" className="group mt-5 inline-flex items-center gap-2 label" style={{ color: SAFFRON }}>
+            <a href={PRODUCT_URL} target="_blank" rel="noreferrer" data-cursor="See it" className="group mt-5 inline-flex items-center gap-2 label" style={{ color: SAFFRON }}>
               Explore made. kitchen
               <ArrowUpRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </a>
@@ -44,7 +45,9 @@ export function KitchenTease() {
             return (
               <a
                 key={s.k}
-                href="/kitchen"
+                href={PRODUCT_URL}
+                target="_blank"
+                rel="noreferrer"
                 className="reveal-up group rounded-2xl border border-ink-line bg-ink-soft/40 p-7 md:p-9 min-h-[200px] flex flex-col justify-between hover:border-grey transition-colors"
               >
                 <div className="flex items-center justify-between">

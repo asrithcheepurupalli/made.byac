@@ -25,7 +25,7 @@ export function SiteFooter() {
             <div className="flex flex-col gap-3">
               <span className="label text-grey">Products</span>
               <a href="https://table.made-by-ac.com" target="_blank" rel="noreferrer" className="text-paper/80 hover:text-gold transition-colors text-sm">made. table</a>
-              <a href="/kitchen" className="text-paper/80 hover:text-gold transition-colors text-sm">made. kitchen</a>
+              <a href="https://kitchen.made-by-ac.com" target="_blank" rel="noreferrer" className="text-paper/80 hover:text-gold transition-colors text-sm">made. kitchen</a>
               <a href="/ai" className="text-paper/80 hover:text-gold transition-colors text-sm">AI agents</a>
               <a href="/offer" className="text-paper/80 hover:text-gold transition-colors text-sm">What we offer</a>
             </div>

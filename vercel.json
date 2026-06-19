@@ -4,12 +4,12 @@
   "buildCommand": "vite build",
   "outputDirectory": "dist",
   "redirects": [
-    { "source": "/table", "destination": "https://table.made-by-ac.com", "permanent": false }
+    { "source": "/table", "destination": "https://table.made-by-ac.com", "permanent": false },
+    { "source": "/kitchen", "destination": "https://kitchen.made-by-ac.com", "permanent": false }
   ],
   "rewrites": [
     { "source": "/offer", "destination": "/offer.html" },
     { "source": "/ai", "destination": "/ai.html" },
-    { "source": "/kitchen", "destination": "/kitchen.html" },
     { "source": "/work", "destination": "/work.html" },
     { "source": "/((?!api/).*)", "destination": "/index.html" }
   ]
