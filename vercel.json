@@ -7,7 +7,6 @@
     { "source": "/table", "destination": "https://table.made-by-ac.com", "permanent": false }
   ],
   "rewrites": [
-    { "source": "/", "has": [{ "type": "host", "value": "kitchen.made-by-ac.com" }], "destination": "/kitchen.html" },
     { "source": "/offer", "destination": "/offer.html" },
     { "source": "/ai", "destination": "/ai.html" },
     { "source": "/kitchen", "destination": "/kitchen.html" },

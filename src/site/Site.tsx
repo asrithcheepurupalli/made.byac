@@ -61,13 +61,8 @@ export function Site() {
   // Pick the page for the current route. Case studies first, so a #/work/<slug>
   // deep link wins over the /work archive.
   const campaignSlug = route.startsWith("#/work/") ? route.slice("#/work/".length) : "";
-  // made. kitchen also lives at kitchen.made-by-ac.com (same codebase) — when served
-  // from that host, render the kitchen page at the root.
-  const onKitchenHost = typeof window !== "undefined" && window.location.hostname.startsWith("kitchen.");
   let content: ReactNode;
-  if (onKitchenHost) {
-    content = <KitchenPage />;
-  } else if (route === "#/work/somaa") {
+  if (route === "#/work/somaa") {
     content = <SomaaCaseStudy />;
   } else if (campaignSlug && CAMPAIGN_CASES[campaignSlug]) {
     content = <CampaignCaseStudy slug={campaignSlug} />;

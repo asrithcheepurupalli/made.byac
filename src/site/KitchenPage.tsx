@@ -60,11 +60,11 @@ export function KitchenPage() {
       {/* back nav */}
       <header className="fixed top-0 inset-x-0 z-50 backdrop-blur-md bg-ink/60 border-b border-ink-line">
         <div className="mx-auto max-w-[1400px] px-6 md:px-10 h-16 flex items-center justify-between">
-          <a href="https://made-by-ac.com/" className="label flex items-center gap-2 text-[10px] text-grey-dim hover:text-paper transition-colors">
+          <a href="/" className="label flex items-center gap-2 text-[10px] text-grey-dim hover:text-paper transition-colors">
             <ArrowLeft className="w-4 h-4" /> made.
           </a>
           <span className="label text-[10px] text-grey">made. kitchen</span>
-          <a href="https://made-by-ac.com/#say-hi" className="label text-[10px] rounded-full px-4 py-2 border" style={{ borderColor: SAFFRON, color: SAFFRON }}>
+          <a href="/#say-hi" className="label text-[10px] rounded-full px-4 py-2 border" style={{ borderColor: SAFFRON, color: SAFFRON }}>
             Run a pilot
           </a>
         </div>
@@ -242,17 +242,17 @@ export function KitchenPage() {
             Run a cloud kitchen? Let's win your customers back.
           </h2>
           <div className="mt-12 flex flex-wrap items-center justify-center gap-5">
-            <a href="https://made-by-ac.com/#say-hi" className="group label rounded-full px-7 py-4 flex items-center gap-2 text-ink hover:-translate-y-0.5 transition-all duration-300" style={{ background: SAFFRON }}>
+            <a href="/#say-hi" className="group label rounded-full px-7 py-4 flex items-center gap-2 text-ink hover:-translate-y-0.5 transition-all duration-300" style={{ background: SAFFRON }}>
               Run a pilot with us <ArrowUpRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </a>
-            <a href="https://made-by-ac.com/offer" className="label rounded-full px-7 py-4 border border-ink-line text-paper hover:border-grey transition-colors">Everything we offer</a>
+            <a href="/offer" className="label rounded-full px-7 py-4 border border-ink-line text-paper hover:border-grey transition-colors">Everything we offer</a>
           </div>
         </div>
       </section>
 
       <footer className="border-t border-ink-line">
         <div className="mx-auto max-w-[1400px] px-6 md:px-10 py-10 flex flex-col sm:flex-row justify-between gap-3 label text-grey">
-          <a href="https://made-by-ac.com/" className="hover:opacity-80 flex items-center gap-2"><ArrowLeft className="w-3.5 h-3.5" /> back to made.</a>
+          <a href="/" className="hover:opacity-80 flex items-center gap-2"><ArrowLeft className="w-3.5 h-3.5" /> back to made.</a>
           <span>made. by ac · made. kitchen</span>
         </div>
       </footer>
