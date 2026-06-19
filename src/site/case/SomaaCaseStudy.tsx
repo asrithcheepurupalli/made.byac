@@ -1,6 +1,6 @@
 import type { FC, ReactNode } from "react";
 import { useEffect, useRef, useState } from "react";
-import { motion, useScroll, useTransform, useInView, useMotionValueEvent } from "motion/react";
+import { motion, useScroll, useTransform, useInView, useMotionValueEvent, useReducedMotion } from "motion/react";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
 
 // ---- Somaa's own world: dark charcoal, warm amber, cream. ----
@@ -18,7 +18,7 @@ const C = {
 
 const A = "/case/somaa";
 
-function CountUp({ to, suffix = "", prefix = "", dur = 1500 }: { to: number; suffix?: string; prefix?: string; dur?: number }) {
+function CountUp({ to, suffix = "", prefix = "", dur = 1500, decimals = 0 }: { to: number; suffix?: string; prefix?: string; dur?: number; decimals?: number }) {
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
   const [n, setN] = useState(0);
@@ -29,7 +29,7 @@ function CountUp({ to, suffix = "", prefix = "", dur = 1500 }: { to: number; suf
     const tick = (t: number) => {
       const p = Math.min(1, (t - start) / dur);
       const eased = 1 - Math.pow(1 - p, 3);
-      setN(Math.round(eased * to));
+      setN(eased * to);
       if (p < 1) raf = requestAnimationFrame(tick);
     };
     raf = requestAnimationFrame(tick);
@@ -38,7 +38,7 @@ function CountUp({ to, suffix = "", prefix = "", dur = 1500 }: { to: number; suf
   return (
     <span ref={ref}>
       {prefix}
-      {n}
+      {decimals > 0 ? n.toFixed(decimals) : Math.round(n)}
       {suffix}
     </span>
   );
@@ -87,10 +87,112 @@ const WANTS = [
   { k: "More repeat visits", d: "Remembered occasions and a feedback-for-reward loop turn one good night into the next." },
 ];
 
+// ---- PROJECTED IMPACT (a pilot model — NOT measured results) ----
+// Clearly labelled as a projection everywhere it appears. Numbers are a modelled
+// pilot ramp, not claims of actuals. Revenue is indexed to the launch baseline (100).
+const REVENUE_INDEX = [100, 107, 116, 124, 131, 138]; // launch → month 5
+const REVENUE_MONTHS = ["Launch", "M1", "M2", "M3", "M4", "M5"];
+
+const IMPACT_KPIS = [
+  { to: 22, prefix: "+", suffix: "%", label: "average bill value", sub: "Raga's pairings & specials" },
+  { to: 27, prefix: "+", suffix: "%", label: "repeat-visit rate", sub: "occasions + feedback loop" },
+  { to: 18, prefix: "+", suffix: "%", label: "faster table turns", sub: "self + group ordering" },
+  { to: 4.7, suffix: "/5", decimals: 1, label: "guest satisfaction", sub: "projected average rating" },
+];
+
 // A reliable scroll-reveal: a CSS scroll-driven fade-up where supported
 // (Chrome), gracefully visible everywhere else. Never gets stuck hidden.
 const Reveal: FC<{ children: ReactNode; className?: string; delay?: number }> = ({ children, className = "" }) => {
   return <div className={`reveal-up ${className}`}>{children}</div>;
+};
+
+// A projected-revenue area chart that draws + rises into view. Pure SVG; the line
+// animates via pathLength, the fill fades up, the end dot pops. Honest by framing,
+// not by faking precision — the curve is a modelled pilot ramp (indexed to launch).
+const RevenueChart: FC<{ data: number[]; months: string[] }> = ({ data, months }) => {
+  const reduce = useReducedMotion();
+  const W = 720, H = 260, padX = 18, padTop = 26, baseY = H - 30;
+  const yMin = 92, yMax = Math.max(...data) + 8;
+  const x = (i: number) => padX + (i * (W - padX * 2)) / (data.length - 1);
+  const y = (v: number) => baseY - ((v - yMin) / (yMax - yMin)) * (baseY - padTop);
+  const pts = data.map((v, i) => [x(i), y(v)] as const);
+  const line = pts.map((p, i) => `${i ? "L" : "M"}${p[0].toFixed(1)},${p[1].toFixed(1)}`).join(" ");
+  const area = `${line} L${pts[pts.length - 1][0].toFixed(1)},${baseY} L${pts[0][0].toFixed(1)},${baseY} Z`;
+  const grid = [100, 115, 130, Math.round(yMax - 4)];
+
+  return (
+    <div className="rounded-2xl p-5 md:p-8" style={{ background: C.bg, border: `1px solid ${C.line}` }}>
+      <div className="flex items-end justify-between mb-5">
+        <div>
+          <div className="label text-[9px]" style={{ color: C.dim }}>Projected monthly revenue · indexed to launch</div>
+          <div className="mt-2 font-display text-4xl md:text-5xl" style={{ color: C.text }}>
+            <CountUp to={38} prefix="+" suffix="%" /> <span className="text-2xl" style={{ color: C.amber }}>by month 5</span>
+          </div>
+        </div>
+        <span className="label text-[9px] hidden sm:block" style={{ color: C.dim }}>pilot model</span>
+      </div>
+
+      <svg viewBox={`0 0 ${W} ${H}`} className="w-full h-auto" preserveAspectRatio="none" role="img" aria-label="Projected revenue rising over the pilot">
+        <defs>
+          <linearGradient id="rev-fill" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor={C.amber} stopOpacity="0.34" />
+            <stop offset="100%" stopColor={C.amber} stopOpacity="0" />
+          </linearGradient>
+        </defs>
+
+        {/* gridlines */}
+        {grid.map((g) => (
+          <g key={g}>
+            <line x1={padX} x2={W - padX} y1={y(g)} y2={y(g)} stroke={C.line} strokeWidth="1" />
+            <text x={padX} y={y(g) - 5} fill={C.dim} fontSize="11" fontFamily="monospace">{g}</text>
+          </g>
+        ))}
+
+        {/* area fill — fades up after the line draws */}
+        <motion.path
+          d={area}
+          fill="url(#rev-fill)"
+          initial={reduce ? { opacity: 1 } : { opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.8, delay: reduce ? 0 : 0.9 }}
+        />
+
+        {/* the rising line — draws left to right */}
+        <motion.path
+          d={line}
+          fill="none"
+          stroke={C.amber}
+          strokeWidth="3"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          initial={reduce ? { pathLength: 1 } : { pathLength: 0 }}
+          whileInView={{ pathLength: 1 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
+        />
+
+        {/* end dot — pops at the peak */}
+        <motion.circle
+          cx={pts[pts.length - 1][0]}
+          cy={pts[pts.length - 1][1]}
+          r="6"
+          fill={C.amber}
+          initial={reduce ? { scale: 1, opacity: 1 } : { scale: 0, opacity: 0 }}
+          whileInView={{ scale: 1, opacity: 1 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.5, delay: reduce ? 0 : 1.35, ease: [0.16, 1, 0.3, 1] }}
+          style={{ transformOrigin: `${pts[pts.length - 1][0]}px ${pts[pts.length - 1][1]}px` }}
+        />
+      </svg>
+
+      <div className="mt-3 flex justify-between px-1">
+        {months.map((m) => (
+          <span key={m} className="font-mono text-[10px]" style={{ color: C.dim }}>{m}</span>
+        ))}
+      </div>
+    </div>
+  );
 };
 
 export function SomaaCaseStudy() {
@@ -338,6 +440,59 @@ export function SomaaCaseStudy() {
             ))}
           </div>
         </div>
+      </section>
+
+      {/* PROJECTED IMPACT — modelled pilot ramp, clearly labelled */}
+      <section className="mx-auto max-w-[1400px] px-6 md:px-10 py-20 md:py-32">
+        <Reveal>
+          <span className="label" style={{ color: C.amber }}>Projected impact · pilot model</span>
+          <h2 className="mt-6 font-display text-4xl md:text-6xl leading-[0.95] max-w-3xl" style={{ color: C.text }}>
+            What a waiter, made 3× more effective, is worth.
+          </h2>
+          <p className="mt-7 text-lg leading-relaxed max-w-2xl" style={{ color: C.muted }}>
+            A modelled view of where the platform takes the room — bigger bills, faster tables and more
+            guests coming back, compounding into revenue. These are projections for the pilot, not
+            measured results.
+          </p>
+        </Reveal>
+
+        <Reveal delay={0.1} className="mt-12">
+          <RevenueChart data={REVENUE_INDEX} months={REVENUE_MONTHS} />
+        </Reveal>
+
+        <div className="mt-4 grid grid-cols-2 lg:grid-cols-4 gap-4">
+          {IMPACT_KPIS.map((k, i) => {
+            const frac = Math.min(1, k.decimals ? k.to / 5 : k.to / 35);
+            return (
+              <Reveal key={k.label} delay={(i % 4) * 0.06}>
+                <div className="h-full rounded-2xl p-6 md:p-7" style={{ background: C.surface, border: `1px solid ${C.line}` }}>
+                  <div className="font-display text-4xl md:text-5xl tracking-tight" style={{ color: C.text }}>
+                    <CountUp to={k.to} prefix={k.prefix ?? ""} suffix={k.suffix} decimals={k.decimals ?? 0} />
+                  </div>
+                  {/* grow bar */}
+                  <div className="mt-4 h-1.5 rounded-full overflow-hidden" style={{ background: C.line }}>
+                    <motion.div
+                      className="h-full rounded-full"
+                      style={{ background: C.amber, transformOrigin: "left" }}
+                      initial={{ scaleX: 0 }}
+                      whileInView={{ scaleX: frac }}
+                      viewport={{ once: true, margin: "-60px" }}
+                      transition={{ duration: 1.1, delay: 0.15 + (i % 4) * 0.08, ease: [0.16, 1, 0.3, 1] }}
+                    />
+                  </div>
+                  <p className="mt-4 text-[15px]" style={{ color: C.text }}>{k.label}</p>
+                  <p className="mt-1 text-[13px] leading-relaxed" style={{ color: C.dim }}>{k.sub}</p>
+                </div>
+              </Reveal>
+            );
+          })}
+        </div>
+
+        <p className="mt-8 text-[12px] leading-relaxed max-w-2xl" style={{ color: C.dim }}>
+          Projected pilot model — illustrative figures based on the platform's mechanics and comparable
+          rollouts, shown to size the opportunity. Not a claim of measured results. Revenue is indexed
+          to the launch baseline (100).
+        </p>
       </section>
 
       {/* CRAFT — brand + homepage shot */}
