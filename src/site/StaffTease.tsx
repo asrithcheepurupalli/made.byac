@@ -29,8 +29,8 @@ export function StaffTease() {
           </div>
           <div className="max-w-md">
             <p className="font-display text-xl md:text-2xl text-grey-dim leading-relaxed">
-              The team a 1–10 person company can't afford to hire — we run the work you shouldn't be doing,
-              then automate it. Your most important asset is time; we give it back.
+              The team you need but don't want on the payroll — we run the tech and the day-to-day you
+              shouldn't, then automate it. Your most important asset is time; we give it back.
             </p>
             <a href={PRODUCT_URL} target="_blank" rel="noreferrer" data-cursor="See it" className="group mt-5 inline-flex items-center gap-2 label" style={{ color: GOLD }}>
               Explore made. staff
