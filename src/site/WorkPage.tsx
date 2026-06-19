@@ -11,7 +11,7 @@ const CASE_SLUG: Record<string, string> = {
 
 // Featured studies carried at the top of the page.
 const FEATURED = [
-  { slug: "somaa", client: "Somaa", line: "A restobar that remembers you.", img: "/case/somaa/biryani.webp", tag: "QR dining platform", accent: "#d99547", overlay: "/case/somaa/wordmark-cream.png" },
+  { slug: "somaa", client: "Somaa", line: "A restobar that remembers you.", img: "/case/somaa/biryani.webp", tag: "AI dining platform", accent: "#d99547", overlay: "/case/somaa/wordmark-cream.png" },
   { slug: "innovolt", client: "Innovolt", line: "Used EVs, made a safe bet.", img: "/images/Hyd'Tel.png", tag: "EV marketplace campaigns", accent: "#27d17c" },
   { slug: "mithai-maharaja", client: "Mithai Maharaja", line: "Sweets dressed like heirlooms.", img: "/images/thumb_1778155198_f88efc2a-69f8-4b24-b07b-26e8a339b684.jpg", tag: "Luxury packaging", accent: "#c8a24b" },
 ];

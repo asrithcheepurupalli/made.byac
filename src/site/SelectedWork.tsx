@@ -4,7 +4,7 @@ import { PROJECTS } from "../data";
 // ACT II — the work, under the lights. Three case studies carry it; everything
 // else hangs on a quiet wall you can hover to view.
 const CASE_STUDIES = [
-  { slug: "somaa", client: "Somaa", line: "A restobar that\nremembers you.", img: "/case/somaa/biryani.webp", tag: "QR dining platform" },
+  { slug: "somaa", client: "Somaa", line: "A restobar that\nremembers you.", img: "/case/somaa/biryani.webp", tag: "AI dining platform" },
   { slug: "innovolt", client: "Innovolt", line: "Used EVs, made\na safe bet.", img: "/images/Hyd'Tel.png", tag: "EV campaigns" },
   { slug: "mithai-maharaja", client: "Mithai Maharaja", line: "Sweets dressed\nlike heirlooms.", img: "/images/thumb_1778155198_f88efc2a-69f8-4b24-b07b-26e8a339b684.jpg", tag: "Luxury packaging" },
 ];

@@ -78,6 +78,15 @@ const STATS = [
   { to: 2, suffix: "", label: "AI copilots · Raga & Somy" },
 ];
 
+// What owners actually want — and the part of Somaa that delivers it. The waiter
+// stays the hero; the platform makes them more effective.
+const WANTS = [
+  { k: "Faster service", d: "Scan, group-order and send in seconds — tables move without waiting just to be noticed." },
+  { k: "Higher average bill", d: "Raga suggests the pairing, the special and the second round — at every table, every time." },
+  { k: "Better satisfaction", d: "Order-taking handled, the floor is freed for the part only people do well: hospitality." },
+  { k: "More repeat visits", d: "Remembered occasions and a feedback-for-reward loop turn one good night into the next." },
+];
+
 // A reliable scroll-reveal: a CSS scroll-driven fade-up where supported
 // (Chrome), gracefully visible everywhere else. Never gets stuck hidden.
 const Reveal: FC<{ children: ReactNode; className?: string; delay?: number }> = ({ children, className = "" }) => {
@@ -135,8 +144,8 @@ export function SomaaCaseStudy() {
           <span className="label" style={{ color: C.amber }}>·01 · case study · hospitality</span>
           <img src={`${A}/wordmark-cream.png`} alt="Somaa" className="mt-8 h-16 md:h-28 w-auto object-contain object-left" />
           <p className="mt-8 font-display text-2xl md:text-4xl leading-snug max-w-2xl" style={{ color: C.text }}>
-            A coastal-Andhra restobar in Vizag, and the QR dining platform we designed and built to
-            match the room.
+            A coastal-Andhra restobar in Vizag, and the AI-powered dining experience platform we
+            designed and built to match the room.
           </p>
           <div className="mt-10 flex items-center gap-3 label" style={{ color: C.muted }}>
             <span className="inline-block w-10 h-px" style={{ background: C.amber }} /> scroll
@@ -185,6 +194,61 @@ export function SomaaCaseStudy() {
               would have worked, and felt like every other place. Somaa wanted the at-table
               experience to carry the brand: warm, a little theatrical, unmistakably theirs. And it
               had to plug into the kitchen they already run on Petpooja.
+            </p>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* THE BIGGER IDEA — the reposition */}
+      <section className="border-y" style={{ borderColor: C.line, background: C.surface }}>
+        <div className="mx-auto max-w-[1400px] px-6 md:px-10 py-20 md:py-32">
+          <Reveal>
+            <span className="label" style={{ color: C.amber }}>The bigger idea</span>
+            <h2 className="mt-6 font-display text-3xl md:text-[3.2rem] leading-[1.08] max-w-4xl" style={{ color: C.text }}>
+              Most restaurant tech sells <span style={{ color: C.dim }}>fewer waiters.</span> We built the{" "}
+              <span style={{ color: C.amber }}>opposite.</span>
+            </h2>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <p className="mt-8 text-lg leading-relaxed max-w-2xl" style={{ color: C.muted }}>
+              The category pitches automation as subtraction — replace the server, thin the floor.
+              But owners never wanted fewer people. They want faster tables, bigger bills, happier
+              guests, and more of them coming back. So Somaa isn't a QR menu that removes the waiter.
+              It's a platform that makes every waiter{" "}
+              <span style={{ color: C.text }}>three times more effective</span> — the technology working
+              quietly in the background, the waiter still the hero of the room.
+            </p>
+          </Reveal>
+
+          {/* category reframe */}
+          <Reveal delay={0.15}>
+            <div className="mt-12 flex flex-wrap items-center gap-x-6 gap-y-3">
+              <span className="label text-[11px]" style={{ color: C.dim, textDecoration: "line-through" }}>
+                QR ordering system
+              </span>
+              <span style={{ color: C.dim }}>→</span>
+              <span className="font-display text-xl md:text-2xl" style={{ color: C.amber }}>
+                AI-powered dining experience platform
+              </span>
+            </div>
+          </Reveal>
+
+          {/* what owners actually want */}
+          <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px rounded-2xl overflow-hidden" style={{ background: C.line, border: `1px solid ${C.line}` }}>
+            {WANTS.map((w) => (
+              <div key={w.k} className="reveal-up p-6 md:p-7" style={{ background: C.bg }}>
+                <h3 className="font-display text-xl md:text-[1.45rem] leading-tight" style={{ color: C.text }}>{w.k}</h3>
+                <p className="mt-3 text-[14px] leading-relaxed" style={{ color: C.muted }}>{w.d}</p>
+              </div>
+            ))}
+          </div>
+
+          {/* the moat */}
+          <Reveal>
+            <p className="mt-16 font-display text-2xl md:text-3xl leading-snug max-w-3xl" style={{ color: C.text }}>
+              The gap in the market was never{" "}
+              <span style={{ color: C.muted }}>“let people order from their phones.”</span> Everyone has
+              that. The gap is a night worth coming back for — and that's far harder to copy than a QR code.
             </p>
           </Reveal>
         </div>
