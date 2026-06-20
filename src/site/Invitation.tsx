@@ -29,7 +29,7 @@ export function Invitation() {
   } = useStudio();
 
   return (
-    <section id="say-hi" className="relative bg-ink text-paper py-28 md:py-44 overflow-hidden">
+    <section id="say-hi" data-nav-dark className="relative bg-ink text-paper py-28 md:py-44 overflow-hidden">
       {/* seam: blend down from the paper-dim studio above */}
       <div aria-hidden className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-paper-dim to-ink pointer-events-none" />
       {/* soft red glow */}

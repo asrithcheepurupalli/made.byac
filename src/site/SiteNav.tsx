@@ -14,6 +14,8 @@ export function SiteNav() {
   const [scrolled, setScrolled] = useState(false);
   const [hidden, setHidden] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  // the fixed nav flips to light text whenever a dark (ink) section sits behind it
+  const [navDark, setNavDark] = useState(false);
 
   useEffect(() => {
     let last = window.scrollY;
@@ -24,11 +26,25 @@ export function SiteNav() {
       if (y > 240 && y > last + 6) setHidden(true);
       else if (y < last - 6) setHidden(false);
       last = y;
+      // detect a dark section behind the nav line
+      let over = false;
+      document.querySelectorAll<HTMLElement>("[data-nav-dark]").forEach((el) => {
+        const r = el.getBoundingClientRect();
+        if (r.top <= 44 && r.bottom >= 44) over = true;
+      });
+      setNavDark(over);
     };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    window.addEventListener("resize", onScroll);
+    return () => { window.removeEventListener("scroll", onScroll); window.removeEventListener("resize", onScroll); };
   }, []);
+
+  const tone = navDark ? "text-paper" : "text-ink";
+  const sayHi = navDark
+    ? "border-paper/50 hover:bg-paper hover:text-ink"
+    : "border-ink/30 hover:bg-ink hover:text-paper";
+  const bar = navDark ? "bg-paper" : "bg-ink";
 
   // Lock background scroll + close on Escape / route change while the menu is open.
   useEffect(() => {
@@ -49,7 +65,7 @@ export function SiteNav() {
   return (
     <>
       <header
-        className={`fixed top-0 inset-x-0 z-50 mix-blend-difference text-white transition-[transform,padding] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+        className={`fixed top-0 inset-x-0 z-50 ${tone} transition-[transform,padding,color] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
           scrolled ? "pb-5" : "pb-8"
         } ${hidden && !menuOpen ? "-translate-y-full" : "translate-y-0"}`}
         // top padding includes the safe-area inset so it isn't flush to the top
@@ -75,7 +91,7 @@ export function SiteNav() {
               href="#say-hi"
               data-cursor="Hello"
               data-magnetic
-              className="label text-[10px] border border-white/60 rounded-full px-4 py-2 hover:bg-white hover:text-black transition-colors"
+              className={`label text-[10px] border rounded-full px-4 py-2 transition-colors ${sayHi}`}
             >
               Say hi
             </a>
@@ -90,12 +106,12 @@ export function SiteNav() {
             className="sm:hidden relative w-9 h-9 -mr-1 flex flex-col items-center justify-center gap-[5px]"
           >
             <span
-              className={`block h-px w-6 bg-white transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+              className={`block h-px w-6 ${menuOpen ? "bg-paper" : bar} transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${
                 menuOpen ? "translate-y-[3px] rotate-45" : ""
               }`}
             />
             <span
-              className={`block h-px w-6 bg-white transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+              className={`block h-px w-6 ${menuOpen ? "bg-paper" : bar} transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${
                 menuOpen ? "-translate-y-[3px] -rotate-45" : ""
               }`}
             />

@@ -4,7 +4,7 @@ import { useStudio } from "../StudioContext";
 export function SiteFooter() {
   const { vizagTime } = useStudio();
   return (
-    <footer className="bg-ink text-paper border-t border-ink-line">
+    <footer data-nav-dark className="bg-ink text-paper border-t border-ink-line">
       <div className="mx-auto max-w-[1600px] px-6 md:px-10 py-14 md:py-20">
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-10">
           <div>

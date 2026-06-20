@@ -26,7 +26,7 @@ export function SelectedWork() {
   const somaa = CASE_STUDIES[0];
 
   return (
-    <section id="work" className="relative bg-ink text-paper py-28 md:py-40 overflow-hidden">
+    <section id="work" data-nav-dark className="relative bg-ink text-paper py-28 md:py-40 overflow-hidden">
       {/* sits under the ink before/after section — no seam needed */}
       <div className="relative mx-auto max-w-[1600px] px-6 md:px-10">
         {/* header */}

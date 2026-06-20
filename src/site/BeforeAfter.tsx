@@ -101,7 +101,7 @@ export function BeforeAfter() {
   }, [hint]);
 
   return (
-    <section className="relative bg-ink text-paper py-28 md:py-40 overflow-hidden">
+    <section data-nav-dark className="relative bg-ink text-paper py-28 md:py-40 overflow-hidden">
       <div aria-hidden className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-paper-dim to-ink pointer-events-none" />
       <div className="relative z-10 mx-auto max-w-[1400px] px-6 md:px-10">
         <div className="reveal-up max-w-2xl">
