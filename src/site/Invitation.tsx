@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import { ArrowUpRight, Phone, Mail, Instagram } from "lucide-react";
+import { ArrowUpRight, Phone, Mail } from "lucide-react";
 import { useStudio } from "../StudioContext";
 
 // Drop the real number here (with country code) to light up the Call + WhatsApp
@@ -8,6 +8,19 @@ const PHONE = "+917382699377";
 const HAS_PHONE = /^\+?\d[\d\s-]{7,}$/.test(PHONE) && !PHONE.toUpperCase().includes("X");
 const PHONE_TEL = PHONE.replace(/[^\d+]/g, "");
 const PHONE_WA = PHONE.replace(/[^\d]/g, "");
+
+// One-click contact — the message is pre-written so reaching out takes zero effort.
+const EMAIL = "thebrain@made-by-ac.com";
+const MAIL_HREF =
+  `mailto:${EMAIL}?subject=${encodeURIComponent("Hi made. — a project idea")}` +
+  `&body=${encodeURIComponent(
+    "Hi made. team,\n\nI came across your work and I'd love to talk about a project.\n\n" +
+      "What I'm imagining:\n\n\nA bit about me / us:\n\n\nThanks,\n"
+  )}`;
+const WA_HREF =
+  `https://wa.me/${PHONE_WA}?text=${encodeURIComponent(
+    "Hi made. by ac 👋 I came across your work and I'd love to talk about a project."
+  )}`;
 
 function WhatsAppIcon({ className }: { className?: string }) {
   return (
@@ -59,67 +72,52 @@ export function Invitation() {
             <span className="text-paper"> Most of the time, we can.</span>
           </p>
 
-          <a
-            href="mailto:thebrain@made-by-ac.com"
-            data-cursor="Email"
-            className="group mt-10 inline-flex items-center gap-3 font-display text-2xl md:text-3xl text-paper border-b border-gold/50 pb-1 hover:text-gold transition-colors"
-          >
-            thebrain@made-by-ac.com <ArrowUpRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
-          </a>
-
-          {/* direct contact — call / whatsapp / email / socials */}
-          <div className="mt-9">
-            <span className="label text-grey-dim">Or reach us directly</span>
+          {/* one-click contact — pre-written message, zero effort to reach out */}
+          <div className="mt-10">
+            <span className="label text-grey-dim">One click — the message is already written for you</span>
             <div className="mt-4 flex flex-wrap items-center gap-3">
               {HAS_PHONE && (
                 <a
-                  href={`https://wa.me/${PHONE_WA}`}
+                  href={WA_HREF}
                   target="_blank"
                   rel="noreferrer"
-                  aria-label="Message us on WhatsApp"
+                  aria-label="Message us on WhatsApp (pre-filled)"
                   data-cursor="Chat"
-                  className="group flex items-center gap-2.5 rounded-full border border-ink-line pl-4 pr-5 py-3 text-paper/85 hover:text-[#25D366] hover:border-[#25D366]/60 transition-colors"
+                  className="group inline-flex items-center gap-2.5 rounded-full bg-[#25D366] text-ink pl-5 pr-6 py-3.5 font-medium hover:-translate-y-0.5 transition-transform"
                 >
                   <WhatsAppIcon className="w-5 h-5" />
-                  <span className="label text-[10px]">WhatsApp</span>
+                  <span className="label text-[10px] !tracking-[0.16em]">WhatsApp us</span>
                 </a>
               )}
+              <a
+                href={MAIL_HREF}
+                aria-label="Email us (pre-filled)"
+                data-cursor="Email"
+                className="group inline-flex items-center gap-2.5 rounded-full bg-red text-white pl-5 pr-6 py-3.5 hover:bg-red-deep hover:-translate-y-0.5 transition-all"
+              >
+                <Mail className="w-[18px] h-[18px]" strokeWidth={1.8} />
+                <span className="label text-[10px] !tracking-[0.16em]">Email us</span>
+              </a>
               {HAS_PHONE && (
                 <a
                   href={`tel:${PHONE_TEL}`}
                   aria-label="Call us"
-                  className="group flex items-center gap-2.5 rounded-full border border-ink-line pl-4 pr-5 py-3 text-paper/85 hover:text-gold hover:border-gold/60 transition-colors"
+                  data-cursor="Call"
+                  className="group inline-flex items-center gap-2.5 rounded-full border border-ink-line pl-5 pr-6 py-3.5 text-paper/85 hover:text-gold hover:border-gold/60 transition-colors"
                 >
                   <Phone className="w-[18px] h-[18px]" strokeWidth={1.7} />
-                  <span className="label text-[10px]">Call</span>
+                  <span className="label text-[10px] !tracking-[0.16em]">Call us</span>
                 </a>
               )}
-              <a
-                href="mailto:thebrain@made-by-ac.com"
-                aria-label="Email us"
-                className="group w-12 h-12 rounded-full border border-ink-line flex items-center justify-center text-paper/85 hover:text-red hover:border-red/60 transition-colors"
-              >
-                <Mail className="w-[18px] h-[18px]" strokeWidth={1.7} />
-              </a>
-              <a
-                href="https://www.instagram.com"
-                target="_blank"
-                rel="noreferrer"
-                aria-label="Instagram"
-                className="group w-12 h-12 rounded-full border border-ink-line flex items-center justify-center text-paper/85 hover:text-gold hover:border-gold/60 transition-colors"
-              >
-                <Instagram className="w-[18px] h-[18px]" strokeWidth={1.7} />
-              </a>
-              <a
-                href="https://www.behance.net"
-                target="_blank"
-                rel="noreferrer"
-                aria-label="Behance"
-                className="group w-12 h-12 rounded-full border border-ink-line flex items-center justify-center font-display text-sm text-paper/85 hover:text-gold hover:border-gold/60 transition-colors"
-              >
-                Be
-              </a>
             </div>
+            <a
+              href={MAIL_HREF}
+              data-cursor="Email"
+              className="group mt-5 inline-flex items-center gap-2 text-grey-dim hover:text-gold transition-colors"
+            >
+              <span className="font-mono text-[13px]">{EMAIL}</span>
+              <ArrowUpRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            </a>
           </div>
         </div>
 

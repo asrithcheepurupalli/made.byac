@@ -78,6 +78,13 @@ const LABS: Lab[] = [
   },
 ];
 
+// one-click, pre-written contact — same zero-effort pattern as the homepage
+const LABS_MAIL =
+  `mailto:thebrain@made-by-ac.com?subject=${encodeURIComponent("Hi made. — about the Labs")}` +
+  `&body=${encodeURIComponent(
+    "Hi made. team,\n\nI saw made. labs and I'd love to talk about building something with you.\n\nWhat I have in mind:\n\n\nThanks,\n"
+  )}`;
+
 export function LabsPage() {
   return (
     <div className="bg-ink text-paper font-sans antialiased min-h-screen overflow-clip">
@@ -386,7 +393,7 @@ function LabsCapabilities() {
           Every world here went from a blank page to a working product — brand, interface, motion and
           demo — by the same small team that would build yours.
         </p>
-        <a href="/#say-hi" data-cursor="Hello" data-magnetic
+        <a href={LABS_MAIL} data-cursor="Hello" data-magnetic
           className="reveal-up mt-12 inline-flex items-center gap-2 bg-red text-white label rounded-full px-8 py-4 hover:bg-red-deep transition-colors">
           Bring us the thing nobody else will build <ArrowUpRight className="w-4 h-4" />
         </a>
@@ -407,7 +414,7 @@ function LabsInvitation() {
         </div>
         <div className="reveal-up flex flex-wrap gap-3">
           <a href="/work" className="label text-[10px] rounded-full px-6 py-3.5 border border-paper/30 hover:bg-paper hover:text-ink transition-colors">See client work</a>
-          <a href="mailto:thebrain@made-by-ac.com" data-cursor="Hello" className="label text-[10px] rounded-full px-6 py-3.5 bg-red text-white hover:bg-red-deep transition-colors">Start a project</a>
+          <a href={LABS_MAIL} data-cursor="Hello" className="label text-[10px] rounded-full px-6 py-3.5 bg-red text-white hover:bg-red-deep transition-colors">Start a project</a>
         </div>
       </div>
     </section>
