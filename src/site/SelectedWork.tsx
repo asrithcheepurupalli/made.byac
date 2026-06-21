@@ -32,7 +32,7 @@ export function SelectedWork() {
         {/* header */}
         <div className="reveal-up flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-16 md:mb-24">
           <div>
-            <span className="label text-red">·003 / selected work</span>
+            <span className="label text-red">·005 / selected work</span>
             <h2 className="mt-6 font-display text-6xl md:text-8xl leading-[0.9] tracking-[-0.02em]">The work<span className="text-red">.</span></h2>
           </div>
           <p className="font-display text-xl md:text-2xl text-grey-dim max-w-md leading-relaxed">Three studies we're proud of, and a wall of everything else.</p>

@@ -41,7 +41,7 @@ export function Invitation() {
       <div className="relative z-10 mx-auto max-w-[1600px] px-6 md:px-10 grid grid-cols-1 lg:grid-cols-12 gap-14 lg:gap-20 items-center">
         {/* the warm message */}
         <div className="lg:col-span-7">
-          <span className="label text-red">·005 / say hi</span>
+          <span className="label text-red">·008 / say hi</span>
           <motion.h2
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}

@@ -11,7 +11,7 @@ export function Manifesto() {
   return (
     <section id="why" className="relative bg-paper text-ink py-28 md:py-44">
       <div className="mx-auto max-w-[1600px] px-6 md:px-10">
-        <span className="label text-red">·002 / why we do this</span>
+        <span className="label text-red">·007 / why we do this</span>
 
         <motion.p
           initial={{ opacity: 0, y: 24 }}
