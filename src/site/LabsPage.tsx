@@ -40,6 +40,7 @@ const LABS: Lab[] = [
     shots: ["/labs/meanwhile/home.png", "/labs/meanwhile/third.png", "/labs/meanwhile/browse.png"],
     tags: ["Architectural negative-space", "Generated floor-plans", "Interactive rent-splitter", "GSAP · Lenis"],
     caseStudy: "/labs/docs/Meanwhile-Case-Study.pdf",
+    live: "https://meanwhile.made-by-ac.com",
   },
   {
     id: "karu",
@@ -56,6 +57,7 @@ const LABS: Lab[] = [
     shots: ["/labs/karu/cover.png", "/labs/karu/product.png", "/labs/karu/collection.png"],
     tags: ["Warm earthen direction", "Live auction + revenue split", "Full-bleed scroll gallery", "Next.js 16 · React 19"],
     caseStudy: "/labs/docs/Karu-Case-Study.pdf",
+    live: "https://karu.made-by-ac.com",
   },
   {
     id: "tideline",
@@ -72,6 +74,7 @@ const LABS: Lab[] = [
     shots: ["/labs/tideline/home.png", "/labs/tideline/catch.png", "/labs/tideline/boat.png"],
     tags: ["Tidal data-as-poetry", "Generative tide charts", "Seat-or-share booking", "GSAP · Lenis"],
     caseStudy: "/labs/docs/Tideline-Case-Study.pdf",
+    live: "https://tideline.made-by-ac.com",
   },
 ];
 
