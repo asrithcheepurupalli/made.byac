@@ -19,6 +19,8 @@ import { OfferPage } from "./OfferPage";
 import { AiPage } from "./AiPage";
 import { KitchenPage } from "./KitchenPage";
 import { WorkPage } from "./WorkPage";
+import { LabsPage } from "./LabsPage";
+import { LabsTease } from "./LabsTease";
 import { SomaaCaseStudy } from "./case/SomaaCaseStudy";
 import { CampaignCaseStudy } from "./case/CampaignCaseStudy";
 import { CAMPAIGN_CASES } from "./case/caseData";
@@ -55,7 +57,7 @@ export function Site() {
   useMagnetic(`${route}|${path}`);
 
   useEffect(() => {
-    if (route.startsWith("#/work/") || route === "#/offer" || route === "#/work" || route === "#/ai" || route === "#/kitchen") window.scrollTo(0, 0);
+    if (route.startsWith("#/work/") || route === "#/offer" || route === "#/work" || route === "#/ai" || route === "#/kitchen" || route === "#/labs") window.scrollTo(0, 0);
   }, [route]);
 
   // Pick the page for the current route. Case studies first, so a #/work/<slug>
@@ -74,6 +76,8 @@ export function Site() {
     content = <KitchenPage />;
   } else if (path === "/work" || route === "#/work") {
     content = <WorkPage />;
+  } else if (path === "/labs" || route === "#/labs") {
+    content = <LabsPage />;
   } else {
     content = (
       <div className="bg-paper text-ink font-sans antialiased">
@@ -85,6 +89,7 @@ export function Site() {
           <LiveCompose />
           <BeforeAfter />
           <SelectedWork />
+          <LabsTease />
           <GridLab />
           <Manifesto />
           <Invitation />

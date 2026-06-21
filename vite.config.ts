@@ -19,6 +19,7 @@ export default defineConfig(() => {
           ai: path.resolve(__dirname, 'ai.html'),
           kitchen: path.resolve(__dirname, 'kitchen.html'),
           work: path.resolve(__dirname, 'work.html'),
+          labs: path.resolve(__dirname, 'labs.html'),
         },
       },
     },

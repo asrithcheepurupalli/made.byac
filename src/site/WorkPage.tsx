@@ -132,6 +132,55 @@ export function WorkPage() {
         </div>
       </section>
 
+      {/* concept studies — portal into made. labs (self-initiated work) */}
+      <section className="mx-auto max-w-[1500px] px-6 md:px-10 pb-8 md:pb-12">
+        <a
+          href="/labs"
+          data-cursor="Enter"
+          className="reveal-up group relative block rounded-2xl overflow-hidden border border-ink-line bg-ink-soft p-8 md:p-12"
+        >
+          <div
+            className="absolute inset-0 pointer-events-none opacity-[0.4]"
+            aria-hidden
+            style={{
+              backgroundImage:
+                "linear-gradient(var(--color-ink-line) 1px, transparent 1px), linear-gradient(90deg, var(--color-ink-line) 1px, transparent 1px)",
+              backgroundSize: "48px 48px",
+              maskImage: "radial-gradient(120% 100% at 90% 50%, #000 30%, transparent 100%)",
+            }}
+          />
+          <div className="relative flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
+            <div>
+              <span className="label text-gold">· made. labs — concept studies</span>
+              <h2 className="mt-4 font-display text-4xl md:text-6xl leading-[0.95]">
+                Beyond the brief, we build whole <span className="italic text-gold">worlds</span>
+                <span className="text-red">.</span>
+              </h2>
+              <p className="mt-4 text-grey-dim text-[15px] md:text-base max-w-xl leading-snug">
+                Self-initiated studies — Meanwhile, Karu and Tideline — entire products taken from a
+                blank page to a working demo, with no client and no brief.
+              </p>
+              <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2">
+                {[
+                  { n: "Meanwhile", a: "#ff5a1f" },
+                  { n: "Karu", a: "#c2683f" },
+                  { n: "Tideline", a: "#16b9a8" },
+                ].map((w) => (
+                  <span key={w.n} className="flex items-center gap-2">
+                    <span className="h-1.5 w-1.5 rounded-full" style={{ background: w.a }} />
+                    <span className="font-display text-base text-paper">{w.n}</span>
+                  </span>
+                ))}
+              </div>
+            </div>
+            <span className="shrink-0 inline-flex items-center gap-2 label text-[11px] rounded-full px-6 py-3.5 bg-paper text-ink group-hover:bg-gold transition-colors">
+              Enter the labs
+              <ArrowUpRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            </span>
+          </div>
+        </a>
+      </section>
+
       {/* interactive gallery */}
       <section className="border-y border-ink-line bg-ink-soft/20">
         <div className="mx-auto max-w-[1500px] px-6 md:px-10 py-16 md:py-24">

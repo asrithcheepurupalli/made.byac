@@ -13,6 +13,7 @@
     { "source": "/offer", "destination": "/offer.html" },
     { "source": "/ai", "destination": "/ai.html" },
     { "source": "/work", "destination": "/work.html" },
+    { "source": "/labs", "destination": "/labs.html" },
     { "source": "/((?!api/).*)", "destination": "/index.html" }
   ]
 }
