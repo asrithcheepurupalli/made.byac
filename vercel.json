@@ -7,7 +7,8 @@
     { "source": "/table", "destination": "https://table.made-by-ac.com", "permanent": false },
     { "source": "/kitchen", "destination": "https://kitchen.made-by-ac.com", "permanent": false },
     { "source": "/crew", "destination": "https://crew.made-by-ac.com", "permanent": false },
-    { "source": "/staff", "destination": "https://crew.made-by-ac.com", "permanent": false }
+    { "source": "/staff", "destination": "https://crew.made-by-ac.com", "permanent": false },
+    { "source": "/(.*)", "has": [{ "type": "host", "value": "labs.made-by-ac.com" }], "destination": "https://made-by-ac.com/labs", "permanent": false }
   ],
   "rewrites": [
     { "source": "/offer", "destination": "/offer.html" },
