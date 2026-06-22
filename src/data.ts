@@ -19,7 +19,7 @@ export const PROJECTS: Project[] = [
     role: "Lead Creative",
     challenge: "Defining a royal, premium visual standard that makes traditional Mysore Pak standout in high-end spaces.",
     solution: "Draped the graphics in elegant purple with classic typography layouts and subtle gold accents.",
-    outcome: "Transformed an everyday regional sweet into an elite, celebratory gift specimen.",
+    outcome: "Turned an everyday regional sweet into a premium festive gift.",
     metrics: "+45% Brand Recall Rate",
     detailedSpecs: [
       "Traditional gold metallics and rich royal purple values",
@@ -97,7 +97,7 @@ export const PROJECTS: Project[] = [
     role: "Packaging Interaction Designer",
     challenge: "Displaying traditional cashew diamonds within high-voltage reds while keeping typography elegant.",
     solution: "Formulated custom deep carmine backdrops alongside luxury thin gold fonts.",
-    outcome: "Set a new high-end benchmark for modern Indian confectionery branding.",
+    outcome: "Raised the bar for the brand's confectionery packaging.",
     metrics: "Flagship Artwork Index",
     detailedSpecs: [
       "High intensity carmine red print plates",
@@ -123,7 +123,7 @@ export const PROJECTS: Project[] = [
     role: "Lead Concept Architect",
     challenge: "Arranging diverse confectionery elements systematically on a single visual canvas without clutter.",
     solution: "Created dual-drawer slide interfaces reflecting regional design motifs and luxury color patterns.",
-    outcome: "Boosted collaborative gifting programs enormously during traditional festive timelines.",
+    outcome: "Lifted gifting-program sales over the festive season.",
     metrics: "+55% Client Conversion Boost",
     detailedSpecs: [
       "Rigid friction-lock dual drawer slides",
@@ -149,7 +149,7 @@ export const PROJECTS: Project[] = [
     role: "Illustrative Director",
     challenge: "Capturing emotional human warmth and traditional sibling bonds in a clean, modern aesthetic.",
     solution: "Merged delicate hand-styled character vectors with clean, warm editorial layouts and framing.",
-    outcome: "Achieved the highest viral engagement scorecard across the brand's Instagram presence.",
+    outcome: "Became the brand's best-performing Instagram post to date.",
     metrics: "100% Brand Story Compliant",
     detailedSpecs: [
       "Warm clay backgrounds and festive ochres",
@@ -227,7 +227,7 @@ export const PROJECTS: Project[] = [
     role: "Director of Technical Visualization",
     challenge: "Making battery density guidelines and heavy-load range curves appeal to logistics operations managers.",
     solution: "Rendered raw performance numbers and range indices in custom Fira Code typography over sharp vehicle side profiles.",
-    outcome: "Universally credited with establishing the vehicle model as the premium option in regional markets.",
+    outcome: "Helped position the model as the premium option in its regional market.",
     metrics: "12,000+ Digital Interactions",
     detailedSpecs: [
       "Monospace specifications layout",
@@ -305,7 +305,7 @@ export const PROJECTS: Project[] = [
     role: "Campaign Visual Planner",
     challenge: "Adapting general fleet advantages to the context of Bengaluru's unique municipal and tech corridor systems.",
     solution: "Applied custom traffic references, tech park outlines, and clear warranty seals directly over primary vehicle artwork.",
-    outcome: "Enabled seamless expansion dialogues with leading e-commerce fleet networks.",
+    outcome: "Opened expansion conversations with large e-commerce fleet operators.",
     metrics: "+48% Enterprise Leads",
     detailedSpecs: [
       "City-specific map outline overlays",
@@ -358,7 +358,7 @@ export const PROJECTS: Project[] = [
     role: "Visual Identity Specialist",
     challenge: "Developing a monochrome business card that feels highly bespoke and elite rather than generic.",
     solution: "Used structural layout proportions, high-density cotton stocks, and subtle debossed line tracks.",
-    outcome: "Universally selected as the core offline handing collateral across the leadership council.",
+    outcome: "Became the team's main offline handout.",
     metrics: "Elite Print Certified",
     detailedSpecs: [
       "Strict monochrome vector mark details",
@@ -489,7 +489,7 @@ export const PROJECTS: Project[] = [
     role: "Typography and Branding Lead",
     challenge: "Graphically expressing the multi-perspectival nature of photography without relying on camera illustration clichés.",
     solution: "Layered monochromatic high-contrast landscape fragments directly within high-impact geometric letter masks.",
-    outcome: "Exemplified as a stellar model of conceptual typographic collateral in fine art catalogs.",
+    outcome: "A conceptual typographic piece the community singled out.",
     metrics: "Community Masterpiece Distinction",
     detailedSpecs: [
       "High-contrast geometric letter mask filters",
