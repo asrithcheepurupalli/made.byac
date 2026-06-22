@@ -130,7 +130,7 @@ export function LiveCompose() {
             Watch us make you<br />something<span className="text-red">.</span>
           </h2>
           <p className="mt-6 text-grey text-[15px] md:text-lg leading-relaxed">
-            Type your business and a word or two of vibe. We'll compose a bespoke world for it — right here,
+            Type your business and a word or two of vibe. We'll compose a bespoke world for it, right here,
             in seconds. (It's a taste of what we build for real.)
           </p>
         </div>
@@ -163,7 +163,7 @@ export function LiveCompose() {
               </div>
             </form>
             <p className="mt-4 text-[12px] leading-relaxed text-grey max-w-sm">
-              No two come out alike — the look is composed from the story, never picked from a template. The
+              No two come out alike. The look is composed from the story, never picked from a template. The
               real thing ships as a live site.
             </p>
           </div>

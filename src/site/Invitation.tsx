@@ -12,7 +12,7 @@ const PHONE_WA = PHONE.replace(/[^\d]/g, "");
 // One-click contact — the message is pre-written so reaching out takes zero effort.
 const EMAIL = "thebrain@made-by-ac.com";
 const MAIL_HREF =
-  `mailto:${EMAIL}?subject=${encodeURIComponent("Hi made. — a project idea")}` +
+  `mailto:${EMAIL}?subject=${encodeURIComponent("Hi made., a project idea")}` +
   `&body=${encodeURIComponent(
     "Hi made. team,\n\nI came across your work and I'd love to talk about a project.\n\n" +
       "What I'm imagining:\n\n\nA bit about me / us:\n\n\nThanks,\n"
@@ -74,7 +74,7 @@ export function Invitation() {
 
           {/* one-click contact — pre-written message, zero effort to reach out */}
           <div className="mt-10">
-            <span className="label text-grey-dim">One click — the message is already written for you</span>
+            <span className="label text-grey-dim">One click, the message is already written for you</span>
             <div className="mt-4 flex flex-wrap items-center gap-3">
               {HAS_PHONE && (
                 <a

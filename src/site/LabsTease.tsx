@@ -29,7 +29,7 @@ export function LabsTease() {
             <span className="italic text-gold">worlds<span className="text-red">.</span></span>
           </h2>
           <p className="reveal-up mt-6 text-grey-dim text-lg max-w-xl leading-relaxed">
-            Self-initiated concept studies — entire products taken from a blank page to a working demo,
+            Self-initiated concept studies: entire products taken from a blank page to a working demo,
             with no client and no brief. Proof we can build the thing you haven't asked for yet.
           </p>
 

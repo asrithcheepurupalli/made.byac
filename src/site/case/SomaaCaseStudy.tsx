@@ -81,8 +81,8 @@ const STATS = [
 // What owners actually want — and the part of Somaa that delivers it. The waiter
 // stays the hero; the platform makes them more effective.
 const WANTS = [
-  { k: "Faster service", d: "Scan, group-order and send in seconds — tables move without waiting just to be noticed." },
-  { k: "Higher average bill", d: "Raga suggests the pairing, the special and the second round — at every table, every time." },
+  { k: "Faster service", d: "Scan, group-order and send in seconds, so tables move without waiting just to be noticed." },
+  { k: "Higher average bill", d: "Raga suggests the pairing, the special and the second round, at every table, every time." },
   { k: "Better satisfaction", d: "Order-taking handled, the floor is freed for the part only people do well: hospitality." },
   { k: "More repeat visits", d: "Remembered occasions and a feedback-for-reward loop turn one good night into the next." },
 ];
@@ -313,12 +313,12 @@ export function SomaaCaseStudy() {
           </Reveal>
           <Reveal delay={0.1}>
             <p className="mt-8 text-lg leading-relaxed max-w-2xl" style={{ color: C.muted }}>
-              The category pitches automation as subtraction — replace the server, thin the floor.
+              The category pitches automation as subtraction: replace the server, thin the floor.
               But owners never wanted fewer people. They want faster tables, bigger bills, happier
               guests, and more of them coming back. So Somaa isn't a QR menu that removes the waiter.
               It's a platform that makes every waiter{" "}
-              <span style={{ color: C.text }}>three times more effective</span> — the technology working
-              quietly in the background, the waiter still the hero of the room.
+              <span style={{ color: C.text }}>three times more effective</span>. The technology works
+              quietly in the background, and the waiter stays the hero of the room.
             </p>
           </Reveal>
 
@@ -350,7 +350,7 @@ export function SomaaCaseStudy() {
             <p className="mt-16 font-display text-2xl md:text-3xl leading-snug max-w-3xl" style={{ color: C.text }}>
               The gap in the market was never{" "}
               <span style={{ color: C.muted }}>“let people order from their phones.”</span> Everyone has
-              that. The gap is a night worth coming back for — and that's far harder to copy than a QR code.
+              that. The gap is a night worth coming back for, and that's far harder to copy than a QR code.
             </p>
           </Reveal>
         </div>
@@ -450,7 +450,7 @@ export function SomaaCaseStudy() {
             What a waiter, made 3× more effective, is worth.
           </h2>
           <p className="mt-7 text-lg leading-relaxed max-w-2xl" style={{ color: C.muted }}>
-            A modelled view of where the platform takes the room — bigger bills, faster tables and more
+            A modelled view of where the platform takes the room: bigger bills, faster tables and more
             guests coming back, compounding into revenue. These are projections for the pilot, not
             measured results.
           </p>
@@ -489,7 +489,7 @@ export function SomaaCaseStudy() {
         </div>
 
         <p className="mt-8 text-[12px] leading-relaxed max-w-2xl" style={{ color: C.dim }}>
-          Projected pilot model — illustrative figures based on the platform's mechanics and comparable
+          Projected pilot model: illustrative figures based on the platform's mechanics and comparable
           rollouts, shown to size the opportunity. Not a claim of measured results. Revenue is indexed
           to the launch baseline (100).
         </p>

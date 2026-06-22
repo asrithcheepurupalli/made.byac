@@ -33,7 +33,7 @@ const LABS: Lab[] = [
     tagline: "Half rent. Full opportunity.",
     what: "A marketplace for temporary commercial occupancy",
     blurb:
-      "Vacant shops earn nothing while businesses can't afford the door. Meanwhile names a third state between occupied and empty — letting owners monetise the in-between, and growing brands take premium addresses at a fraction of the rent.",
+      "Vacant shops earn nothing while businesses can't afford the door. Meanwhile names a third state between occupied and empty, so owners can monetise the in-between while growing brands take premium addresses at a fraction of the rent.",
     accent: "#ff5a1f",
     year: "2026",
     discipline: "Marketplace · brand · interactive demo",
@@ -50,7 +50,7 @@ const LABS: Lab[] = [
     tagline: "Made by the last masters of the craft.",
     what: "A gallery that sells India's master artisans, direct",
     blurb:
-      "The people who make India's finest crafts sell them for a fraction of their worth. Karu collapses the distance to a single line — maker to collector — paying the majority of every sale to the hand that made it, with live auctions and one-of-one provenance.",
+      "The people who make India's finest crafts sell them for a fraction of their worth. Karu collapses the distance to a single line, maker to collector, and pays the majority of every sale to the hand that made it, with live auctions and one-of-one provenance.",
     accent: "#c2683f",
     year: "2026",
     discipline: "Marketplace · brand · story-first demo",
@@ -67,7 +67,7 @@ const LABS: Lab[] = [
     tagline: "Off the boat. Onto your table.",
     what: "The marketplace for the day's catch",
     blurb:
-      "Five hands and three days stand between a net and a plate. Tideline lets you book a seat on a working boat or claim a share of the landing, direct from the skipper at the dock price — with a generative tide chart drawn for every boat.",
+      "Five hands and three days stand between a net and a plate. Tideline lets you book a seat on a working boat or claim a share of the landing, direct from the skipper at the dock price, with a generative tide chart drawn for every boat.",
     accent: "#16b9a8",
     year: "2026",
     discipline: "Marketplace · brand · interactive demo",
@@ -80,7 +80,7 @@ const LABS: Lab[] = [
 
 // one-click, pre-written contact — same zero-effort pattern as the homepage
 const LABS_MAIL =
-  `mailto:thebrain@made-by-ac.com?subject=${encodeURIComponent("Hi made. — about the Labs")}` +
+  `mailto:thebrain@made-by-ac.com?subject=${encodeURIComponent("Hi made., about the Labs")}` +
   `&body=${encodeURIComponent(
     "Hi made. team,\n\nI saw made. labs and I'd love to talk about building something with you.\n\nWhat I have in mind:\n\n\nThanks,\n"
   )}`;
@@ -167,12 +167,12 @@ function LabsHero() {
         }} />
       <div className="relative mx-auto max-w-[1600px] w-full grid lg:grid-cols-[1.1fr_0.9fr] gap-12 items-center">
         <div>
-          <span className="rise label text-red block" style={{ animationDelay: ".05s" }}>· made. labs — concept studies</span>
+          <span className="rise label text-red block" style={{ animationDelay: ".05s" }}>· made. labs · concept studies</span>
           <h1 className="rise mt-6 font-display text-[15vw] leading-[0.84] tracking-[-0.03em] sm:text-[12vw] lg:text-[7.5rem]" style={{ animationDelay: ".13s" }}>
             The work<br />nobody<br /><span className="italic font-normal text-gold">asked for<span className="text-red">.</span></span>
           </h1>
           <p className="rise mt-8 font-display text-xl md:text-2xl leading-snug max-w-xl text-paper/80" style={{ animationDelay: ".3s" }}>
-            Self-initiated concept studies — where the studio answers its own brief and
+            Self-initiated concept studies, where the studio answers its own brief and
             builds the future of an industry before a client does.
           </p>
           <div className="rise mt-10 flex flex-wrap items-center gap-x-10 gap-y-5" style={{ animationDelay: ".42s" }}>
@@ -227,7 +227,7 @@ function LabsManifesto() {
           only client were <span className="italic text-gold">the idea.</span>
         </p>
         <p className="reveal-up mt-8 text-grey text-lg max-w-2xl leading-relaxed">
-          Each of these is a whole product — brand, interface, motion and a working demo — taken
+          Each of these is a whole product (brand, interface, motion and a working demo) taken
           from a blank page to something you can use. No brief, no committee. Just proof that we can
           build the thing you haven't asked for yet.
         </p>
@@ -338,7 +338,7 @@ function LabBlock({ lab, i }: { lab: Lab; i: number }) {
                 Live demo <ArrowUpRight className="w-3.5 h-3.5" />
               </a>
             ) : (
-              <span className="label text-[9px] text-grey-dim/70 px-2">Live demo — soon</span>
+              <span className="label text-[9px] text-grey-dim/70 px-2">Live demo soon</span>
             )}
           </div>
         </div>
@@ -353,12 +353,12 @@ function LabBlock({ lab, i }: { lab: Lab; i: number }) {
               <span className="w-2 h-2 rounded-full bg-ink-line" />
               <span className="ml-3 font-mono text-[9px] text-grey-dim">{lab.id}.made-by-ac.com</span>
             </div>
-            <img src={lab.shots[0]} alt={`${lab.name} — landing`} loading="lazy" className="w-full block" />
+            <img src={lab.shots[0]} alt={`${lab.name} landing page`} loading="lazy" className="w-full block" />
           </div>
           <div className="mt-4 grid grid-cols-2 gap-4">
             {lab.shots.slice(1, 3).map((s, k) => (
               <div key={s} className="rounded-lg overflow-hidden border border-ink-line bg-ink-soft group">
-                <img src={s} alt={`${lab.name} — screen ${k + 2}`} loading="lazy"
+                <img src={s} alt={`${lab.name} screen ${k + 2}`} loading="lazy"
                   className="w-full block transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.05]" />
               </div>
             ))}
@@ -390,8 +390,8 @@ function LabsCapabilities() {
           for you.
         </h2>
         <p className="reveal-up mt-8 text-grey text-lg max-w-2xl mx-auto leading-relaxed">
-          Every world here went from a blank page to a working product — brand, interface, motion and
-          demo — by the same small team that would build yours.
+          Every world here went from a blank page to a working product (brand, interface, motion and
+          demo) by the same small team that would build yours.
         </p>
         <a href={LABS_MAIL} data-cursor="Hello" data-magnetic
           className="reveal-up mt-12 inline-flex items-center gap-2 bg-red text-white label rounded-full px-8 py-4 hover:bg-red-deep transition-colors">

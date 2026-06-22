@@ -48,9 +48,9 @@ const SIGNALS: Signal[] = [
 ];
 
 const CLOSER_LINES = [
-  "Yo — caught you eyeing the Obsidian Black 🖤",
+  "Yo, caught you eyeing the Obsidian Black 🖤",
   "Here's how our top customers style it ↓",
-  "Yours is held for the next hour — 15% off if you grab it today.",
+  "Yours is held for the next hour. 15% off if you grab it today.",
 ];
 
 const RESULTS = ["Message sent", "15% offer applied", "Bag held 60 min", "Logged to CRM"];
@@ -263,7 +263,7 @@ function AgentDemo() {
             </div>
           ) : (
             <p className="text-grey text-[13px] leading-relaxed">
-              When intent is hot, a personal message goes out — social proof, a held bag, a timed nudge.
+              When intent is hot, a personal message goes out: social proof, a held bag, a timed nudge.
             </p>
           )}
 
@@ -313,14 +313,14 @@ const AUTOMATIONS: Auto[] = [
   {
     icon: Sparkles,
     title: "Conversion & Retention Agent",
-    line: "Watches behaviour, scores intent, and closes on WhatsApp — recovers the carts you're losing today.",
+    line: "Watches behaviour, scores intent, and closes on WhatsApp. Recovers the carts you're losing today.",
     tags: ["Intent scoring", "Cart recovery", "WhatsApp / push", "Upsell", "Win-back"],
     badge: "Flagship",
   },
   {
     icon: MessageSquareText,
     title: "Concierge & Support Agent",
-    line: "A 24/7 assistant in your brand's voice — answers, recommends, and books, in Hinglish or English.",
+    line: "A 24/7 assistant in your brand's voice that answers, recommends, and books, in Hinglish or English.",
     tags: ["24/7 chat", "Multilingual", "On-brand voice", "Order help", "Hand-off to humans"],
   },
   {
@@ -332,19 +332,19 @@ const AUTOMATIONS: Auto[] = [
   {
     icon: ShoppingBag,
     title: "WhatsApp Commerce",
-    line: "Browse, order and pay inside a chat — the storefront your customers already live in.",
+    line: "Browse, order and pay inside a chat, the storefront your customers already live in.",
     tags: ["Catalog in chat", "Checkout", "Payments", "Order tracking"],
   },
   {
     icon: Star,
     title: "Feedback & Reputation Loop",
-    line: "Reads the room after every order — routes unhappy customers to you, sends happy ones to your reviews.",
+    line: "Reads the room after every order. Routes unhappy customers to you, sends happy ones to your reviews.",
     tags: ["Sentiment", "Smart routing", "Review nudges", "Alerts"],
   },
   {
     icon: Wand2,
     title: "Creative Automation",
-    line: "On-brand campaign variants, product copy and social posts at volume — drawn by the studio, scaled by AI.",
+    line: "On-brand campaign variants, product copy and social posts at volume: drawn by the studio, scaled by AI.",
     tags: ["Ad variants", "Product copy", "Social content", "Brand-locked"],
   },
 ];
@@ -374,7 +374,7 @@ export function AiPage() {
           <span style={{ color: ACCENT }}>.</span>
         </h1>
         <p className="rise mt-9 font-display text-xl md:text-2xl leading-snug max-w-2xl text-paper/80" style={{ animationDelay: "0.28s" }}>
-          The same studio that designs the brand now builds the AI behind it — agents that watch, decide
+          The same studio that designs the brand now builds the AI behind it: agents that watch, decide
           and act on their own. They answer, they recommend, and they close the sale you were about to lose.
         </p>
       </section>
@@ -394,7 +394,7 @@ export function AiPage() {
             </div>
             <p className="text-grey-dim text-[15px] md:text-base leading-relaxed max-w-md">
               A shopper browses and leaves. The agent watches the behaviour, a judge scores the buying intent,
-              and a closer sends a personal nudge on WhatsApp — automatically. Here's the whole cycle.
+              and a closer sends a personal nudge on WhatsApp, automatically. Here's the whole cycle.
             </p>
           </div>
           <div className="reveal-up">
@@ -415,7 +415,7 @@ export function AiPage() {
           </h2>
           <p className="mt-6 text-grey-dim text-[15px] md:text-base leading-relaxed">
             We don't bolt on a generic chatbot. Each agent is designed in your brand's voice and wired into
-            the tools you already run — built by the team that drew the brand in the first place.
+            the tools you already run, built by the team that drew the brand in the first place.
           </p>
         </div>
 
@@ -501,7 +501,7 @@ function StorySection() {
         </h2>
         <p className="reveal-up mt-9 font-display text-xl md:text-3xl leading-snug max-w-3xl text-paper/80">
           For years we made brands impossible to ignore. Now we make them impossible to out-think.
-          The same studio that shapes how a brand looks and sounds builds the layer underneath —
+          The same studio that shapes how a brand looks and sounds builds the layer underneath:
           the judgment that notices, decides and closes. One team for the part your customers see,
           and the part that never sleeps.
         </p>
@@ -513,7 +513,7 @@ function StorySection() {
             </span>
             <h3 className="mt-6 font-display text-3xl">The face</h3>
             <p className="mt-3 text-grey-dim text-[15px] leading-relaxed">
-              Brand, packaging, sites and campaigns. The part the world sees and remembers — the craft
+              Brand, packaging, sites and campaigns. The part the world sees and remembers, the craft
               we've always been known for.
             </p>
           </div>
@@ -523,7 +523,7 @@ function StorySection() {
             </span>
             <h3 className="mt-6 font-display text-3xl">The brain</h3>
             <p className="mt-3 text-grey-dim text-[15px] leading-relaxed">
-              Agents that watch, judge and act on their own — answering, recommending and closing. The part
+              Agents that watch, judge and act on their own. They answer, they recommend, they close. The part
               that works while you sleep. (Yes, <span className="text-paper">thebrain@made-by-ac.com</span> was always the plan.)
             </p>
           </div>
@@ -539,8 +539,8 @@ function StorySection() {
  * ------------------------------------------------------------------ */
 
 const BUILD_STEPS = [
-  { icon: Ear, no: "01", title: "Listen", body: "We map every moment a customer touches you — and every place they quietly slip away." },
-  { icon: Brain, no: "02", title: "Give it judgment", body: "We design what the agent notices, decides and says — in your brand's exact voice, not a default one." },
+  { icon: Ear, no: "01", title: "Listen", body: "We map every moment a customer touches you, and every place they quietly slip away." },
+  { icon: Brain, no: "02", title: "Give it judgment", body: "We design what the agent notices, decides and says, in your brand's exact voice, not a default one." },
   { icon: Plug, no: "03", title: "Wire it in", body: "We connect it to the tools you already run: WhatsApp, your store, POS, calendar and CRM." },
   { icon: Rocket, no: "04", title: "Ship & sharpen", body: "Live on real traffic from day one. We watch how it performs and tune it every week." },
 ];
@@ -557,7 +557,7 @@ function HowWeBuild() {
             </h2>
           </div>
           <p className="text-grey-dim text-[15px] md:text-base leading-relaxed max-w-md">
-            An agent is a teammate you onboard once and never re-train. Here's how yours gets made —
+            An agent is a teammate you onboard once and never re-train. Here's how yours gets made:
             usually two weeks to a working pilot, not a six-month deck.
           </p>
         </div>
@@ -607,7 +607,7 @@ function Breadth() {
             If it repeats,<br />we can automate it.
           </h2>
           <p className="mt-7 text-grey-dim text-[15px] md:text-lg leading-relaxed">
-            One studio, the whole stack — strategy, brand, design, build and AI under a single roof. Nothing
+            One studio, the whole stack: strategy, brand, design, build and AI under a single roof. Nothing
             gets lost between a design agency, a dev shop and some “AI guy.” You bring the problem; we carry the
             entire thing, from the first sketch to the agent running in production.
           </p>
@@ -657,7 +657,7 @@ function Proof() {
             We don't just pitch this.<br /><span className="italic font-normal text-gold">We ship it.</span>
           </h2>
           <p className="mt-7 text-grey-dim text-[15px] md:text-lg leading-relaxed max-w-xl">
-            In Vizag, Somaa runs an AI dining host we designed and built — it greets guests, takes the
+            In Vizag, Somaa runs an AI dining host we designed and built. It greets guests, takes the
             order and knows the menu, wired straight into the kitchen's POS. The agents on this page
             aren't a concept. They're already how we work.
           </p>

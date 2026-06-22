@@ -151,13 +151,13 @@ export function WorkPage() {
           />
           <div className="relative flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
             <div>
-              <span className="label text-gold">· made. labs — concept studies</span>
+              <span className="label text-gold">· made. labs · concept studies</span>
               <h2 className="mt-4 font-display text-4xl md:text-6xl leading-[0.95]">
                 Beyond the brief, we build whole <span className="italic text-gold">worlds</span>
                 <span className="text-red">.</span>
               </h2>
               <p className="mt-4 text-grey-dim text-[15px] md:text-base max-w-xl leading-snug">
-                Self-initiated studies — Meanwhile, Karu and Tideline — entire products taken from a
+                Self-initiated studies: Meanwhile, Karu and Tideline. Entire products taken from a
                 blank page to a working demo, with no client and no brief.
               </p>
               <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2">

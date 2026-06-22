@@ -25,7 +25,7 @@ const PROBLEMS = [
   {
     n: "01",
     t: "You don't own your customers",
-    d: "An order comes through a food-delivery app — and the platform keeps the customer data, the history, the notifications, the discovery. You just get the order.",
+    d: "An order comes through a food-delivery app, and the platform keeps the customer data, the history, the notifications, the discovery. You just get the order.",
   },
   {
     n: "02",
@@ -35,22 +35,22 @@ const PROBLEMS = [
   {
     n: "03",
     t: "Growth is expensive",
-    d: "Ads, influencers, platform promotions — most kitchens don't have the budget or the expertise to run them efficiently.",
+    d: "Ads, influencers, platform promotions: most kitchens don't have the budget or the expertise to run them efficiently.",
   },
 ];
 
 const MVP = [
-  { icon: Store, t: "Branded ordering page", d: "Your own storefront — biryanibowl.app, ramenhouse.app — where customers order direct, no commission skim." },
+  { icon: Store, t: "Branded ordering page", d: "Your own storefront (biryanibowl.app, ramenhouse.app) where customers order direct, no commission skim." },
   { icon: QrCode, t: "QR customer capture", d: "A QR card in every package. Scan → land on your page → earn points. Now you own the relationship." },
   { icon: Users, t: "Customer CRM", d: "See your repeat customers, top spenders, who's gone quiet, and which dishes actually pull." },
-  { icon: MessageSquareText, t: "WhatsApp marketing", d: "Birthday offers, new-menu drops, festival specials and win-back nudges — sent automatically." },
+  { icon: MessageSquareText, t: "WhatsApp marketing", d: "Birthday offers, new-menu drops, festival specials and win-back nudges, all sent automatically." },
   { icon: Gift, t: "Loyalty program", d: "5 orders → free dessert · 10 → ₹200 off · 15 → VIP. Reasons to come back, built in." },
 ];
 
 const PHASES = [
-  { icon: CalendarClock, tag: "Phase 2", t: "Subscriptions", d: "Weekly meals, office lunches, fitness plans — predictable, recurring revenue beyond one-off orders." },
+  { icon: CalendarClock, tag: "Phase 2", t: "Subscriptions", d: "Weekly meals, office lunches, fitness plans: predictable, recurring revenue beyond one-off orders." },
   { icon: Brain, tag: "Phase 2", t: "AI growth assistant", d: "“Repeat rate dropped 12%.” “Biryani buyers also order kebabs.” “Win back 30-day-inactive guests.”" },
-  { icon: Share2, tag: "Phase 2", t: "Referral engine", d: "₹100 credit per successful referral — turning happy customers into a growth loop." },
+  { icon: Share2, tag: "Phase 2", t: "Referral engine", d: "₹100 credit per successful referral, so happy customers become a growth loop." },
   { icon: Shop, tag: "Phase 3", t: "Curated marketplace", d: "A food-lover platform of only cloud kitchens, home chefs and specialty brands. No giants, no generic listings." },
 ];
 
@@ -78,7 +78,7 @@ export function KitchenPage() {
           Own your<br />customers<span style={{ color: SAFFRON }}>.</span>
         </h1>
         <p className="rise mt-9 font-display text-xl md:text-2xl leading-snug max-w-2xl text-paper/80" style={{ animationDelay: "0.28s" }}>
-          A growth and retention platform built only for cloud kitchens — acquire on the food-delivery apps,
+          A growth and retention platform built only for cloud kitchens. Acquire on the food-delivery apps,
           then keep those customers on a channel you actually own. We run it as a service first, then automate.
         </p>
       </section>
@@ -217,8 +217,8 @@ export function KitchenPage() {
             We run it for you<br />first. <span className="italic font-normal" style={{ color: SAFFRON }}>Then we automate.</span>
           </h2>
           <p className="mt-7 text-grey-dim text-[15px] md:text-lg leading-relaxed max-w-xl">
-            The biggest risk in this space is building software nobody uses. So we don't start with an app —
-            we start with a service. We set up your direct ordering, run your WhatsApp campaigns and build
+            The biggest risk in this space is building software nobody uses. So we don't start with an app.
+            We start with a service. We set up your direct ordering, run your WhatsApp campaigns and build
             your loyalty program by hand. When it's making you more money, we automate it.
           </p>
         </div>
@@ -226,7 +226,7 @@ export function KitchenPage() {
           <div className="rounded-3xl border p-8 md:p-10" style={{ borderColor: SAFFRON + "55", background: SAFFRON + "0d" }}>
             <span className="label" style={{ color: SAFFRON }}>The first pilot</span>
             <p className="mt-5 font-display text-2xl md:text-3xl leading-snug text-paper/90">
-              10 cloud kitchens. One city — Vizag. One biryani, one healthy, one dessert, one pizza, one
+              10 cloud kitchens. One city, Vizag. One biryani, one healthy, one dessert, one pizza, one
               midnight-snacks brand. We solve their retention, and let the results do the selling.
             </p>
           </div>
