@@ -16,6 +16,7 @@
     { "source": "/ai", "destination": "/ai.html" },
     { "source": "/work", "destination": "/work.html" },
     { "source": "/labs", "destination": "/labs.html" },
+    { "source": "/laws", "destination": "/laws.html" },
     { "source": "/((?!api/).*)", "destination": "/index.html" }
   ]
 }

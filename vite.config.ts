@@ -20,6 +20,7 @@ export default defineConfig(() => {
           kitchen: path.resolve(__dirname, 'kitchen.html'),
           work: path.resolve(__dirname, 'work.html'),
           labs: path.resolve(__dirname, 'labs.html'),
+          laws: path.resolve(__dirname, 'laws.html'),
         },
       },
     },
