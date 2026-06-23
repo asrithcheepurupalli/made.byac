@@ -19,7 +19,7 @@ const MAIL_HREF =
   )}`;
 const WA_HREF =
   `https://wa.me/${PHONE_WA}?text=${encodeURIComponent(
-    "Hi made. by ac 👋 I came across your work and I'd love to talk about a project."
+    "Hi made. by ac — I came across your work and I'd love to talk about a project."
   )}`;
 
 function WhatsAppIcon({ className }: { className?: string }) {

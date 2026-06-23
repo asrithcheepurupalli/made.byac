@@ -86,7 +86,7 @@ const LABS_MAIL =
   )}`;
 const LABS_WA =
   `https://wa.me/919390852636?text=${encodeURIComponent(
-    "Hi made. by ac 👋 I saw made. labs and I'd love to talk about building something with you."
+    "Hi made. by ac — I saw made. labs and I'd love to talk about building something with you."
   )}`;
 
 export function LabsPage() {
