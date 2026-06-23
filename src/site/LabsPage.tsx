@@ -87,7 +87,7 @@ const LABS: Lab[] = [
     what: "A privacy-first AI notification gateway",
     blurb:
       "Notifications never stop. Pingless sits between your apps and you — reading every alert on-device, delivering the ones that matter and quietly holding the rest, with no cloud, no account, and zero bytes ever leaving your phone. The concept that left the lab and shipped to real phones.",
-    accent: "#27d17c",
+    accent: "#c8102e",
     year: "2026",
     discipline: "Product · native Android · brand",
     shots: ["/labs/pingless/home.png", "/labs/pingless/demo.png", "/labs/pingless/privacy.png"],

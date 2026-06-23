@@ -6,7 +6,7 @@ const WORLDS = [
   { name: "Meanwhile", note: "commercial vacancy, monetised", accent: "#ff5a1f" },
   { name: "Karu", note: "the maker, paid direct", accent: "#c2683f" },
   { name: "Tideline", note: "the catch, off the boat", accent: "#16b9a8" },
-  { name: "Pingless", note: "shipped — a quieter phone", accent: "#27d17c" },
+  { name: "Pingless", note: "shipped — a quieter phone", accent: "#c8102e" },
 ];
 
 export function LabsTease() {

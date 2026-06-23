@@ -165,7 +165,7 @@ export function WorkPage() {
                   { n: "Meanwhile", a: "#ff5a1f" },
                   { n: "Karu", a: "#c2683f" },
                   { n: "Tideline", a: "#16b9a8" },
-                  { n: "Pingless", a: "#27d17c" },
+                  { n: "Pingless", a: "#c8102e" },
                 ].map((w) => (
                   <span key={w.n} className="flex items-center gap-2">
                     <span className="h-1.5 w-1.5 rounded-full" style={{ background: w.a }} />

@@ -85,7 +85,7 @@ const FIXES: Fix[] = [
     id: "noise",
     pain: "My notifications never stop",
     tag: "pingless.",
-    accent: "#27d17c",
+    accent: "#c8102e",
     promise: "Only the pings that matter.",
     line: "Pingless is our own shipped app — an on-device AI gateway that delivers what's real and quiets the rest. No cloud, no account, zero bytes off your phone.",
     href: "https://pingless.made-by-ac.com",
