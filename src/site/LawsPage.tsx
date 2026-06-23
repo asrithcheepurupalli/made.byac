@@ -1,12 +1,12 @@
-import { useState, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ComponentType } from "react";
 import { ArrowLeft, ArrowUpRight, Play } from "lucide-react";
 import { SiteFooter } from "./SiteFooter";
 
 // ── The laws we design by ────────────────────────────────────────────────────
-// A page that demonstrates the UX laws we actually follow, and lets you feel each
-// one in a live demo, then points to where it lives on this very site. The canon
-// is maintained at lawsofux.com by Jon Yablonski; we credit it and only claim the
-// handful we genuinely build by. Intended for made-by-ac.com/laws.
+// Not a list of cards. An exhibit: a cursor-lit hero, a periodic table of the whole
+// canon (the seven we live pop in colour), full-bleed specimens you can feel, and a
+// rail that tracks where you are. The page demonstrates the laws while explaining them.
+// Canon maintained at lawsofux.com by Jon Yablonski; we only claim what we build by.
 
 function PageHeader() {
   return (
@@ -18,28 +18,6 @@ function PageHeader() {
         <span className="label text-[10px] text-grey-dim">the laws we design by</span>
       </div>
     </header>
-  );
-}
-
-/* A law block: the principle + where we live it on the left, the live demo on the right. */
-function Law({ n, name, says, here, children }: { n: string; name: string; says: string; here: string; children: ReactNode }) {
-  return (
-    <section className="reveal-up border-t border-ink-line py-16 md:py-24">
-      <div className="mx-auto max-w-[1600px] px-6 md:px-10 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
-        <div className="lg:col-span-5">
-          <span className="label text-red">·{n}</span>
-          <h2 className="mt-4 font-display text-3xl md:text-5xl leading-[0.98] tracking-tight">{name}</h2>
-          <p className="mt-5 text-grey-dim leading-relaxed text-[17px]">{says}</p>
-          <p className="mt-6 flex gap-2 text-[14px] leading-relaxed">
-            <span className="label shrink-0 pt-1 text-gold">we live it</span>
-            <span className="text-paper/85">{here}</span>
-          </p>
-        </div>
-        <div className="lg:col-span-7">
-          <div className="rounded-2xl border border-ink-line bg-ink-soft/50 p-6 md:p-8">{children}</div>
-        </div>
-      </div>
-    </section>
   );
 }
 
@@ -84,16 +62,14 @@ function AestheticDemo() {
 function VonRestorffDemo() {
   const [pos, setPos] = useState(7);
   const [same, setSame] = useState(false);
-  const reshuffle = () => setPos(Math.floor((pos * 7 + 3) % 15)); // deterministic-ish, no Math.random in SSR concerns
+  const reshuffle = () => setPos(Math.floor((pos * 7 + 3) % 15));
   return (
     <div>
       <p className="label text-grey-dim text-[9px]">{same ? "now find the one that matters" : "which did your eye hit first?"}</p>
       <div className="mt-4 flex flex-wrap gap-2">
         {Array.from({ length: 15 }).map((_, i) => {
           const hot = !same && i === pos;
-          return (
-            <span key={i} className="h-9 rounded-full transition-colors duration-300" style={{ width: hot ? 86 : 64, background: hot ? "var(--color-red)" : "var(--color-ink-line)" }} />
-          );
+          return <span key={i} className="h-9 rounded-full transition-colors duration-300" style={{ width: hot ? 86 : 64, background: hot ? "var(--color-red)" : "var(--color-ink-line)" }} />;
         })}
       </div>
       <div className="mt-5 flex flex-wrap items-center gap-3">
@@ -118,9 +94,7 @@ function HicksDemo() {
         <span className="label text-[9px]" style={{ color: full ? "var(--color-red)" : "var(--color-gold)" }}>{full ? "12 choices · you hesitate" : "3 choices · you just pick"}</span>
       </div>
       <div className="mt-4 flex flex-wrap gap-2">
-        {list.map((x) => (
-          <span key={x} className={`${card} text-[13px] text-paper/80`} style={{ borderRadius: 10, padding: "8px 12px" }}>{x}</span>
-        ))}
+        {list.map((x) => <span key={x} className={`${card} text-[13px] text-paper/80`} style={{ borderRadius: 10, padding: "8px 12px" }}>{x}</span>)}
       </div>
       <button onClick={() => setFull((f) => !f)} className="label mt-5 text-[10px] rounded-full border border-ink-line px-4 py-2 text-grey-dim transition-colors hover:text-paper">{full ? "show me what matters" : "show me everything"}</button>
       <p className="mt-4 text-[14px] leading-relaxed text-grey-dim">More options means a slower, heavier decision. So we ask one sharp question and offer a few good answers, never a wall.</p>
@@ -133,7 +107,7 @@ function FittsDemo() {
   const [size, setSize] = useState(56);
   const [dist, setDist] = useState(180);
   const [hit, setHit] = useState(false);
-  const id = Math.log2((2 * dist) / size + 1); // index of difficulty
+  const id = Math.log2((2 * dist) / size + 1);
   const verdict = id < 2.2 ? ["effortless", "var(--color-gold)"] : id < 3.4 ? ["fine", "var(--color-paper)"] : ["a chore", "var(--color-red)"];
   return (
     <div>
@@ -200,7 +174,7 @@ function JakobsDemo() {
 
 /* 7. Peak-End ─ play an experience; you remember the spike and the finish. */
 function PeakEndDemo() {
-  const bars = [3, 5, 4, 9, 4, 3, 7]; // 9 = peak, last = end
+  const bars = [3, 5, 4, 9, 4, 3, 7];
   const [step, setStep] = useState(-1);
   const peak = bars.indexOf(Math.max(...bars));
   const play = () => { setStep(0); let i = 0; const t = window.setInterval(() => { i += 1; setStep(i); if (i >= bars.length) window.clearInterval(t); }, 320); };
@@ -211,9 +185,7 @@ function PeakEndDemo() {
         {bars.map((b, i) => {
           const on = step >= i;
           const mark = done && (i === peak || i === bars.length - 1);
-          return (
-            <div key={i} className="flex-1 rounded-t-md transition-all duration-300" style={{ height: on ? `${b * 11}px` : 4, background: mark ? "var(--color-gold)" : on ? "var(--color-red)" : "var(--color-ink-line)" }} />
-          );
+          return <div key={i} className="flex-1 rounded-t-md transition-all duration-300" style={{ height: on ? `${b * 11}px` : 4, background: mark ? "var(--color-gold)" : on ? "var(--color-red)" : "var(--color-ink-line)" }} />;
         })}
       </div>
       <div className="mt-4 flex items-center gap-3">
@@ -225,7 +197,17 @@ function PeakEndDemo() {
   );
 }
 
-/* The rest of the canon ─ named and explained, credited to lawsofux.com. */
+type Law = { id: string; n: string; name: string; short: string; accent: string; says: string; here: string; Demo: ComponentType };
+const LIVE: Law[] = [
+  { id: "aesthetic", n: "01", name: "Aesthetic-Usability Effect", short: "Aesthetic", accent: "#c8102e", Demo: AestheticDemo, says: "People perceive good-looking design as more usable, and trust it before they have tested a thing.", here: "It is our whole thesis. You decided this studio was worth your time in the first second, on looks alone. We earn that second." },
+  { id: "von-restorff", n: "02", name: "Von Restorff Effect", short: "Von Restorff", accent: "#bd9b4e", Demo: VonRestorffDemo, says: "The one thing that is different from the rest is the thing that gets remembered.", here: "Our red. Exactly one red action per screen, never two, so your eye always knows the next move. The dot in our wordmark is the same idea." },
+  { id: "hicks", n: "03", name: "Hick's Law", short: "Hick's Law", accent: "#3aa655", Demo: HicksDemo, says: "The more choices you offer, the longer and heavier the decision becomes.", here: "The 'what's eating you?' picker, and a footer that lists four products, not forty. We ask one sharp question, not for everything at once." },
+  { id: "fitts", n: "04", name: "Fitts's Law", short: "Fitts's Law", accent: "#2f6df0", Demo: FittsDemo, says: "The time to hit a target depends on how big it is and how far away.", here: "Our calls-to-action are large, rounded and close to the thumb. Nothing important hides in a corner at eight pixels tall." },
+  { id: "doherty", n: "05", name: "Doherty Threshold", short: "Doherty", accent: "#8b5cf6", Demo: DohertyDemo, says: "Under 400 milliseconds, a system feels like an extension of your hand.", here: "Snappy reveals, an instant cursor, demos that compose while you watch. We answer before you can doubt." },
+  { id: "jakobs", n: "06", name: "Jakob's Law", short: "Jakob's Law", accent: "#e8702a", Demo: JakobsDemo, says: "People expect your site to work like every other site they already know.", here: "Wordmark top-left, menu top-right, a checkout that behaves. We spend our novelty on the work, not on relearning where the menu is." },
+  { id: "peak-end", n: "07", name: "Peak-End Rule", short: "Peak-End", accent: "#16a6a0", Demo: PeakEndDemo, says: "An experience is judged by its best moment and its ending, not its average.", here: "A cinematic hero for the peak, and a warm, human goodbye for the end. We make the bookends sing." },
+];
+
 const REST: [string, string][] = [
   ["Choice Overload", "Too many options overwhelm, so people stall or pick nothing."],
   ["Chunking", "Group information into meaningful units so it is easier to take in."],
@@ -252,70 +234,161 @@ const REST: [string, string][] = [
   ["Zeigarnik Effect", "Unfinished tasks nag at the memory more than finished ones."],
 ];
 
+type Item = { name: string; desc: string; live: boolean; id?: string; accent?: string };
+const ALL: Item[] = [
+  ...LIVE.map((l) => ({ name: l.name, desc: l.says, live: true, id: l.id, accent: l.accent })),
+  ...REST.map(([name, desc]) => ({ name, desc, live: false })),
+].sort((a, b) => a.name.localeCompare(b.name));
+
+/* Cursor-lit dot-grid hero: faint dots everywhere, gold dots glow under the cursor. */
+function Hero() {
+  const ref = useRef<HTMLElement>(null);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const move = (e: MouseEvent) => {
+      const r = el.getBoundingClientRect();
+      el.style.setProperty("--mx", `${e.clientX - r.left}px`);
+      el.style.setProperty("--my", `${e.clientY - r.top}px`);
+    };
+    el.addEventListener("mousemove", move);
+    return () => el.removeEventListener("mousemove", move);
+  }, []);
+  return (
+    <section ref={ref} className="relative flex min-h-[92vh] flex-col justify-center overflow-hidden px-6 md:px-10" style={{ ["--mx" as string]: "50%", ["--my" as string]: "50%" }}>
+      <div className="pointer-events-none absolute inset-0" style={{ backgroundImage: "radial-gradient(var(--color-ink-line) 1.5px, transparent 1.6px)", backgroundSize: "34px 34px", opacity: 0.55 }} />
+      <div className="pointer-events-none absolute inset-0" style={{ backgroundImage: "radial-gradient(var(--color-gold) 1.7px, transparent 1.8px)", backgroundSize: "34px 34px", WebkitMaskImage: "radial-gradient(240px circle at var(--mx) var(--my), #000 0%, transparent 72%)", maskImage: "radial-gradient(240px circle at var(--mx) var(--my), #000 0%, transparent 72%)" }} />
+      <div className="relative z-10 mx-auto w-full max-w-[1600px] reveal-up">
+        <span className="label text-red">·the laws we design by</span>
+        <h1 className="mt-7 font-display text-[15vw] leading-[0.86] tracking-[-0.03em] sm:text-[10rem]">
+          Good design<br /><span className="italic font-normal text-gold">obeys laws.</span>
+        </h1>
+        <p className="mt-8 max-w-2xl text-lg md:text-xl text-grey-dim leading-relaxed font-display">
+          Decades of research into how people see, decide and remember. We do not decorate with them, we build on them. Thirty laws below. The seven we live by, you can feel for yourself.
+        </p>
+        <div className="mt-12 flex items-center gap-3 text-xs uppercase tracking-[0.2em] text-grey-dim">
+          <span className="h-px w-10 bg-red" /> scroll to the canon
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* The canon as a periodic table; hover updates a museum label, the seven we live pop. */
+function CanonIndex({ onJump }: { onJump: (id: string) => void }) {
+  const [active, setActive] = useState(ALL.findIndex((i) => i.live));
+  const cur = ALL[active];
+  return (
+    <section className="relative border-t border-ink-line py-20 md:py-28">
+      <div className="mx-auto max-w-[1600px] px-6 md:px-10">
+        <div className="flex flex-wrap items-end justify-between gap-4">
+          <div>
+            <span className="label text-red">·the canon</span>
+            <h2 className="mt-4 font-display text-3xl md:text-5xl leading-tight tracking-tight">Thirty laws.<br />Seven we build by.</h2>
+          </div>
+          <p className="max-w-xs text-sm text-grey-dim leading-relaxed">The colour ones are the laws we live, click to feel them. Hover any to read. Credit, <a href="https://lawsofux.com" target="_blank" rel="noreferrer" className="u-link text-paper">lawsofux.com</a>.</p>
+        </div>
+
+        <div className="mt-10 grid grid-cols-3 gap-2 sm:grid-cols-5 lg:grid-cols-6">
+          {ALL.map((it, i) => (
+            <button
+              key={it.name}
+              onMouseEnter={() => setActive(i)}
+              onFocus={() => setActive(i)}
+              onClick={() => it.live && it.id && onJump(it.id)}
+              data-cursor={it.live ? "feel" : undefined}
+              className="group relative flex aspect-[5/4] flex-col justify-between overflow-hidden rounded-lg p-2.5 text-left transition-transform duration-200 hover:-translate-y-1"
+              style={{ background: it.live ? it.accent : "var(--color-ink-soft)", border: active === i ? "1px solid var(--color-paper)" : "1px solid var(--color-ink-line)" }}
+            >
+              <span className={`label text-[8px] ${it.live ? "text-ink/55" : "text-grey-dim"}`}>{String(i + 1).padStart(2, "0")}</span>
+              <span className={`font-display text-[12px] md:text-[13px] leading-[1.05] ${it.live ? "text-ink" : "text-grey-dim group-hover:text-paper"}`}>{it.name}</span>
+              {it.live && <span className="label absolute right-2 top-2 text-[8px] text-ink/55 opacity-0 transition-opacity group-hover:opacity-100">feel →</span>}
+            </button>
+          ))}
+        </div>
+
+        {/* live museum label */}
+        <div className="mt-8 flex items-baseline gap-4 border-t border-ink-line pt-6">
+          <span className="label shrink-0 text-[10px]" style={{ color: cur.live ? cur.accent : "var(--color-grey-dim)" }}>{cur.live ? "we live this" : "in the canon"}</span>
+          <p className="text-lg md:text-2xl font-display leading-snug">
+            <span className="text-paper">{cur.name}.</span> <span className="text-grey-dim">{cur.desc}</span>
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* A full-bleed specimen: giant ghost number, the law, the live demo, alternating side. */
+function Exhibit({ law, flip }: { law: Law; flip: boolean }) {
+  const Demo = law.Demo;
+  return (
+    <section id={`law-${law.id}`} className="relative overflow-hidden border-t border-ink-line py-20 md:py-32 scroll-mt-16 reveal-up">
+      <span aria-hidden className="pointer-events-none absolute -top-10 select-none font-display font-semibold leading-none" style={{ right: flip ? "auto" : "1rem", left: flip ? "1rem" : "auto", fontSize: "26vw", color: law.accent, opacity: 0.06 }}>{law.n}</span>
+      <div className="relative mx-auto grid max-w-[1500px] grid-cols-1 items-center gap-10 px-6 md:px-10 lg:grid-cols-12 lg:gap-16">
+        <div className={`lg:col-span-5 ${flip ? "lg:order-2" : ""}`}>
+          <div className="flex items-center gap-3">
+            <span className="h-px w-10" style={{ background: law.accent }} />
+            <span className="label" style={{ color: law.accent }}>·{law.n} / law</span>
+          </div>
+          <h2 className="mt-5 font-display text-4xl md:text-6xl leading-[0.95] tracking-tight">{law.name}</h2>
+          <p className="mt-5 text-lg text-grey-dim leading-relaxed">{law.says}</p>
+          <p className="mt-6 flex gap-3">
+            <span className="label shrink-0 pt-1 text-gold">we live it</span>
+            <span className="text-[15px] leading-relaxed text-paper/85">{law.here}</span>
+          </p>
+        </div>
+        <div className={`lg:col-span-7 ${flip ? "lg:order-1" : ""}`}>
+          <div className="rounded-2xl border border-ink-line bg-ink-soft/40 p-6 md:p-8">
+            <Demo />
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* Fixed rail: where you are in the seven; goal-gradient + serial position, on you. */
+function ProgressRail({ active, onJump }: { active: number; onJump: (id: string) => void }) {
+  return (
+    <div className="fixed right-6 top-1/2 z-40 hidden -translate-y-1/2 flex-col items-end gap-3.5 lg:flex">
+      {LIVE.map((l, i) => (
+        <button key={l.id} onClick={() => onJump(l.id)} className="group flex items-center gap-2.5" data-cursor="jump" aria-label={l.name}>
+          <span className="label text-[8px] text-grey-dim opacity-0 transition-opacity group-hover:opacity-100" style={{ opacity: active === i ? 1 : undefined, color: active === i ? l.accent : undefined }}>{l.short}</span>
+          <span className="h-2.5 w-2.5 rounded-full transition-all duration-300" style={{ background: active === i ? l.accent : "var(--color-ink-line)", transform: active === i ? "scale(1.5)" : "scale(1)" }} />
+        </button>
+      ))}
+    </div>
+  );
+}
+
 export function LawsPage() {
+  const [active, setActive] = useState(0);
+  useEffect(() => {
+    const obs = new IntersectionObserver(
+      (entries) => entries.forEach((e) => {
+        if (e.isIntersecting) {
+          const idx = LIVE.findIndex((l) => `law-${l.id}` === e.target.id);
+          if (idx >= 0) setActive(idx);
+        }
+      }),
+      { rootMargin: "-45% 0px -45% 0px" },
+    );
+    LIVE.forEach((l) => { const el = document.getElementById(`law-${l.id}`); if (el) obs.observe(el); });
+    return () => obs.disconnect();
+  }, []);
+  const jump = (id: string) => document.getElementById(`law-${id}`)?.scrollIntoView({ behavior: "smooth", block: "start" });
+
   return (
     <div className="bg-ink text-paper font-sans antialiased min-h-screen overflow-clip">
       <PageHeader />
+      <ProgressRail active={active} onJump={jump} />
       <main>
-        {/* hero */}
-        <section className="reveal-up px-6 md:px-10 pt-32 pb-10 md:pt-40 md:pb-16">
-          <div className="mx-auto max-w-[1600px]">
-            <span className="label text-red">·001 / the laws we design by</span>
-            <h1 className="mt-6 font-display text-[12vw] leading-[0.88] tracking-[-0.03em] sm:text-[8rem]">
-              Good design<br /><span className="italic font-normal text-gold">obeys laws.</span>
-            </h1>
-            <p className="mt-8 max-w-2xl text-lg md:text-xl text-grey-dim leading-relaxed font-display">
-              Decades of research into how people see, decide and remember. We do not decorate with them, we build on them. Here are the ones we live by, each one you can feel for yourself, with a note on where it shows up on this very site.
-            </p>
-          </div>
-        </section>
+        <Hero />
+        <CanonIndex onJump={jump} />
+        {LIVE.map((law, i) => <Exhibit key={law.id} law={law} flip={i % 2 === 1} />)}
 
-        <Law n="002" name="Aesthetic-Usability Effect" says="People perceive good-looking design as more usable, and trust it before they have tested a thing." here="It is our whole thesis. You decided this studio was worth your time in the first second, on looks alone. We earn that second.">
-          <AestheticDemo />
-        </Law>
-        <Law n="003" name="Von Restorff Effect" says="The one thing that is different from the rest is the thing that gets remembered." here="Our red. Exactly one red action per screen, never two, so your eye always knows the next move. The dot in our wordmark is the same idea.">
-          <VonRestorffDemo />
-        </Law>
-        <Law n="004" name="Hick's Law" says="The more choices you offer, the longer and heavier the decision becomes." here="The 'what's eating you?' picker, and a footer that lists four products, not forty. We ask one sharp question, not for everything at once.">
-          <HicksDemo />
-        </Law>
-        <Law n="005" name="Fitts's Law" says="The time to hit a target depends on how big it is and how far away." here="Our calls-to-action are large, rounded and close to the thumb. Nothing important hides in a corner at eight pixels tall.">
-          <FittsDemo />
-        </Law>
-        <Law n="006" name="Doherty Threshold" says="Under 400 milliseconds, a system feels like an extension of your hand." here="Snappy reveals, an instant cursor, demos that compose while you watch. We answer before you can doubt.">
-          <DohertyDemo />
-        </Law>
-        <Law n="007" name="Jakob's Law" says="People expect your site to work like every other site they already know." here="Wordmark top-left, menu top-right, a checkout that behaves. We spend our novelty on the work, not on relearning where the menu is.">
-          <JakobsDemo />
-        </Law>
-        <Law n="008" name="Peak-End Rule" says="An experience is judged by its best moment and its ending, not its average." here="A cinematic hero for the peak, and a warm, human goodbye for the end. We make the bookends sing.">
-          <PeakEndDemo />
-        </Law>
-
-        {/* the rest of the canon */}
-        <section data-nav-dark className="reveal-up bg-paper text-ink border-t border-paper-line py-24 md:py-32">
-          <div className="mx-auto max-w-[1600px] px-6 md:px-10">
-            <span className="label text-red">·009 / the rest of the canon</span>
-            <h2 className="mt-4 max-w-2xl font-display text-3xl md:text-5xl leading-tight tracking-tight">The other laws we keep close.</h2>
-            <p className="mt-4 max-w-xl text-grey">Not every law needs a demo to matter. These shape the quiet decisions, the spacing, the order, the words.</p>
-            <div className="mt-12 grid gap-px overflow-hidden rounded-2xl border border-paper-line bg-paper-line sm:grid-cols-2 lg:grid-cols-3">
-              {REST.map(([name, desc]) => (
-                <div key={name} className="bg-paper p-6">
-                  <h3 className="font-display text-xl leading-tight">{name}</h3>
-                  <p className="mt-2 text-[14px] leading-relaxed text-grey">{desc}</p>
-                </div>
-              ))}
-            </div>
-            <p className="mt-8 text-sm text-grey">
-              The canon is maintained at{" "}
-              <a href="https://lawsofux.com" target="_blank" rel="noreferrer" className="u-link text-ink">lawsofux.com</a>{" "}
-              by Jon Yablonski. We just build by it.
-            </p>
-          </div>
-        </section>
-
-        {/* close */}
-        <section className="reveal-up border-t border-ink-line py-24 md:py-32 text-center">
+        <section className="reveal-up border-t border-ink-line py-24 md:py-36 text-center">
           <div className="mx-auto max-w-2xl px-6">
             <h2 className="font-display text-4xl md:text-6xl leading-tight tracking-tight">Design you can feel,<br /><span className="italic font-normal text-gold">because it follows the rules.</span></h2>
             <a href="/#say-hi" data-cursor="Hello" className="mt-10 inline-flex items-center gap-2 rounded-full bg-red px-7 py-4 text-paper transition-transform hover:-translate-y-0.5">
