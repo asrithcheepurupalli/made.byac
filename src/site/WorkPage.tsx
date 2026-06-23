@@ -157,14 +157,15 @@ export function WorkPage() {
                 <span className="text-red">.</span>
               </h2>
               <p className="mt-4 text-grey-dim text-[15px] md:text-base max-w-xl leading-snug">
-                Self-initiated studies: Meanwhile, Karu and Tideline. Entire products taken from a
-                blank page to a working demo, with no client and no brief.
+                Self-initiated work: Meanwhile, Karu, Tideline and Pingless. Entire products from a
+                blank page to a working demo, with no client and no brief — one already shipped.
               </p>
               <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2">
                 {[
                   { n: "Meanwhile", a: "#ff5a1f" },
                   { n: "Karu", a: "#c2683f" },
                   { n: "Tideline", a: "#16b9a8" },
+                  { n: "Pingless", a: "#27d17c" },
                 ].map((w) => (
                   <span key={w.n} className="flex items-center gap-2">
                     <span className="h-1.5 w-1.5 rounded-full" style={{ background: w.a }} />

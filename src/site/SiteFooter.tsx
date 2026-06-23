@@ -27,6 +27,7 @@ export function SiteFooter() {
               <a href="https://table.made-by-ac.com" target="_blank" rel="noreferrer" className="text-paper/80 hover:text-gold transition-colors text-sm">made. table</a>
               <a href="https://kitchen.made-by-ac.com" target="_blank" rel="noreferrer" className="text-paper/80 hover:text-gold transition-colors text-sm">made. kitchen</a>
               <a href="https://crew.made-by-ac.com" target="_blank" rel="noreferrer" className="text-paper/80 hover:text-gold transition-colors text-sm">made. crew</a>
+              <a href="https://pingless.made-by-ac.com" target="_blank" rel="noreferrer" className="text-paper/80 hover:text-gold transition-colors text-sm">pingless.</a>
               <a href="/ai" className="text-paper/80 hover:text-gold transition-colors text-sm">AI agents</a>
               <a href="/offer" className="text-paper/80 hover:text-gold transition-colors text-sm">What we offer</a>
             </div>

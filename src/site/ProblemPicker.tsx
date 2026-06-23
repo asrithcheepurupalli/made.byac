@@ -81,6 +81,18 @@ const FIXES: Fix[] = [
     proof: "110+",
     proofLabel: "components shipped on Somaa",
   },
+  {
+    id: "noise",
+    pain: "My notifications never stop",
+    tag: "pingless.",
+    accent: "#27d17c",
+    promise: "Only the pings that matter.",
+    line: "Pingless is our own shipped app — an on-device AI gateway that delivers what's real and quiets the rest. No cloud, no account, zero bytes off your phone.",
+    href: "https://pingless.made-by-ac.com",
+    cta: "Get Pingless",
+    proof: "100%",
+    proofLabel: "on-device, nothing uploaded",
+  },
 ];
 
 // tiny count-up for the numeric proofs (skips non-numeric like 24/7, 1 of 1)

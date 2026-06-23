@@ -20,8 +20,10 @@ type Lab = {
   discipline: string;
   shots: string[];
   tags: string[];
-  caseStudy: string;
+  caseStudy?: string;
   live?: string; // omitted until deployed
+  getApp?: string; // for shipped apps — APK / store link
+  shipped?: boolean; // real, shipped product (not just a concept demo)
 };
 
 const LABS: Lab[] = [
@@ -75,6 +77,24 @@ const LABS: Lab[] = [
     tags: ["Tidal data-as-poetry", "Generative tide charts", "Seat-or-share booking", "GSAP · Lenis"],
     caseStudy: "/labs/docs/Tideline-Case-Study.pdf",
     live: "https://tideline.made-by-ac.com",
+  },
+  {
+    id: "pingless",
+    name: "Pingless",
+    italic: "ping",
+    rest: "less",
+    tagline: "Your phone, finally quiet.",
+    what: "A privacy-first AI notification gateway",
+    blurb:
+      "Notifications never stop. Pingless sits between your apps and you — reading every alert on-device, delivering the ones that matter and quietly holding the rest, with no cloud, no account, and zero bytes ever leaving your phone. The concept that left the lab and shipped to real phones.",
+    accent: "#27d17c",
+    year: "2026",
+    discipline: "Product · native Android · brand",
+    shots: ["/labs/pingless/home.png", "/labs/pingless/demo.png", "/labs/pingless/privacy.png"],
+    tags: ["On-device, no internet permission", "3-layer on-device classifier", "Jetpack Compose · Kotlin", "Real, shipped"],
+    live: "https://pingless.made-by-ac.com",
+    getApp: "https://pingless.made-by-ac.com/pingless.apk",
+    shipped: true,
   },
 ];
 
@@ -180,7 +200,7 @@ function LabsHero() {
             builds the future of an industry before a client does.
           </p>
           <div className="rise mt-10 flex flex-wrap items-center gap-x-10 gap-y-5" style={{ animationDelay: ".42s" }}>
-            <div><div className="font-display text-4xl text-paper">03</div><div className="mt-1 label text-[9px] text-grey">Worlds, built whole</div></div>
+            <div><div className="font-display text-4xl text-paper">04</div><div className="mt-1 label text-[9px] text-grey">Built whole · 1 shipped</div></div>
             <div><div className="font-display text-4xl text-paper">100%</div><div className="mt-1 label text-[9px] text-grey">Self-initiated</div></div>
             <div><div className="font-display text-4xl text-paper">2026</div><div className="mt-1 label text-[9px] text-grey">The lab, so far</div></div>
           </div>
@@ -190,18 +210,22 @@ function LabsHero() {
         <div className="relative h-[360px] sm:h-[440px] hidden md:block">
           {LABS.map((lab, i) => {
             const pos = [
-              "left-0 top-6 rotate-[-5deg]",
-              "right-2 top-24 rotate-[4deg]",
-              "left-16 bottom-0 rotate-[-2deg]",
+              "left-0 top-2 rotate-[-5deg]",
+              "right-0 top-16 rotate-[4deg]",
+              "left-10 bottom-16 rotate-[-2deg]",
+              "right-6 bottom-0 rotate-[3deg]",
             ][i];
-            const depth = [26, 40, 16][i];
+            const depth = [24, 38, 14, 30][i];
             return (
               <a key={lab.id} href={`#${lab.id}`} data-cursor="View" data-depth={depth}
-                className={`labs-tile absolute ${pos} w-[58%] max-w-[330px] rounded-xl overflow-hidden border border-ink-line bg-ink-soft shadow-2xl hover:!rotate-0 hover:scale-[1.03] hover:z-20`}
+                className={`labs-tile absolute ${pos} w-[55%] max-w-[300px] rounded-xl overflow-hidden border border-ink-line bg-ink-soft shadow-2xl hover:!rotate-0 hover:scale-[1.03] hover:z-20`}
                 style={{ boxShadow: `0 24px 60px -24px ${lab.accent}55` }}>
                 <div className="relative aspect-[16/10] overflow-hidden">
                   <img src={lab.shots[0]} alt={lab.name} loading="lazy" className="w-full h-full object-cover object-top" />
                   <span className="absolute top-3 left-3 h-2 w-2 rounded-full" style={{ background: lab.accent }} />
+                  {lab.shipped && (
+                    <span className="absolute top-2.5 right-2.5 label text-[7px] rounded-full bg-[#27d17c] text-ink px-2 py-0.5">Shipped</span>
+                  )}
                 </div>
                 <div className="flex items-center justify-between px-4 py-3">
                   <span className="font-display text-lg">{lab.name}</span>
@@ -314,6 +338,9 @@ function LabBlock({ lab, i }: { lab: Lab; i: number }) {
           <div className="reveal-up flex items-center gap-4">
             <span className="font-display text-7xl md:text-8xl leading-none" style={{ color: lab.accent }}>{String(i + 1).padStart(2, "0")}</span>
             <span className="h-px flex-1 max-w-[70px]" style={{ background: lab.accent }} />
+            {lab.shipped && (
+              <span className="label text-[8px] rounded-full bg-[#27d17c] text-ink px-2.5 py-1">● Shipped</span>
+            )}
             <span className="label text-[9px] text-grey">{lab.year}</span>
           </div>
           <h2 className="reveal-up mt-7 font-display text-6xl md:text-7xl leading-[0.92] tracking-[-0.02em]">
@@ -331,17 +358,26 @@ function LabBlock({ lab, i }: { lab: Lab; i: number }) {
           </div>
 
           <div className="reveal-up mt-9 flex flex-wrap items-center gap-3">
-            <a href={lab.caseStudy} target="_blank" rel="noreferrer" data-cursor="Open"
-              className="inline-flex items-center gap-2 label text-[10px] rounded-full px-5 py-3 text-ink transition-transform hover:-translate-y-0.5"
-              style={{ background: lab.accent }}>
-              <FileText className="w-3.5 h-3.5" /> Case study
-            </a>
-            {lab.live ? (
+            {lab.live && (
               <a href={lab.live} target="_blank" rel="noreferrer" data-cursor="Visit"
-                className="inline-flex items-center gap-2 label text-[10px] rounded-full px-5 py-3 border border-paper/30 hover:bg-paper hover:text-ink transition-colors">
-                Live demo <ArrowUpRight className="w-3.5 h-3.5" />
+                className="inline-flex items-center gap-2 label text-[10px] rounded-full px-5 py-3 text-ink transition-transform hover:-translate-y-0.5"
+                style={{ background: lab.accent }}>
+                {lab.shipped ? "Try it live" : "Live demo"} <ArrowUpRight className="w-3.5 h-3.5" />
               </a>
-            ) : (
+            )}
+            {lab.getApp && (
+              <a href={lab.getApp} target="_blank" rel="noreferrer" data-cursor="Get"
+                className="inline-flex items-center gap-2 label text-[10px] rounded-full px-5 py-3 border border-paper/30 hover:bg-paper hover:text-ink transition-colors">
+                Get the app <ArrowUpRight className="w-3.5 h-3.5" />
+              </a>
+            )}
+            {lab.caseStudy && (
+              <a href={lab.caseStudy} target="_blank" rel="noreferrer" data-cursor="Open"
+                className="inline-flex items-center gap-2 label text-[10px] rounded-full px-5 py-3 border border-paper/30 hover:bg-paper hover:text-ink transition-colors">
+                <FileText className="w-3.5 h-3.5" /> Case study
+              </a>
+            )}
+            {!lab.live && !lab.caseStudy && (
               <span className="label text-[9px] text-grey-dim/70 px-2">Live demo soon</span>
             )}
           </div>
