@@ -23,6 +23,7 @@ import { LabsPage } from "./LabsPage";
 import { LabsTease } from "./LabsTease";
 import { LawsPage } from "./LawsPage";
 import { LawsTease } from "./LawsTease";
+import { PlayCanvas } from "./PlayCanvas";
 import { SomaaCaseStudy } from "./case/SomaaCaseStudy";
 import { CampaignCaseStudy } from "./case/CampaignCaseStudy";
 import { CAMPAIGN_CASES } from "./case/caseData";
@@ -99,6 +100,7 @@ export function Site() {
           <Manifesto />
           <Invitation />
         </main>
+        <PlayCanvas />
         <SiteFooter />
       </div>
     );
