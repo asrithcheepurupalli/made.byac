@@ -31,8 +31,6 @@ export function SiteFooter() {
             </div>
             <div className="flex flex-col gap-3">
               <span className="label text-grey">Elsewhere</span>
-              <a href="https://www.instagram.com" target="_blank" rel="noreferrer" className="text-paper/80 hover:text-gold transition-colors text-sm">Instagram</a>
-              <a href="https://www.behance.net" target="_blank" rel="noreferrer" className="text-paper/80 hover:text-gold transition-colors text-sm">Behance</a>
               <a href="mailto:thebrain@made-by-ac.com" className="text-paper/80 hover:text-gold transition-colors text-sm">Email</a>
             </div>
           </div>
