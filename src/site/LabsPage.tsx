@@ -84,6 +84,10 @@ const LABS_MAIL =
   `&body=${encodeURIComponent(
     "Hi made. team,\n\nI saw made. labs and I'd love to talk about building something with you.\n\nWhat I have in mind:\n\n\nThanks,\n"
   )}`;
+const LABS_WA =
+  `https://wa.me/919390852636?text=${encodeURIComponent(
+    "Hi made. by ac 👋 I saw made. labs and I'd love to talk about building something with you."
+  )}`;
 
 export function LabsPage() {
   return (
@@ -414,6 +418,7 @@ function LabsInvitation() {
         </div>
         <div className="reveal-up flex flex-wrap gap-3">
           <a href="/work" className="label text-[10px] rounded-full px-6 py-3.5 border border-paper/30 hover:bg-paper hover:text-ink transition-colors">See client work</a>
+          <a href={LABS_WA} target="_blank" rel="noreferrer" data-cursor="Chat" className="label text-[10px] rounded-full px-6 py-3.5 bg-[#25D366] text-ink hover:-translate-y-0.5 transition-transform">WhatsApp us</a>
           <a href={LABS_MAIL} data-cursor="Hello" className="label text-[10px] rounded-full px-6 py-3.5 bg-red text-white hover:bg-red-deep transition-colors">Start a project</a>
         </div>
       </div>
