@@ -274,9 +274,10 @@ function Hero() {
   );
 }
 
-/* The canon as a periodic table; hover updates a museum label, the seven we live pop. */
+/* The canon as a periodic table; a reader above the grid updates on hover OR tap, the
+   seven we live pop in colour. The reader sits above so it is always in view. */
 function CanonIndex({ onJump }: { onJump: (id: string) => void }) {
-  const [active, setActive] = useState(ALL.findIndex((i) => i.live));
+  const [active, setActive] = useState(Math.max(0, ALL.findIndex((i) => i.live)));
   const cur = ALL[active];
   return (
     <section className="relative border-t border-ink-line py-20 md:py-28">
@@ -286,33 +287,38 @@ function CanonIndex({ onJump }: { onJump: (id: string) => void }) {
             <span className="label text-red">·the canon</span>
             <h2 className="mt-4 font-display text-3xl md:text-5xl leading-tight tracking-tight">Thirty laws.<br />Seven we build by.</h2>
           </div>
-          <p className="max-w-xs text-sm text-grey-dim leading-relaxed">The colour ones are the laws we live, click to feel them. Hover any to read. Credit, <a href="https://lawsofux.com" target="_blank" rel="noreferrer" className="u-link text-paper">lawsofux.com</a>.</p>
+          <p className="max-w-xs text-sm text-grey-dim leading-relaxed">The colour ones are the laws we live. Hover or tap any to read it, then feel the live ones. Credit, <a href="https://lawsofux.com" target="_blank" rel="noreferrer" className="u-link text-paper">lawsofux.com</a>.</p>
         </div>
 
-        <div className="mt-10 grid grid-cols-3 gap-2 sm:grid-cols-5 lg:grid-cols-6">
+        {/* the reader — sits above the grid, always in view as you browse */}
+        <div className="mt-8 flex min-h-[4.5rem] flex-col gap-3 border-y border-ink-line py-5 sm:flex-row sm:items-center sm:gap-6">
+          <span className="label shrink-0 text-[10px]" style={{ color: cur.live ? cur.accent : "var(--color-grey-dim)" }}>{cur.live ? "we live this" : "in the canon"}</span>
+          <p className="flex-1 font-display text-lg leading-snug md:text-2xl">
+            <span className="text-paper">{cur.name}.</span> <span className="text-grey-dim">{cur.desc}</span>
+          </p>
+          {cur.live && cur.id && (
+            <button onClick={() => onJump(cur.id!)} data-cursor="feel" className="label shrink-0 self-start rounded-full px-4 py-2 text-[10px] text-ink transition-transform hover:-translate-y-0.5 sm:self-auto" style={{ background: cur.accent }}>
+              feel it →
+            </button>
+          )}
+        </div>
+
+        <div className="mt-8 grid grid-cols-3 gap-2 sm:grid-cols-5 lg:grid-cols-6">
           {ALL.map((it, i) => (
             <button
               key={it.name}
               onMouseEnter={() => setActive(i)}
               onFocus={() => setActive(i)}
-              onClick={() => it.live && it.id && onJump(it.id)}
+              onClick={() => setActive(i)}
+              title={it.desc}
               data-cursor={it.live ? "feel" : undefined}
               className="group relative flex aspect-[5/4] flex-col justify-between overflow-hidden rounded-lg p-2.5 text-left transition-transform duration-200 hover:-translate-y-1"
               style={{ background: it.live ? it.accent : "var(--color-ink-soft)", border: active === i ? "1px solid var(--color-paper)" : "1px solid var(--color-ink-line)" }}
             >
               <span className={`label text-[8px] ${it.live ? "text-ink/55" : "text-grey-dim"}`}>{String(i + 1).padStart(2, "0")}</span>
               <span className={`font-display text-[12px] md:text-[13px] leading-[1.05] ${it.live ? "text-ink" : "text-grey-dim group-hover:text-paper"}`}>{it.name}</span>
-              {it.live && <span className="label absolute right-2 top-2 text-[8px] text-ink/55 opacity-0 transition-opacity group-hover:opacity-100">feel →</span>}
             </button>
           ))}
-        </div>
-
-        {/* live museum label */}
-        <div className="mt-8 flex items-baseline gap-4 border-t border-ink-line pt-6">
-          <span className="label shrink-0 text-[10px]" style={{ color: cur.live ? cur.accent : "var(--color-grey-dim)" }}>{cur.live ? "we live this" : "in the canon"}</span>
-          <p className="text-lg md:text-2xl font-display leading-snug">
-            <span className="text-paper">{cur.name}.</span> <span className="text-grey-dim">{cur.desc}</span>
-          </p>
         </div>
       </div>
     </section>
