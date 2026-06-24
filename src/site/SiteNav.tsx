@@ -6,9 +6,8 @@ const LINKS = [
   { label: "Work", href: "/work" },
   { label: "Labs", href: "/labs" },
   { label: "AI", href: "/ai" },
-  { label: "Live", href: "/live" },
+  { label: "Craft", href: "/craft" },
   { label: "Offer", href: "/offer" },
-  { label: "Laws", href: "/laws" },
   { label: "Why", href: "#why" },
   { label: "Studio", href: "#studio" },
 ];
