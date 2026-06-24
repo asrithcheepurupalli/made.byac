@@ -22,6 +22,7 @@ export default defineConfig(() => {
           labs: path.resolve(__dirname, 'labs.html'),
           laws: path.resolve(__dirname, 'laws.html'),
           live: path.resolve(__dirname, 'live.html'),
+          system: path.resolve(__dirname, 'system.html'),
         },
       },
     },

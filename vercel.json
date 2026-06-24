@@ -18,6 +18,7 @@
     { "source": "/labs", "destination": "/labs.html" },
     { "source": "/laws", "destination": "/laws.html" },
     { "source": "/live", "destination": "/live.html" },
+    { "source": "/system", "destination": "/system.html" },
     { "source": "/((?!api/).*)", "destination": "/index.html" }
   ]
 }
