@@ -24,6 +24,7 @@ export default defineConfig(() => {
           live: path.resolve(__dirname, 'live.html'),
           system: path.resolve(__dirname, 'system.html'),
           worth: path.resolve(__dirname, 'worth.html'),
+          motion: path.resolve(__dirname, 'motion.html'),
         },
       },
     },

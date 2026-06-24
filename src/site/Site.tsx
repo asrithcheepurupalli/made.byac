@@ -26,6 +26,7 @@ import { LawsTease } from "./LawsTease";
 import { LivePage } from "./LivePage";
 import { SystemPage } from "./SystemPage";
 import { WorthPage } from "./WorthPage";
+import { MotionPage } from "./MotionPage";
 import { PlayCanvas } from "./PlayCanvas";
 import { SomaaCaseStudy } from "./case/SomaaCaseStudy";
 import { CampaignCaseStudy } from "./case/CampaignCaseStudy";
@@ -67,7 +68,7 @@ export function Site() {
   useMagnetic(`${pageRoute}|${path}`);
 
   useEffect(() => {
-    if (route.startsWith("#/work/") || route === "#/offer" || route === "#/work" || route === "#/ai" || route === "#/kitchen" || route === "#/labs" || route === "#/laws" || route === "#/live" || route === "#/system" || route === "#/worth") window.scrollTo(0, 0);
+    if (route.startsWith("#/work/") || route === "#/offer" || route === "#/work" || route === "#/ai" || route === "#/kitchen" || route === "#/labs" || route === "#/laws" || route === "#/live" || route === "#/system" || route === "#/worth" || route === "#/motion") window.scrollTo(0, 0);
   }, [route]);
 
   // Deep-link to a homepage section from another page (e.g. /#say-hi from /laws) is a
@@ -122,6 +123,8 @@ export function Site() {
     content = <SystemPage />;
   } else if (path === "/worth" || route === "#/worth") {
     content = <WorthPage />;
+  } else if (path === "/motion" || route === "#/motion") {
+    content = <MotionPage />;
   } else {
     content = (
       <div className="bg-paper text-ink font-sans antialiased">
