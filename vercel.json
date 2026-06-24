@@ -19,6 +19,7 @@
     { "source": "/laws", "destination": "/laws.html" },
     { "source": "/live", "destination": "/live.html" },
     { "source": "/system", "destination": "/system.html" },
+    { "source": "/worth", "destination": "/worth.html" },
     { "source": "/((?!api/).*)", "destination": "/index.html" }
   ]
 }

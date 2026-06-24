@@ -23,6 +23,7 @@ export default defineConfig(() => {
           laws: path.resolve(__dirname, 'laws.html'),
           live: path.resolve(__dirname, 'live.html'),
           system: path.resolve(__dirname, 'system.html'),
+          worth: path.resolve(__dirname, 'worth.html'),
         },
       },
     },
