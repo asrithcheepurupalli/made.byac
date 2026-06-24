@@ -17,6 +17,7 @@
     { "source": "/work", "destination": "/work.html" },
     { "source": "/labs", "destination": "/labs.html" },
     { "source": "/laws", "destination": "/laws.html" },
+    { "source": "/live", "destination": "/live.html" },
     { "source": "/((?!api/).*)", "destination": "/index.html" }
   ]
 }

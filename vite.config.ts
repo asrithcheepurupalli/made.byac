@@ -21,6 +21,7 @@ export default defineConfig(() => {
           work: path.resolve(__dirname, 'work.html'),
           labs: path.resolve(__dirname, 'labs.html'),
           laws: path.resolve(__dirname, 'laws.html'),
+          live: path.resolve(__dirname, 'live.html'),
         },
       },
     },

@@ -23,6 +23,7 @@ import { LabsPage } from "./LabsPage";
 import { LabsTease } from "./LabsTease";
 import { LawsPage } from "./LawsPage";
 import { LawsTease } from "./LawsTease";
+import { LivePage } from "./LivePage";
 import { PlayCanvas } from "./PlayCanvas";
 import { SomaaCaseStudy } from "./case/SomaaCaseStudy";
 import { CampaignCaseStudy } from "./case/CampaignCaseStudy";
@@ -64,7 +65,7 @@ export function Site() {
   useMagnetic(`${pageRoute}|${path}`);
 
   useEffect(() => {
-    if (route.startsWith("#/work/") || route === "#/offer" || route === "#/work" || route === "#/ai" || route === "#/kitchen" || route === "#/labs" || route === "#/laws") window.scrollTo(0, 0);
+    if (route.startsWith("#/work/") || route === "#/offer" || route === "#/work" || route === "#/ai" || route === "#/kitchen" || route === "#/labs" || route === "#/laws" || route === "#/live") window.scrollTo(0, 0);
   }, [route]);
 
   // Deep-link to a homepage section from another page (e.g. /#say-hi from /laws) is a
@@ -113,6 +114,8 @@ export function Site() {
     content = <LabsPage />;
   } else if (path === "/laws" || route === "#/laws") {
     content = <LawsPage />;
+  } else if (path === "/live" || route === "#/live") {
+    content = <LivePage />;
   } else {
     content = (
       <div className="bg-paper text-ink font-sans antialiased">
