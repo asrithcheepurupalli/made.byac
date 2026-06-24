@@ -14,6 +14,8 @@ export function SmoothScroll() {
       smoothWheel: true,
       anchors: true,
     });
+    // expose for cross-page deep-link scrolling (see Site.tsx)
+    (window as unknown as { __lenis?: Lenis }).__lenis = lenis;
 
     let raf = 0;
     const loop = (time: number) => {
@@ -25,6 +27,7 @@ export function SmoothScroll() {
     return () => {
       cancelAnimationFrame(raf);
       lenis.destroy();
+      delete (window as unknown as { __lenis?: Lenis }).__lenis;
     };
   }, []);
 

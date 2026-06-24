@@ -54,14 +54,44 @@ export function Site() {
     typeof window !== "undefined"
       ? window.location.pathname.replace(/\/$/, "").replace(/\.html$/, "")
       : "";
+  // Only PAGE routes (#/...) swap content. In-page scroll anchors (#say-hi, #why…)
+  // must NOT re-key the tree, or every anchor click remounts the whole page and the
+  // scroll is thrown away (the "dead loop").
+  const pageRoute = route.startsWith("#/") ? route : "";
 
   // Re-arm scroll reveals + magnetic elements whenever the route swaps content.
-  useScrollReveal(`${route}|${path}`);
-  useMagnetic(`${route}|${path}`);
+  useScrollReveal(`${pageRoute}|${path}`);
+  useMagnetic(`${pageRoute}|${path}`);
 
   useEffect(() => {
     if (route.startsWith("#/work/") || route === "#/offer" || route === "#/work" || route === "#/ai" || route === "#/kitchen" || route === "#/labs" || route === "#/laws") window.scrollTo(0, 0);
   }, [route]);
+
+  // Deep-link to a homepage section from another page (e.g. /#say-hi from /laws) is a
+  // full load: scroll to the anchor once it exists and the intro curtain has unlocked.
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const hash = window.location.hash;
+    if (hash.length < 2 || hash.startsWith("#/")) return;
+    if (window.location.pathname.replace(/\/$/, "") !== "") return; // anchors live on the homepage
+    let cancelled = false;
+    let tries = 0;
+    const tick = () => {
+      if (cancelled) return;
+      let el: Element | null = null;
+      try { el = document.querySelector(hash); } catch { el = null; }
+      const locked = document.body.style.overflow === "hidden";
+      if (el && !locked) {
+        const lenis = (window as unknown as { __lenis?: { scrollTo: (t: Element, o?: { offset?: number }) => void } }).__lenis;
+        if (lenis) lenis.scrollTo(el, { offset: 0 });
+        else (el as HTMLElement).scrollIntoView();
+      } else if (tries++ < 45) {
+        window.setTimeout(tick, 80);
+      }
+    };
+    window.setTimeout(tick, 120);
+    return () => { cancelled = true; };
+  }, []);
 
   // Pick the page for the current route. Case studies first, so a #/work/<slug>
   // deep link wins over the /work archive.
@@ -114,7 +144,7 @@ export function Site() {
       <ScrollProgress />
       <SmoothScroll />
       <div className="grain" aria-hidden />
-      <div key={`${route}|${path}`} className="route-fade">
+      <div key={`${pageRoute}|${path}`} className="route-fade">
         {content}
       </div>
     </>
