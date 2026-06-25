@@ -1,4 +1,4 @@
-import { useEffect, useState, type ReactNode } from "react";
+import { lazy, Suspense, useEffect, useState, type ReactNode } from "react";
 import { SmoothScroll } from "./SmoothScroll";
 import { ScrollProgress } from "./ScrollProgress";
 import { Cursor } from "./Cursor";
@@ -15,23 +15,26 @@ import { SelectedWork } from "./SelectedWork";
 import { GridLab } from "./GridLab";
 import { Invitation } from "./Invitation";
 import { SiteFooter } from "./SiteFooter";
-import { OfferPage } from "./OfferPage";
-import { AiPage } from "./AiPage";
-import { KitchenPage } from "./KitchenPage";
-import { WorkPage } from "./WorkPage";
-import { LabsPage } from "./LabsPage";
 import { LabsTease } from "./LabsTease";
-import { LawsPage } from "./LawsPage";
 import { LawsTease } from "./LawsTease";
-import { LivePage } from "./LivePage";
-import { SystemPage } from "./SystemPage";
-import { WorthPage } from "./WorthPage";
-import { MotionPage } from "./MotionPage";
-import { CraftPage } from "./CraftPage";
 import { PlayCanvas } from "./PlayCanvas";
-import { SomaaCaseStudy } from "./case/SomaaCaseStudy";
-import { CampaignCaseStudy } from "./case/CampaignCaseStudy";
 import { CAMPAIGN_CASES } from "./case/caseData";
+
+// Route pages load on demand, so the homepage ships only its own code instead of all
+// eleven pages in one bundle (that monolith is what made the site slow).
+const OfferPage = lazy(() => import("./OfferPage").then((m) => ({ default: m.OfferPage })));
+const AiPage = lazy(() => import("./AiPage").then((m) => ({ default: m.AiPage })));
+const KitchenPage = lazy(() => import("./KitchenPage").then((m) => ({ default: m.KitchenPage })));
+const WorkPage = lazy(() => import("./WorkPage").then((m) => ({ default: m.WorkPage })));
+const LabsPage = lazy(() => import("./LabsPage").then((m) => ({ default: m.LabsPage })));
+const LawsPage = lazy(() => import("./LawsPage").then((m) => ({ default: m.LawsPage })));
+const LivePage = lazy(() => import("./LivePage").then((m) => ({ default: m.LivePage })));
+const SystemPage = lazy(() => import("./SystemPage").then((m) => ({ default: m.SystemPage })));
+const WorthPage = lazy(() => import("./WorthPage").then((m) => ({ default: m.WorthPage })));
+const MotionPage = lazy(() => import("./MotionPage").then((m) => ({ default: m.MotionPage })));
+const CraftPage = lazy(() => import("./CraftPage").then((m) => ({ default: m.CraftPage })));
+const SomaaCaseStudy = lazy(() => import("./case/SomaaCaseStudy").then((m) => ({ default: m.SomaaCaseStudy })));
+const CampaignCaseStudy = lazy(() => import("./case/CampaignCaseStudy").then((m) => ({ default: m.CampaignCaseStudy })));
 
 // Tiny hash router so case-study pages get their own URL + back button,
 // without pulling in a routing dependency.
@@ -160,7 +163,9 @@ export function Site() {
       <SmoothScroll />
       <div className="grain" aria-hidden />
       <div key={`${pageRoute}|${path}`} className="route-fade">
-        {content}
+        <Suspense fallback={<div style={{ minHeight: "100vh" }} aria-hidden />}>
+          {content}
+        </Suspense>
       </div>
     </>
   );
