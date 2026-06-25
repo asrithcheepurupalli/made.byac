@@ -1,15 +1,14 @@
 import { useEffect, useRef, useState } from "react";
 
 // A playful grid above the footer. The dots spell "made." by default (red dot in its
-// place); type your name and they re-form into it, like an LED sign. Tap any cell to
-// paint or cycle its colour. Brand expression + a small joy.
+// place); type your name and they re-form into it. Performance note: the graph paper
+// is ONE css-background div and only the LIT cells are real elements (~150, not a
+// button per cell), with a single delegated click handler. Keeps the homepage light.
 const COLORS = ["#c8102e", "#bd9b4e", "#3aa655", "#2f6df0", "#8b5cf6", "#e8702a"];
 const INK = "#15120f";
-const CELL = 30; // target cell size in px
-const ROWS = 11; // 2 pad + 7 glyph + 2 pad
+const CELL = 38; // target cell size in px
+const ROWS = 11;
 
-// A compact 5x7 dot-matrix font. Each glyph is 7 rows of 5 columns. Guarantees the
-// name reads, where freeform text rasterised at this scale never does.
 const GLYPH_H = 7;
 const F: Record<string, string[]> = {
   A: ["01110", "10001", "10001", "11111", "10001", "10001", "10001"],
@@ -43,8 +42,6 @@ const F: Record<string, string[]> = {
   "-": ["00000", "00000", "00000", "01110", "00000", "00000", "00000"],
 };
 
-// Lay out text in the grid with the 5x7 font; return the lit cells + geometry so the
-// caller can drop the red period right after the word.
 function layout(text: string, cols: number) {
   const chars = text.toUpperCase().split("").filter((c) => c in F);
   const cw = 5;
@@ -69,14 +66,12 @@ function layout(text: string, cols: number) {
   return { cells, endX: startX + wordW, padTop };
 }
 
-// Assemble: the word in ink dots, its period as the signature dot, and a light scatter
-// of colour in the empty rows above and below the word.
 function compose(name: string, cols: number, word: string, dot: string): Record<number, string> {
   const text = name || word;
   const { cells, endX, padTop } = layout(text, cols);
   const m: Record<number, string> = {};
   cells.forEach((c) => (m[c] = INK));
-  if (!name && endX + 1 < cols) m[(padTop + GLYPH_H - 1) * cols + endX + 1] = dot; // the made. period
+  if (!name && endX + 1 < cols) m[(padTop + GLYPH_H - 1) * cols + endX + 1] = dot;
   const total = cols * ROWS;
   let placed = 0;
   let tries = 0;
@@ -104,7 +99,6 @@ export function PlayCanvas({ word = "made", dotColor = "#c8102e" }: { word?: str
     if (!el) return;
     const set = () => {
       const w = el.clientWidth;
-      // shrink the cell on small screens so a word like "made" still fits the width
       const cell = w < 560 ? 14 : w < 900 ? 22 : CELL;
       setCellPx(cell);
       setCols(Math.max(13, Math.floor(w / cell)));
@@ -129,7 +123,16 @@ export function PlayCanvas({ word = "made", dotColor = "#c8102e" }: { word?: str
       return out;
     });
 
-  const total = cols * ROWS;
+  // one delegated click handler instead of a button per cell
+  const onGridClick = (e: React.MouseEvent) => {
+    const el = ref.current;
+    if (!el) return;
+    const r = el.getBoundingClientRect();
+    const x = Math.floor((e.clientX - r.left) / cellPx);
+    const y = Math.floor((e.clientY - r.top) / cellPx);
+    if (x < 0 || x >= cols || y < 0 || y >= ROWS) return;
+    paint(y * cols + x);
+  };
 
   const field = (extra: string) => (
     <input
@@ -142,43 +145,52 @@ export function PlayCanvas({ word = "made", dotColor = "#c8102e" }: { word?: str
     />
   );
 
+  const gridH = ROWS * cellPx;
+
   return (
     <section className="relative overflow-hidden bg-paper border-t border-paper-line" aria-hidden>
       <style>{`@keyframes pc-pop{0%{transform:scale(.2);opacity:0}60%{transform:scale(1.16)}100%{transform:scale(1);opacity:1}}@media(prefers-reduced-motion:reduce){.pc-dot{animation:none!important}}`}</style>
 
-      {/* mobile: a clean input bar above the grid (no overlap on short screens) */}
       <div className="md:hidden px-5 pt-5 pb-3">
         <label className="label text-grey-dim text-[9px]">type your name, we will fill it with our dots</label>
         {field("mt-1 text-3xl")}
       </div>
 
+      {/* graph paper is a single background; clicks are delegated; only lit cells render */}
       <div
         ref={ref}
-        className="grid border-l border-t border-paper-line"
-        style={{ gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))`, gridAutoRows: `${cellPx}px` }}
+        onClick={onGridClick}
+        data-cursor="dot"
+        className="relative w-full border-l border-t border-paper-line"
+        style={{
+          height: gridH,
+          cursor: "pointer",
+          backgroundImage:
+            "linear-gradient(var(--color-paper-line) 1px, transparent 1px), linear-gradient(90deg, var(--color-paper-line) 1px, transparent 1px)",
+          backgroundSize: `${cellPx}px ${cellPx}px`,
+        }}
       >
-        {Array.from({ length: total }).map((_, i) => {
-          const col = cells[i];
+        {Object.keys(cells).map((k) => {
+          const i = +k;
+          const x = i % cols;
+          const y = Math.floor(i / cols);
           return (
-            <button
+            <span
               key={i}
-              onClick={() => paint(i)}
-              className="group relative border-b border-r border-paper-line"
-              aria-label="paint a dot"
-            >
-              <span className="pointer-events-none absolute inset-0 m-auto h-2 w-2 rounded-full bg-ink opacity-0 transition-opacity duration-150 group-hover:opacity-20" />
-              {col !== undefined && (
-                <span
-                  className="pc-dot pointer-events-none absolute inset-0 m-auto rounded-full"
-                  style={{ height: "66%", width: "66%", background: col, animation: "pc-pop .22s cubic-bezier(.34,1.56,.64,1)" }}
-                />
-              )}
-            </button>
+              className="pc-dot pointer-events-none absolute rounded-full"
+              style={{
+                left: x * cellPx + cellPx * 0.17,
+                top: y * cellPx + cellPx * 0.17,
+                width: cellPx * 0.66,
+                height: cellPx * 0.66,
+                background: cells[i],
+                animation: "pc-pop .22s cubic-bezier(.34,1.56,.64,1)",
+              }}
+            />
           );
         })}
       </div>
 
-      {/* desktop: the field sits as a signature in the lower-left, over the canvas */}
       <div className="hidden md:block absolute bottom-8 left-10 max-w-[88vw]">
         <label className="label text-grey-dim text-[10px]">type your name, we will fill it with our dots</label>
         {field("mt-1.5 text-5xl")}
