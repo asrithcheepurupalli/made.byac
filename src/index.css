@@ -332,6 +332,10 @@ html.js-reveal .reveal-stagger.in-view > *:nth-child(n + 9) { transition-delay: 
   background-size: 160px 160px;
 }
 @media (prefers-reduced-motion: reduce) { .grain { opacity: 0.03; } }
+/* iOS Safari has a long-standing bug: a position:fixed element with mix-blend-mode
+   locks the whole page's scroll. The grain is desktop-only polish, so drop it on
+   touch devices, otherwise phones cannot scroll at all. */
+@media (hover: none) { .grain { display: none; } }
 
 /* ---- hero cursor-lit grid: a gold spotlight on the architect grid ---- */
 .hero-grid-lit {
