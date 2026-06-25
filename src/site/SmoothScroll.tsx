@@ -7,6 +7,11 @@ export function SmoothScroll() {
   useEffect(() => {
     if (typeof window === "undefined") return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    // Desktop only. On touch devices Lenis fights native momentum scrolling, which
+    // reads as a dead, stop-mid-flick scroll on phones and makes scroll-driven
+    // animations stutter. Native scroll on mobile is smooth and reliable, and the
+    // parallax + scroll reveals read the native scroll position just fine.
+    if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
 
     const lenis = new Lenis({
       duration: 1.1,
