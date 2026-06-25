@@ -236,7 +236,7 @@ export function SomaaCaseStudy() {
       </header>
 
       {/* HERO — parallax */}
-      <section ref={heroRef} className="relative h-screen w-full overflow-hidden flex flex-col justify-end">
+      <section ref={heroRef} className="relative h-[100svh] w-full overflow-hidden flex flex-col justify-end">
         <motion.div style={{ y: bgY }} className="absolute inset-0 z-0">
           <img src={`${A}/hero.png`} alt="Somaa signature dish" className="w-full h-[120%] object-cover" />
           <div className="absolute inset-0" style={{ background: "linear-gradient(to top, #0c0a09 8%, rgba(12,10,9,0.45) 45%, rgba(12,10,9,0.65) 100%)" }} />
@@ -360,7 +360,7 @@ export function SomaaCaseStudy() {
       <section ref={walkRef} className="border-y" style={{ borderColor: C.line, background: C.surface }}>
         <div className="mx-auto max-w-[1400px] px-6 md:px-10 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
           {/* sticky phone */}
-          <div className="lg:sticky lg:top-0 lg:h-screen flex items-center justify-center py-16 lg:py-0">
+          <div className="lg:sticky lg:top-0 lg:h-[100svh] flex items-center justify-center py-16 lg:py-0">
             <div className="relative">
               <div className="relative rounded-[2.2rem] p-2.5 shadow-2xl" style={{ background: "#000", border: `1px solid ${C.line}` }}>
                 <div className="relative w-[256px] md:w-[300px] aspect-[430/932] rounded-[1.7rem] overflow-hidden bg-black">

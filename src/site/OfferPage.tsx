@@ -320,7 +320,7 @@ export function OfferPage() {
   const [open, setOpen] = useState<string>("ai");
 
   return (
-    <div className="bg-ink text-paper font-sans antialiased min-h-screen">
+    <div className="bg-ink text-paper font-sans antialiased min-h-[100svh]">
       {/* back nav */}
       <header className="fixed top-0 inset-x-0 z-50 backdrop-blur-md bg-ink/60 border-b border-ink-line">
         <div className="mx-auto max-w-[1400px] px-6 md:px-10 h-16 flex items-center justify-between">

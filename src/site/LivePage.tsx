@@ -114,7 +114,7 @@ export function LivePage() {
   }, []);
 
   return (
-    <div className="bg-ink text-paper font-sans antialiased min-h-screen overflow-clip">
+    <div className="bg-ink text-paper font-sans antialiased min-h-[100svh] overflow-clip">
       <PageHeader />
       <main>
         {/* hero + composer */}

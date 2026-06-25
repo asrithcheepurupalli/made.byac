@@ -36,7 +36,7 @@ export function ActHero() {
     <section
       ref={ref}
       id="top"
-      className="relative min-h-screen w-full bg-paper text-ink overflow-hidden flex flex-col justify-between"
+      className="relative min-h-[100svh] w-full bg-paper text-ink overflow-hidden flex flex-col justify-between"
     >
       {/* faint architect grid (parallax) */}
       <motion.div style={{ y: gridY }} className="pointer-events-none absolute inset-0 opacity-[0.5]">

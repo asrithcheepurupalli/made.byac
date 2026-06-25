@@ -111,7 +111,7 @@ const LABS_WA =
 
 export function LabsPage() {
   return (
-    <div className="bg-ink text-paper font-sans antialiased min-h-screen overflow-clip">
+    <div className="bg-ink text-paper font-sans antialiased min-h-[100svh] overflow-clip">
       <LabsHeader />
       <LabsHero />
       <LabsManifesto />

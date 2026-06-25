@@ -82,7 +82,7 @@ export function ProjectDetailView() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -30 }}
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="min-h-screen w-full flex flex-col justify-start p-6 md:p-12 relative overflow-y-auto"
+            className="min-h-[100svh] w-full flex flex-col justify-start p-6 md:p-12 relative overflow-y-auto"
           >
             {/* Design detail top bar */}
             <header className="w-full flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-neutral-200/60 dark:border-neutral-800/60 pb-6 mb-10 z-10">

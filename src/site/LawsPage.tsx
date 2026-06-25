@@ -255,7 +255,7 @@ function Hero() {
     return () => el.removeEventListener("mousemove", move);
   }, []);
   return (
-    <section ref={ref} className="relative flex min-h-[92vh] flex-col justify-center overflow-hidden px-6 md:px-10" style={{ ["--mx" as string]: "50%", ["--my" as string]: "50%" }}>
+    <section ref={ref} className="relative flex min-h-[92svh] flex-col justify-center overflow-hidden px-6 md:px-10" style={{ ["--mx" as string]: "50%", ["--my" as string]: "50%" }}>
       <div className="pointer-events-none absolute inset-0" style={{ backgroundImage: "radial-gradient(var(--color-ink-line) 1.5px, transparent 1.6px)", backgroundSize: "34px 34px", opacity: 0.55 }} />
       <div className="pointer-events-none absolute inset-0" style={{ backgroundImage: "radial-gradient(var(--color-gold) 1.7px, transparent 1.8px)", backgroundSize: "34px 34px", WebkitMaskImage: "radial-gradient(240px circle at var(--mx) var(--my), #000 0%, transparent 72%)", maskImage: "radial-gradient(240px circle at var(--mx) var(--my), #000 0%, transparent 72%)" }} />
       <div className="relative z-10 mx-auto w-full max-w-[1600px] reveal-up">
@@ -386,7 +386,7 @@ export function LawsPage() {
   const jump = (id: string) => document.getElementById(`law-${id}`)?.scrollIntoView({ behavior: "smooth", block: "start" });
 
   return (
-    <div className="bg-ink text-paper font-sans antialiased min-h-screen overflow-clip">
+    <div className="bg-ink text-paper font-sans antialiased min-h-[100svh] overflow-clip">
       <PageHeader />
       <ProgressRail active={active} onJump={jump} />
       <main>

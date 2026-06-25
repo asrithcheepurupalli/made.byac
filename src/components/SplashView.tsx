@@ -82,7 +82,7 @@ export function SplashView() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0, y: -24 }}
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="min-h-screen w-full flex flex-col justify-between p-6 md:p-12 relative overflow-hidden select-none"
+            className="min-h-[100svh] w-full flex flex-col justify-between p-6 md:p-12 relative overflow-hidden select-none"
           >
             {/* Top Bar Navigation (Symmetrical digital metadata header) */}
             <header className="w-full flex justify-between items-center z-10 font-mono text-xs tracking-widest text-neutral-900 dark:text-neutral-300">

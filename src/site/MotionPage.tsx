@@ -182,7 +182,7 @@ export function MotionPage() {
     document.head.appendChild(s);
   }, []);
   return (
-    <div className="bg-ink text-paper font-sans antialiased min-h-screen overflow-clip">
+    <div className="bg-ink text-paper font-sans antialiased min-h-[100svh] overflow-clip">
       <PageHeader />
       <main>
         <section className="reveal-up px-6 md:px-10 pt-32 pb-12 md:pt-40">

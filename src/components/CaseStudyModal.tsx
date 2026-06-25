@@ -90,7 +90,7 @@ export function CaseStudyModal() {
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.96, y: 25 }}
               transition={{ type: "spring", damping: 26, stiffness: 200 }}
-              className={`w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-3xl shadow-2xl flex flex-col ${
+              className={`w-full max-w-4xl max-h-[90svh] overflow-y-auto rounded-3xl shadow-2xl flex flex-col ${
                 isDarkMode ? "bg-neutral-950 border border-neutral-800 text-[#eceae5]" : "bg-white border border-[#cfc4c5]/40 text-[#1c1b1b]"
               }`}
               onClick={(e) => e.stopPropagation()}

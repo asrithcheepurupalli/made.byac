@@ -11,7 +11,7 @@ export function CampaignCaseStudy({ slug }: { slug: string }) {
   const a = c.accent;
 
   return (
-    <div className="bg-ink text-paper font-sans antialiased min-h-screen" style={{ ["--a" as string]: a }}>
+    <div className="bg-ink text-paper font-sans antialiased min-h-[100svh]" style={{ ["--a" as string]: a }}>
       {/* back nav */}
       <header className="fixed top-0 inset-x-0 z-50 backdrop-blur-md bg-ink/60 border-b border-ink-line" style={{ paddingTop: "env(safe-area-inset-top)" }}>
         <div className="mx-auto max-w-[1400px] px-6 md:px-10 h-16 flex items-center justify-between">

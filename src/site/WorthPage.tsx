@@ -64,7 +64,7 @@ export function WorthPage() {
   const max = Math.max(after, 1);
 
   return (
-    <div className="bg-ink text-paper font-sans antialiased min-h-screen overflow-clip">
+    <div className="bg-ink text-paper font-sans antialiased min-h-[100svh] overflow-clip">
       <PageHeader />
       <main>
         {/* hero */}
