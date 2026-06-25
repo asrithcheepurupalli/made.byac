@@ -133,7 +133,7 @@ export function SiteNav() {
 
       {/* mobile full-screen overlay menu */}
       <div
-        className={`sm:hidden fixed inset-0 z-40 bg-ink text-paper transition-[opacity,visibility] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+        className={`sm:hidden fixed inset-0 z-40 overflow-y-auto overscroll-contain bg-ink text-paper transition-[opacity,visibility] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
           menuOpen ? "opacity-100 visible" : "opacity-0 invisible"
         }`}
         aria-hidden={!menuOpen}
@@ -148,7 +148,7 @@ export function SiteNav() {
           }}
         />
         <div
-          className="relative h-full flex flex-col px-7 pb-12"
+          className="relative flex min-h-full flex-col px-7 pb-12"
           style={{ paddingTop: "max(calc(env(safe-area-inset-top) + 6rem), 7rem)" }}
         >
           <span className="label text-red">·menu</span>
