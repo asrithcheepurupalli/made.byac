@@ -21,14 +21,18 @@ export function SiteNav() {
 
   useEffect(() => {
     let last = window.scrollY;
-    const onScroll = () => {
+    let ticking = false;
+    // Read once per frame (rAF-throttled) instead of on every scroll event. Lenis
+    // fires many scroll events per frame, and the old handler did a querySelectorAll
+    // + getBoundingClientRect on each one, thrashing layout. setState bails when the
+    // boolean is unchanged, so the nav only re-renders when a state actually flips.
+    const read = () => {
+      ticking = false;
       const y = window.scrollY;
       setScrolled(y > 24);
-      // hide when scrolling down past the hero, show on the slightest scroll up
       if (y > 240 && y > last + 6) setHidden(true);
       else if (y < last - 6) setHidden(false);
       last = y;
-      // detect a dark section behind the nav line
       let over = false;
       document.querySelectorAll<HTMLElement>("[data-nav-dark]").forEach((el) => {
         const r = el.getBoundingClientRect();
@@ -36,9 +40,15 @@ export function SiteNav() {
       });
       setNavDark(over);
     };
-    onScroll();
+    const onScroll = () => {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(read);
+      }
+    };
+    read();
     window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
+    window.addEventListener("resize", onScroll, { passive: true });
     return () => { window.removeEventListener("scroll", onScroll); window.removeEventListener("resize", onScroll); };
   }, []);
 
