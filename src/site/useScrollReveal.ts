@@ -1,12 +1,12 @@
 import { useEffect } from "react";
 
 // Drives the .reveal-up / .reveal-stagger CSS (see index.css) with a single
-// IntersectionObserver, so reveals run on every browser — unlike the old
-// animation-timeline approach, which only ran on Chromium + Safari 26+.
+// IntersectionObserver, so reveals run on every browser.
 //
-// Pass a route key so it re-scans after the SPA swaps page content. Elements
-// already on screen at mount are revealed on the observer's first callback
-// (next frame), which reads as a clean entrance rather than a flash.
+// Pass a route key so it re-scans after the SPA swaps page content. Crucially, route
+// pages are code-split (React.lazy), so their content mounts a beat AFTER the route
+// changes. A one-shot rAF would observe nothing and leave that content stuck hidden,
+// so we also keep a MutationObserver watching for reveal elements that mount late.
 export function useScrollReveal(routeKey: unknown) {
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -15,11 +15,10 @@ export function useScrollReveal(routeKey: unknown) {
     if (!document.documentElement.classList.contains("js-reveal")) return;
 
     // Reveal via INLINE STYLES, not a class. Many of these elements live in
-    // components that re-render (hover, filters, scroll-synced state); React
-    // rewrites their className on every render and would wipe a JS-added class,
-    // snapping them back to hidden. Inline styles survive that. (.reveal-stagger
-    // still needs the class so its nth-child child delays apply — its containers
-    // are static, so they're safe.)
+    // components that re-render (hover, filters, scroll-synced state); React rewrites
+    // their className on every render and would wipe a JS-added class, snapping them
+    // back to hidden. Inline styles survive that. (.reveal-stagger still needs the
+    // class so its nth-child delays apply; its containers are static, so they're safe.)
     const reveal = (el: HTMLElement) => {
       if (el.classList.contains("reveal-stagger")) {
         el.classList.add("in-view");
@@ -30,37 +29,54 @@ export function useScrollReveal(routeKey: unknown) {
     };
 
     const selector = ".reveal-up, .reveal-stagger";
-    const collect = () =>
-      Array.from(document.querySelectorAll<HTMLElement>(selector)).filter(
-        (el) => !el.classList.contains("in-view") && el.style.opacity !== "1",
-      );
+    const pending = (el: HTMLElement) => !el.classList.contains("in-view") && el.style.opacity !== "1";
 
-    // Let the freshly-rendered route paint before we query + observe.
+    let io: IntersectionObserver | null = null;
+    let mo: MutationObserver | null = null;
+    let moRaf = 0;
+
+    // Observe any not-yet-revealed elements currently in the DOM. Safe to call
+    // repeatedly; re-observing an element the IO already watches is a no-op.
+    const sweep = () => {
+      if (!io) return;
+      document.querySelectorAll<HTMLElement>(selector).forEach((el) => {
+        if (pending(el)) io!.observe(el);
+      });
+    };
+
     const raf = requestAnimationFrame(() => {
-      const els = collect();
       if (!("IntersectionObserver" in window)) {
-        els.forEach(reveal);
+        document.querySelectorAll<HTMLElement>(selector).forEach(reveal);
         return;
       }
-      const io = new IntersectionObserver(
+      io = new IntersectionObserver(
         (entries) => {
           for (const entry of entries) {
             if (entry.isIntersecting) {
               reveal(entry.target as HTMLElement);
-              io.unobserve(entry.target);
+              io!.unobserve(entry.target);
             }
           }
         },
         { rootMargin: "0px 0px -8% 0px", threshold: 0.1 },
       );
-      els.forEach((el) => io.observe(el));
-      cleanup = () => io.disconnect();
+      sweep();
+      // Catch lazy / async-mounted page content as it appears (code-split routes).
+      mo = new MutationObserver(() => {
+        if (moRaf) return;
+        moRaf = requestAnimationFrame(() => {
+          moRaf = 0;
+          sweep();
+        });
+      });
+      mo.observe(document.body, { childList: true, subtree: true });
     });
 
-    let cleanup = () => {};
     return () => {
       cancelAnimationFrame(raf);
-      cleanup();
+      if (moRaf) cancelAnimationFrame(moRaf);
+      mo?.disconnect();
+      io?.disconnect();
     };
   }, [routeKey]);
 }
