@@ -18,6 +18,7 @@ import { SiteFooter } from "./SiteFooter";
 import { LabsTease } from "./LabsTease";
 import { LawsTease } from "./LawsTease";
 import { PlayCanvas } from "./PlayCanvas";
+import { ProductsTease } from "./ProductsTease";
 import { CAMPAIGN_CASES } from "./case/caseData";
 
 // Route pages load on demand, so the homepage ships only its own code instead of all
@@ -142,6 +143,7 @@ export function Site() {
           <LiveCompose />
           <BeforeAfter />
           <SelectedWork />
+          <ProductsTease />
           <LabsTease />
           <LawsTease />
           <GridLab />
