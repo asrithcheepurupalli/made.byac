@@ -337,6 +337,14 @@ html.js-reveal .reveal-stagger.in-view > *:nth-child(n + 9) { transition-delay: 
    touch devices, otherwise phones cannot scroll at all. */
 @media (hover: none) { .grain { display: none; } }
 
+/* ---- keyboard focus: a gold ring on whatever is tabbed to (mouse clicks stay clean
+   because :focus-visible only fires for keyboard/AT, never pointer) ---- */
+:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
 /* ---- hero cursor-lit grid: a gold spotlight on the architect grid ---- */
 .hero-grid-lit {
   position: absolute;

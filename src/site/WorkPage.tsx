@@ -293,7 +293,7 @@ export function WorkPage() {
             <div className="mt-6 grid grid-cols-4 gap-3">
               {PALETTE.map((c) => (
                 <div key={c.name} className="group">
-                  <div className="aspect-square rounded-xl border border-ink-line transition-transform duration-300 group-hover:-translate-y-1" style={{ background: c.hex }} />
+                  <div className="aspect-square rounded-xl border border-ink-line transition-transform duration-300 group-hover:-translate-y-1 active:scale-[0.98]" style={{ background: c.hex }} />
                   <div className="mt-2.5 font-display text-sm text-paper">{c.name}</div>
                   <div className="label text-[8px] text-grey">{c.hex}</div>
                 </div>

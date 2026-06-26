@@ -157,7 +157,7 @@ export function BeforeAfter() {
         {/* the comparison */}
         <div
           ref={wrapRef}
-          className="reveal-up mt-12 relative w-full rounded-3xl overflow-hidden border border-ink-line select-none cursor-ew-resize aspect-[4/5] sm:aspect-[16/10] md:aspect-[16/8] shadow-2xl"
+          className="reveal-up group mt-12 relative w-full rounded-3xl overflow-hidden border border-ink-line select-none cursor-ew-resize active:cursor-grabbing aspect-[4/5] sm:aspect-[16/10] md:aspect-[16/8] shadow-2xl"
           onMouseDown={(e) => { dragging.current = true; setHint(false); setFromClientX(e.clientX); }}
           onTouchStart={(e) => { dragging.current = true; setHint(false); e.touches[0] && setFromClientX(e.touches[0].clientX); }}
         >
@@ -168,8 +168,8 @@ export function BeforeAfter() {
           <span className="absolute top-4 right-4 label text-[9px] rounded-full px-3 py-1.5 z-10" style={{ background: "#c8102e", color: "#fff" }}>made. · a whole brand</span>
 
           <div className="absolute top-0 bottom-0 w-[2px] bg-white/80 pointer-events-none z-10" style={{ left: `${pct}%` }} />
-          <div className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-12 h-12 rounded-full bg-white text-ink flex items-center justify-center shadow-xl pointer-events-none z-10 ring-4 ring-white/25" style={{ left: `${pct}%` }}>
-            <MoveHorizontal className="w-5 h-5" />
+          <div className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-12 h-12 rounded-full bg-white text-ink flex items-center justify-center shadow-xl pointer-events-none z-10 ring-4 ring-white/25 transition-[transform,box-shadow] duration-200 group-hover:scale-105 group-active:scale-110 group-active:ring-white/50" style={{ left: `${pct}%` }}>
+            <MoveHorizontal className="w-5 h-5 transition-transform duration-200 group-active:scale-90" />
           </div>
         </div>
         <p className="mt-4 label text-[9px] text-grey text-center">drag the handle ←→</p>
@@ -182,8 +182,8 @@ export function BeforeAfter() {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-ink-line border border-ink-line rounded-2xl overflow-hidden">
             {SCOPE.map(([t, d], i) => (
-              <div key={t} className="bg-ink p-6 md:p-7 flex flex-col gap-3">
-                <span className="font-mono text-sm text-gold">{String(i + 1).padStart(2, "0")}</span>
+              <div key={t} className="group bg-ink p-6 md:p-7 flex flex-col gap-3 transition-colors duration-300 hover:bg-ink-soft">
+                <span className="font-mono text-sm text-gold transition-colors group-hover:text-red">{String(i + 1).padStart(2, "0")}</span>
                 <h4 className="font-display text-xl md:text-2xl leading-tight">{t}</h4>
                 <p className="text-[14px] leading-relaxed text-grey-dim">{d}</p>
               </div>

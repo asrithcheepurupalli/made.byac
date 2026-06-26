@@ -312,7 +312,7 @@ function CanonIndex({ onJump }: { onJump: (id: string) => void }) {
               onClick={() => setActive(i)}
               title={it.desc}
               data-cursor={it.live ? "feel" : undefined}
-              className="group relative flex aspect-[5/4] flex-col justify-between overflow-hidden rounded-lg p-2.5 text-left transition-transform duration-200 hover:-translate-y-1"
+              className="group relative flex aspect-[5/4] flex-col justify-between overflow-hidden rounded-lg p-2.5 text-left transition-transform duration-200 hover:-translate-y-1 active:scale-[0.98]"
               style={{ background: it.live ? it.accent : "var(--color-ink-soft)", border: active === i ? "1px solid var(--color-paper)" : "1px solid var(--color-ink-line)" }}
             >
               <span className={`label text-[8px] ${it.live ? "text-ink/55" : "text-grey-dim"}`}>{String(i + 1).padStart(2, "0")}</span>

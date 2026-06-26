@@ -62,7 +62,7 @@ export function CraftPage() {
                   <h2 className="mt-2 font-display text-3xl leading-tight tracking-tight transition-colors md:text-5xl group-hover:text-gold">{p.name}</h2>
                   <p className="mt-2 max-w-xl text-grey-dim leading-relaxed">{p.line}</p>
                 </div>
-                <ArrowUpRight className="h-6 w-6 shrink-0 text-grey-dim transition-all group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-paper" />
+                <ArrowUpRight className="h-6 w-6 shrink-0 text-grey-dim transition-all group-hover:translate-x-1 group-hover:-translate-y-1 active:scale-[0.98] group-hover:text-paper" />
               </a>
             ))}
           </div>

@@ -39,7 +39,7 @@ export function ExploreTease() {
               key={c.href}
               href={c.href}
               data-cursor="Open"
-              className="reveal-up group relative overflow-hidden rounded-2xl border border-ink-line p-9 md:p-11 min-h-[240px] flex flex-col justify-between transition-transform duration-300 hover:-translate-y-1"
+              className="reveal-up group relative overflow-hidden rounded-2xl border border-ink-line p-9 md:p-11 min-h-[240px] flex flex-col justify-between transition-transform duration-300 hover:-translate-y-1 active:scale-[0.98]"
             >
               <div className="flex items-center justify-between">
                 <span className="h-1 w-12 rounded-full" style={{ background: c.accent }} />

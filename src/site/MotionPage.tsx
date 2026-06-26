@@ -71,7 +71,7 @@ function StatesDemo() {
     <div>
       <p className="label text-grey-dim text-[9px]">hover it, then press and hold</p>
       <div className="mt-4 flex h-40 items-center justify-center rounded-xl border border-ink-line bg-ink">
-        <button className="rounded-full bg-red px-7 py-3.5 text-sm font-semibold text-white transition-transform duration-200 hover:-translate-y-1 active:translate-y-0 active:scale-95" style={{ transitionTimingFunction: SIGNATURE }}>Press me</button>
+        <button className="rounded-full bg-red px-7 py-3.5 text-sm font-semibold text-white transition-transform duration-200 hover:-translate-y-1 active:scale-[0.98] active:translate-y-0 active:scale-95" style={{ transitionTimingFunction: SIGNATURE }}>Press me</button>
       </div>
       <p className="mt-4 text-[14px] leading-relaxed text-grey-dim">Hover and it lifts toward you. Press and it gives, like a real button under a real thumb. Every control answers your touch inside a single frame, so the screen feels physical.</p>
     </div>

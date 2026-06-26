@@ -31,7 +31,7 @@ export function ProductsTease() {
           target="_blank"
           rel="noreferrer"
           data-cursor="Open"
-          className="reveal-up group grid grid-cols-1 lg:grid-cols-12 items-stretch overflow-hidden rounded-2xl bg-ink text-paper shadow-xl transition-transform duration-300 hover:-translate-y-1"
+          className="reveal-up group grid grid-cols-1 lg:grid-cols-12 items-stretch overflow-hidden rounded-2xl bg-ink text-paper shadow-xl transition-transform duration-300 hover:-translate-y-1 active:scale-[0.98]"
         >
           {/* left: the pitch */}
           <div className="lg:col-span-7 p-9 md:p-12 flex flex-col">
@@ -65,7 +65,7 @@ export function ProductsTease() {
               target="_blank"
               rel="noreferrer"
               data-cursor="Open"
-              className="reveal-up group rounded-2xl border border-paper-line bg-paper p-7 flex flex-col gap-5 min-h-[160px] transition-transform duration-300 hover:-translate-y-1"
+              className="reveal-up group rounded-2xl border border-paper-line bg-paper p-7 flex flex-col gap-5 min-h-[160px] transition-transform duration-300 hover:-translate-y-1 active:scale-[0.98]"
             >
               <div className="flex items-center justify-between">
                 <span className="h-1 w-10 rounded-full bg-gold" />

@@ -63,7 +63,7 @@ export function SelectedWork() {
               href={`#/work/${c.slug}`}
               data-cursor="View"
               data-cursor-img={CASE_IMG[c.slug]}
-              className="group reveal-up rounded-2xl border border-ink-line p-9 md:p-11 min-h-[200px] flex flex-col gap-6 transition-transform duration-300 hover:-translate-y-1"
+              className="group reveal-up rounded-2xl border border-ink-line p-9 md:p-11 min-h-[200px] flex flex-col gap-6 transition-transform duration-300 hover:-translate-y-1 active:scale-[0.98]"
             >
               <span className="block h-1 w-12 rounded-full" style={{ background: c.accent }} />
               <div className="flex items-center justify-between">
