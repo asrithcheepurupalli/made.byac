@@ -21,8 +21,10 @@ const CARDS = [
 
 export function ExploreTease() {
   return (
-    <section data-nav-dark className="relative bg-ink text-paper border-t border-ink-line py-24 md:py-32">
-      <div className="mx-auto max-w-[1600px] px-6 md:px-10">
+    <section data-nav-dark className="relative overflow-hidden bg-ink text-paper py-24 md:py-32">
+      {/* seam: blend down from the paper products section above */}
+      <div aria-hidden className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-paper-dim to-ink pointer-events-none" />
+      <div className="relative z-10 mx-auto max-w-[1600px] px-6 md:px-10">
         <div className="reveal-up flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12 md:mb-14">
           <div>
             <span className="label text-red">·006 / beyond the work</span>

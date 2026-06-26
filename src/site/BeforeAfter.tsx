@@ -102,7 +102,8 @@ export function BeforeAfter() {
 
   return (
     <section data-nav-dark className="relative bg-ink text-paper py-28 md:py-32 overflow-hidden">
-      <div aria-hidden className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-paper-dim to-ink pointer-events-none" />
+      {/* ProblemPicker above is also ink, so no seam (a paper-to-ink seam here left a
+          bright band between two dark sections after LiveCompose was removed) */}
       <div className="relative z-10 mx-auto max-w-[1400px] px-6 md:px-10">
         <div className="reveal-up max-w-2xl">
           <span className="label text-gold">·003 / the made. difference</span>
