@@ -8,7 +8,6 @@ import { useMagnetic } from "./useMagnetic";
 import { SiteNav } from "./SiteNav";
 import { ActHero } from "./ActHero";
 import { ProblemPicker } from "./ProblemPicker";
-import { LiveCompose } from "./LiveCompose";
 import { BeforeAfter } from "./BeforeAfter";
 import { Manifesto } from "./Manifesto";
 import { SelectedWork } from "./SelectedWork";
@@ -140,7 +139,6 @@ export function Site() {
         <main>
           <ActHero />
           <ProblemPicker />
-          <LiveCompose />
           <BeforeAfter />
           <SelectedWork />
           <ProductsTease />

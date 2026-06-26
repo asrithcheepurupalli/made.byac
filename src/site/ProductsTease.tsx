@@ -1,7 +1,8 @@
 import { ArrowUpRight } from "lucide-react";
 
-// made. ships its own products, not just client work. percentyle is the newest, so
-// it gets the featured slot; the rest of the family sits in a quiet grid beneath.
+// made. ships its own products, not just client work. This is the paper break in the
+// middle of the dark run; percentyle is the featured (bold ink) card so it pops, the
+// rest of the family sits in quiet light cards beneath.
 const PRODUCTS = [
   { name: "made. table", url: "https://table.made-by-ac.com", desc: "Type a vibe, get a bespoke restaurant site." },
   { name: "made. crew", url: "https://crew.made-by-ac.com", desc: "A chief-of-staff and back-office for operators." },
@@ -11,24 +12,24 @@ const PRODUCTS = [
 
 export function ProductsTease() {
   return (
-    <section id="products" data-nav-dark className="relative bg-ink text-paper border-t border-ink-line py-28 md:py-40 overflow-hidden">
+    <section id="products" className="relative bg-paper-dim text-ink border-t border-paper-line py-24 md:py-32 overflow-hidden">
       <div className="relative mx-auto max-w-[1600px] px-6 md:px-10">
         {/* header */}
-        <div className="reveal-up flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-14 md:mb-20">
+        <div className="reveal-up flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-12 md:mb-16">
           <div>
             <span className="label text-red">·products</span>
             <h2 className="mt-6 font-display text-6xl md:text-8xl leading-[0.9] tracking-[-0.02em]">We build for<br />ourselves too<span className="text-red">.</span></h2>
           </div>
-          <p className="font-display text-xl md:text-2xl text-grey-dim max-w-md leading-relaxed">Real products we design, build and ship, the same way we do for clients.</p>
+          <p className="font-display text-xl md:text-2xl text-grey max-w-md leading-relaxed">Real products we design, build and ship, the same way we do for clients.</p>
         </div>
 
-        {/* featured: percentyle */}
+        {/* featured: percentyle — a bold ink card on the paper section */}
         <a
           href="https://percentyle.in"
           target="_blank"
           rel="noreferrer"
           data-cursor="Open"
-          className="reveal-up group grid grid-cols-1 lg:grid-cols-12 items-stretch gap-8 lg:gap-0 overflow-hidden rounded-2xl border border-ink-line transition-transform duration-300 hover:-translate-y-1"
+          className="reveal-up group grid grid-cols-1 lg:grid-cols-12 items-stretch overflow-hidden rounded-2xl bg-ink text-paper shadow-xl transition-transform duration-300 hover:-translate-y-1"
         >
           {/* left: the pitch */}
           <div className="lg:col-span-7 p-9 md:p-12 flex flex-col">
@@ -53,7 +54,7 @@ export function ProductsTease() {
           </div>
         </a>
 
-        {/* the rest of the family */}
+        {/* the rest of the family — light cards */}
         <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {PRODUCTS.map((p) => (
             <a
@@ -62,15 +63,15 @@ export function ProductsTease() {
               target="_blank"
               rel="noreferrer"
               data-cursor="Open"
-              className="reveal-up group rounded-2xl border border-ink-line p-7 flex flex-col gap-5 min-h-[160px] transition-transform duration-300 hover:-translate-y-1"
+              className="reveal-up group rounded-2xl border border-paper-line bg-paper p-7 flex flex-col gap-5 min-h-[160px] transition-transform duration-300 hover:-translate-y-1"
             >
               <div className="flex items-center justify-between">
-                <span className="h-1 w-10 rounded-full bg-gold/70" />
-                <ArrowUpRight className="w-5 h-5 text-grey-dim transition-all duration-300 group-hover:text-paper group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                <span className="h-1 w-10 rounded-full bg-gold" />
+                <ArrowUpRight className="w-5 h-5 text-grey transition-all duration-300 group-hover:text-ink group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </div>
               <div className="mt-auto">
                 <h3 className="font-display text-2xl leading-tight">{p.name}</h3>
-                <p className="mt-2 text-[14px] leading-relaxed text-grey-dim">{p.desc}</p>
+                <p className="mt-2 text-[14px] leading-relaxed text-grey">{p.desc}</p>
               </div>
             </a>
           ))}
