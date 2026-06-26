@@ -17,7 +17,7 @@ export function ProductsTease() {
         {/* header */}
         <div className="reveal-up flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-12 md:mb-16">
           <div>
-            <span className="label text-red">·products</span>
+            <span className="label text-red">·005 / products</span>
             <h2 className="mt-6 font-display text-6xl md:text-8xl leading-[0.9] tracking-[-0.02em]">We build for<br />ourselves too<span className="text-red">.</span></h2>
           </div>
           <p className="font-display text-xl md:text-2xl text-grey max-w-md leading-relaxed">Real products we design, build and ship, the same way we do for clients.</p>

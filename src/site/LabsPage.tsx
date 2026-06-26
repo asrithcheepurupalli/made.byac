@@ -419,7 +419,7 @@ function LabsCapabilities() {
     return () => clearInterval(t);
   }, []);
   return (
-    <section data-nav-dark className="bg-paper text-ink py-24 md:py-40 border-t border-paper-line">
+    <section data-nav-dark className="bg-paper text-ink py-24 md:py-32 border-t border-paper-line">
       <div className="mx-auto max-w-[1500px] px-6 md:px-10 text-center">
         <span className="reveal-up label text-red">· what this proves</span>
         <h2 className="reveal-up mt-8 font-display text-4xl md:text-7xl leading-[1.02] tracking-[-0.02em]">

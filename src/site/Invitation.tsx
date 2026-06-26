@@ -42,7 +42,7 @@ export function Invitation() {
   } = useStudio();
 
   return (
-    <section id="say-hi" data-nav-dark className="relative bg-ink text-paper py-28 md:py-44 overflow-hidden">
+    <section id="say-hi" data-nav-dark className="relative bg-ink text-paper py-28 md:py-32 overflow-hidden">
       {/* seam: blend down from the paper-dim studio above */}
       <div aria-hidden className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-paper-dim to-ink pointer-events-none" />
       {/* soft red glow — kept well below the seam so it warms the body, not the
@@ -55,7 +55,7 @@ export function Invitation() {
       <div className="relative z-10 mx-auto max-w-[1600px] px-6 md:px-10 grid grid-cols-1 lg:grid-cols-12 gap-14 lg:gap-20 items-center">
         {/* the warm message */}
         <div className="lg:col-span-7">
-          <span className="label text-red">·008 / say hi</span>
+          <span className="label text-red">·009 / say hi</span>
           <motion.h2
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}

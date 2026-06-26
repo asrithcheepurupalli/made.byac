@@ -525,7 +525,7 @@ export function SomaaCaseStudy() {
       {/* OUTCOME / CTA */}
       <section className="relative overflow-hidden">
         <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[70vw] h-[50vh] opacity-30" style={{ background: "radial-gradient(50% 50% at 50% 50%, rgba(217,149,71,0.5), transparent 70%)" }} />
-        <div className="relative z-10 mx-auto max-w-[1400px] px-6 md:px-10 py-24 md:py-40 text-center">
+        <div className="relative z-10 mx-auto max-w-[1400px] px-6 md:px-10 py-24 md:py-32 text-center">
           <span className="label" style={{ color: C.amber }}>The outcome</span>
           <h2 className="mt-8 font-display text-4xl md:text-7xl leading-[1.0] max-w-4xl mx-auto" style={{ color: C.text }}>
             A guest can sit down, scan, and feel looked after before a server says a word.

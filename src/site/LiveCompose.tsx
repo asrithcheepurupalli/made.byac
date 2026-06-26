@@ -121,7 +121,7 @@ export function LiveCompose() {
   useEffect(() => () => { runRef.current = -1; }, []);
 
   return (
-    <section id="make" data-ambient="dim" className="relative bg-paper-dim text-ink py-28 md:py-40 overflow-hidden">
+    <section id="make" data-ambient="dim" className="relative bg-paper-dim text-ink py-28 md:py-32 overflow-hidden">
       <div aria-hidden className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-ink to-paper-dim pointer-events-none" />
       <div className="relative z-10 mx-auto max-w-[1600px] px-6 md:px-10">
         <div className="reveal-up max-w-3xl">

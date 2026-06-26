@@ -128,7 +128,7 @@ export function ProblemPicker() {
   const fix = FIXES[active];
 
   return (
-    <section id="fix" data-nav-dark className="relative bg-ink text-paper py-28 md:py-40 overflow-hidden">
+    <section id="fix" data-nav-dark className="relative bg-ink text-paper py-28 md:py-32 overflow-hidden">
       {/* seam down from the paper hero/manifesto above */}
       <div aria-hidden className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-paper to-ink pointer-events-none" />
       {/* accent glow tracks the selected fix */}

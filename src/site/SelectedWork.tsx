@@ -21,16 +21,16 @@ export function SelectedWork() {
   const somaa = CASE_STUDIES[0];
 
   return (
-    <section id="work" data-nav-dark className="relative bg-ink text-paper py-28 md:py-40 overflow-hidden">
+    <section id="work" data-nav-dark className="relative bg-ink text-paper py-28 md:py-32 overflow-hidden">
       {/* sits under the ink before/after section — no seam needed */}
       <div className="relative mx-auto max-w-[1600px] px-6 md:px-10">
         {/* header */}
         <div className="reveal-up flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-16 md:mb-24">
           <div>
-            <span className="label text-red">·005 / selected work</span>
+            <span className="label text-red">·004 / selected work</span>
             <h2 className="mt-6 font-display text-6xl md:text-8xl leading-[0.9] tracking-[-0.02em]">The work<span className="text-red">.</span></h2>
           </div>
-          <p className="font-display text-xl md:text-2xl text-grey-dim max-w-md leading-relaxed">Three studies we're proud of, and a wall of everything else.</p>
+          <p className="font-display text-xl md:text-2xl text-grey-dim max-w-md leading-relaxed">A few studies we are proud of. The rest lives in the work archive.</p>
         </div>
 
         {/* featured case study — Somaa */}

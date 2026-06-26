@@ -14,8 +14,7 @@ import { SelectedWork } from "./SelectedWork";
 import { GridLab } from "./GridLab";
 import { Invitation } from "./Invitation";
 import { SiteFooter } from "./SiteFooter";
-import { LabsTease } from "./LabsTease";
-import { LawsTease } from "./LawsTease";
+import { ExploreTease } from "./ExploreTease";
 import { PlayCanvas } from "./PlayCanvas";
 import { ProductsTease } from "./ProductsTease";
 import { CAMPAIGN_CASES } from "./case/caseData";
@@ -142,8 +141,7 @@ export function Site() {
           <BeforeAfter />
           <SelectedWork />
           <ProductsTease />
-          <LabsTease />
-          <LawsTease />
+          <ExploreTease />
           <GridLab />
           <Manifesto />
           <Invitation />
