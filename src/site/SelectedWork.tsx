@@ -1,5 +1,4 @@
 import { ArrowUpRight, Zap, Truck, Gift, Package } from "lucide-react";
-import { PROJECTS } from "../data";
 
 // ACT II — the work, under the lights. Three case studies carry it; everything
 // else hangs on a quiet wall you can hover to view.
@@ -14,10 +13,6 @@ const MORE = [
   { slug: "innovolt", client: "Innovolt", desc: "Commercial EV marketplace campaigns", accent: "#27d17c", icons: [Zap, Truck] },
   { slug: "mithai-maharaja", client: "Mithai Maharaja", desc: "Luxury Indian sweets packaging", accent: "#c8a24b", icons: [Gift, Package] },
 ];
-
-// quiet wall = clients without a dedicated case study (yet)
-const WALL = PROJECTS.filter((p) => p.client === "Telyport" || p.client === "Mr. Snapper International");
-const ROT = [-3, 2.5, -2, 3, -1.5, 2, -2.5, 1.5];
 
 // thumbnail the cursor floats when hovering a secondary case-study card
 const CASE_IMG: Record<string, string> = Object.fromEntries(CASE_STUDIES.map((c) => [c.slug, c.img]));
@@ -88,34 +83,6 @@ export function SelectedWork() {
           ))}
         </div>
 
-        {/* the quiet wall — hover to view */}
-        <div className="mt-28 md:mt-40 border-t border-ink-line">
-          <div className="flex items-center justify-between pt-8 mb-16">
-            <span className="label text-grey-dim">Also from the studio</span>
-            <span className="label text-grey-dim/60">hover to view</span>
-          </div>
-          <div className="flex flex-wrap justify-center gap-x-10 gap-y-16 md:gap-x-16 px-2">
-            {WALL.map((p, i) => (
-              <div
-                key={p.id}
-                className="wall-item group relative flex flex-col items-center hover:z-40"
-                style={{ transform: `rotate(${ROT[i % ROT.length]}deg)` }}
-              >
-                {/* the hanger */}
-                <span className="w-px h-7 bg-ink-line" />
-                <span className="w-1.5 h-1.5 rounded-full -mt-7 mb-5" style={{ background: "var(--color-gold)" }} />
-                {/* grows upward from its bottom edge so it never covers the caption below */}
-                <div className="relative w-28 md:w-36 aspect-[3/4] rounded-md overflow-hidden border border-ink-line bg-ink-soft shadow-lg origin-bottom transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.5] group-hover:rotate-0 group-hover:shadow-2xl">
-                  <img src={p.imageUrl} alt={p.altText} loading="lazy" referrerPolicy="no-referrer" className="wall-thumb w-full h-full object-cover grayscale opacity-70 transition-all duration-500 group-hover:grayscale-0 group-hover:opacity-100" />
-                </div>
-                <div className="wall-caption relative z-40 mt-4 text-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <div className="font-display text-sm text-paper leading-tight">{p.title}</div>
-                  <div className="label text-[8px] text-grey-dim mt-1">{p.client}</div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
       </div>
     </section>
   );

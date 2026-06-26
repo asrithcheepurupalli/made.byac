@@ -45,10 +45,11 @@ export function Invitation() {
     <section id="say-hi" data-nav-dark className="relative bg-ink text-paper py-28 md:py-44 overflow-hidden">
       {/* seam: blend down from the paper-dim studio above */}
       <div aria-hidden className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-paper-dim to-ink pointer-events-none" />
-      {/* soft red glow */}
+      {/* soft red glow — kept well below the seam so it warms the body, not the
+          paper-to-ink transition (the glow over the light edge read as muddy brown) */}
       <div
-        className="pointer-events-none absolute -top-40 left-1/2 -translate-x-1/2 w-[80vw] h-[60vh] opacity-30"
-        style={{ background: "radial-gradient(50% 50% at 50% 50%, rgba(200,16,46,0.45), transparent 70%)" }}
+        className="pointer-events-none absolute top-1/3 left-1/2 -translate-x-1/2 w-[80vw] h-[55vh] opacity-25"
+        style={{ background: "radial-gradient(50% 50% at 50% 50%, rgba(200,16,46,0.4), transparent 70%)" }}
       />
 
       <div className="relative z-10 mx-auto max-w-[1600px] px-6 md:px-10 grid grid-cols-1 lg:grid-cols-12 gap-14 lg:gap-20 items-center">
