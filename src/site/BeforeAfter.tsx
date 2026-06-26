@@ -1,11 +1,10 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { MoveHorizontal } from "lucide-react";
 
-// The made. difference, in one gesture. A draggable before→after of the SAME storefront:
-// once as an off-the-shelf template, once made. by ac. A "what changed" breakdown makes
-// the gap explicit, not just felt. Show, don't tell.
+// The made. difference, in one gesture. Drag a cheap template into the full made.
+// treatment: not a prettier page, a whole brand system (identity, voice, palette,
+// type, surfaces). The scope grid below spells out everything we actually deliver.
 
-// A mock storefront, rendered two ways. Same restaurant, different soul.
 function Card({ made }: { made: boolean }) {
   if (!made) {
     // BEFORE — a generic template: system font, stock blue, clutter, shouting.
@@ -30,37 +29,62 @@ function Card({ made }: { made: boolean }) {
       </div>
     );
   }
-  // AFTER — made.: Fraunces, warm paper, one red, an editorial voice, room to breathe.
+  // AFTER — made.: a whole brand system, not a page. Identity, voice, palette, type, surfaces.
+  const cell = "rounded-lg p-3 md:p-4 flex flex-col";
+  const lbl = "font-mono text-[7px] md:text-[8px] uppercase tracking-[0.16em]";
   return (
-    <div style={{ background: "#f6f3ee", color: "#0b0b0c" }} className="relative w-full h-full p-6 md:p-10 flex flex-col justify-between select-none overflow-hidden">
+    <div style={{ background: "#f6f3ee", color: "#0b0b0c" }} className="relative w-full h-full p-5 md:p-7 flex flex-col select-none overflow-hidden">
       <div aria-hidden className="absolute -right-24 -top-24 w-80 h-80 rounded-full" style={{ background: "radial-gradient(circle, rgba(168,132,47,0.16), transparent 70%)" }} />
+      {/* identity */}
       <div className="relative flex items-center justify-between">
-        <span className="font-display text-xl md:text-2xl font-semibold italic tracking-tight">Quick Bites<span className="not-italic" style={{ color: "#c8102e" }}>.</span></span>
-        <span className="font-mono text-[9px] uppercase tracking-[0.16em]" style={{ color: "#6f6a62" }}>menu · story · order</span>
+        <span className="font-display text-xl md:text-3xl font-semibold italic tracking-tight">Quick Bites<span className="not-italic" style={{ color: "#c8102e" }}>.</span></span>
+        <span className={lbl} style={{ color: "#a8842f" }}>a complete brand</span>
       </div>
-      <div className="relative">
-        <span className="font-mono text-[9px] uppercase tracking-[0.2em]" style={{ color: "#a8842f" }}>now serving</span>
-        <div className="mt-3 font-display text-4xl md:text-6xl leading-[0.95] tracking-[-0.02em]">Coastal plates,<br /><span className="italic" style={{ color: "#a8842f" }}>unhurried.</span></div>
-        <p className="mt-4 text-sm max-w-sm leading-relaxed" style={{ color: "#56514a" }}>Bay-of-Bengal cooking, a warm room, and an order that takes ten seconds.</p>
-        <div className="mt-5 flex items-center gap-3">
-          <span style={{ background: "#c8102e", color: "#fff" }} className="rounded-full px-5 py-2.5 text-[11px] font-semibold inline-flex items-center gap-1.5">Order <span aria-hidden>→</span></span>
-          <span className="flex gap-1.5">
-            {["#0b0b0c", "#c8102e", "#a8842f", "#e7ddcb"].map((c) => (
-              <span key={c} className="w-4 h-4 rounded-full" style={{ background: c, border: "1px solid rgba(0,0,0,0.08)" }} />
+      {/* voice */}
+      <div className="relative mt-3 md:mt-4">
+        <span className={lbl} style={{ color: "#a8842f" }}>Voice</span>
+        <div className="mt-1 font-display text-2xl md:text-4xl leading-[0.98] tracking-[-0.02em]">Coastal plates, <span className="italic" style={{ color: "#a8842f" }}>unhurried.</span></div>
+      </div>
+      {/* system: palette / type / surface */}
+      <div className="relative mt-3 md:mt-4 grid grid-cols-3 gap-2 md:gap-3 flex-1 min-h-0">
+        <div className={cell} style={{ border: "1px solid #e2dccf" }}>
+          <span className={lbl} style={{ color: "#6f6a62" }}>Palette</span>
+          <div className="mt-auto flex flex-wrap gap-1.5">
+            {["#0b0b0c", "#c8102e", "#a8842f", "#16323a", "#e7ddcb"].map((c) => (
+              <span key={c} className="w-4 h-4 md:w-6 md:h-6 rounded" style={{ background: c, border: "1px solid rgba(0,0,0,0.08)" }} />
             ))}
-          </span>
+          </div>
+        </div>
+        <div className={cell} style={{ border: "1px solid #e2dccf" }}>
+          <span className={lbl} style={{ color: "#6f6a62" }}>Type</span>
+          <div className="mt-auto">
+            <span className="font-display text-3xl md:text-5xl leading-none">Aa</span>
+            <div className="text-[8px] md:text-[10px] mt-1" style={{ color: "#6f6a62" }}>Fraunces · Hanken</div>
+          </div>
+        </div>
+        <div className={cell} style={{ border: "1px solid #e2dccf" }}>
+          <span className={lbl} style={{ color: "#6f6a62" }}>Website</span>
+          <div className="mt-auto rounded p-2 flex flex-col justify-between min-h-[44px] md:min-h-[64px]" style={{ background: "#0b0b0c" }}>
+            <span className="font-display italic text-[9px] md:text-[11px]" style={{ color: "#f6f3ee" }}>Quick Bites<span style={{ color: "#c8102e" }}>.</span></span>
+            <span className="font-display text-[11px] md:text-[15px] leading-none" style={{ color: "#f6f3ee" }}>Coastal plates.</span>
+            <span className="mt-1 inline-block w-9 h-1.5 rounded-full" style={{ background: "#c8102e" }} />
+          </div>
         </div>
       </div>
-      <div className="relative font-mono text-[9px] uppercase tracking-[0.16em]" style={{ color: "#6f6a62" }}>made. by ac · designed to be remembered</div>
+      {/* what's in the box */}
+      <div className={`relative mt-3 ${lbl}`} style={{ color: "#6f6a62" }}>Identity · Website · App · Motion · Voice · System</div>
     </div>
   );
 }
 
-const DIFFS: [string, string, string][] = [
-  ["Type", "Arial, off the shelf", "Fraunces, chosen for the story"],
-  ["Colour", "a stock template blue", "one considered red, used once"],
-  ["Voice", "BEST FOOD IN TOWN!!!", "an editorial line worth reading"],
-  ["Space", "crammed to fill the page", "composed, with room to breathe"],
+// Everything made. actually delivers — the scope, in words.
+const SCOPE: [string, string][] = [
+  ["Identity", "A wordmark, marks and a visual signature, not a clip-art logo."],
+  ["Website", "Designed and built by us, end to end. Never a template."],
+  ["Product & app", "Ordering, dashboards, the things your customers actually use."],
+  ["Motion", "How it moves, not just how it sits. Considered, never showy."],
+  ["Voice & copy", "Words worth reading, in a tone that is unmistakably yours."],
+  ["A living system", "Tokens and rules, so the brand stays itself on every screen."],
 ];
 
 export function BeforeAfter() {
@@ -73,8 +97,7 @@ export function BeforeAfter() {
     const el = wrapRef.current;
     if (!el) return;
     const r = el.getBoundingClientRect();
-    const p = ((clientX - r.left) / r.width) * 100;
-    setPct(Math.max(2, Math.min(98, p)));
+    setPct(Math.max(2, Math.min(98, ((clientX - r.left) / r.width) * 100)));
   }, []);
 
   useEffect(() => {
@@ -93,7 +116,6 @@ export function BeforeAfter() {
     };
   }, [setFromClientX]);
 
-  // a gentle one-time nudge when it scrolls into view, so people know it moves
   useEffect(() => {
     const el = wrapRef.current;
     if (!el || typeof IntersectionObserver === "undefined") return;
@@ -121,8 +143,6 @@ export function BeforeAfter() {
 
   return (
     <section data-nav-dark className="relative bg-ink text-paper py-28 md:py-32 overflow-hidden">
-      {/* ProblemPicker above is also ink, so no seam (a paper-to-ink seam here left a
-          bright band between two dark sections after LiveCompose was removed) */}
       <div className="relative z-10 mx-auto max-w-[1400px] px-6 md:px-10">
         <div className="reveal-up max-w-2xl">
           <span className="label text-gold">·003 / the made. difference</span>
@@ -130,7 +150,7 @@ export function BeforeAfter() {
             Drag it. Feel the<br />difference<span className="text-red">.</span>
           </h2>
           <p className="mt-6 text-grey-dim text-[15px] md:text-lg leading-relaxed">
-            The same restaurant, built twice. On the left, a template anyone can buy. On the right, made. by ac. Drag the handle, then read what actually changed.
+            The same restaurant, built twice. On the left, a template anyone can buy. On the right, the full made. treatment, a whole brand system. Drag the handle, then see everything that comes with it.
           </p>
         </div>
 
@@ -141,35 +161,31 @@ export function BeforeAfter() {
           onMouseDown={(e) => { dragging.current = true; setHint(false); setFromClientX(e.clientX); }}
           onTouchStart={(e) => { dragging.current = true; setHint(false); e.touches[0] && setFromClientX(e.touches[0].clientX); }}
         >
-          {/* AFTER fills the base */}
           <div className="absolute inset-0"><Card made /></div>
-          {/* BEFORE clipped to the left of the handle */}
           <div className="absolute inset-0" style={{ clipPath: `inset(0 ${100 - pct}% 0 0)` }}><Card made={false} /></div>
 
-          {/* labels */}
           <span className="absolute top-4 left-4 label text-[9px] rounded-full px-3 py-1.5 bg-black/55 text-white backdrop-blur z-10">before · a template</span>
-          <span className="absolute top-4 right-4 label text-[9px] rounded-full px-3 py-1.5 z-10" style={{ background: "#c8102e", color: "#fff" }}>made.</span>
+          <span className="absolute top-4 right-4 label text-[9px] rounded-full px-3 py-1.5 z-10" style={{ background: "#c8102e", color: "#fff" }}>made. · a whole brand</span>
 
-          {/* divider + handle */}
           <div className="absolute top-0 bottom-0 w-[2px] bg-white/80 pointer-events-none z-10" style={{ left: `${pct}%` }} />
-          <div
-            className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-12 h-12 rounded-full bg-white text-ink flex items-center justify-center shadow-xl pointer-events-none z-10 ring-4 ring-white/25"
-            style={{ left: `${pct}%` }}
-          >
+          <div className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-12 h-12 rounded-full bg-white text-ink flex items-center justify-center shadow-xl pointer-events-none z-10 ring-4 ring-white/25" style={{ left: `${pct}%` }}>
             <MoveHorizontal className="w-5 h-5" />
           </div>
         </div>
         <p className="mt-4 label text-[9px] text-grey text-center">drag the handle ←→</p>
 
-        {/* what actually changed */}
-        <div className="reveal-up mt-12 md:mt-16">
-          <span className="label text-grey-dim">What changed</span>
-          <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-ink-line border border-ink-line rounded-2xl overflow-hidden">
-            {DIFFS.map(([dim, before, after]) => (
-              <div key={dim} className="bg-ink p-6 flex flex-col gap-3">
-                <span className="label text-[9px] text-gold">{dim}</span>
-                <span className="text-[13px] leading-snug text-grey-dim line-through decoration-grey-dim/40">{before}</span>
-                <span className="text-[15px] leading-snug text-paper">{after}</span>
+        {/* what made. actually delivers */}
+        <div className="reveal-up mt-14 md:mt-20">
+          <div className="flex items-end justify-between gap-4 mb-6">
+            <h3 className="font-display text-3xl md:text-4xl leading-tight tracking-tight">Not a page. Everything.</h3>
+            <span className="label text-grey-dim hidden sm:block">what comes with made.</span>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-ink-line border border-ink-line rounded-2xl overflow-hidden">
+            {SCOPE.map(([t, d], i) => (
+              <div key={t} className="bg-ink p-6 md:p-7 flex flex-col gap-3">
+                <span className="font-mono text-sm text-gold">{String(i + 1).padStart(2, "0")}</span>
+                <h4 className="font-display text-xl md:text-2xl leading-tight">{t}</h4>
+                <p className="text-[14px] leading-relaxed text-grey-dim">{d}</p>
               </div>
             ))}
           </div>
