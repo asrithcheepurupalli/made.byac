@@ -26,6 +26,7 @@ export default defineConfig(() => {
           worth: path.resolve(__dirname, 'worth.html'),
           motion: path.resolve(__dirname, 'motion.html'),
           craft: path.resolve(__dirname, 'craft.html'),
+          teardown: path.resolve(__dirname, 'teardown.html'),
         },
       },
     },

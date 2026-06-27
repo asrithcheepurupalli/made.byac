@@ -22,6 +22,7 @@
     { "source": "/worth", "destination": "/worth.html" },
     { "source": "/motion", "destination": "/motion.html" },
     { "source": "/craft", "destination": "/craft.html" },
+    { "source": "/teardown", "destination": "/teardown.html" },
     { "source": "/((?!api/).*)", "destination": "/index.html" }
   ]
 }

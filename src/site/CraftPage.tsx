@@ -25,6 +25,7 @@ const PIECES: Piece[] = [
   { href: "/system", n: "03", name: "The living system", line: "Four colours, three fonts, one grid. Change a token, watch it all follow.", muscle: "the system", accent: "#3aa655" },
   { href: "/motion", n: "04", name: "The motion index", line: "The craft of movement, each move on its own and live, with the why.", muscle: "the feel", accent: "#2f6df0" },
   { href: "/worth", n: "05", name: "What design is worth", line: "Slide your numbers and watch what a better experience returns.", muscle: "the case", accent: "#e8702a" },
+  { href: "/teardown", n: "06", name: "Free landing-page teardown", line: "Score your own page against the eight things we check first, free.", muscle: "the audit", accent: "#8b5cf6" },
 ];
 
 export function CraftPage() {

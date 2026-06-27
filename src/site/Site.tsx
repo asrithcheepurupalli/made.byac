@@ -32,6 +32,7 @@ const SystemPage = lazy(() => import("./SystemPage").then((m) => ({ default: m.S
 const WorthPage = lazy(() => import("./WorthPage").then((m) => ({ default: m.WorthPage })));
 const MotionPage = lazy(() => import("./MotionPage").then((m) => ({ default: m.MotionPage })));
 const CraftPage = lazy(() => import("./CraftPage").then((m) => ({ default: m.CraftPage })));
+const TeardownPage = lazy(() => import("./TeardownPage").then((m) => ({ default: m.TeardownPage })));
 const SomaaCaseStudy = lazy(() => import("./case/SomaaCaseStudy").then((m) => ({ default: m.SomaaCaseStudy })));
 const CampaignCaseStudy = lazy(() => import("./case/CampaignCaseStudy").then((m) => ({ default: m.CampaignCaseStudy })));
 
@@ -71,7 +72,7 @@ export function Site() {
   useMagnetic(`${pageRoute}|${path}`);
 
   useEffect(() => {
-    if (route.startsWith("#/work/") || route === "#/offer" || route === "#/work" || route === "#/ai" || route === "#/kitchen" || route === "#/labs" || route === "#/laws" || route === "#/live" || route === "#/system" || route === "#/worth" || route === "#/motion" || route === "#/craft") window.scrollTo(0, 0);
+    if (route.startsWith("#/work/") || route === "#/offer" || route === "#/work" || route === "#/ai" || route === "#/kitchen" || route === "#/labs" || route === "#/laws" || route === "#/live" || route === "#/system" || route === "#/worth" || route === "#/motion" || route === "#/craft" || route === "#/teardown") window.scrollTo(0, 0);
   }, [route]);
 
   // Deep-link to a homepage section from another page (e.g. /#say-hi from /laws) is a
@@ -130,6 +131,8 @@ export function Site() {
     content = <MotionPage />;
   } else if (path === "/craft" || route === "#/craft") {
     content = <CraftPage />;
+  } else if (path === "/teardown" || route === "#/teardown") {
+    content = <TeardownPage />;
   } else {
     content = (
       <div className="bg-paper text-ink font-sans antialiased">
