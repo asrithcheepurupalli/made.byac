@@ -2,11 +2,11 @@ import { ArrowUpRight } from "lucide-react";
 
 // made. ships its own products, not just client work. This is the paper break in the
 // middle of the dark run; percentyle is the featured (bold ink) card so it pops, the
-// rest of the family sits in quiet light cards beneath.
+// rest of the shipped apps sit in quiet light cards beneath. airlock and stash link to
+// their landings, which route on to the Chrome Web Store.
 const PRODUCTS = [
-  { name: "made. table", url: "https://table.made-by-ac.com", desc: "Type a vibe, get a bespoke restaurant site." },
-  { name: "made. crew", url: "https://crew.made-by-ac.com", desc: "A chief-of-staff and back-office for operators." },
-  { name: "made. kitchen", url: "https://kitchen.made-by-ac.com", desc: "Growth and retention for cloud kitchens." },
+  { name: "airlock.", url: "https://airlock.made-by-ac.com", desc: "Redacts sensitive data on-device, before it reaches AI." },
+  { name: "stash.", url: "https://stash.made-by-ac.com", desc: "A local-first memory for your AI chats and reading." },
   { name: "pingless.", url: "https://pingless.made-by-ac.com", desc: "An on-device AI gateway that quiets your phone." },
 ];
 
@@ -20,7 +20,7 @@ export function ProductsTease() {
         <div className="reveal-up flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-12 md:mb-16">
           <div>
             <span className="label text-red">·005 / products</span>
-            <h2 className="mt-6 font-display text-6xl md:text-8xl leading-[0.9] tracking-[-0.02em]">We build for<br />ourselves too<span className="text-red">.</span></h2>
+            <h2 className="mt-6 font-display text-6xl md:text-8xl leading-[0.9] tracking-[-0.02em]">Things we've<br />made<span className="text-red">.</span></h2>
           </div>
           <p className="font-display text-xl md:text-2xl text-grey max-w-md leading-relaxed">Real products we design, build and ship, the same way we do for clients.</p>
         </div>
@@ -57,7 +57,7 @@ export function ProductsTease() {
         </a>
 
         {/* the rest of the family — light cards */}
-        <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {PRODUCTS.map((p) => (
             <a
               key={p.name}
