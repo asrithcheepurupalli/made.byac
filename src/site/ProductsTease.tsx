@@ -1,13 +1,15 @@
 import { ArrowUpRight } from "lucide-react";
 
 // made. ships its own products, not just client work. This is the paper break in the
-// middle of the dark run; percentyle is the featured (bold ink) card so it pops, the
-// rest of the shipped apps sit in quiet light cards beneath. airlock and stash link to
-// their landings, which route on to the Chrome Web Store.
+// middle of the dark run. Two hero cards (percentyle + supermind) lead in bold ink,
+// each with its own paper specimen strip; the rest of the shipped apps sit in quiet
+// light cards beneath. Every card links out to the product's live home.
 const PRODUCTS = [
   { name: "airlock.", url: "https://airlock.made-by-ac.com", desc: "Redacts sensitive data on-device, before it reaches AI." },
   { name: "stash.", url: "https://stash.made-by-ac.com", desc: "A local-first memory for your AI chats and reading." },
   { name: "pingless.", url: "https://pingless.made-by-ac.com", desc: "An on-device AI gateway that quiets your phone." },
+  { name: "hindsight.", url: "https://hindsight.made-by-ac.com", desc: "A time-shifted mirror that shows how you really look on a call." },
+  { name: "cricadda.", url: "https://cricadda-tau.vercel.app", desc: "Live LED scoring that turns any cricket turf into a stadium." },
 ];
 
 export function ProductsTease() {
@@ -25,36 +27,65 @@ export function ProductsTease() {
           <p className="font-display text-xl md:text-2xl text-grey max-w-md leading-relaxed">Real products we design, build and ship, the same way we do for clients.</p>
         </div>
 
-        {/* featured: percentyle — a bold ink card on the paper section */}
-        <a
-          href="https://percentyle.in"
-          target="_blank"
-          rel="noreferrer"
-          data-cursor="Open"
-          className="reveal-up group grid grid-cols-1 lg:grid-cols-12 items-stretch overflow-hidden rounded-2xl bg-ink text-paper shadow-xl transition-transform duration-300 hover:-translate-y-1 active:scale-[0.98]"
-        >
-          {/* left: the pitch */}
-          <div className="lg:col-span-7 p-9 md:p-12 flex flex-col">
-            <div className="flex items-center gap-3">
-              <span className="label text-[10px] rounded-full bg-red px-3 py-1.5 text-white">New</span>
+        {/* two featured heroes — bold ink cards on the paper section */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
+          {/* percentyle */}
+          <a
+            href="https://percentyle.in"
+            target="_blank"
+            rel="noreferrer"
+            data-cursor="Open"
+            className="reveal-up group flex flex-col overflow-hidden rounded-2xl bg-ink text-paper shadow-xl transition-transform duration-300 hover:-translate-y-1 active:scale-[0.98]"
+          >
+            <div className="flex-1 p-9 md:p-11 flex flex-col">
               <span className="label text-grey-dim">CAT 2026 prep</span>
+              <h3 className="mt-6 font-display text-5xl md:text-6xl leading-none tracking-tight">percentyle<span className="text-red">.</span></h3>
+              <p className="mt-4 font-display text-xl md:text-2xl leading-snug text-paper/90">Your entire CAT prep, in one place.</p>
+              <p className="mt-3 max-w-md text-grey-dim leading-relaxed">Real PYQ mocks, a spaced-repetition error log, and analytics that show exactly what to fix next.</p>
+              <span className="mt-7 inline-flex items-center gap-2 label text-paper border-b border-gold/50 pb-1 self-start group-hover:text-gold transition-colors">
+                Open percentyle <ArrowUpRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </span>
             </div>
-            <h3 className="mt-7 font-display text-6xl md:text-7xl leading-none tracking-tight">percentyle<span className="text-red">.</span></h3>
-            <p className="mt-5 font-display text-2xl md:text-3xl leading-snug text-paper/90">Your entire CAT prep, in one place.</p>
-            <p className="mt-4 max-w-md text-grey-dim leading-relaxed">Real PYQ mocks, a spaced-repetition error log, and analytics that show exactly what to fix next.</p>
-            <span className="mt-8 inline-flex items-center gap-2 label text-paper border-b border-gold/50 pb-1 self-start group-hover:text-gold transition-colors">
-              Open percentyle <ArrowUpRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-            </span>
-          </div>
-          {/* right: a calm specimen panel (percentyle runs on paper) */}
-          <div className="lg:col-span-5 relative min-h-[220px] bg-paper text-ink flex items-center justify-center p-10">
-            <div className="text-center">
-              <div className="font-display text-7xl md:text-8xl leading-none tracking-tight">99<span className="align-top text-3xl md:text-4xl">.%ile</span></div>
-              <div className="label text-[10px] text-grey mt-3">the only number that matters</div>
+            {/* specimen strip: percentyle runs on paper */}
+            <div className="relative bg-paper text-ink flex items-center justify-center py-9 px-8">
+              <div className="text-center">
+                <div className="font-display text-6xl md:text-7xl leading-none tracking-tight">99<span className="align-top text-2xl md:text-3xl">.%ile</span></div>
+                <div className="label text-[10px] text-grey mt-2.5">the only number that matters</div>
+              </div>
+              <span className="absolute bottom-3.5 right-5 font-mono text-[11px] text-grey">percentyle.in</span>
             </div>
-            <span className="absolute bottom-4 right-5 font-mono text-[11px] text-grey">percentyle.in</span>
-          </div>
-        </a>
+          </a>
+
+          {/* supermind — the new privacy-first flagship */}
+          <a
+            href="https://supermind.ink"
+            target="_blank"
+            rel="noreferrer"
+            data-cursor="Open"
+            className="reveal-up group flex flex-col overflow-hidden rounded-2xl bg-ink text-paper shadow-xl transition-transform duration-300 hover:-translate-y-1 active:scale-[0.98]"
+          >
+            <div className="flex-1 p-9 md:p-11 flex flex-col">
+              <div className="flex items-center gap-3">
+                <span className="label text-[10px] rounded-full bg-red px-3 py-1.5 text-white">New</span>
+                <span className="label text-grey-dim">local-first second brain</span>
+              </div>
+              <h3 className="mt-6 font-display text-5xl md:text-6xl leading-none tracking-tight">supermind<span className="text-red">.</span></h3>
+              <p className="mt-4 font-display text-xl md:text-2xl leading-snug text-paper/90">A second brain that lives on your device.</p>
+              <p className="mt-3 max-w-md text-grey-dim leading-relaxed">Notes, links and files, organised automatically and found instantly. No account, no server, nothing ever leaves your machine.</p>
+              <span className="mt-7 inline-flex items-center gap-2 label text-paper border-b border-gold/50 pb-1 self-start group-hover:text-gold transition-colors">
+                Open supermind <ArrowUpRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </span>
+            </div>
+            {/* specimen strip: instant recall */}
+            <div className="relative bg-paper text-ink flex items-center justify-center py-9 px-8">
+              <div className="text-center">
+                <div className="font-display text-6xl md:text-7xl leading-none tracking-tight">⌘K</div>
+                <div className="label text-[10px] text-grey mt-2.5">everything, one keystroke away</div>
+              </div>
+              <span className="absolute bottom-3.5 right-5 font-mono text-[11px] text-grey">supermind.ink</span>
+            </div>
+          </a>
+        </div>
 
         {/* the rest of the family — light cards */}
         <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">

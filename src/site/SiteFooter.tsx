@@ -29,6 +29,8 @@ export function SiteFooter() {
               <a href="https://crew.made-by-ac.com" target="_blank" rel="noreferrer" className="text-paper/80 hover:text-gold transition-colors text-sm">made. crew</a>
               <a href="https://pingless.made-by-ac.com" target="_blank" rel="noreferrer" className="text-paper/80 hover:text-gold transition-colors text-sm">pingless.</a>
               <a href="https://percentyle.in" target="_blank" rel="noreferrer" className="text-paper/80 hover:text-gold transition-colors text-sm">percentyle.</a>
+              <a href="https://supermind.ink" target="_blank" rel="noreferrer" className="text-paper/80 hover:text-gold transition-colors text-sm">supermind.</a>
+              <a href="https://hindsight.made-by-ac.com" target="_blank" rel="noreferrer" className="text-paper/80 hover:text-gold transition-colors text-sm">hindsight.</a>
             </div>
             <div className="flex flex-col gap-3">
               <span className="label text-grey">Elsewhere</span>
