@@ -28,6 +28,28 @@ type Lab = {
 
 const LABS: Lab[] = [
   {
+    id: "vane",
+    name: "VANE",
+    italic: "V",
+    rest: "ANE",
+    tagline: "Zips jam. Feathers don't.",
+    what: "A closure with no slider, taken from a feather",
+    blurb:
+      "A zip is a few hundred parts that have to stay in register, and the one that fails takes the whole garment with it. VANE replaces all of it with a single moulded tape of hooked barbs, copied from the way a feather locks itself back together. One hand, any point of entry, and no metal left in the coat to cut out before it can be recycled.",
+    accent: "#27499b",
+    year: "2026",
+    discipline: "Industrial design · brand · interactive study",
+    shots: ["/labs/vane/home.png", "/labs/vane/problem.png", "/labs/vane/forces.png"],
+    tags: [
+      "Natural history plate direction",
+      "Drag-to-seal seam, SVG and rAF",
+      "A zip that jams, on purpose",
+      "Live force-asymmetry rig",
+    ],
+    caseStudy: "/labs/docs/VANE-Case-Study.pdf",
+    live: "https://vane.made-by-ac.com",
+  },
+  {
     id: "meanwhile",
     name: "Meanwhile",
     italic: "Mean",
@@ -200,7 +222,7 @@ function LabsHero() {
             builds the future of an industry before a client does.
           </p>
           <div className="rise mt-10 flex flex-wrap items-center gap-x-10 gap-y-5" style={{ animationDelay: ".42s" }}>
-            <div><div className="font-display text-4xl text-paper">04</div><div className="mt-1 label text-[9px] text-grey">Built whole · 1 shipped</div></div>
+            <div><div className="font-display text-4xl text-paper">05</div><div className="mt-1 label text-[9px] text-grey">Built whole · 1 shipped</div></div>
             <div><div className="font-display text-4xl text-paper">100%</div><div className="mt-1 label text-[9px] text-grey">Self-initiated</div></div>
             <div><div className="font-display text-4xl text-paper">2026</div><div className="mt-1 label text-[9px] text-grey">The lab, so far</div></div>
           </div>
@@ -210,12 +232,13 @@ function LabsHero() {
         <div className="relative h-[360px] sm:h-[440px] hidden md:block">
           {LABS.map((lab, i) => {
             const pos = [
-              "left-0 top-2 rotate-[-5deg]",
-              "right-0 top-16 rotate-[4deg]",
-              "left-10 bottom-16 rotate-[-2deg]",
-              "right-6 bottom-0 rotate-[3deg]",
+              "left-0 top-0 rotate-[-4deg] z-10",
+              "right-0 top-14 rotate-[4deg]",
+              "left-14 top-32 rotate-[-2deg]",
+              "right-8 bottom-8 rotate-[3deg]",
+              "left-2 bottom-0 rotate-[-6deg]",
             ][i];
-            const depth = [24, 38, 14, 30][i];
+            const depth = [30, 38, 14, 26, 20][i];
             return (
               <a key={lab.id} href={`#${lab.id}`} data-cursor="View" data-depth={depth}
                 className={`labs-tile absolute ${pos} w-[55%] max-w-[300px] rounded-xl overflow-hidden border border-ink-line bg-ink-soft shadow-2xl hover:!rotate-0 hover:scale-[1.03] hover:z-20`}
@@ -237,7 +260,7 @@ function LabsHero() {
         </div>
       </div>
 
-      <a href="#meanwhile" className="absolute bottom-7 left-1/2 -translate-x-1/2 label text-[9px] text-grey-dim flex flex-col items-center gap-2" data-cursor="Scroll">
+      <a href="#vane" className="absolute bottom-7 left-1/2 -translate-x-1/2 label text-[9px] text-grey-dim flex flex-col items-center gap-2" data-cursor="Scroll">
         Enter the lab
         <span className="block h-7 w-px bg-grey-dim/50" />
       </a>
