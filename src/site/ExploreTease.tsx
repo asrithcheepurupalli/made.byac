@@ -52,10 +52,10 @@ export function ExploreTease() {
               {c.featured && (
                 <div
                   aria-hidden
-                  className="pointer-events-none absolute inset-y-0 right-0 w-[58%] hidden sm:block opacity-40 transition-opacity duration-500 group-hover:opacity-60"
+                  className="pointer-events-none absolute inset-y-0 right-0 w-[52%] hidden sm:block opacity-[0.22] transition-opacity duration-500 group-hover:opacity-40"
                   style={{
-                    maskImage: "linear-gradient(to right, transparent, #000 62%)",
-                    WebkitMaskImage: "linear-gradient(to right, transparent, #000 62%)",
+                    maskImage: "linear-gradient(to right, transparent, #000 78%)",
+                    WebkitMaskImage: "linear-gradient(to right, transparent, #000 78%)",
                   }}
                 >
                   <img
