@@ -48,11 +48,6 @@
   ],
   "rewrites": [
     {
-      "source": "/",
-      "has": [{ "type": "host", "value": "aavira.made-by-ac.com" }],
-      "destination": "/aavira.html"
-    },
-    {
       "source": "/offer",
       "destination": "/offer.html"
     },
