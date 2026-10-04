@@ -195,7 +195,7 @@ export const GUIDES: Content[] = [
         "You want to upsell pairings and specials: ordering plus an AI host helps",
         "Your staff are nervous about change: start with a menu",
       ] },
-      { h: "What good ordering still leaves to people", p: ["The best versions take order-taking off your waiters so they can do hospitality, not replace them. That is how we built it for a Vizag restobar, and why the waiter stays at the centre of the room."] },
+      { h: "What good ordering still leaves to people", p: ["The best versions take order-taking off your waiters so they can do hospitality, not replace them. That is how we built our own platform, and why the waiter stays at the centre of the room."] },
       { h: "Pilot before the whole floor", p: ["Run ordering on a few tables first, watch what guests and staff do, and fix what is awkward. A pilot is cheaper than a rollout you regret."] },
     ],
     faqs: [

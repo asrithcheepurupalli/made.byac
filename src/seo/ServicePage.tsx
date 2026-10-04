@@ -32,7 +32,7 @@ export function ServicePage({ slug }: { slug: string }) {
         {/* HERO: one headline, one action, proof right beside it */}
         <div style={{ background: `radial-gradient(70% 70% at 88% 0%, ${s.accent}1f, transparent 70%)` }}>
         <section className="mx-auto max-w-[1400px] px-6 md:px-10 pt-32 md:pt-40 pb-16 md:pb-24 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-          <div className="lg:col-span-7">
+          <div className={s.proof ? "lg:col-span-7" : "lg:col-span-9"}>
             <nav aria-label="Breadcrumb" className="label text-[10px] text-ink/65 flex flex-wrap gap-2">
               <a href="/" className="hover:text-ink">Home</a><span aria-hidden>/</span>
               <a href={HUB.path} className="hover:text-ink">Services</a><span aria-hidden>/</span>
@@ -46,17 +46,19 @@ export function ServicePage({ slug }: { slug: string }) {
               <a href={`mailto:${EMAIL}?subject=${encodeURIComponent(s.navLabel)}`} className="text-ink/65 hover:text-[#8a6d2f] transition-colors text-sm underline underline-offset-4 decoration-paper-line">or email {EMAIL}</a>
             </div>
           </div>
+          {s.proof && (
           <div className="lg:col-span-5">
-            <a href={s.proof.href} className="group block rounded-2xl overflow-hidden border border-paper-line bg-white">
-              <img src={s.proof.img} alt={s.proof.alt} width={1200} height={750} className="w-full aspect-[16/10] object-cover object-top transition-transform duration-[1.1s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04]" />
+            <a href={s.proof!.href} className="group block rounded-2xl overflow-hidden border border-paper-line bg-white">
+              <img src={s.proof!.img} alt={s.proof!.alt} width={1200} height={750} className="w-full aspect-[16/10] object-cover object-top transition-transform duration-[1.1s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04]" />
               <div className="p-6">
-                <span className="label text-[10px]" style={{ color: s.accent }}>{s.proof.label}</span>
-                <h2 className="mt-2 font-display text-2xl leading-snug">{s.proof.title}</h2>
-                <p className="mt-2 text-sm leading-relaxed text-ink/65">{s.proof.text}</p>
-                <span className="mt-4 inline-flex items-center gap-1.5 label text-[10px] text-ink/85 group-hover:text-[#8a6d2f] transition-colors">{s.proof.cta} <ArrowUpRight className="w-3.5 h-3.5" aria-hidden /></span>
+                <span className="label text-[10px]" style={{ color: s.accent }}>{s.proof!.label}</span>
+                <h2 className="mt-2 font-display text-2xl leading-snug">{s.proof!.title}</h2>
+                <p className="mt-2 text-sm leading-relaxed text-ink/65">{s.proof!.text}</p>
+                <span className="mt-4 inline-flex items-center gap-1.5 label text-[10px] text-ink/85 group-hover:text-[#8a6d2f] transition-colors">{s.proof!.cta} <ArrowUpRight className="w-3.5 h-3.5" aria-hidden /></span>
               </div>
             </a>
           </div>
+          )}
         </section>
 
         </div>

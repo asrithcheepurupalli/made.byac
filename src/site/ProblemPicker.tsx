@@ -39,7 +39,7 @@ const FIXES: Fix[] = [
     accent: "#d99547",
     promise: "Order from the table. The waiter stays the hero.",
     line: "Scan, order together and let an AI host suggest the second round, wired into the kitchen you already run.",
-    href: "/work/somaa",
+    href: "/offer",
     cta: "See the ordering concept",
     proof: "0",
     proofLabel: "apps for guests to download",

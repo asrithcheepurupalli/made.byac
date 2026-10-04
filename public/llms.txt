@@ -13,7 +13,6 @@
 
 ## Proof
 - [Ramachandra Ortho Care, clinic booking case study](https://made-by-ac.com/work/ramachandra-ortho)
-- [Somaa, restaurant ordering case study](https://made-by-ac.com/work/somaa)
 
 ## Contact
 - Email: thebrain@made-by-ac.com

@@ -18,7 +18,7 @@ const SERVICES = [
     line: "Table QR, shared carts and an AI host, wired into the kitchen you already run.",
     tags: ["QR ordering", "AI host", "Loyalty"],
     proof: "Ordering platform concept",
-    href: "/work/somaa",
+    href: "/offer",
   },
   {
     id: "agents",

@@ -26,7 +26,7 @@ export interface Service {
   outcomes: Block[];
   includes: Block[];
   process: Block[];
-  proof: Proof;
+  proof?: Proof;
   coverage: { h: string; p: string };
   faqs: Faq[];
   related: string[];
@@ -128,12 +128,12 @@ export const SERVICES: Service[] = [
     ],
     proof: {
       label: "Recent work",
-      title: "Somaa, a restobar in Vizag",
-      text: "A restobar's whole at-table experience, designed and built end to end: brand-matched menu, group ordering and an AI host.",
-      href: "/work/somaa",
+      title: "Ramachandra Ortho Care, Visakhapatnam",
+      text: "A clinic's booking, WhatsApp and payments system, designed and built end to end, in three languages.",
+      href: "/work/ramachandra-ortho",
       cta: "Read the case study",
-      img: "/case/somaa/hero.webp",
-      alt: "Somaa restobar signature dish used in the case study",
+      img: "/case/ortho/hero-d.webp",
+      alt: "Ramachandra Ortho Care booking website with live doctor availability",
     },
     coverage: {
       h: "Based in Vizag, building for India",
@@ -183,22 +183,13 @@ export const SERVICES: Service[] = [
       { t: "Connect the kitchen", d: "Point-of-sale and admin set up so orders flow where staff already look." },
       { t: "Pilot and tune", d: "We launch on a few tables, watch, and adjust before the whole floor." },
     ],
-    proof: {
-      label: "Live pilot",
-      title: "Somaa, Visakhapatnam",
-      text: "A coastal-Andhra restobar with live music runs its at-table experience on the platform we designed and built, connected to its kitchen's point-of-sale.",
-      href: "/work/somaa",
-      cta: "Read the case study",
-      img: "/case/somaa/step-order.webp",
-      alt: "Somaa table ordering screen on a phone",
-    },
     coverage: {
       h: "For Vizag restaurants first, and India wide",
       p: "We are in Visakhapatnam, close to its restaurants, bars and cafes, and we build for venues in any Indian city. A pilot on a few tables is the usual start.",
     },
     faqs: [
       { q: "Do guests need to download an app?", a: "No. They scan the table's QR code and the menu opens in the phone's browser." },
-      { q: "Will it work with my point-of-sale?", a: "Our live pilot forwards orders to a restaurant point-of-sale system. Other systems are scoped case by case, and we will tell you if one is not a fit." },
+      { q: "Will it work with my point-of-sale?", a: "Our ordering platform forwards orders to a restaurant point-of-sale system. Other systems are scoped case by case, and we will tell you if one is not a fit." },
       { q: "Does this replace my waiters?", a: "No, and that is deliberate. It takes order-taking off them so they can do hospitality, and helps each one sell more." },
       { q: "Can the menu match our branding?", a: "Yes. It is designed for your place, not a generic template." },
       { q: "How is this different from a plain QR menu?", a: "A plain QR menu is a PDF on a phone. This is ordering, group carts, an AI host, loyalty and feedback, working as one system." },
@@ -357,19 +348,6 @@ export const CASES: CaseShell[] = [
     ],
     img: "/case/ortho/hero-d.webp",
     datePublished: "2026-10-04",
-  },
-  {
-    slug: "somaa",
-    path: "/work/somaa",
-    title: "Restaurant QR ordering case study · Somaa, Vizag",
-    description: "How we designed and built an AI-powered dining experience platform with QR ordering, group carts, loyalty and an AI host for a Visakhapatnam restobar.",
-    h1: "Somaa: an AI-powered dining experience platform for a Vizag restobar",
-    summary: [
-      "Somaa is a coastal-Andhra restobar with live music. It wanted ordering that felt as considered as the room, and that plugged into the kitchen's existing point-of-sale.",
-      "We designed and built per-table QR ordering, group carts, an AI host, a loyalty and occasions engine, and a feedback-to-reward loop.",
-    ],
-    img: "/case/somaa/hero.webp",
-    datePublished: "2026-06-12",
   },
   {
     slug: "innovolt",

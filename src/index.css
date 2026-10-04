@@ -140,7 +140,7 @@ body {
 :root[data-temp="slate"] [data-ambient="dim"]   { background-color: #e5eaf1; }
 @media (prefers-reduced-motion: reduce) { [data-ambient] { transition: none; } }
 
-/* Lenis smooth scroll (same as the Somaa pages) */
+/* Lenis smooth scroll */
 html.lenis,
 html.lenis body { height: auto; }
 .lenis.lenis-smooth { scroll-behavior: auto !important; }
@@ -226,7 +226,7 @@ html.has-vt .route-fade { animation: none; }
   .tile-info { opacity: 1 !important; transform: none !important; }
 }
 
-/* ---- Somaa case-study walkthrough steps ----
+/* ---- case-study walkthrough steps ----
    Mobile: all steps fully legible (no sticky phone to sync against).
    Desktop: dim inactive steps, highlight the active one as the phone swaps. */
 .walk-step { opacity: 1; transition: opacity 0.5s ease; }

@@ -21,8 +21,8 @@ point, and also why it took longer than we'll admit.
 
 ## The work it shows
 
-Real projects, no invented metrics: Somaa (a full QR dining platform we designed
-*and* built), Innovolt, Mithai Maharaja, Telyport, Mr. Snapper, plus the part
+Real projects, no invented metrics: Ramachandra Ortho Care (a clinic booking, WhatsApp and
+payments system we designed *and* built), Innovolt, Mithai Maharaja, Telyport, Mr. Snapper, plus the part
 where the studio quietly grew a software-and-AI side and started shipping products,
 not just decks. There's an `/ai` page for that. It has agents. They behave.
 

@@ -62,7 +62,6 @@ export function Footer() {
             <span className="label text-ink/60">Studio</span>
             <a href="/" className="text-ink/80 hover:text-[#8a6d2f] transition-colors text-sm">made. by ac homepage</a>
             <a href="/work/ramachandra-ortho" className="text-ink/80 hover:text-[#8a6d2f] transition-colors text-sm">Clinic booking case study</a>
-            <a href="/work/somaa" className="text-ink/80 hover:text-[#8a6d2f] transition-colors text-sm">Restaurant ordering case study</a>
             <a href="/#say-hi" className="text-ink/80 hover:text-[#8a6d2f] transition-colors text-sm">Contact</a>
           </nav>
         </div>

@@ -5,7 +5,7 @@ import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import { NextCase } from "./NextCase";
 
 // ---- Ramachandra Ortho Care's own world: bone, emerald, a single coral. ----
-// This is the clinic's identity, not ours. The page borrows it the way the Somaa study borrows amber.
+// This is the clinic's identity, not ours. The page borrows the clinic's own palette rather than ours.
 const C = {
   bg: "#f5f8f6",
   surface: "#ffffff",

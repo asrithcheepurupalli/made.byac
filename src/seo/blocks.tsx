@@ -49,7 +49,7 @@ const TRUST: Record<Cluster, { k: string; n?: number; s?: string; v: string }[]>
     { k: "Based in Vizag", v: "In person here, over video everywhere else" },
   ],
   restaurant: [
-    { k: "Live pilot", v: "A Vizag restobar orders from the table on it" },
+    { k: "A working platform", v: "Scan, order together and pay, built and demoed end to end" },
     { k: "No app", v: "Guests scan a code and the menu opens in the browser" },
     { k: "Your kitchen", v: "Orders can flow into the point-of-sale you already run" },
     { k: "The waiter stays", v: "It takes the order, not the hospitality" },
@@ -278,22 +278,18 @@ const SHOTS: Record<Cluster, { src: string; cap: string; kind: "phone" | "wide";
     { src: "/case/ortho/rc-chat-m.webp", cap: "An assistant answers and books, with one-tap replies", kind: "phone", alt: "Clinic assistant chat" },
     { src: "/case/ortho/admin-d.webp", cap: "The front desk runs the day from one live queue", kind: "wide", alt: "Front desk queue dashboard" },
   ],
-  restaurant: [
-    { src: "/case/somaa/step-scan.webp", cap: "Guests scan the table, no app", kind: "phone", alt: "Scanning a table code" },
-    { src: "/case/somaa/step-order.webp", cap: "The whole table orders together", kind: "phone", alt: "Group ordering" },
-    { src: "/case/somaa/step-host.webp", cap: "An AI host suggests pairings in your voice", kind: "phone", alt: "AI dining host" },
-  ],
+  restaurant: [],
   web: [
     { src: "/case/ortho/hero-d.webp", cap: "A clinic's booking site, live", kind: "wide", alt: "Clinic booking website" },
-    { src: "/case/somaa/og.webp", cap: "A restobar's brand and ordering", kind: "wide", alt: "Restaurant ordering brand" },
+    { src: "/case/ortho/admin-d.webp", cap: "A front desk dashboard, live", kind: "wide", alt: "Front desk queue dashboard" },
     { src: "/images/Hyd'Tel.webp", cap: "Regional campaign creative, in Telugu", kind: "wide", alt: "Telugu campaign creative" },
   ],
   guide: [],
 };
 const SHOT_NOTE: Record<Cluster, string> = {
   clinic: "Real screens from a live clinic. The front desk view is shown with demo patients.",
-  restaurant: "Real screens from a live restobar pilot.",
-  web: "Real work: a clinic site, a restobar, and a regional campaign.",
+  restaurant: "",
+  web: "Real work: a clinic booking site and dashboard, and a regional campaign.",
   guide: "",
 };
 
@@ -561,7 +557,7 @@ export function TableSim() {
 /* ───────────────────────────── moment 3: see it on a phone (web) */
 const SHOWS = [
   { k: "ortho", name: "A clinic's booking site", desktop: "/case/ortho/hero-d.webp", phone: "/case/ortho/hero-m.webp", alt: "Clinic booking site" },
-  { k: "somaa", name: "A restobar's ordering", desktop: "/case/somaa/og.webp", phone: "/case/somaa/step-order.webp", alt: "Restaurant ordering" },
+  { k: "ortho-desk", name: "A front desk dashboard", desktop: "/case/ortho/admin-d.webp", phone: "/case/ortho/admin-m.webp", alt: "Front desk dashboard" },
 ];
 
 export function DeviceSwitch() {

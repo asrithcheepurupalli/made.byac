@@ -5,6 +5,11 @@
   "outputDirectory": "dist",
   "redirects": [
     {
+      "source": "/work/somaa",
+      "destination": "/work",
+      "permanent": false
+    },
+    {
       "source": "/table",
       "destination": "https://table.made-by-ac.com",
       "permanent": false

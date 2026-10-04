@@ -12,15 +12,6 @@ const ORTHO = {
   img: "/case/ortho/hero-d.webp",
   alt: "Ramachandra Ortho Care booking website with live doctor availability",
 };
-const SOMAA = {
-  label: "Live pilot",
-  title: "Somaa, Visakhapatnam",
-  text: "A restobar with live music orders from the table on the platform we designed and built, connected to its kitchen's point-of-sale.",
-  href: "/work/somaa",
-  cta: "Read the case study",
-  img: "/case/somaa/step-order.webp",
-  alt: "Somaa table ordering on a phone",
-};
 
 const clinicCta = { ctaLabel: "Talk to us on WhatsApp", accent: "#0c7a68" };
 
@@ -353,7 +344,7 @@ export const LANDINGS: Content[] = [
       { q: "Who owns the code?", a: "That is agreed at the start. We prefer clear ownership and documentation so you are never locked in." },
       { q: "How do you price projects?", a: "We scope first and quote a fixed plan, rather than quote blind." },
     ],
-    proof: SOMAA, related: ["/web-development-company-visakhapatnam", "/mobile-app-and-pwa-development-visakhapatnam", "/guides/how-to-choose-a-web-development-company-in-vizag"],
+    proof: ORTHO, related: ["/web-development-company-visakhapatnam", "/mobile-app-and-pwa-development-visakhapatnam", "/guides/how-to-choose-a-web-development-company-in-vizag"],
     keywords: ["software development company Visakhapatnam", "custom software development Vizag", "web software developers Vizag"],
     ctaMessage: "Hi, we are looking for a software development partner in Vizag.", ctaLabel: "Message us on WhatsApp", accent: "#8a6d2f",
   },
@@ -461,7 +452,7 @@ export const LANDINGS: Content[] = [
       { q: "Can the website be in Telugu?", a: "Yes. We build bilingual sites, written to be read, not machine translated." },
       { q: "Do you build for small local businesses?", a: "Yes. A focused site is often the best start." },
     ],
-    proof: SOMAA, related: ["/web-development-company-visakhapatnam", "/website-development-company-hyderabad", "/clinic-appointment-booking-software-andhra-pradesh"],
+    proof: ORTHO, related: ["/web-development-company-visakhapatnam", "/website-development-company-hyderabad", "/clinic-appointment-booking-software-andhra-pradesh"],
     keywords: ["website development company Andhra Pradesh", "web design Vijayawada", "web development Guntur Tirupati"],
     ctaMessage: "Hi, we are an Andhra Pradesh business looking for a website partner.", ctaLabel: "Message us on WhatsApp", accent: "#8a6d2f",
   },
@@ -492,12 +483,12 @@ export const LANDINGS: Content[] = [
     kind: "landing", cluster: "restaurant", slug: "restaurant-qr-ordering-system-visakhapatnam",
     path: "/restaurant-qr-ordering-system-visakhapatnam", navLabel: "QR ordering for Vizag restaurants",
     title: "QR ordering system for Visakhapatnam restaurants & bars",
-    description: "Table QR ordering, a brand-matched digital menu and loyalty for restaurants, bars and cafes in Vizag, from the studio behind a live local pilot.",
+    description: "Table QR ordering, a brand-matched digital menu and loyalty for restaurants, bars and cafes in Vizag, from the studio that built a full ordering platform.",
     eyebrow: "Vizag restaurants and bars", h1: "QR ordering system for restaurants and bars in Visakhapatnam",
-    lede: "We build table QR ordering for restaurants, bars and cafes in Visakhapatnam. Our live pilot is a Vizag restobar, so we know what a busy Friday service, a loud room and a kitchen already on a point-of-sale actually demand.",
+    lede: "We build table QR ordering for restaurants, bars and cafes in Visakhapatnam. We built a full ordering platform for exactly this: a busy Friday service, a loud room and a kitchen already on a point-of-sale.",
     sections: [
-      { h: "Built in a Vizag room", p: [
-        "Somaa, a coastal-Andhra restobar with live music, runs its at-table ordering on what we built: per-table codes, a shared table cart, an AI host that knows the menu, and a loyalty and feedback loop. We tuned it on a real floor, not in a demo.",
+      { h: "Built for a busy room", p: [
+        "The platform covers per-table codes, a shared table cart, an AI host that knows the menu, and a loyalty and feedback loop. It is designed around what a loud, full floor actually demands.",
       ] },
       { h: "Where it helps most", p: [], bullets: [
         "Busy evenings when guests wait just to be noticed",
@@ -509,10 +500,10 @@ export const LANDINGS: Content[] = [
     ],
     faqs: [
       { q: "Is it an app guests must download?", a: "No. They scan the table code and the menu opens in the browser." },
-      { q: "Can it work with my point-of-sale?", a: "Our pilot forwards orders to a restaurant point-of-sale. Others are scoped case by case." },
+      { q: "Can it work with my point-of-sale?", a: "Our platform forwards orders to a restaurant point-of-sale. Others are scoped case by case." },
       { q: "Do you replace waiters?", a: "No. It frees them to do hospitality and helps each one sell more." },
     ],
-    proof: SOMAA, related: ["/restaurant-qr-ordering-system", "/digital-menu-for-restaurants-and-bars", "/guides/qr-menu-vs-qr-ordering-for-restaurants"],
+    related: ["/restaurant-qr-ordering-system", "/digital-menu-for-restaurants-and-bars", "/guides/qr-menu-vs-qr-ordering-for-restaurants"],
     keywords: ["QR ordering system Visakhapatnam", "restaurant software Vizag", "digital menu Vizag restaurants"],
     ctaMessage: "Hi, we run a restaurant in Vizag and want QR ordering.", ctaLabel: "Talk to us on WhatsApp", accent: "#a8651c",
   },
@@ -539,7 +530,7 @@ export const LANDINGS: Content[] = [
       { q: "Can I update prices myself?", a: "Yes, from a simple admin screen." },
       { q: "Does it work without an app?", a: "Yes. It opens in the phone's browser from the table code." },
     ],
-    proof: SOMAA, related: ["/restaurant-qr-ordering-system", "/restaurant-qr-ordering-system-visakhapatnam", "/guides/qr-menu-vs-qr-ordering-for-restaurants"],
+    related: ["/restaurant-qr-ordering-system", "/restaurant-qr-ordering-system-visakhapatnam", "/guides/qr-menu-vs-qr-ordering-for-restaurants"],
     keywords: ["digital menu for restaurants India", "QR code menu for restaurants", "digital menu for bars"],
     ctaMessage: "Hi, we want a digital menu for our restaurant.", ctaLabel: "Talk to us on WhatsApp", accent: "#a8651c",
   },

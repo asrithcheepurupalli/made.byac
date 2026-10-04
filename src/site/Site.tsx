@@ -37,7 +37,6 @@ const WorthPage = lazyRoute(() => import("./WorthPage").then((m) => ({ default: 
 const MotionPage = lazyRoute(() => import("./MotionPage").then((m) => ({ default: m.MotionPage })));
 const CraftPage = lazyRoute(() => import("./CraftPage").then((m) => ({ default: m.CraftPage })));
 const TeardownPage = lazyRoute(() => import("./TeardownPage").then((m) => ({ default: m.TeardownPage })));
-const SomaaCaseStudy = lazyRoute(() => import("./case/SomaaCaseStudy").then((m) => ({ default: m.SomaaCaseStudy })));
 const SeoRoute = lazyRoute<{ path: string }>(() => import("../seo/SeoRoute").then((m) => ({ default: m.SeoRoute })));
 const OrthoCaseStudy = lazyRoute(() => import("./case/OrthoCaseStudy").then((m) => ({ default: m.OrthoCaseStudy })));
 const CampaignCaseStudy = lazyRoute<{ slug: string }>(() => import("./case/CampaignCaseStudy").then((m) => ({ default: m.CampaignCaseStudy })));
@@ -57,7 +56,6 @@ registerRoute("/worth", WorthPage.preload);
 registerRoute("/motion", MotionPage.preload);
 registerRoute("/craft", CraftPage.preload);
 registerRoute("/teardown", TeardownPage.preload);
-registerRoute("/work/somaa", SomaaCaseStudy.preload);
 registerRoute("/work/ramachandra-ortho", OrthoCaseStudy.preload);
 registerRoute("/work/innovolt", CampaignCaseStudy.preload);
 registerRoute("/work/mithai-maharaja", CampaignCaseStudy.preload);
@@ -133,12 +131,10 @@ export function Site() {
   // deep link wins over the /work archive.
   const caseSlug = path.startsWith("/work/") ? path.slice("/work/".length) : "";
   const KNOWN = ["", "/index", "/offer", "/ai", "/kitchen", "/work", "/labs", "/laws", "/live", "/system", "/worth", "/motion", "/craft", "/teardown"];
-  const isKnownCase = caseSlug === "somaa" || caseSlug === "ramachandra-ortho" || !!CAMPAIGN_CASES[caseSlug];
+  const isKnownCase = caseSlug === "ramachandra-ortho" || !!CAMPAIGN_CASES[caseSlug];
   const isHashPage = route.startsWith("#/");
   let content: ReactNode;
-  if (caseSlug === "somaa") {
-    content = <SomaaCaseStudy />;
-  } else if (caseSlug === "ramachandra-ortho") {
+  if (caseSlug === "ramachandra-ortho") {
     content = <OrthoCaseStudy />;
   } else if (caseSlug && CAMPAIGN_CASES[caseSlug]) {
     content = <CampaignCaseStudy slug={caseSlug} />;

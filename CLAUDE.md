@@ -33,7 +33,7 @@ speaks in **team voice** — "we / our studio", never "I".
 - **Real pages** (own URL + share preview): `/ai`, `/work`, `/offer`. Each has its own
   `*.html` at repo root (SEO/OG meta + JSON-LD on ai.html), a Vite MPA input in
   `vite.config.ts`, and a `vercel.json` rewrite. **Case studies are hash routes**
-  (`#/work/somaa`, `#/work/<slug>`); `Site.tsx` checks these BEFORE the `/work` path.
+  (`#/work/<slug>`); `Site.tsx` checks these BEFORE the `/work` path.
 - `/table` is a **redirect** to `table.made-by-ac.com` (made. table, the studio's SaaS),
   set in `vercel.json` `redirects`.
 - Content data: `src/data.ts`. State/contact: `src/StudioContext.tsx` (`useStudio`).
@@ -57,6 +57,7 @@ speaks in **team voice** — "we / our studio", never "I".
   `.env.local`) so it's off locally too. The site renders fine without it.
 - `package.json` name is `react-example` — intentional, leave it (the README jokes
   about it).
-- Somaa is positioned as an **"AI-powered dining experience platform"** (not "QR
-  ordering"); impact figures in its case study are **labelled projections**, not
-  measured results — keep that framing honest.
+- The restaurant ordering platform is our own flagship study, not a client job. Its previous
+  working name was removed from the public site (trademark and photo-rights reasons). The old
+  demo is kept unlisted; never link it from this site, never put it in a sitemap, and never reuse
+  its photography. Any impact figures must be labelled as modelled, never as measured.
