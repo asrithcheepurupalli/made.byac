@@ -5,6 +5,7 @@ import { AV, Wordmark, WordmarkDraw } from "./brand";
 import { MENU } from "./Prototype";
 import { MADE } from "./host";
 import { StaffPanel, StaffTabs, useFloor, type Tab } from "./LiveFloor";
+import { AaviraPrototype } from "./Prototype";
 import { OrderPage } from "./OrderPage";
 
 // Aavira's own website: the restaurant a guest would find, not the study about it. A concept
@@ -251,6 +252,13 @@ function OrderDemo({ open, onClose }: { open: boolean; onClose: () => void }) {
   const closeRef = useRef<HTMLButtonElement>(null);
   const floor = useFloor();
   const [view, setView] = useState<View>("Guest");
+  const [phone, setPhone] = useState(() => typeof window !== "undefined" && window.matchMedia("(max-width: 767px)").matches);
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 767px)");
+    const on = () => setPhone(mq.matches);
+    mq.addEventListener("change", on);
+    return () => mq.removeEventListener("change", on);
+  }, []);
   useEffect(() => {
     if (!open) return;
     const prev = document.body.style.overflow;
@@ -261,6 +269,21 @@ function OrderDemo({ open, onClose }: { open: boolean; onClose: () => void }) {
     return () => { document.body.style.overflow = prev; window.removeEventListener("keydown", key); };
   }, [open, onClose]);
   if (!open) return null;
+  // On a phone the guest side is the app itself: full screen, Aavira header, the scan screen opening,
+  // then the menu with its bottom bar. The kitchen, waiter and owner views sit behind one button.
+  if (phone && view === "Guest") {
+    const bar = (
+      <div className="flex items-center justify-between px-4 h-12" style={{ background: AV.ink, borderBottom: `1px solid ${AV.line}` }}>
+        <button type="button" onClick={() => setView("Kitchen")} className="av-press rounded-full px-3.5 py-1.5 text-[0.66rem] uppercase tracking-[0.16em]" style={{ border: `1px solid ${AV.line}`, color: AV.muted }}>Behind the scenes{floor.open.length ? ` · ${floor.open.length}` : ""}</button>
+        <button ref={closeRef} type="button" onClick={onClose} aria-label="Close" className="av-press rounded-full px-3.5 py-1.5 text-[0.66rem] uppercase tracking-[0.16em]" style={{ border: `1px solid ${AV.turmeric}`, color: AV.turmeric }}>Close</button>
+      </div>
+    );
+    return (
+      <div role="dialog" aria-modal="true" aria-label="Order at your table, live demo" className="av-fade fixed inset-0 z-[75]" style={{ background: AV.ink, height: "100dvh" }}>
+        <AaviraPrototype fullscreen topBar={bar} onOrder={floor.onOrder} onCall={floor.onCall} onEvent={floor.onEvent} status={floor.latest} />
+      </div>
+    );
+  }
   const views: View[] = ["Guest", "Kitchen", "Waiter", "Owner"];
   const badge = (v: View) => (v === "Kitchen" && floor.open.length ? ` · ${floor.open.length}` : v === "Waiter" && floor.alerts.some((a) => !a.done) ? ` · ${floor.alerts.filter((a) => !a.done).length}` : "");
   return (

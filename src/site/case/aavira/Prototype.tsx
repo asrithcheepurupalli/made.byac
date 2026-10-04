@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState, type PointerEvent as RPointerEvent } from "react";
+import { useEffect, useMemo, useRef, useState, type PointerEvent as RPointerEvent, type ReactNode } from "react";
 import { AV, Wordmark } from "./brand";
 
 // The Aavira guest flow as a working front-end prototype: scan, browse, ask the host, order
@@ -171,6 +171,8 @@ export function AaviraPrototype({
   onCall,
   onEvent,
   status,
+  fullscreen = false,
+  topBar,
 }: {
   screen?: Screen;
   onScreen?: (s: Screen) => void;
@@ -179,6 +181,9 @@ export function AaviraPrototype({
   onCall?: (kind: ServiceKind) => void;
   onEvent?: () => void;
   status?: "new" | "cooking" | "ready" | "served" | null;
+  /** fill the available height edge to edge, as the guest app does on a real phone */
+  fullscreen?: boolean;
+  topBar?: ReactNode;
 }) {
   const [screen, setScreen] = useState<Screen>(controlled ?? "scan");
   useEffect(() => { if (controlled) setScreen(controlled); }, [controlled]);
@@ -321,15 +326,16 @@ export function AaviraPrototype({
   // ----- scaling: design at 390 x 844 and scale to whatever width we are given
   const wrap = useRef<HTMLDivElement>(null);
   const [k, setK] = useState(1);
+  const [hh, setHh] = useState(844);
   useEffect(() => {
     const el = wrap.current;
     if (!el) return;
-    const measure = () => setK(el.clientWidth / 390);
+    const measure = () => { const kk = el.clientWidth / 390; setK(kk); if (fullscreen) setHh(el.clientHeight / kk); };
     measure();
     const ro = new ResizeObserver(measure);
     ro.observe(el);
     return () => ro.disconnect();
-  }, []);
+  }, [fullscreen]);
 
   const tab = (s: Screen, label: string, d: string) => (
     <button type="button" onClick={() => go(s)} className="av-press flex flex-col items-center gap-1 py-2 px-3 relative min-w-[64px]" aria-current={screen === s} aria-label={label}>
@@ -342,13 +348,17 @@ export function AaviraPrototype({
   );
 
   return (
-    <div ref={wrap} className={className} style={{ width: "100%", height: 844 * k, position: "relative", overflow: "hidden", borderRadius: "inherit", background: AV.ink }}>
-      <div style={{ width: 390, height: 844, transform: `scale(${k})`, transformOrigin: "top left", position: "absolute", inset: 0 }} className="font-sans" >
+    <div ref={wrap} className={className} style={{ width: "100%", height: fullscreen ? "100%" : 844 * k, position: "relative", overflow: "hidden", borderRadius: "inherit", background: AV.ink }}>
+      <div style={{ width: 390, height: fullscreen ? hh : 844, transform: `scale(${k})`, transformOrigin: "top left", position: "absolute", inset: 0 }} className="font-sans" >
         <div className="absolute inset-0 flex flex-col" style={{ background: AV.ink, color: AV.cream }}>
           {/* status bar */}
-          <div className="h-[46px] shrink-0 flex items-end justify-between px-7 pb-1.5 text-[12px]" style={{ color: AV.muted }}>
-            <span className="font-medium">9:41</span><span aria-hidden>●●● ▮</span>
-          </div>
+          {fullscreen ? (
+            <div className="shrink-0" style={{ paddingTop: "env(safe-area-inset-top)" }}>{topBar}</div>
+          ) : (
+            <div className="h-[46px] shrink-0 flex items-end justify-between px-7 pb-1.5 text-[12px]" style={{ color: AV.muted }}>
+              <span className="font-medium">9:41</span><span aria-hidden>●●● ▮</span>
+            </div>
+          )}
 
           {/* ---------------------------------------------------------------- SCAN */}
           {screen === "scan" && (
@@ -603,7 +613,7 @@ export function AaviraPrototype({
 
           {/* tab bar */}
           {screen !== "scan" && (
-            <nav className="shrink-0 flex items-center justify-around pb-5 pt-1" style={{ background: AV.surface, borderTop: `1px solid ${AV.line}` }} aria-label="Guest navigation">
+            <nav className="shrink-0 flex items-center justify-around pb-5 pt-1" style={{ background: AV.surface, borderTop: `1px solid ${AV.line}`, paddingBottom: fullscreen ? "max(20px, env(safe-area-inset-bottom))" : undefined }} aria-label="Guest navigation">
               {tab("menu", "Menu", ICONS.menu)}
               {tab("host", "Aira", ICONS.host)}
               {tab("cart", "Table", ICONS.cart)}
