@@ -1,4 +1,5 @@
 import { VizagClock } from "./Clocks";
+import { waLink } from "../seo/data";
 
 // Minimal editorial footer.
 export function SiteFooter() {
@@ -20,6 +21,8 @@ export function SiteFooter() {
               <a href="#work" className="text-paper/80 hover:text-gold transition-colors text-sm">Work</a>
               <a href="#why" className="text-paper/80 hover:text-gold transition-colors text-sm">Why</a>
               <a href="#studio" className="text-paper/80 hover:text-gold transition-colors text-sm">Studio</a>
+              <a href="/#faq" className="text-paper/80 hover:text-gold transition-colors text-sm">Questions</a>
+              <a href="/aavira" className="text-paper/80 hover:text-gold transition-colors text-sm">Aavira, a concept</a>
             </div>
             <div className="flex flex-col gap-3">
               <span className="label text-grey">Products</span>
@@ -34,6 +37,7 @@ export function SiteFooter() {
             <div className="flex flex-col gap-3">
               <span className="label text-grey">Elsewhere</span>
               <a href="mailto:thebrain@made-by-ac.com" className="text-paper/80 hover:text-gold transition-colors text-sm">Email</a>
+              <a href={waLink("Hi, I found you through made-by-ac.com.")} target="_blank" rel="noreferrer" className="text-paper/80 hover:text-gold transition-colors text-sm">WhatsApp</a>
               <a href="/services" className="text-paper/50 hover:text-gold transition-colors text-xs">All services</a>
             </div>
           </div>
@@ -42,7 +46,7 @@ export function SiteFooter() {
         <div className="mt-14 pt-7 border-t border-ink-line flex flex-col sm:flex-row justify-between gap-3 label text-grey">
           <span>© 2026 made. by ac · all rights reserved · <a href="/privacy" className="hover:text-gold transition-colors">Privacy</a> · <a href="/terms" className="hover:text-gold transition-colors">Terms</a></span>
           <span>Vizag <VizagClock /></span>
-          <span>made with intent</span>
+          <a href="#top" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }); }} className="hover:text-gold transition-colors">back to top ↑</a>
         </div>
       </div>
     </footer>

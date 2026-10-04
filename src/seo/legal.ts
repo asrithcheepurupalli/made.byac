@@ -92,6 +92,7 @@ export const LEGAL: LegalPageData[] = [
         h: "Contact",
         p: [`Questions, requests and complaints about your data go to ${EMAIL}. We read every message ourselves.`],
       },
+      { h: "Version history", p: ["4 October 2026: first published."] },
     ],
   },
   {
@@ -152,6 +153,7 @@ export const LEGAL: LegalPageData[] = [
         h: "Changes and contact",
         p: [`We may update these terms, and the date at the top will change when we do. Questions go to ${EMAIL}.`],
       },
+      { h: "Version history", p: ["4 October 2026: first published."] },
     ],
   },
 ];

@@ -4,7 +4,8 @@ import { ArrowUpRight } from "lucide-react";
 import { AV, Wordmark, WordmarkDraw } from "./brand";
 import { MENU } from "./Prototype";
 import { MADE } from "./host";
-import { LiveFloor } from "./LiveFloor";
+import { StaffPanel, StaffTabs, useFloor, type Tab } from "./LiveFloor";
+import { OrderPage } from "./OrderPage";
 
 // Aavira's own website: the restaurant a guest would find, not the study about it. A concept
 // we designed to show a restaurant site that feels like the room. Fictional brand, licensed stock
@@ -244,9 +245,12 @@ function Pass() {
   );
 }
 
-// ---- "Order at your table": the working demo, in a full-screen layer -------------------------------
+// ---- "Order at your table": the working order page, in a full-screen layer ----------------------------
+type View = "Guest" | Tab;
 function OrderDemo({ open, onClose }: { open: boolean; onClose: () => void }) {
   const closeRef = useRef<HTMLButtonElement>(null);
+  const floor = useFloor();
+  const [view, setView] = useState<View>("Guest");
   useEffect(() => {
     if (!open) return;
     const prev = document.body.style.overflow;
@@ -257,20 +261,42 @@ function OrderDemo({ open, onClose }: { open: boolean; onClose: () => void }) {
     return () => { document.body.style.overflow = prev; window.removeEventListener("keydown", key); };
   }, [open, onClose]);
   if (!open) return null;
+  const views: View[] = ["Guest", "Kitchen", "Waiter", "Owner"];
+  const badge = (v: View) => (v === "Kitchen" && floor.open.length ? ` · ${floor.open.length}` : v === "Waiter" && floor.alerts.some((a) => !a.done) ? ` · ${floor.alerts.filter((a) => !a.done).length}` : "");
   return (
-    <div role="dialog" aria-modal="true" aria-label="Order at your table, live demo" className="av-fade fixed inset-0 z-[90] flex flex-col" style={{ background: AV.ink }}>
-      <div className="shrink-0 flex items-center justify-between gap-4 px-6 md:px-10 h-16" style={{ borderBottom: `1px solid ${AV.line}`, background: "rgba(14,12,11,.92)" }}>
-        <div className="flex items-center gap-4 min-w-0"><Wordmark steam height={20} /><span className="hidden sm:block text-[0.7rem] uppercase tracking-[0.24em] truncate" style={{ color: AV.muted }}>Order at your table · Table 7</span></div>
-        <button ref={closeRef} type="button" onClick={onClose} className="av-press rounded-full px-5 py-2 text-[0.72rem] uppercase tracking-[0.22em]" style={{ border: `1px solid ${AV.turmeric}`, color: AV.turmeric }}>Close</button>
+    // z-[75]: under the made. cursor (z-80) so the pointer stays visible on this layer
+    <div role="dialog" aria-modal="true" aria-label="Order at your table, live demo" className="av-fade fixed inset-0 z-[75] flex flex-col" style={{ background: AV.ink }}>
+      <div className="shrink-0 flex items-center gap-3 md:gap-6 px-4 md:px-10 h-16" style={{ borderBottom: `1px solid ${AV.line}`, background: "rgba(14,12,11,.94)" }}>
+        <div className="flex items-center gap-4 min-w-0"><Wordmark steam height={20} /><span className="hidden lg:block text-[0.7rem] uppercase tracking-[0.24em] truncate" style={{ color: AV.muted }}>Order at your table</span></div>
+        <div className="flex-1 flex justify-start md:justify-center gap-1.5 overflow-x-auto" role="tablist" aria-label="Views" style={{ scrollbarWidth: "none" }}>
+          {views.map((v) => (
+            <button key={v} type="button" role="tab" aria-selected={view === v} onClick={() => setView(v)} className="av-press shrink-0 rounded-full px-4 py-2 text-[0.72rem] uppercase tracking-[0.16em]" style={{ background: view === v ? AV.turmeric : "transparent", color: view === v ? AV.ink : AV.muted, border: `1px solid ${view === v ? AV.turmeric : AV.line}` }}>{v === "Guest" ? "Guest" : v}{badge(v)}</button>
+          ))}
+        </div>
+        <button ref={closeRef} type="button" onClick={onClose} className="av-press shrink-0 rounded-full px-5 py-2 text-[0.72rem] uppercase tracking-[0.22em]" style={{ border: `1px solid ${AV.turmeric}`, color: AV.turmeric }}>Close</button>
       </div>
       <div data-lenis-prevent className="flex-1 overflow-y-auto overscroll-contain">
-        <div className="mx-auto max-w-[1300px] px-6 md:px-10 py-10 md:py-14">
-          <div className="max-w-3xl mb-10 md:mb-14">
-            <div className={KICK} style={{ color: AV.turmeric }}>This is what a guest gets</div>
-            <h2 className="mt-4 font-display text-5xl md:text-7xl leading-[1]">Scan, browse, ask, order.</h2>
-            <p className="mt-5 text-lg leading-relaxed" style={{ color: AV.muted }}>Open the menu on the phone, tap a dish for the chef's note, ask Aira for something spicy or in Telugu, add to the shared table, and send it. The kitchen, waiter and owner screens answer alongside it. A prototype: nothing is saved or sent.</p>
-          </div>
-          <LiveFloor />
+        <div className="mx-auto max-w-[1400px] px-4 md:px-10 py-8 md:py-12">
+          {view === "Guest" ? (
+            <>
+              <div className="max-w-3xl mb-6 md:mb-8">
+                <div className={KICK} style={{ color: AV.turmeric }}>What a guest sees from the table</div>
+                <h2 className="mt-2 font-display text-5xl md:text-6xl leading-[1]">Order at your table.</h2>
+                <p className="mt-3 text-[15px] md:text-base leading-relaxed" style={{ color: AV.muted }}>Browse, ask Aira, add to the shared table and check out. Then switch to Kitchen, Waiter or Owner above to see the same order land. A prototype: nothing is saved or sent.</p>
+              </div>
+              <OrderPage floor={floor} goStaff={(t) => setView(t)} />
+            </>
+          ) : (
+            <>
+              <div className="max-w-3xl mb-6">
+                <div className={KICK} style={{ color: AV.turmeric }}>The other side of the same order</div>
+                <h2 className="mt-3 font-display text-4xl md:text-6xl leading-[1]">{view === "Kitchen" ? "What the kitchen sees." : view === "Waiter" ? "What the waiter sees." : "What the owner sees."}</h2>
+              </div>
+              <StaffTabs f={floor} tab={view} setTab={(t) => setView(t)} />
+              <StaffPanel f={floor} tab={view} />
+              <button type="button" onClick={() => setView("Guest")} className="av-press mt-6 rounded-full px-6 py-3 text-sm font-semibold" style={{ background: AV.turmeric, color: AV.ink }}>Back to ordering</button>
+            </>
+          )}
         </div>
       </div>
     </div>

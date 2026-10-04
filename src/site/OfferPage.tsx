@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { FaqSection } from "./FaqSection";
 import { AnimatePresence, motion } from "motion/react";
 import {
   ArrowLeft,
@@ -531,6 +532,8 @@ export function OfferPage() {
         </div>
       </section>
 
+      <FaqSection dark />
+
       {/* CTA */}
       <section className="relative overflow-hidden border-t border-ink-line">
         <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[70vw] h-[50vh] opacity-25" style={{ background: "radial-gradient(50% 50% at 50% 50%, #c8102e, transparent 70%)" }} />
@@ -552,6 +555,7 @@ export function OfferPage() {
         <div className="mx-auto max-w-[1400px] px-6 md:px-10 py-10 flex flex-col sm:flex-row justify-between gap-3 label text-grey">
           <a href="/" className="hover:opacity-80 flex items-center gap-2"><ArrowLeft className="w-3.5 h-3.5" /> back to made.</a>
           <span>made. by ac · what we offer</span>
+          <span><a href="/privacy" className="hover:text-gold transition-colors">Privacy</a> · <a href="/terms" className="hover:text-gold transition-colors">Terms</a></span>
         </div>
       </footer>
     </div>

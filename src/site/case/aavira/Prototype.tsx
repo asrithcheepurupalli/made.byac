@@ -10,7 +10,7 @@ export type Screen = "scan" | "menu" | "host" | "cart" | "remember" | "feedback"
 export type ServiceKind = "water" | "napkins" | "cutlery" | "waiter" | "bill";
 export type OrderLine = { name: string; who: string; price: number; qty: number; note?: string };
 
-type Dish = {
+export type Dish = {
   id: string; name: string; line: string; price: number; veg: boolean; cat: string; tag?: string;
   spice: 0 | 1 | 2 | 3; how: string; hero: string; pair: string; alias: string[];
 };
@@ -30,11 +30,11 @@ export const MENU: Dish[] = [
   { id: "lime-soda", name: "Fresh lime soda", line: "Sweet, salted or both", price: 120, veg: true, cat: "Drinks", spice: 0, how: "Fresh lime pressed to order and topped with soda. Sweet, salted or both.", hero: "Fresh lime", pair: "chicken-65", alias: ["lime", "soda"] },
   { id: "filter-coffee", name: "Filter coffee", line: "Strong, frothed, in a davara", price: 110, veg: true, cat: "Drinks", spice: 0, how: "A slow-brewed decoction, frothed with hot milk and poured from a height.", hero: "Chicory blend", pair: "payasam", alias: ["coffee"] },
 ];
-const BY_ID: Record<string, Dish> = Object.fromEntries(MENU.map((d) => [d.id, d]));
-const CATS = ["All", "Starters", "Mains", "Biryani", "Tiffin", "Sweet", "Drinks"];
+export const BY_ID: Record<string, Dish> = Object.fromEntries(MENU.map((d) => [d.id, d]));
+export const CATS = ["All", "Starters", "Mains", "Biryani", "Tiffin", "Sweet", "Drinks"];
 const GUESTS: Record<string, string> = { Ravi: AV.turmeric, Meera: AV.ember, You: "#7aa14a" };
-const NOTES = ["Less spicy", "Extra spicy", "No onion"];
-const SERVICES: { k: ServiceKind; label: string; done: string }[] = [
+export const NOTES = ["Less spicy", "Extra spicy", "No onion"];
+export const SERVICES: { k: ServiceKind; label: string; done: string }[] = [
   { k: "water", label: "Water", done: "Water is on its way" },
   { k: "napkins", label: "Napkins", done: "Napkins are on their way" },
   { k: "cutlery", label: "Cutlery", done: "Cutlery is on its way" },
@@ -50,7 +50,7 @@ const SEED: Line[] = [
   { uid: 3, id: "biryani", who: "You", qty: 1 },
 ];
 
-const inr = (n: number) => `₹${n.toLocaleString("en-IN")}`;
+export const inr = (n: number) => `₹${n.toLocaleString("en-IN")}`;
 
 // ---- the stand-in host: a keyword reader, labelled as scripted in the chat itself
 type Lang = "en" | "te" | "hi";
@@ -92,17 +92,17 @@ const INTENT_TEXT: Record<string, Record<Lang, string>> = {
 };
 const INTENT_PICKS: Record<string, string[]> = { spicy: ["chicken-65", "lime-soda"], veg: ["paneer-tikka", "dosa"], sweet: ["payasam", "gulab-jamun"], pop: ["chicken-65", "prawn-pepper", "biryani"] };
 
-function DishArt({ id, size = 64, radius = 14 }: { id: string; size?: number; radius?: number }) {
+export function DishArt({ id, size = 64, radius = 14 }: { id: string; size?: number; radius?: number }) {
   return <img src={`/case/aavira/dishes/${id}.webp`} alt={BY_ID[id]?.name ?? ""} width={size} height={size} loading="lazy" draggable={false} style={{ width: size, height: size, borderRadius: radius, objectFit: "cover" }} className="shrink-0" />;
 }
 
-const Dot = ({ veg }: { veg: boolean }) => (
+export const Dot = ({ veg }: { veg: boolean }) => (
   <span className="inline-flex items-center justify-center w-[13px] h-[13px] rounded-[3px] border" style={{ borderColor: veg ? "#5fa05a" : "#c0431f" }} aria-label={veg ? "Vegetarian" : "Non vegetarian"}>
     <span className="block w-[6px] h-[6px] rounded-full" style={{ background: veg ? "#5fa05a" : "#c0431f" }} />
   </span>
 );
 
-const Chilis = ({ n }: { n: number }) => (
+export const Chilis = ({ n }: { n: number }) => (
   <span className="inline-flex gap-0.5" aria-label={`Spice level ${n} of 3`}>{[1, 2, 3].map((i) => <i key={i} className="w-2 h-2 rounded-full" style={{ background: i <= n ? AV.ember : AV.line }} />)}</span>
 );
 

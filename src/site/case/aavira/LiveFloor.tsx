@@ -12,17 +12,15 @@ type Alert = { id: number; kind: "order" | "ready" | ServiceKind | "event"; text
 const inr = (n: number) => `₹${n.toLocaleString("en-IN")}`;
 const clock = (t: number) => new Date(t).toLocaleTimeString("en-IN", { hour: "2-digit", minute: "2-digit" });
 const NEXT: Record<Status, Status | null> = { new: "cooking", cooking: "ready", ready: "served", served: null };
-const TABS = ["Kitchen", "Waiter", "Owner"] as const;
-type Tab = (typeof TABS)[number];
+export const TABS = ["Kitchen", "Waiter", "Owner"] as const;
+export type Tab = (typeof TABS)[number];
 
-export function LiveFloor() {
-  const [tab, setTab] = useState<Tab>("Kitchen");
+export function useFloor() {
   const [tickets, setTickets] = useState<Ticket[]>([]);
   const [alerts, setAlerts] = useState<Alert[]>([]);
   const [now, setNow] = useState(() => Date.now());
   const [interest, setInterest] = useState(0);
   const [justSent, setJustSent] = useState<number | null>(null);
-  const panelRef = useRef<HTMLDivElement>(null);
   const seq = useRef(1);
   const tix = useRef(1);
   const timers = useRef<number[]>([]);
@@ -79,26 +77,17 @@ export function LiveFloor() {
     served: { label: "Served", color: AV.dim, cta: null },
   };
 
+  const closeAlert = (a: Alert) => {
+    setAlerts((x) => x.map((y) => (y.id === a.id ? { ...y, done: true } : y)));
+    if (a.kind === "ready") { const id = Number(/#(\d+)/.exec(a.text)?.[1]); advance(id, "served"); }
+  };
+  return { tickets, alerts, interest, justSent, setJustSent, onOrder, onCall, onEvent, advance, closeAlert, latest, open, served, revenue, mins, STAT, lastId: () => tix.current - 1 };
+}
+export type Floor = ReturnType<typeof useFloor>;
+
+export function StaffPanel({ f, tab }: { f: Floor; tab: Tab }) {
+  const { tickets, alerts, interest, advance, closeAlert, open, served, revenue, mins, STAT } = f;
   return (
-    <div className="grid lg:grid-cols-12 gap-10 lg:gap-14 items-start">
-      <div className="lg:col-span-4 flex flex-col items-center">
-        <div className="w-full max-w-[340px] rounded-[44px] p-2.5" style={{ background: "#050404", border: `1px solid ${AV.line}`, boxShadow: "0 40px 90px -30px rgba(0,0,0,.8)" }}>
-          <AaviraPrototype className="rounded-[36px]" screen={undefined} onOrder={onOrder} onCall={onCall} onEvent={onEvent} status={latest} />
-        </div>
-        {justSent !== null && (
-          <button type="button" onClick={() => { setTab("Kitchen"); panelRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }); setJustSent(null); }} className="lg:hidden mt-4 w-full max-w-[340px] rounded-full py-3 text-sm font-semibold" style={{ background: AV.turmeric, color: AV.ink }}>Ticket #{justSent} is in the kitchen. See it ↓</button>
-        )}
-      </div>
-
-      <div className="lg:col-span-8" ref={panelRef}>
-        <div className="flex gap-2 mb-5" role="tablist">
-          {TABS.map((t) => (
-            <button key={t} type="button" role="tab" aria-selected={tab === t} onClick={() => setTab(t)} className="px-5 py-2.5 rounded-full text-sm" style={{ background: tab === t ? AV.turmeric : AV.surface, color: tab === t ? AV.ink : AV.muted, border: `1px solid ${tab === t ? AV.turmeric : AV.line}` }}>
-              {t}{t === "Kitchen" && open.length > 0 ? ` · ${open.length}` : t === "Waiter" && alerts.some((a) => !a.done) ? ` · ${alerts.filter((a) => !a.done).length}` : ""}
-            </button>
-          ))}
-        </div>
-
         <div className="rounded-3xl p-5 md:p-7 min-h-[430px]" style={{ background: AV.surface, border: `1px solid ${AV.line}` }}>
           {tab === "Kitchen" && (
             <div>
@@ -107,7 +96,7 @@ export function LiveFloor() {
                 <span className="label text-[10px]" style={{ color: AV.dim }}>{open.length} open</span>
               </div>
               {tickets.length === 0 ? (
-                <Empty text="No tickets yet. Add dishes in the phone, open Table, and send the order to the kitchen." />
+                <Empty text="No tickets yet. Place an order on the guest side and it lands here." />
               ) : (
                 <div className="mt-5 grid md:grid-cols-2 gap-4">
                   {tickets.map((t) => (
@@ -156,7 +145,7 @@ export function LiveFloor() {
                       <i className="w-2 h-2 rounded-full shrink-0" style={{ background: a.kind === "ready" ? "#7aa14a" : a.kind === "order" ? AV.ember : AV.turmeric }} />
                       <span className="flex-1">{a.text}</span>
                       <span className="text-xs" style={{ color: AV.dim }}>{clock(a.at)}</span>
-                      {!a.done && <button type="button" onClick={() => { setAlerts((x) => x.map((y) => (y.id === a.id ? { ...y, done: true } : y))); if (a.kind === "ready") { const id = Number(/#(\d+)/.exec(a.text)?.[1]); advance(id, "served"); } }} className="rounded-full px-3 py-1 text-xs font-semibold" style={{ background: AV.turmeric, color: AV.ink }}>{a.kind === "ready" ? "Serve" : "Done"}</button>}
+                      {!a.done && <button type="button" onClick={() => closeAlert(a)} className="rounded-full px-3 py-1 text-xs font-semibold" style={{ background: AV.turmeric, color: AV.ink }}>{a.kind === "ready" ? "Serve" : "Done"}</button>}
                     </li>
                   ))}
                 </ul>
@@ -185,11 +174,43 @@ export function LiveFloor() {
             </div>
           )}
         </div>
+  );
+}
+
+export function StaffTabs({ f, tab, setTab }: { f: Floor; tab: Tab; setTab: (t: Tab) => void }) {
+  return (
+    <div className="flex gap-2 mb-5" role="tablist">
+      {TABS.map((t) => (
+        <button key={t} type="button" role="tab" aria-selected={tab === t} onClick={() => setTab(t)} className="px-5 py-2.5 rounded-full text-sm" style={{ background: tab === t ? AV.turmeric : AV.surface, color: tab === t ? AV.ink : AV.muted, border: `1px solid ${tab === t ? AV.turmeric : AV.line}` }}>
+          {t}{t === "Kitchen" && f.open.length > 0 ? ` · ${f.open.length}` : t === "Waiter" && f.alerts.some((a) => !a.done) ? ` · ${f.alerts.filter((a) => !a.done).length}` : ""}
+        </button>
+      ))}
+    </div>
+  );
+}
+
+export function LiveFloor() {
+  const [tab, setTab] = useState<Tab>("Kitchen");
+  const f = useFloor();
+  const panelRef = useRef<HTMLDivElement>(null);
+  return (
+    <div className="grid lg:grid-cols-12 gap-10 lg:gap-14 items-start">
+      <div className="lg:col-span-4 flex flex-col items-center">
+        <div className="w-full max-w-[340px] rounded-[44px] p-2.5" style={{ background: "#050404", border: `1px solid ${AV.line}`, boxShadow: "0 40px 90px -30px rgba(0,0,0,.8)" }}>
+          <AaviraPrototype className="rounded-[36px]" screen={undefined} onOrder={f.onOrder} onCall={f.onCall} onEvent={f.onEvent} status={f.latest} />
+        </div>
+        {f.justSent !== null && (
+          <button type="button" onClick={() => { setTab("Kitchen"); panelRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }); f.setJustSent(null); }} className="lg:hidden mt-4 w-full max-w-[340px] rounded-full py-3 text-sm font-semibold" style={{ background: AV.turmeric, color: AV.ink }}>Ticket #{f.justSent} is in the kitchen. See it ↓</button>
+        )}
+      </div>
+      <div className="lg:col-span-8" ref={panelRef}>
+        <StaffTabs f={f} tab={tab} setTab={setTab} />
+        <StaffPanel f={f} tab={tab} />
       </div>
     </div>
   );
 }
 
-const Empty = ({ text }: { text: string }) => (
+export const Empty = ({ text }: { text: string }) => (
   <div className="mt-5 rounded-2xl grid place-items-center text-center px-6 py-14 text-sm" style={{ border: `1px dashed ${AV.line}`, color: AV.dim }}>{text}</div>
 );

@@ -10,6 +10,8 @@ import { useScrollReveal } from "./useScrollReveal";
 import { useMagnetic } from "./useMagnetic";
 import { SiteNav } from "./SiteNav";
 import { ActHero } from "./ActHero";
+import { ClientStrip } from "./ClientStrip";
+import { FaqSection } from "./FaqSection";
 import { SiteFooter } from "./SiteFooter";
 import { Defer } from "./Defer";
 import { CAMPAIGN_CASES } from "./case/caseData";
@@ -182,11 +184,13 @@ export function Site() {
         <SiteNav />
         <main>
           <ActHero />
+          <ClientStrip />
           <Defer Component={SelectedWork} id="work" dark bg="bg-ink" minHeight="200svh" delay={1500} />
           <Defer Component={ProblemPicker} id="fix" dark bg="bg-ink" minHeight="100svh" delay={2000} />
           <Defer Component={ExploreTease} dark bg="bg-ink" minHeight="80svh" delay={2500} />
           <Defer Component={GridLab} id="studio" bg="bg-paper-dim" minHeight="120svh" delay={3000} />
           <Defer Component={ProductsTease} id="products" bg="bg-paper-dim" minHeight="120svh" delay={3500} />
+          <Defer Component={FaqSection} id="faq-wrap" bg="bg-paper" minHeight="80svh" delay={4200} />
           <Defer Component={Manifesto} id="why" bg="bg-paper" minHeight="100svh" delay={4000} />
           <Defer Component={Invitation} id="say-hi" dark bg="bg-ink" minHeight="100svh" delay={4500} />
         </main>
