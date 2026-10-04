@@ -355,7 +355,7 @@ export const CASES: CaseShell[] = [
     path: "/work/aavira",
     title: "Restaurant ordering platform study · Aavira",
     description: "Our own flagship study: a QR ordering, AI host and loyalty platform for a restaurant, with an original brand, illustrated menu and a prototype you can tap through.",
-    h1: "Aavira: a guest platform that makes every waiter three times more effective",
+    h1: "Aavira: a guest platform that gives every waiter more time for the guests",
     summary: [
       "Aavira is a fictional coastal kitchen and bar, and our own flagship study of a restaurant platform. It is not a client project.",
       "The study covers the brand, an illustrated menu, per-table QR ordering, a menu-grounded AI host, loyalty and feedback, with a working prototype on the page.",

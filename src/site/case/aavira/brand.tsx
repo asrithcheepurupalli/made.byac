@@ -1,3 +1,5 @@
+import "./aavira.css";
+
 // Aavira brand: wordmark (monoline, round caps, the "I" is a wisp of steam), the mark, and tokens.
 export const AV = {
   ink: "#0e0c0b",
@@ -6,9 +8,10 @@ export const AV = {
   line: "#2a2420",
   cream: "#f5ecdd",
   muted: "#b9ac98",
-  dim: "#7a6f5e",
+  dim: "#9a8d79",
   turmeric: "#e9a23b",
   ember: "#d9622b",
+  tide: "#12302e", // deep sea green, the coastal second surface
 };
 
 const SW = 13;
@@ -32,6 +35,19 @@ export function Wordmark({ color = AV.cream, height = 28, className }: { color?:
   return (
     <svg viewBox={`${-SW} ${-SW} ${vbW} ${vbH}`} height={height} width={(height * vbW) / vbH} className={className} role="img" aria-label="Aavira">
       <path d={PATH} fill="none" stroke={color} strokeWidth={SW} strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+// The wordmark drawing itself, letter by letter, for the intro. Stroke length is normalised so the
+// same keyframes work at any size. `draw` seconds; falls back to the static mark with reduced motion.
+export function WordmarkDraw({ color = AV.cream, height = 56, draw = 1.8, className }: { color?: string; height?: number; draw?: number; className?: string }) {
+  const vbW = TOTAL + SW * 2;
+  const vbH = H + SW * 2;
+  return (
+    <svg viewBox={`${-SW} ${-SW} ${vbW} ${vbH}`} height={height} width={(height * vbW) / vbH} className={className} role="img" aria-label="Aavira">
+      <style>{`@keyframes av-draw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}@media (prefers-reduced-motion:no-preference){.av-draw{stroke-dasharray:1;stroke-dashoffset:1;animation:av-draw ${draw}s cubic-bezier(.65,0,.35,1) .15s forwards}}`}</style>
+      <path className="av-draw" pathLength={1} d={PATH} fill="none" stroke={color} strokeWidth={SW} strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }

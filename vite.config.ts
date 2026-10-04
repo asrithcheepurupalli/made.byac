@@ -21,6 +21,7 @@ export default defineConfig(() => {
           work: path.resolve(__dirname, 'work.html'),
           labs: path.resolve(__dirname, 'labs.html'),
           laws: path.resolve(__dirname, 'laws.html'),
+          aavira: path.resolve(__dirname, 'aavira.html'),
           live: path.resolve(__dirname, 'live.html'),
           system: path.resolve(__dirname, 'system.html'),
           worth: path.resolve(__dirname, 'worth.html'),

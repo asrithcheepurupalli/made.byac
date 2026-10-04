@@ -68,6 +68,10 @@
       "destination": "/laws.html"
     },
     {
+      "source": "/aavira",
+      "destination": "/aavira.html"
+    },
+    {
       "source": "/live",
       "destination": "/live.html"
     },

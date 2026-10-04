@@ -1,14 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import { AV } from "./brand";
-import { AaviraPrototype } from "./Prototype";
+import { AaviraPrototype, type OrderLine, type ServiceKind } from "./Prototype";
 
 // The other side of the phone: what the kitchen, the waiter and the owner see when a guest sends
 // an order. All local state, wired to the prototype's callbacks. Nothing leaves the page.
 
 type Status = "new" | "cooking" | "ready" | "served";
-type Line = { name: string; who: string; price: number };
-type Ticket = { id: number; lines: Line[]; total: number; status: Status; at: number };
-type Alert = { id: number; kind: "order" | "ready" | "waiter" | "bill"; text: string; at: number; done: boolean };
+type Ticket = { id: number; lines: OrderLine[]; total: number; status: Status; at: number };
+type Alert = { id: number; kind: "order" | "ready" | ServiceKind | "event"; text: string; at: number; done: boolean };
 
 const inr = (n: number) => `₹${n.toLocaleString("en-IN")}`;
 const clock = (t: number) => new Date(t).toLocaleTimeString("en-IN", { hour: "2-digit", minute: "2-digit" });
@@ -21,7 +20,11 @@ export function LiveFloor() {
   const [tickets, setTickets] = useState<Ticket[]>([]);
   const [alerts, setAlerts] = useState<Alert[]>([]);
   const [now, setNow] = useState(() => Date.now());
+  const [interest, setInterest] = useState(0);
+  const [justSent, setJustSent] = useState<number | null>(null);
+  const panelRef = useRef<HTMLDivElement>(null);
   const seq = useRef(1);
+  const tix = useRef(1);
   const timers = useRef<number[]>([]);
 
   useEffect(() => {
@@ -41,10 +44,11 @@ export function LiveFloor() {
       return { ...t, status: nx };
     }));
 
-  const onOrder = (lines: Line[], total: number) => {
-    const id = seq.current++;
+  const onOrder = (lines: OrderLine[], total: number) => {
+    const id = tix.current++;
+    setJustSent(id);
     setTickets((ts) => [{ id, lines, total, status: "new" as Status, at: Date.now() }, ...ts].slice(0, 6));
-    pushAlert("order", `Table 7 sent order #${id}, ${lines.length} items`);
+    pushAlert("order", `Table 7 sent order #${id}, ${lines.reduce((s, l) => s + l.qty, 0)} items`);
     // the kitchen picks it up and finishes it on its own if nobody taps, so the demo always moves
     timers.current.push(window.setTimeout(() => setTickets((ts) => ts.map((t) => {
       if (t.id !== id || t.status !== "new") return t;
@@ -58,7 +62,9 @@ export function LiveFloor() {
       }));
     }, 10000));
   };
-  const onCall = (kind: "waiter" | "bill") => pushAlert(kind, kind === "waiter" ? "Table 7 is calling for a waiter" : "Table 7 asked for the bill");
+  const CALLS: Record<ServiceKind, string> = { water: "Table 7 would like water", napkins: "Table 7 needs napkins", cutlery: "Table 7 needs cutlery", waiter: "Table 7 is calling for a server", bill: "Table 7 asked for the bill" };
+  const onCall = (kind: ServiceKind) => pushAlert(kind, CALLS[kind]);
+  const onEvent = () => { setInterest((n) => n + 1); pushAlert("event", "Table 7 is interested in tonight's live set"); };
 
   const latest = tickets[0]?.status ?? null;
   const open = tickets.filter((t) => t.status !== "served");
@@ -75,13 +81,16 @@ export function LiveFloor() {
 
   return (
     <div className="grid lg:grid-cols-12 gap-10 lg:gap-14 items-start">
-      <div className="lg:col-span-4 flex justify-center">
+      <div className="lg:col-span-4 flex flex-col items-center">
         <div className="w-full max-w-[340px] rounded-[44px] p-2.5" style={{ background: "#050404", border: `1px solid ${AV.line}`, boxShadow: "0 40px 90px -30px rgba(0,0,0,.8)" }}>
-          <AaviraPrototype className="rounded-[36px]" screen={undefined} onOrder={onOrder} onCall={onCall} status={latest} />
+          <AaviraPrototype className="rounded-[36px]" screen={undefined} onOrder={onOrder} onCall={onCall} onEvent={onEvent} status={latest} />
         </div>
+        {justSent !== null && (
+          <button type="button" onClick={() => { setTab("Kitchen"); panelRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }); setJustSent(null); }} className="lg:hidden mt-4 w-full max-w-[340px] rounded-full py-3 text-sm font-semibold" style={{ background: AV.turmeric, color: AV.ink }}>Ticket #{justSent} is in the kitchen. See it ↓</button>
+        )}
       </div>
 
-      <div className="lg:col-span-8">
+      <div className="lg:col-span-8" ref={panelRef}>
         <div className="flex gap-2 mb-5" role="tablist">
           {TABS.map((t) => (
             <button key={t} type="button" role="tab" aria-selected={tab === t} onClick={() => setTab(t)} className="px-5 py-2.5 rounded-full text-sm" style={{ background: tab === t ? AV.turmeric : AV.surface, color: tab === t ? AV.ink : AV.muted, border: `1px solid ${tab === t ? AV.turmeric : AV.line}` }}>
@@ -109,7 +118,7 @@ export function LiveFloor() {
                       </div>
                       <div className="mt-1 text-xs" style={{ color: AV.dim }}>In at {clock(t.at)} · {mins(t.at)} ago</div>
                       <ul className="mt-3 flex flex-col gap-1.5 text-sm">
-                        {t.lines.map((l, i) => <li key={i} className="flex justify-between gap-3"><span>{l.name}</span><span style={{ color: AV.dim }}>{l.who}</span></li>)}
+                        {t.lines.map((l, i) => <li key={i} className="flex justify-between gap-3"><span>{l.qty}× {l.name}{l.note ? <em className="not-italic" style={{ color: AV.turmeric }}> · {l.note.toLowerCase()}</em> : null}</span><span style={{ color: AV.dim }}>{l.who}</span></li>)}
                       </ul>
                       {STAT[t.status].cta && (
                         <button type="button" onClick={() => advance(t.id)} className="mt-4 w-full rounded-full py-2.5 text-[13px] font-semibold" style={{ background: AV.turmeric, color: AV.ink }}>{STAT[t.status].cta}</button>
@@ -158,11 +167,11 @@ export function LiveFloor() {
           {tab === "Owner" && (
             <div>
               <div className="font-display text-2xl">Tonight at Aavira</div>
-              <div className="mt-5 grid grid-cols-3 gap-3 md:gap-4">
-                {[["Orders", String(tickets.length)], ["Served", String(served.length)], ["Sales", inr(revenue)]].map(([k, v]) => (
+              <div className="mt-5 grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+                {[["Orders", String(tickets.length)], ["Served", String(served.length)], ["Sales", inr(revenue)], ["Live set interest", String(interest)]].map(([k, v]) => (
                   <div key={k} className="rounded-2xl p-4" style={{ background: AV.ink, border: `1px solid ${AV.line}` }}>
                     <div className="label text-[10px]" style={{ color: AV.dim }}>{k}</div>
-                    <div className="mt-2 font-display text-3xl md:text-4xl" style={{ color: AV.cream }}>{v}</div>
+                    <div className="mt-2 font-display text-3xl" style={{ color: AV.cream }}>{v}</div>
                   </div>
                 ))}
               </div>

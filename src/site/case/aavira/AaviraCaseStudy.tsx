@@ -28,7 +28,7 @@ const META = [
 const STEPS: { screen: Screen; tab: string; t: string; d: string }[] = [
   { screen: "scan", tab: "Scan", t: "A code on the table is the front door", d: "No app, no download, no account. The code opens the menu in the browser, already knowing which table and how many guests." },
   { screen: "menu", tab: "Browse", t: "A menu that looks like the room feels", d: "Every dish leads with a real photo, a veg mark and one line, with a tonight's special, a veg filter and categories that fit a thumb." },
-  { screen: "host", tab: "Ask", t: "A host that knows the menu", d: "Aira answers in plain language: something spicy, something vegetarian, what is popular. It only ever suggests dishes that are on the menu." },
+  { screen: "host", tab: "Ask", t: "A host that knows the menu", d: "Ask in plain words, or in Telugu or Hindi. Aira says how a dish is made, suggests, and puts things on the table when you ask. It only ever speaks for what is on the menu." },
   { screen: "cart", tab: "Order", t: "One order for the whole table", d: "Everyone adds from their own phone to the same list. One person sends it, and the kitchen gets a single clean ticket." },
   { screen: "remember", tab: "Return", t: "The room remembers you", d: "Birthday week, tier progress, your usual order. The best single perk applies automatically, so offers never stack by accident." },
   { screen: "feedback", tab: "Feedback", t: "Ten seconds, then a reason to come back", d: "A star rating and a tap or two, answered with a code for next time. Unhappy guests reach the manager before they reach a review site." },
@@ -36,7 +36,7 @@ const STEPS: { screen: Screen; tab: string; t: string; d: string }[] = [
 
 const SYSTEMS = [
   { t: "Guest ordering", d: "Per-table QR, shared cart, phone OTP, live order status." },
-  { t: "AI host", d: "Grounded in the live menu and stock. Declines what it does not know." },
+  { t: "AI host", d: "A chef's voice grounded in the live menu. Adds, notes and removes, replies in Telugu or Hindi, and confirms before it sends." },
   { t: "Kitchen and floor", d: "One ticket per table, a waiter view, and calls for the bill or help." },
   { t: "Loyalty and offers", d: "Tiers, birthdays and anniversaries, one best offer applied." },
   { t: "Feedback loop", d: "Ratings in the moment, low scores routed to the manager." },
@@ -113,7 +113,7 @@ export function AaviraCaseStudy() {
   });
 
   return (
-    <div style={{ background: AV.ink, color: AV.cream }} className="font-sans antialiased selection:bg-[#e9a23b] selection:text-black">
+    <div style={{ background: AV.ink, color: AV.cream }} className="av-type font-sans antialiased selection:bg-[#e9a23b] selection:text-black">
       <header className="fixed top-0 inset-x-0 z-50 backdrop-blur-md" style={{ background: "rgba(14,12,11,0.92)", borderBottom: `1px solid ${AV.line}`, paddingTop: "env(safe-area-inset-top)" }}>
         <div className="mx-auto max-w-[1400px] px-6 md:px-10 h-16 flex items-center justify-between">
           <a href="/" className="label flex items-center gap-2 text-[10px]" style={{ color: AV.muted }}><ArrowLeft className="w-4 h-4" /> made.</a>
@@ -135,10 +135,19 @@ export function AaviraCaseStudy() {
         <motion.div style={{ opacity: fade }} className="relative z-10 mx-auto max-w-[1400px] w-full px-6 md:px-10 pb-14 md:pb-20">
           <span className="label" style={{ color: "#ffc467", textShadow: "0 1px 14px rgba(0,0,0,.9)" }}>flagship study · restaurant platform</span>
           <p className="mt-5 font-display text-2xl md:text-4xl leading-snug max-w-3xl" style={{ color: AV.cream }}>
-            A coastal kitchen and bar, and the guest platform we designed to make every waiter three times more effective.
+            Scan, ask the chef, order together, and watch the kitchen react. A guest platform that gives every waiter more time for the guests.
           </p>
-          <p className="mt-4 text-base max-w-xl" style={{ color: AV.muted }}>Our own study, not a client project. The brand and the prototype below are ours; the photography is licensed stock.</p>
+          <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
+            <a href="#try" className="inline-flex items-center gap-2 rounded-full px-7 py-4 text-sm font-semibold" style={{ background: AV.turmeric, color: AV.ink }}>Try the live demo <ArrowUpRight className="w-4 h-4" /></a>
+            <a href="/aavira" className="text-sm underline underline-offset-4" style={{ color: AV.cream }}>Visit the Aavira website</a>
+            <a href={waLink("Hi, I saw the Aavira study and want something like it for my restaurant.")} className="text-sm underline underline-offset-4" style={{ color: AV.cream }}>Want this for your restaurant?</a>
+          </div>
+          <p className="mt-6 text-sm max-w-xl" style={{ color: AV.cream, textShadow: "0 1px 12px rgba(0,0,0,.8)" }}>From the team behind the booking system running at <a href="/work/ramachandra-ortho" className="underline underline-offset-4">Ramachandra Ortho Care</a>, a live clinic in Vizag.</p>
+          <p className="mt-2 text-xs max-w-xl" style={{ color: AV.muted }}>Aavira is our own study, not a client project. The brand and prototype are ours; the photography is licensed stock.</p>
         </motion.div>
+      <div className="hidden lg:block absolute z-10 right-[6%] -bottom-[300px] w-[270px] rounded-[40px] p-2 pointer-events-none select-none" aria-hidden style={{ background: "#050404", border: `1px solid ${AV.line}`, boxShadow: "0 40px 90px -20px rgba(0,0,0,.85)" }}>
+          <AaviraPrototype screen="menu" className="rounded-[32px]" />
+        </div>
       </section>
 
       {/* META */}
@@ -179,17 +188,17 @@ export function AaviraCaseStudy() {
       <section style={{ background: AV.surface, borderTop: `1px solid ${AV.line}`, borderBottom: `1px solid ${AV.line}` }}>
         <div className="mx-auto max-w-[1400px] px-6 md:px-10 py-24 md:py-32 grid lg:grid-cols-12 gap-10 items-center">
           <Reveal className="lg:col-span-6">
-            <span className="label" style={{ color: AV.turmeric }}>The idea</span>
+            <span className="label" style={{ color: AV.turmeric }}>The idea, and what it changes</span>
             <h2 className="mt-6 font-display text-4xl md:text-6xl leading-[1] tracking-[-0.01em]">The waiter stays the hero.</h2>
             <p className="mt-6 text-lg leading-relaxed max-w-xl" style={{ color: AV.muted }}>
               Most QR menus try to remove the waiter. We did the opposite. The phone handles browsing, shared ordering and the small questions, so the waiter arrives knowing the table, the allergies and the occasion, and can host instead of hurry.
             </p>
           </Reveal>
           <Reveal className="lg:col-span-6">
-            <div className="grid grid-cols-3 gap-4 md:gap-6">
-              {[["Browse", "the guest, on their phone"], ["Ask", "a grounded AI host"], ["Welcome", "the waiter, with context"]].map(([a, b]) => (
+            <div className="grid sm:grid-cols-2 gap-4">
+              {[["Guests order when they are ready", "not when a waiter is free to come over."], ["Suggestions at the moment of choosing", "the second round, the dessert, the pairing."], ["Waiters know the table before they arrive", "who is celebrating, who is vegetarian."], ["Low ratings reach a manager first", "before they reach a review site."]].map(([a, b]) => (
                 <div key={a} className="rounded-2xl p-5 md:p-6" style={{ background: AV.ink, border: `1px solid ${AV.line}` }}>
-                  <div className="font-display text-2xl md:text-3xl" style={{ color: AV.turmeric }}>{a}</div>
+                  <div className="font-display text-xl md:text-2xl leading-snug" style={{ color: AV.cream }}>{a}</div>
                   <div className="mt-2 text-sm leading-snug" style={{ color: AV.muted }}>{b}</div>
                 </div>
               ))}
@@ -261,13 +270,56 @@ export function AaviraCaseStudy() {
         </div>
       </section>
 
+      {/* MEET AIRA */}
+      <section style={{ borderTop: `1px solid ${AV.line}` }} aria-labelledby="aira-h">
+        <div className="mx-auto max-w-[1400px] px-6 md:px-10 py-24 md:py-32 grid lg:grid-cols-12 gap-10 lg:gap-16">
+          <div className="lg:col-span-5">
+            <span className="label" style={{ color: AV.turmeric }}>The host</span>
+            <h2 id="aira-h" className="mt-6 font-display text-4xl md:text-6xl leading-[1]">Meet Aira, the chef's voice.</h2>
+            <p className="mt-6 text-lg leading-relaxed" style={{ color: AV.muted }}>Aira talks about the food the way the kitchen would, and she does the small jobs a guest would otherwise wave a waiter over for.</p>
+            <ul className="mt-8 grid gap-3 text-[15px]" style={{ color: AV.cream }}>
+              {["Only speaks for what is on tonight's menu", "Suggests first, adds only on a clear instruction", "Reads the order back and waits for a yes before sending"].map((t) => (
+                <li key={t} className="flex gap-3"><span aria-hidden style={{ color: AV.turmeric }}>→</span><span>{t}</span></li>
+              ))}
+            </ul>
+          </div>
+          <div className="lg:col-span-7">
+            <div className="grid sm:grid-cols-2 gap-3">
+              {[
+                ["Tell me about the biryani", "A chef's note: the technique, the hero ingredient and a pairing, with an Add button."],
+                ["Add two lime sodas, less spicy", "Puts them on the table with the note for the kitchen."],
+                ["Remove the mojito", "Takes it off the table and says so."],
+                ["Bring water, and the bill", "Pings the floor staff directly, not a note on the food order."],
+                ["కారంగా ఏముంది?", "Answers in the guest's own language: Telugu, Hindi or a mix."],
+                ["That's everything", "Reads the order and total back, and sends only after a yes."],
+                ["Is there music tonight?", "Tells them about the live set and puts their table on the list."],
+                ["Something vegetarian", "Suggests dishes as tappable cards, never adds on a guess."],
+              ].map(([q, a]) => (
+                <div key={q} className="rounded-2xl p-5" style={{ background: AV.surface, border: `1px solid ${AV.line}` }}>
+                  <div className="font-display text-lg leading-snug" style={{ color: AV.turmeric }}>"{q}"</div>
+                  <div className="mt-2 text-sm leading-snug" style={{ color: AV.muted }}>{a}</div>
+                </div>
+              ))}
+            </div>
+            <p className="mt-5 text-sm" style={{ color: AV.dim }}>In the prototype below Aira is a scripted stand-in. The real one runs on Claude, grounded in the live menu and the live cart.</p>
+          </div>
+        </div>
+      </section>
+
       {/* LIVE FLOOR */}
-      <section style={{ borderTop: `1px solid ${AV.line}` }} aria-labelledby="floor-h">
+      <section id="try" style={{ borderTop: `1px solid ${AV.line}` }} aria-labelledby="floor-h">
         <div className="mx-auto max-w-[1400px] px-6 md:px-10 py-20 md:py-28">
           <span className="label" style={{ color: AV.turmeric }}>Try it, both sides</span>
           <h2 id="floor-h" className="mt-6 font-display text-4xl md:text-6xl leading-[1] max-w-3xl">Place an order. Watch the room react.</h2>
-          <p className="mt-5 text-lg max-w-2xl" style={{ color: AV.muted }}>Add dishes, open Table and send. A ticket lands in the kitchen, the waiter gets an alert and the owner's numbers move. Tap Cook or Serve to push it along and the phone updates. It is a prototype: nothing here is saved or sent.</p>
+          <p className="mt-5 text-lg max-w-2xl" style={{ color: AV.muted }}>Ask Aira for something, add dishes, open Table and send. A ticket lands in the kitchen, the waiter gets an alert and the owner's numbers move. Tap the kitchen buttons to push it along and the phone updates. It is a prototype: nothing here is saved or sent.</p>
           <div className="mt-14"><LiveFloor /></div>
+        </div>
+      </section>
+
+      <section style={{ background: AV.surface, borderTop: `1px solid ${AV.line}`, borderBottom: `1px solid ${AV.line}` }}>
+        <div className="mx-auto max-w-[1400px] px-6 md:px-10 py-12 md:py-14 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+          <p className="font-display text-2xl md:text-4xl leading-snug max-w-2xl">Liked what you saw? We can put this on your tables.</p>
+          <a href={waLink("Hi, I tried the Aavira demo and want something like it for my restaurant.")} className="inline-flex items-center gap-2 rounded-full px-7 py-4 text-sm font-semibold self-start md:self-auto" style={{ background: AV.turmeric, color: AV.ink }}>Message us on WhatsApp <ArrowUpRight className="w-4 h-4" /></a>
         </div>
       </section>
 
@@ -311,6 +363,29 @@ export function AaviraCaseStudy() {
             ))}
           </ol>
         </Reveal>
+      </section>
+
+      {/* FAQ */}
+      <section style={{ borderTop: `1px solid ${AV.line}` }} aria-labelledby="faq-h">
+        <div className="mx-auto max-w-[1000px] px-6 md:px-10 py-24 md:py-32">
+          <span className="label" style={{ color: AV.turmeric }}>Questions owners ask</span>
+          <h2 id="faq-h" className="mt-6 font-display text-4xl md:text-5xl leading-[1]">Before you message us.</h2>
+          <div className="mt-10" style={{ borderTop: `1px solid ${AV.line}` }}>
+            {[
+              ["What does it cost?", "We quote after a short call about your room: how many tables, your menu, and whether it connects to your point-of-sale. A pilot on a few tables is the usual start."],
+              ["Will it work with my point-of-sale?", "Our platform forwards orders to a restaurant point-of-sale system. Other systems are scoped case by case, and we will tell you if one is not a fit."],
+              ["Do my guests need an app?", "No. They scan the table code and the menu opens in the browser."],
+              ["Does it replace waiters?", "No. It takes the order-taking and the small requests off them, so they can do the hospitality."],
+              ["Can the host really reply in Telugu or Hindi?", "Yes, that is how it is designed: it answers in the language the guest writes in, including mixed forms. The prototype on this page uses scripted replies to show the idea."],
+              ["Who owns the guest data?", "Your restaurant does. The guest list, the menu and the offers are yours."],
+            ].map(([q, a]) => (
+              <details key={q} className="group py-5" style={{ borderBottom: `1px solid ${AV.line}` }}>
+                <summary className="flex items-center justify-between gap-4 cursor-pointer list-none font-display text-xl md:text-2xl"><span>{q}</span><span aria-hidden className="text-2xl transition-transform group-open:rotate-45" style={{ color: AV.turmeric }}>+</span></summary>
+                <p className="mt-3 max-w-2xl leading-relaxed" style={{ color: AV.muted }}>{a}</p>
+              </details>
+            ))}
+          </div>
+        </div>
       </section>
 
       {/* CTA */}

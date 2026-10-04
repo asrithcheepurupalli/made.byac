@@ -1,0 +1,9 @@
+@font-face{font-family:'Figtree';font-style:normal;font-weight:400 700;font-display:swap;src:url('/fonts/aavira/figtree-normal.woff2') format('woff2')}
+@font-face{font-family:'Instrument Serif';font-style:italic;font-weight:400;font-display:swap;src:url('/fonts/aavira/instrument-serif-italic.woff2') format('woff2')}
+@font-face{font-family:'Instrument Serif';font-style:normal;font-weight:400;font-display:swap;src:url('/fonts/aavira/instrument-serif-normal.woff2') format('woff2')}
+/* Aavira's own type: Instrument Serif for display, Figtree for text. Scoped so the rest of the site is untouched. */
+.av-type{font-family:'Figtree',ui-sans-serif,system-ui,sans-serif}
+.av-type .font-display{font-family:'Instrument Serif',Georgia,'Times New Roman',serif;font-weight:400;letter-spacing:-.01em}
+.av-type .label{font-family:'Figtree',ui-sans-serif,system-ui,sans-serif;font-weight:600;letter-spacing:.22em;text-transform:uppercase}
+.av-type .font-display em{font-style:italic}
+.av-type .font-sans{font-family:'Figtree',ui-sans-serif,system-ui,sans-serif}

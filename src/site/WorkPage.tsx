@@ -12,7 +12,7 @@ const CASE_SLUG: Record<string, string> = {
 // Featured studies carried at the top of the page.
 const FEATURED: { slug: string; client: string; line: string; img: string; tag: string; accent: string; overlay?: string }[] = [
   { slug: "ramachandra-ortho", client: "Ramachandra Ortho Care", line: "A clinic where the visit starts before the phone rings.", img: "/case/ortho/reception.webp", tag: "Clinic booking & WhatsApp", accent: "#2bbfa5" },
-  { slug: "aavira", client: "Aavira", line: "A guest platform that makes every waiter three times more effective.", img: "/case/aavira/hero.webp", tag: "Flagship study · restaurant platform", accent: "#e9a23b" },
+  { slug: "aavira", client: "Aavira", line: "A guest platform that gives every waiter more time for the guests.", img: "/case/aavira/hero.webp", tag: "Flagship study · restaurant platform", accent: "#e9a23b" },
   { slug: "innovolt", client: "Innovolt", line: "Used EVs, made a safe bet.", img: "/images/Hyd'Tel.webp", tag: "EV marketplace campaigns", accent: "#27d17c" },
   { slug: "mithai-maharaja", client: "Mithai Maharaja", line: "Sweets dressed like heirlooms.", img: "/images/thumb_1778155198_f88efc2a-69f8-4b24-b07b-26e8a339b684.webp", tag: "Luxury packaging", accent: "#c8a24b" },
 ];

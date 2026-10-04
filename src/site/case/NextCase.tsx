@@ -6,7 +6,7 @@ import { CAMPAIGN_CASES } from "./caseData";
 // The rotation is client work only: Ortho, Aavira (our flagship study), Innovolt, Mithai Maharaja, then back to Ortho.
 const ROTATION = [
   { slug: "ramachandra-ortho", name: "Ramachandra Ortho Care", tag: "Clinic booking and WhatsApp", line: "A clinic where the visit starts before the call.", img: "/case/ortho/reception.webp" },
-  { slug: "aavira", name: "Aavira", tag: "Flagship study · restaurant platform", line: "A guest platform that makes every waiter three times more effective.", img: "/case/aavira/hero.webp" },
+  { slug: "aavira", name: "Aavira", tag: "Flagship study · restaurant platform", line: "A guest platform that gives every waiter more time for the guests.", img: "/case/aavira/hero.webp" },
   { slug: "innovolt", name: CAMPAIGN_CASES["innovolt"].client, tag: CAMPAIGN_CASES["innovolt"].sector, line: CAMPAIGN_CASES["innovolt"].tagline, img: CAMPAIGN_CASES["innovolt"].hero },
   { slug: "mithai-maharaja", name: CAMPAIGN_CASES["mithai-maharaja"].client, tag: CAMPAIGN_CASES["mithai-maharaja"].sector, line: CAMPAIGN_CASES["mithai-maharaja"].tagline, img: CAMPAIGN_CASES["mithai-maharaja"].hero },
 ];
