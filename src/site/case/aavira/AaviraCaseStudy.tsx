@@ -123,20 +123,21 @@ export function AaviraCaseStudy() {
       </header>
 
       {/* HERO */}
-      <section ref={heroRef} className="relative min-h-[100svh] w-full overflow-hidden flex flex-col justify-end" style={{ background: AV.ink }}>
+      <section ref={heroRef} className="relative min-h-[100svh] w-full overflow-hidden flex flex-col" style={{ background: AV.ink }}>
         <motion.div style={{ y: artY }} className="absolute inset-0 z-0" aria-hidden>
-          <img data-vt-hero src="/case/aavira/hero-bg.webp" alt="" fetchPriority="high" className="absolute right-0 top-0 h-full w-full object-cover object-[70%_50%]" />
-          <div className="absolute inset-0 hidden md:block" style={{ background: `linear-gradient(90deg, ${AV.ink} 20%, rgba(14,12,11,0.82) 36%, rgba(14,12,11,0.35) 58%, rgba(14,12,11,0) 80%)` }} />
-          <div className="absolute inset-0" style={{ background: `linear-gradient(to top, ${AV.ink} 3%, rgba(14,12,11,0.55) 36%, rgba(14,12,11,0.1) 100%)` }} />
+          <img data-vt-hero src="/case/aavira/hero-bg.webp" alt="" fetchPriority="high" className="absolute inset-0 w-full h-[112%] object-cover object-center" />
+          <div className="absolute inset-0" style={{ background: "radial-gradient(55% 40% at 50% 46%, rgba(14,12,11,0.5), rgba(14,12,11,0) 100%)" }} />
+          <div className="absolute inset-x-0 bottom-0 h-[55%]" style={{ background: `linear-gradient(to top, ${AV.ink} 4%, rgba(14,12,11,0.7) 45%, rgba(14,12,11,0) 100%)` }} />
         </motion.div>
-        <motion.div style={{ opacity: fade }} className="relative z-10 mx-auto max-w-[1400px] w-full px-6 md:px-10 pb-16 md:pb-24 pt-32">
-          <span className="label" style={{ color: AV.turmeric }}>flagship study · restaurant platform</span>
-          <h1 className="mt-8"><span className="sr-only">Aavira</span><Wordmark height={72} className="max-w-full h-auto md:h-[110px]" /></h1>
-          <p className="mt-8 font-display text-2xl md:text-4xl leading-snug max-w-3xl" style={{ color: AV.cream }}>
+        <motion.div style={{ opacity: fade }} className="relative z-10 flex-1 flex items-center justify-center px-6 pt-24">
+          <h1 style={{ filter: "drop-shadow(0 6px 30px rgba(0,0,0,.55))" }}><span className="sr-only">Aavira</span><Wordmark height={150} className="w-[78vw] max-w-[620px] h-auto" /></h1>
+        </motion.div>
+        <motion.div style={{ opacity: fade }} className="relative z-10 mx-auto max-w-[1400px] w-full px-6 md:px-10 pb-14 md:pb-20">
+          <span className="label" style={{ color: "#ffc467", textShadow: "0 1px 14px rgba(0,0,0,.9)" }}>flagship study · restaurant platform</span>
+          <p className="mt-5 font-display text-2xl md:text-4xl leading-snug max-w-3xl" style={{ color: AV.cream }}>
             A coastal kitchen and bar, and the guest platform we designed to make every waiter three times more effective.
           </p>
-          <p className="mt-5 text-base max-w-xl" style={{ color: AV.muted }}>Our own study, not a client project. The brand and the prototype below are ours; the photography is licensed stock.</p>
-          <div className="mt-10 flex items-center gap-3 label" style={{ color: AV.muted }}><span className="inline-block w-10 h-px" style={{ background: AV.turmeric }} /> scroll</div>
+          <p className="mt-4 text-base max-w-xl" style={{ color: AV.muted }}>Our own study, not a client project. The brand and the prototype below are ours; the photography is licensed stock.</p>
         </motion.div>
       </section>
 
@@ -157,7 +158,7 @@ export function AaviraCaseStudy() {
             <img src="/case/aavira/p-chilli.webp" alt="Dry-roasted chilli and curry leaf on a black plate" loading="lazy" className="w-full object-cover aspect-[4/3]" />
           </figure>
           <figure className="md:col-span-5 relative overflow-hidden rounded-3xl" style={{ border: `1px solid ${AV.line}` }}>
-            <img src="/case/aavira/p-prawn.webp" alt="Prawns searing in a dark pan" loading="lazy" className="w-full object-cover aspect-[4/3]" />
+            <img src="/case/aavira/p-prawn.webp" alt="Pepper prawns with onion" loading="lazy" className="w-full object-cover aspect-[4/3]" />
           </figure>
         </div>
         <p className="mt-5 text-[12px]" style={{ color: AV.dim }}>Mood photography is licensed stock from Unsplash, used to set the tone of the study. The platform, brand and prototype are ours.</p>

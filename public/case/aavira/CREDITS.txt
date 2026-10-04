@@ -1,7 +1,7 @@
 Mood photography via Unsplash (Unsplash License, free for commercial use):
-- p-prawn: Mika Baumeister, https://unsplash.com/photos/MfGOZ4EhSsM
+- hero-bg: Mika Baumeister, https://unsplash.com/photos/MfGOZ4EhSsM
 - p-chilli, p-leaf: Anil Sharma, https://unsplash.com/photos/Cm5qit1QiJg , https://unsplash.com/photos/1aahKeCCBIQ
-- hero-bg: Kalindu Waranga, https://unsplash.com/photos/wXPnWr79d7k
+- p-prawn: Kalindu Waranga, https://unsplash.com/photos/wXPnWr79d7k
 
 Menu photography (Unsplash License):
 - dishes/prawn-pepper: Kalindu Waranga, https://unsplash.com/photos/wXPnWr79d7k
