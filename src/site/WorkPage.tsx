@@ -102,6 +102,7 @@ export function WorkPage() {
               </div>
             </a>
           ))}
+          <a href="/aavira" className="lg:col-span-12 reveal-up inline-flex items-center gap-2 label text-[11px] text-grey-dim hover:text-paper transition-colors">Also: visit the Aavira restaurant website, our concept site <ArrowUpRight className="w-4 h-4" /></a>
 
           {/* the rest, smaller */}
           <div className="lg:col-span-12 grid grid-cols-1 sm:grid-cols-2 gap-5 md:gap-6">

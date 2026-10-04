@@ -59,7 +59,7 @@ export function getPages(): PageOut[] {
   CASES.forEach((c, i) => {
     out.push({
       file: `work/${c.slug}.html`, url: c.path, title: c.title, description: c.description,
-      ogImage: `${SITE}${c.img.startsWith("/case/ortho") ? "/og.png" : c.img}`, robots: "index, follow", ld: caseLd(c), html: renderToString(<CaseShellBody i={i} />),
+      ogImage: `${SITE}${c.slug === "aavira" ? "/og-aavira-study.jpg" : c.img.startsWith("/case/ortho") ? "/og.png" : c.img}`, robots: "index, follow", ld: caseLd(c), html: renderToString(<CaseShellBody i={i} />),
     });
   });
   for (const c of CONTENT) {

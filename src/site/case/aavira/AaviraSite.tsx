@@ -3,6 +3,7 @@ import { motion, useReducedMotion, useScroll, useTransform } from "motion/react"
 import { ArrowUpRight } from "lucide-react";
 import { AV, Wordmark, WordmarkDraw } from "./brand";
 import { MENU } from "./Prototype";
+import { MADE } from "./host";
 
 // Aavira's own website: the restaurant a guest would find, not the study about it. A concept
 // we designed to show a restaurant site that feels like the room. Fictional brand, licensed stock
@@ -73,7 +74,7 @@ function Header({ solid, showMark }: { solid: boolean; showMark: boolean }) {
   return (
     <header className="fixed top-0 inset-x-0 z-50" style={{ paddingTop: "env(safe-area-inset-top)" }}>
       <div className="text-center text-[11px] py-1.5 px-3" style={{ background: "#050404", color: AV.muted }}>
-        A concept restaurant site by <a href="/" className="underline underline-offset-2" style={{ color: AV.cream }}>made.</a> · <a href="/work/aavira" className="underline underline-offset-2" style={{ color: AV.turmeric }}>read the study</a>
+        A concept restaurant site by <a href={`${MADE}/`} className="underline underline-offset-2" style={{ color: AV.cream }}>made.</a> · <a href={`${MADE}/work/aavira`} className="underline underline-offset-2" style={{ color: AV.turmeric }}>read the study</a>
       </div>
       <nav aria-label="Aavira" className="transition-colors duration-500" style={{ background: solid ? "rgba(14,12,11,.86)" : "transparent", backdropFilter: solid ? "blur(12px)" : "none", borderBottom: `1px solid ${solid ? AV.line : "transparent"}` }}>
         <div className="mx-auto max-w-[1500px] px-6 md:px-10 h-14 grid grid-cols-3 items-center">
@@ -402,7 +403,7 @@ export function AaviraSite() {
             </div>
           ))}
         </div>
-        <a href="/work/aavira" className="mt-10 inline-flex items-center gap-2 text-sm uppercase tracking-[0.2em] pb-1" style={{ color: AV.cream, borderBottom: `1px solid ${AV.turmeric}` }}>See how ordering from the table works <ArrowUpRight className="w-4 h-4" /></a>
+        <a href={`${MADE}/work/aavira`} className="mt-10 inline-flex items-center gap-2 text-sm uppercase tracking-[0.2em] pb-1" style={{ color: AV.cream, borderBottom: `1px solid ${AV.turmeric}` }}>See how ordering from the table works <ArrowUpRight className="w-4 h-4" /></a>
       </section>
 
       {/* NIGHTS */}
@@ -483,10 +484,10 @@ export function AaviraSite() {
         <div className="mx-auto max-w-[1300px] grid sm:grid-cols-3 gap-10 text-[15px]" style={{ color: AV.muted }}>
           <div><div className={KICK} style={{ color: AV.turmeric }}>Hours</div><p className="mt-4 leading-relaxed">Open daily, 12 pm to midnight.<br />The kitchen closes at midnight.</p></div>
           <div><div className={KICK} style={{ color: AV.turmeric }}>Find us</div><p className="mt-4 leading-relaxed">Aavira is a concept, so there is no address to find. The real thing would be right by the sea.</p></div>
-          <div><div className={KICK} style={{ color: AV.turmeric }}>Elsewhere</div><p className="mt-4 leading-relaxed"><a href="/work/aavira" className="underline underline-offset-4" style={{ color: AV.cream }}>Read the case study</a><br /><a href="#menu" className="underline underline-offset-4" style={{ color: AV.cream }}>Order from your table</a></p></div>
+          <div><div className={KICK} style={{ color: AV.turmeric }}>Elsewhere</div><p className="mt-4 leading-relaxed"><a href={`${MADE}/work/aavira`} className="underline underline-offset-4" style={{ color: AV.cream }}>Read the case study</a><br /><a href="#menu" className="underline underline-offset-4" style={{ color: AV.cream }}>Order from your table</a></p></div>
         </div>
         <div className="mt-16 flex justify-center" aria-hidden><Wordmark height={170} color={`${AV.cream}26`} className="w-[92vw] max-w-[1200px] h-auto" /></div>
-        <p className="mt-10 text-center text-xs tracking-wide" style={{ color: AV.dim }}>An Aavira concept, a made. product. Photography is licensed stock. <a href="/" className="underline underline-offset-4" style={{ color: AV.cream }}>made. by ac</a></p>
+        <p className="mt-10 text-center text-xs tracking-wide" style={{ color: AV.dim }}>An Aavira concept, a made. product. Photography is licensed stock. <a href={`${MADE}/`} className="underline underline-offset-4" style={{ color: AV.cream }}>made. by ac</a></p>
       </footer>
     </div>
   );

@@ -365,6 +365,22 @@ export function AaviraCaseStudy() {
         </Reveal>
       </section>
 
+      {/* THE WEBSITE */}
+      <section style={{ borderTop: `1px solid ${AV.line}` }} aria-labelledby="site-h">
+        <div className="mx-auto max-w-[1400px] px-6 md:px-10 py-20 md:py-28">
+          <a href="/aavira" data-cursor="Open" className="group relative block rounded-3xl overflow-hidden" style={{ border: `1px solid ${AV.line}` }}>
+            <img src="/case/aavira/hero.webp" alt="The Aavira website: wordmark over pepper prawns" loading="lazy" className="w-full aspect-[16/9] md:aspect-[21/9] object-cover transition-transform duration-[1.2s] ease-[cubic-bezier(.16,1,.3,1)] group-hover:scale-[1.04]" />
+            <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(14,12,11,.88), rgba(14,12,11,.1) 60%)" }} />
+            <div className="absolute inset-x-0 bottom-0 p-6 md:p-10">
+              <span className="label text-[10px]" style={{ color: "#ffc467" }}>The other half of the study</span>
+              <h2 id="site-h" className="mt-3 font-display text-4xl md:text-6xl leading-[1]" style={{ color: AV.cream }}>The Aavira website.</h2>
+              <p className="mt-3 max-w-xl text-base md:text-lg" style={{ color: AV.muted }}>The restaurant a guest would find first: an intro, a full-bleed hero, signature dishes, the menu board, nights and reservations. Same brand, its own type.</p>
+              <span className="mt-5 inline-flex items-center gap-2 text-sm font-semibold rounded-full px-6 py-3 av-press" style={{ background: AV.turmeric, color: AV.ink }}>Open the website <ArrowUpRight className="w-4 h-4" /></span>
+            </div>
+          </a>
+        </div>
+      </section>
+
       {/* FAQ */}
       <section style={{ borderTop: `1px solid ${AV.line}` }} aria-labelledby="faq-h">
         <div className="mx-auto max-w-[1000px] px-6 md:px-10 py-24 md:py-32">
@@ -394,6 +410,7 @@ export function AaviraCaseStudy() {
           <h2 className="font-display text-4xl md:text-7xl leading-[0.98] max-w-3xl">Want this for your restaurant?</h2>
           <div className="flex flex-wrap gap-3">
             <a href={waLink("Hi, I saw the Aavira study and want something like it for my restaurant.")} className="inline-flex items-center gap-2 rounded-full px-7 py-4 text-sm font-semibold" style={{ background: AV.ink, color: AV.cream }}>Message us on WhatsApp <ArrowUpRight className="w-4 h-4" /></a>
+            <a href="/aavira" className="inline-flex items-center gap-2 rounded-full px-7 py-4 text-sm font-semibold" style={{ border: `1px solid ${AV.ink}` }}>Visit the website</a>
             <a href="/#say-hi" className="inline-flex items-center gap-2 rounded-full px-7 py-4 text-sm font-semibold" style={{ border: `1px solid ${AV.ink}` }}>Send a note</a>
           </div>
         </div>

@@ -14,6 +14,7 @@
 ## Proof
 - [Ramachandra Ortho Care, clinic booking case study](https://made-by-ac.com/work/ramachandra-ortho)
 - [Aavira, our flagship restaurant platform study](https://made-by-ac.com/work/aavira)
+- [Aavira, a concept restaurant website we designed (fictional brand)](https://made-by-ac.com/aavira)
 
 ## Contact
 - Email: thebrain@made-by-ac.com

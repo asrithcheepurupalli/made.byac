@@ -36,7 +36,8 @@ export function SelectedWork() {
         {/* the one featured client study: Ramachandra Ortho Care */}
         <div className="flex flex-col gap-16 md:gap-24">
           {CASE_STUDIES.slice(0, 2).map((feat, idx) => (
-                <a key={feat.slug} href={`/work/${feat.slug}`} data-cursor="View" className="group grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
+                <div key={feat.slug}>
+                <a href={`/work/${feat.slug}`} data-cursor="View" className="group grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
           <div className={`lg:col-span-7 ${idx % 2 ? "lg:order-2" : ""}`}>
             <div className="relative overflow-hidden rounded-2xl border border-ink-line bg-ink-soft aspect-[16/10]">
               <img src={feat.img} alt={feat.client} loading="lazy" className="w-full h-full object-cover transition-transform duration-[1.1s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.05]" />
@@ -49,6 +50,10 @@ export function SelectedWork() {
             <span className="mt-7 inline-flex items-center gap-2 label text-paper border-b border-gold/50 pb-1 group-hover:text-gold transition-colors">Read the case study <ArrowUpRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" /></span>
           </div>
         </a>
+        {feat.slug === "aavira" && (
+          <a href="/aavira" data-cursor="Open" className="mt-5 inline-flex items-center gap-2 label text-gold border-b border-gold/40 pb-1 hover:text-paper transition-colors">Visit the Aavira website <ArrowUpRight className="w-3.5 h-3.5" /></a>
+        )}
+        </div>
           ))}
         </div>
 

@@ -38,6 +38,7 @@ const MotionPage = lazyRoute(() => import("./MotionPage").then((m) => ({ default
 const CraftPage = lazyRoute(() => import("./CraftPage").then((m) => ({ default: m.CraftPage })));
 const TeardownPage = lazyRoute(() => import("./TeardownPage").then((m) => ({ default: m.TeardownPage })));
 const SeoRoute = lazyRoute<{ path: string }>(() => import("../seo/SeoRoute").then((m) => ({ default: m.SeoRoute })));
+import { ON_AAVIRA_HOST } from "./case/aavira/host";
 const AaviraSite = lazyRoute(() => import("./case/aavira/AaviraSite").then((m) => ({ default: m.AaviraSite })));
 const AaviraCaseStudy = lazyRoute(() => import("./case/aavira/AaviraCaseStudy").then((m) => ({ default: m.AaviraCaseStudy })));
 const OrthoCaseStudy = lazyRoute(() => import("./case/OrthoCaseStudy").then((m) => ({ default: m.OrthoCaseStudy })));
@@ -78,7 +79,9 @@ function useLocation() {
 //   III. Kinetic Grid Lab — the studio (paper-dim)
 //   + the Invitation (ink) and footer.  Case studies live at #/work/<slug>.
 export function Site() {
-  const { path, hash: route } = useLocation();
+  const { path: rawPath, hash: route } = useLocation();
+  // aavira.made-by-ac.com opens the restaurant site at its root
+  const path = ON_AAVIRA_HOST && (rawPath === "" || rawPath === "/") ? "/aavira" : rawPath;
 
   // Internal links swap pages inside the app (with a transition) instead of reloading.
   useEffect(() => installNavigation(), []);

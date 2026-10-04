@@ -358,7 +358,7 @@ export const CASES: CaseShell[] = [
     h1: "Aavira: a guest platform that gives every waiter more time for the guests",
     summary: [
       "Aavira is a fictional coastal kitchen and bar, and our own flagship study of a restaurant platform. It is not a client project.",
-      "The study covers the brand, an illustrated menu, per-table QR ordering, a menu-grounded AI host, loyalty and feedback, with a working prototype on the page.",
+      "The study covers the brand, a photo-led menu, per-table QR ordering, a chef-voiced AI host, loyalty and feedback, a working prototype with live kitchen and waiter views, and a concept restaurant website.",
     ],
     img: "/case/aavira/hero.webp",
     datePublished: "2026-10-04",
