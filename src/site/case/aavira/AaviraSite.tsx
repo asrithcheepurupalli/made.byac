@@ -4,6 +4,7 @@ import { ArrowUpRight } from "lucide-react";
 import { AV, Wordmark, WordmarkDraw } from "./brand";
 import { MENU } from "./Prototype";
 import { MADE } from "./host";
+import { LiveFloor } from "./LiveFloor";
 
 // Aavira's own website: the restaurant a guest would find, not the study about it. A concept
 // we designed to show a restaurant site that feels like the room. Fictional brand, licensed stock
@@ -70,7 +71,7 @@ function Intro() {
 }
 
 // ---- header: Monte-style, menu left, wordmark centre, reserve right -----------------------
-function Header({ solid, showMark }: { solid: boolean; showMark: boolean }) {
+function Header({ solid, showMark, onOrder }: { solid: boolean; showMark: boolean; onOrder: () => void }) {
   return (
     <header className="fixed top-0 inset-x-0 z-50" style={{ paddingTop: "env(safe-area-inset-top)" }}>
       <div className="text-center text-[11px] py-1.5 px-3" style={{ background: "#050404", color: AV.muted }}>
@@ -80,6 +81,7 @@ function Header({ solid, showMark }: { solid: boolean; showMark: boolean }) {
         <div className="mx-auto max-w-[1500px] px-6 md:px-10 h-14 grid grid-cols-3 items-center">
           <div className="flex gap-6 text-[0.72rem] uppercase tracking-[0.22em]" style={{ color: AV.cream }}>
             <a href="#menu" className="hover:opacity-70 transition-opacity">Menu</a>
+            <button type="button" onClick={onOrder} className="uppercase tracking-[0.22em] hover:opacity-70 transition-opacity">Order</button>
             <a href="#nights" className="hidden sm:inline hover:opacity-70 transition-opacity">Nights</a>
           </div>
           <a href="#top" aria-label="Aavira, back to top" className="justify-self-center transition-opacity duration-500" style={{ opacity: showMark ? 1 : 0, pointerEvents: showMark ? "auto" : "none" }}><Wordmark steam height={20} /></a>
@@ -242,6 +244,39 @@ function Pass() {
   );
 }
 
+// ---- "Order at your table": the working demo, in a full-screen layer -------------------------------
+function OrderDemo({ open, onClose }: { open: boolean; onClose: () => void }) {
+  const closeRef = useRef<HTMLButtonElement>(null);
+  useEffect(() => {
+    if (!open) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const key = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
+    window.addEventListener("keydown", key);
+    closeRef.current?.focus();
+    return () => { document.body.style.overflow = prev; window.removeEventListener("keydown", key); };
+  }, [open, onClose]);
+  if (!open) return null;
+  return (
+    <div role="dialog" aria-modal="true" aria-label="Order at your table, live demo" className="av-fade fixed inset-0 z-[90] flex flex-col" style={{ background: AV.ink }}>
+      <div className="shrink-0 flex items-center justify-between gap-4 px-6 md:px-10 h-16" style={{ borderBottom: `1px solid ${AV.line}`, background: "rgba(14,12,11,.92)" }}>
+        <div className="flex items-center gap-4 min-w-0"><Wordmark steam height={20} /><span className="hidden sm:block text-[0.7rem] uppercase tracking-[0.24em] truncate" style={{ color: AV.muted }}>Order at your table · Table 7</span></div>
+        <button ref={closeRef} type="button" onClick={onClose} className="av-press rounded-full px-5 py-2 text-[0.72rem] uppercase tracking-[0.22em]" style={{ border: `1px solid ${AV.turmeric}`, color: AV.turmeric }}>Close</button>
+      </div>
+      <div data-lenis-prevent className="flex-1 overflow-y-auto overscroll-contain">
+        <div className="mx-auto max-w-[1300px] px-6 md:px-10 py-10 md:py-14">
+          <div className="max-w-3xl mb-10 md:mb-14">
+            <div className={KICK} style={{ color: AV.turmeric }}>This is what a guest gets</div>
+            <h2 className="mt-4 font-display text-5xl md:text-7xl leading-[1]">Scan, browse, ask, order.</h2>
+            <p className="mt-5 text-lg leading-relaxed" style={{ color: AV.muted }}>Open the menu on the phone, tap a dish for the chef's note, ask Aira for something spicy or in Telugu, add to the shared table, and send it. The kitchen, waiter and owner screens answer alongside it. A prototype: nothing is saved or sent.</p>
+          </div>
+          <LiveFloor />
+        </div>
+      </div>
+    </div>
+  );
+}
+
 // ---- the page ------------------------------------------------------------------------------------
 export function AaviraSite() {
   const heroRef = useRef<HTMLElement>(null);
@@ -266,6 +301,10 @@ export function AaviraSite() {
     return () => window.removeEventListener("scroll", on);
   }, []);
 
+  const [orderOpen, setOrderOpen] = useState(false);
+  const openOrder = () => { setOrderOpen(true); try { history.replaceState(null, "", window.location.pathname + "#order"); } catch { /* ignore */ } };
+  const closeOrder = () => { setOrderOpen(false); try { history.replaceState(null, "", window.location.pathname); } catch { /* ignore */ } };
+  useEffect(() => { if (window.location.hash === "#order") setOrderOpen(true); }, []);
   const [interest, setInterest] = useState<string[]>([]);
   const [sent, setSent] = useState<null | { name: string; date: string; time: string; guests: number }>(null);
   const [guests, setGuests] = useState(2);
@@ -277,8 +316,9 @@ export function AaviraSite() {
     <div id="top" style={{ background: AV.ink, color: AV.cream }} className="av-type font-sans antialiased selection:bg-[#e9a23b] selection:text-black overflow-x-clip">
       <style>{`@keyframes av-marquee{to{transform:translateX(-50%)}}@keyframes av-cue{0%,100%{opacity:.4;transform:scaleY(.6)}50%{opacity:1;transform:scaleY(1)}}`}</style>
       <Intro />
+      <OrderDemo open={orderOpen} onClose={closeOrder} />
       <motion.div aria-hidden className="fixed top-0 inset-x-0 h-[2px] z-[60] origin-left" style={{ scaleX: pageP, background: AV.turmeric }} />
-      <Header solid={solid} showMark={showMark} />
+      <Header solid={solid} showMark={showMark} onOrder={openOrder} />
 
       {/* HERO */}
       <section ref={heroRef} className="relative isolate min-h-[100svh] flex flex-col items-center justify-center text-center px-6 overflow-hidden">
@@ -295,10 +335,11 @@ export function AaviraSite() {
           <h1 className="mt-7" style={{ filter: "drop-shadow(0 4px 26px rgba(0,0,0,.6))" }}><span className="sr-only">Aavira, coastal kitchen and bar</span><Wordmark steam height={190} className="w-[82vw] max-w-[760px] h-auto av-rise" /></h1>
           <p className="mt-8 max-w-md text-base sm:text-lg leading-relaxed" style={{ color: AV.cream, textShadow: "0 1px 16px rgba(0,0,0,.7)" }}>Curry leaf crackling in a hot kadai, tamarind simmered low, and music on the terrace. Come hungry.</p>
           <div className="mt-9 flex flex-col sm:flex-row items-center gap-3">
-            <a href="#menu" className="av-sheen av-press rounded-full px-7 py-3.5 text-sm font-semibold tracking-wide" style={{ background: AV.turmeric, color: AV.ink }}>View the menu</a>
-            <a href="#reserve" className="rounded-full px-7 py-3.5 text-sm font-semibold tracking-wide" style={{ border: `1px solid ${AV.cream}88`, color: AV.cream, background: "rgba(14,12,11,.35)" }}>Reserve a table</a>
+            <button type="button" onClick={openOrder} className="av-sheen av-press rounded-full px-7 py-3.5 text-sm font-semibold tracking-wide" style={{ background: AV.turmeric, color: AV.ink }}>Order at your table</button>
+            <a href="#menu" className="av-press rounded-full px-7 py-3.5 text-sm font-semibold tracking-wide" style={{ border: `1px solid ${AV.cream}88`, color: AV.cream, background: "rgba(14,12,11,.35)" }}>View the menu</a>
           </div>
-          <div className="mt-8 flex items-center gap-3 text-[0.68rem] uppercase tracking-[0.3em]" style={{ color: AV.cream, textShadow: "0 1px 10px rgba(0,0,0,.8)" }}><span>Live music on weekends</span><i className="w-1 h-1 rounded-full" style={{ background: AV.turmeric }} /><span>Open till midnight</span></div>
+          <a href="#reserve" className="av-underline mt-5 text-sm" style={{ color: AV.cream, textShadow: "0 1px 10px rgba(0,0,0,.8)" }}>or reserve a table →</a>
+          <div className="mt-6 flex items-center gap-3 text-[0.68rem] uppercase tracking-[0.3em]" style={{ color: AV.cream, textShadow: "0 1px 10px rgba(0,0,0,.8)" }}><span>Live music on weekends</span><i className="w-1 h-1 rounded-full" style={{ background: AV.turmeric }} /><span>Open till midnight</span></div>
         </motion.div>
         <div className="absolute z-20 flex flex-row gap-1 bottom-7 left-1/2 -translate-x-1/2 md:flex-col md:gap-3 md:bottom-auto md:left-auto md:translate-x-0 md:right-8 md:top-1/2 md:-translate-y-1/2" role="tablist" aria-label="Hero photos">
           {SLIDES.map((sl, k) => (
@@ -405,7 +446,10 @@ export function AaviraSite() {
             </div>
           ))}
         </div>
-        <a href={`${MADE}/work/aavira`} className="mt-10 inline-flex items-center gap-2 text-sm uppercase tracking-[0.2em] pb-1" style={{ color: AV.cream, borderBottom: `1px solid ${AV.turmeric}` }}>See how ordering from the table works <ArrowUpRight className="w-4 h-4" /></a>
+        <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-4">
+          <button type="button" onClick={openOrder} className="av-sheen av-press rounded-full px-7 py-3.5 text-sm font-semibold tracking-wide" style={{ background: AV.turmeric, color: AV.ink }}>Order at your table</button>
+          <a href={`${MADE}/work/aavira`} className="av-underline inline-flex items-center gap-2 text-sm uppercase tracking-[0.2em] pb-1" style={{ color: AV.cream }}>How the platform works <ArrowUpRight className="w-4 h-4" /></a>
+        </div>
       </section>
 
       {/* NIGHTS */}
