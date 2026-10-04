@@ -238,7 +238,7 @@ export function SomaaCaseStudy() {
       {/* HERO — parallax */}
       <section ref={heroRef} className="relative h-[100svh] w-full overflow-hidden flex flex-col justify-end">
         <motion.div style={{ y: bgY }} className="absolute inset-0 z-0">
-          <img src={`${A}/hero.webp`} alt="Somaa signature dish" className="w-full h-[120%] object-cover" />
+          <img data-vt-hero src={`${A}/hero.webp`} alt="Somaa signature dish" className="w-full h-[120%] object-cover" />
           <div className="absolute inset-0" style={{ background: "linear-gradient(to top, #0c0a09 8%, rgba(12,10,9,0.45) 45%, rgba(12,10,9,0.65) 100%)" }} />
         </motion.div>
 

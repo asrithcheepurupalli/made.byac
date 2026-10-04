@@ -272,7 +272,7 @@ export function OrthoCaseStudy() {
       {/* HERO */}
       <section ref={heroRef} className="relative h-[100svh] w-full overflow-hidden flex flex-col justify-end" style={{ background: C.deep }}>
         <motion.div style={{ y: bgY }} className="absolute inset-0 z-0">
-          <img src={`${A}/reception.webp`} alt="The clinic reception" className="w-full h-[120%] object-cover" />
+          <img data-vt-hero src={`${A}/reception.webp`} alt="The clinic reception" className="w-full h-[120%] object-cover" />
           <div className="absolute inset-0" style={{ background: "linear-gradient(to top, #0a1f1a 6%, rgba(10,31,26,0.55) 48%, rgba(10,31,26,0.7) 100%)" }} />
         </motion.div>
 

@@ -1,4 +1,6 @@
-import { lazy, Suspense, useEffect, useState, type ReactNode } from "react";
+import { lazy, Suspense, useEffect, useSyncExternalStore, type ReactNode } from "react";
+import { lazyRoute } from "./lazyRoute";
+import { installNavigation, normPath, registerFallback, registerRoute, snapshot, subscribe } from "./nav";
 import { ScrollProgress } from "./ScrollProgress";
 import { SmoothScroll } from "./SmoothScroll";
 import { Cursor } from "./Cursor";
@@ -23,33 +25,49 @@ const PlayCanvas = lazy(() => import("./PlayCanvas").then((m) => ({ default: m.P
 
 // Route pages load on demand, so the homepage ships only its own code instead of all
 // eleven pages in one bundle (that monolith is what made the site slow).
-const OfferPage = lazy(() => import("./OfferPage").then((m) => ({ default: m.OfferPage })));
-const AiPage = lazy(() => import("./AiPage").then((m) => ({ default: m.AiPage })));
-const KitchenPage = lazy(() => import("./KitchenPage").then((m) => ({ default: m.KitchenPage })));
-const WorkPage = lazy(() => import("./WorkPage").then((m) => ({ default: m.WorkPage })));
-const LabsPage = lazy(() => import("./LabsPage").then((m) => ({ default: m.LabsPage })));
-const LawsPage = lazy(() => import("./LawsPage").then((m) => ({ default: m.LawsPage })));
-const LivePage = lazy(() => import("./LivePage").then((m) => ({ default: m.LivePage })));
-const SystemPage = lazy(() => import("./SystemPage").then((m) => ({ default: m.SystemPage })));
-const WorthPage = lazy(() => import("./WorthPage").then((m) => ({ default: m.WorthPage })));
-const MotionPage = lazy(() => import("./MotionPage").then((m) => ({ default: m.MotionPage })));
-const CraftPage = lazy(() => import("./CraftPage").then((m) => ({ default: m.CraftPage })));
-const TeardownPage = lazy(() => import("./TeardownPage").then((m) => ({ default: m.TeardownPage })));
-const SomaaCaseStudy = lazy(() => import("./case/SomaaCaseStudy").then((m) => ({ default: m.SomaaCaseStudy })));
-const SeoRoute = lazy(() => import("../seo/SeoRoute").then((m) => ({ default: m.SeoRoute })));
-const OrthoCaseStudy = lazy(() => import("./case/OrthoCaseStudy").then((m) => ({ default: m.OrthoCaseStudy })));
-const CampaignCaseStudy = lazy(() => import("./case/CampaignCaseStudy").then((m) => ({ default: m.CampaignCaseStudy })));
+const OfferPage = lazyRoute(() => import("./OfferPage").then((m) => ({ default: m.OfferPage })));
+const AiPage = lazyRoute(() => import("./AiPage").then((m) => ({ default: m.AiPage })));
+const KitchenPage = lazyRoute(() => import("./KitchenPage").then((m) => ({ default: m.KitchenPage })));
+const WorkPage = lazyRoute(() => import("./WorkPage").then((m) => ({ default: m.WorkPage })));
+const LabsPage = lazyRoute(() => import("./LabsPage").then((m) => ({ default: m.LabsPage })));
+const LawsPage = lazyRoute(() => import("./LawsPage").then((m) => ({ default: m.LawsPage })));
+const LivePage = lazyRoute(() => import("./LivePage").then((m) => ({ default: m.LivePage })));
+const SystemPage = lazyRoute(() => import("./SystemPage").then((m) => ({ default: m.SystemPage })));
+const WorthPage = lazyRoute(() => import("./WorthPage").then((m) => ({ default: m.WorthPage })));
+const MotionPage = lazyRoute(() => import("./MotionPage").then((m) => ({ default: m.MotionPage })));
+const CraftPage = lazyRoute(() => import("./CraftPage").then((m) => ({ default: m.CraftPage })));
+const TeardownPage = lazyRoute(() => import("./TeardownPage").then((m) => ({ default: m.TeardownPage })));
+const SomaaCaseStudy = lazyRoute(() => import("./case/SomaaCaseStudy").then((m) => ({ default: m.SomaaCaseStudy })));
+const SeoRoute = lazyRoute<{ path: string }>(() => import("../seo/SeoRoute").then((m) => ({ default: m.SeoRoute })));
+const OrthoCaseStudy = lazyRoute(() => import("./case/OrthoCaseStudy").then((m) => ({ default: m.OrthoCaseStudy })));
+const CampaignCaseStudy = lazyRoute<{ slug: string }>(() => import("./case/CampaignCaseStudy").then((m) => ({ default: m.CampaignCaseStudy })));
 
-// Tiny hash router so case-study pages get their own URL + back button,
-// without pulling in a routing dependency.
-function useHashRoute() {
-  const [hash, setHash] = useState(() => (typeof window !== "undefined" ? window.location.hash : ""));
-  useEffect(() => {
-    const on = () => setHash(window.location.hash);
-    window.addEventListener("hashchange", on);
-    return () => window.removeEventListener("hashchange", on);
-  }, []);
-  return hash;
+// Tell the navigation layer how to warm each page, so a hover (or the click itself) has the
+// chunk ready before the swap and the transition never shows a blank frame.
+registerRoute("", () => Promise.resolve());
+registerRoute("/offer", OfferPage.preload);
+registerRoute("/ai", AiPage.preload);
+registerRoute("/kitchen", KitchenPage.preload);
+registerRoute("/work", WorkPage.preload);
+registerRoute("/labs", LabsPage.preload);
+registerRoute("/laws", LawsPage.preload);
+registerRoute("/live", LivePage.preload);
+registerRoute("/system", SystemPage.preload);
+registerRoute("/worth", WorthPage.preload);
+registerRoute("/motion", MotionPage.preload);
+registerRoute("/craft", CraftPage.preload);
+registerRoute("/teardown", TeardownPage.preload);
+registerRoute("/work/somaa", SomaaCaseStudy.preload);
+registerRoute("/work/ramachandra-ortho", OrthoCaseStudy.preload);
+registerRoute("/work/innovolt", CampaignCaseStudy.preload);
+registerRoute("/work/mithai-maharaja", CampaignCaseStudy.preload);
+registerFallback(SeoRoute.preload);
+
+// Location store: the path and hash, kept in sync with in-app navigation and the back button.
+function useLocation() {
+  const loc = useSyncExternalStore(subscribe, snapshot, () => "");
+  const i = loc.indexOf("#");
+  return { path: normPath(i < 0 ? loc : loc.slice(0, i)), hash: i < 0 ? "" : loc.slice(i) };
 }
 
 // The made. studio site — one immersive scroll, three acts:
@@ -58,14 +76,12 @@ function useHashRoute() {
 //   III. Kinetic Grid Lab — the studio (paper-dim)
 //   + the Invitation (ink) and footer.  Case studies live at #/work/<slug>.
 export function Site() {
-  const route = useHashRoute();
+  const { path, hash: route } = useLocation();
 
-  // /offer and /work are real paths (served by their own .html for correct share
-  // previews); the #/ variants are kept as in-app fallbacks.
-  const path =
-    typeof window !== "undefined"
-      ? window.location.pathname.replace(/\/$/, "").replace(/\.html$/, "")
-      : "";
+  // Internal links swap pages inside the app (with a transition) instead of reloading.
+  useEffect(() => installNavigation(), []);
+
+  // The #/ variants of the pages are kept as in-app fallbacks.
   // Case studies live at real paths (/work/<slug>) so search engines can index them.
   // Old #/work/<slug> links redirect to the path.
   useEffect(() => {
@@ -110,7 +126,7 @@ export function Site() {
     };
     window.setTimeout(tick, 120);
     return () => { cancelled = true; };
-  }, []);
+  }, [path, route]);
 
   // Pick the page for the current route. Case studies first, so a #/work/<slug>
   // deep link wins over the /work archive.
