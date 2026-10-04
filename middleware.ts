@@ -7,5 +7,5 @@ export const config = { matcher: "/" };
 
 export default function middleware(request: Request) {
   const host = (request.headers.get("host") || "").toLowerCase();
-  if (host === "aavira.made-by-ac.com") return rewrite(new URL("/aavira.html", request.url));
+  if (host === "aavira.made-by-ac.com") return rewrite(new URL("/aavira", request.url));
 }
