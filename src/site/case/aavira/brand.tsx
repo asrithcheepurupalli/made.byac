@@ -28,13 +28,24 @@ let cursor = 0;
 for (const w of widths) { xs.push(cursor); cursor += w + GAP; }
 const TOTAL = cursor - GAP;
 const PATH = [A(xs[0]), A(xs[1]), V(xs[2]), I(xs[3]), R(xs[4]), A(xs[5])].join(" ");
+const PATH_REST = [A(xs[0]), A(xs[1]), V(xs[2]), R(xs[4]), A(xs[5])].join(" ");
+const PATH_I = I(xs[3]);
 
-export function Wordmark({ color = AV.cream, height = 28, className }: { color?: string; height?: number; className?: string }) {
+export function Wordmark({ color = AV.cream, height = 28, className, steam = false }: { color?: string; height?: number; className?: string; steam?: boolean }) {
   const vbW = TOTAL + SW * 2;
   const vbH = H + SW * 2;
+  const common = { fill: "none", stroke: color, strokeWidth: SW, strokeLinecap: "round" as const, strokeLinejoin: "round" as const };
   return (
     <svg viewBox={`${-SW} ${-SW} ${vbW} ${vbH}`} height={height} width={(height * vbW) / vbH} className={className} role="img" aria-label="Aavira">
-      <path d={PATH} fill="none" stroke={color} strokeWidth={SW} strokeLinecap="round" strokeLinejoin="round" />
+      {steam ? (
+        <>
+          <path d={PATH_REST} {...common} />
+          {/* the "I" is steam: it sways gently, like it is rising off a plate */}
+          <path d={PATH_I} {...common} className="av-steam" />
+        </>
+      ) : (
+        <path d={PATH} {...common} />
+      )}
     </svg>
   );
 }

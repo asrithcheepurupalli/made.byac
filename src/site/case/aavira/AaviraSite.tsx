@@ -81,7 +81,7 @@ function Header({ solid, showMark }: { solid: boolean; showMark: boolean }) {
             <a href="#menu" className="hover:opacity-70 transition-opacity">Menu</a>
             <a href="#nights" className="hidden sm:inline hover:opacity-70 transition-opacity">Nights</a>
           </div>
-          <a href="#top" aria-label="Aavira, back to top" className="justify-self-center transition-opacity duration-500" style={{ opacity: showMark ? 1 : 0, pointerEvents: showMark ? "auto" : "none" }}><Wordmark height={20} /></a>
+          <a href="#top" aria-label="Aavira, back to top" className="justify-self-center transition-opacity duration-500" style={{ opacity: showMark ? 1 : 0, pointerEvents: showMark ? "auto" : "none" }}><Wordmark steam height={20} /></a>
           <a href="#reserve" className="justify-self-end text-[0.72rem] uppercase tracking-[0.22em] rounded-full px-4 py-2 transition-colors" style={{ border: `1px solid ${AV.turmeric}`, color: AV.turmeric }}>Reserve</a>
         </div>
       </nav>
@@ -289,10 +289,10 @@ export function AaviraSite() {
         </motion.div>
         <motion.div style={reduce ? undefined : { opacity: fade, scale: markScale }} className="relative flex flex-col items-center pt-24">
           <p className={KICK} style={{ color: "#ffc467", textShadow: "0 1px 14px rgba(0,0,0,.8)" }}>Coastal kitchen and bar</p>
-          <h1 className="mt-7" style={{ filter: "drop-shadow(0 4px 26px rgba(0,0,0,.6))" }}><span className="sr-only">Aavira, coastal kitchen and bar</span><Wordmark height={190} className="w-[82vw] max-w-[760px] h-auto" /></h1>
+          <h1 className="mt-7" style={{ filter: "drop-shadow(0 4px 26px rgba(0,0,0,.6))" }}><span className="sr-only">Aavira, coastal kitchen and bar</span><Wordmark steam height={190} className="w-[82vw] max-w-[760px] h-auto av-rise" /></h1>
           <p className="mt-8 max-w-md text-base sm:text-lg leading-relaxed" style={{ color: AV.cream, textShadow: "0 1px 16px rgba(0,0,0,.7)" }}>Curry leaf crackling in a hot kadai, tamarind simmered low, and music on the terrace. Come hungry.</p>
           <div className="mt-9 flex flex-col sm:flex-row items-center gap-3">
-            <a href="#menu" className="rounded-full px-7 py-3.5 text-sm font-semibold tracking-wide" style={{ background: AV.turmeric, color: AV.ink }}>View the menu</a>
+            <a href="#menu" className="av-sheen av-press rounded-full px-7 py-3.5 text-sm font-semibold tracking-wide" style={{ background: AV.turmeric, color: AV.ink }}>View the menu</a>
             <a href="#reserve" className="rounded-full px-7 py-3.5 text-sm font-semibold tracking-wide" style={{ border: `1px solid ${AV.cream}88`, color: AV.cream, background: "rgba(14,12,11,.35)" }}>Reserve a table</a>
           </div>
           <div className="mt-8 flex items-center gap-3 text-[0.68rem] uppercase tracking-[0.3em]" style={{ color: AV.cream, textShadow: "0 1px 10px rgba(0,0,0,.8)" }}><span>Live music on weekends</span><i className="w-1 h-1 rounded-full" style={{ background: AV.turmeric }} /><span>Open till midnight</span></div>
@@ -470,7 +470,7 @@ export function AaviraSite() {
                 </div>
                 <div className="sm:col-span-2">
                   {err && <p className="mb-3 text-sm" role="alert" style={{ color: "#a8341a" }}>{err}</p>}
-                  <button type="submit" className="rounded-full px-8 py-4 text-sm font-semibold tracking-wide" style={{ background: AV.ember, color: "#fff" }}>Request this table</button>
+                  <button type="submit" className="av-sheen av-press rounded-full px-8 py-4 text-sm font-semibold tracking-wide" style={{ background: AV.ember, color: "#fff" }}>Request this table</button>
                 </div>
               </form>
             )}
