@@ -75,8 +75,8 @@ export function ServicesHub() {
             <div className="lg:col-span-8">
               <h2 className="font-display text-3xl md:text-4xl leading-[1.1]">A Vizag studio for clinics, restaurants and growing brands.</h2>
               <p className="mt-6 text-lg leading-relaxed text-ink/75 max-w-2xl">
-                Our live work includes a clinic that books through its website and WhatsApp, in three languages. We build the
-                same systems for clinics, hospitals, restaurants and businesses in India and overseas, and our designers handle
+                Our live work includes a clinic that books through its website and WhatsApp, in three languages, and our own
+                restaurant platform study, Aavira. We build the same systems for clinics, hospitals, restaurants and businesses in India and overseas, and our designers handle
                 the brand side too.
               </p>
               <p className="mt-6 text-ink/70 text-[15px]">

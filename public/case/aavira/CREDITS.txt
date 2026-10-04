@@ -1,0 +1,19 @@
+Mood photography via Unsplash (Unsplash License, free for commercial use):
+- p-prawn: Mika Baumeister, https://unsplash.com/photos/MfGOZ4EhSsM
+- p-chilli, p-leaf: Anil Sharma, https://unsplash.com/photos/Cm5qit1QiJg , https://unsplash.com/photos/1aahKeCCBIQ
+- hero-bg: Kalindu Waranga, https://unsplash.com/photos/wXPnWr79d7k
+
+Menu photography (Unsplash License):
+- dishes/prawn-pepper: Kalindu Waranga, https://unsplash.com/photos/wXPnWr79d7k
+- dishes/chicken-65: Madhurima Basak, https://unsplash.com/photos/R25pvpErlsI
+- dishes/paneer-tikka: Viktor Forgacs, https://unsplash.com/photos/WmKXu-bzygo
+- dishes/chicken-fry: Anil Sharma, https://unsplash.com/photos/Cm5qit1QiJg
+- dishes/fish-curry: Vinitha V, https://unsplash.com/photos/LPnJ146r9Mg
+- dishes/keema: Daily Slowdown, https://unsplash.com/photos/7-TOCB28rms
+- dishes/biryani: Shreyak Singh, https://unsplash.com/photos/0j4bisyPo3M
+- dishes/dosa: Zoshua Colah, https://unsplash.com/photos/VIqcVqZ1uxM
+- dishes/idli-sambar: PRATEEK JAISWAL, https://unsplash.com/photos/lY2m5lxJrmQ
+- dishes/payasam: ARUNAVA MONDAL, https://unsplash.com/photos/Q0oULKUHIEU
+- dishes/gulab-jamun: Shoeib Abolhassani, https://unsplash.com/photos/4FNhtF_qqeo
+- dishes/lime-soda: engin akyurt, https://unsplash.com/photos/5aWjIt6VsAI
+- dishes/filter-coffee: Deepal Tamang, https://unsplash.com/photos/Wu_s3trPEVM

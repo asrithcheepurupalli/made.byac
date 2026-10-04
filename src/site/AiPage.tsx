@@ -657,12 +657,12 @@ function Proof() {
             We don't just pitch this.<br /><span className="italic font-normal text-gold">We ship it.</span>
           </h2>
           <p className="mt-7 text-grey-dim text-[15px] md:text-lg leading-relaxed max-w-xl">
-            We built a full restaurant ordering platform with an AI dining host. It greets guests, takes the
+            We designed and built a full restaurant ordering platform with an AI dining host, as our own flagship study. It greets guests, takes the
             order and knows the menu, wired straight into the kitchen's POS. The agents on this page
             aren't a concept. They're already how we work.
           </p>
-          <a href="/offer" className="group mt-9 inline-flex items-center gap-2 label" style={{ color: ACCENT }}>
-            See what we build
+          <a href="/work/aavira" className="group mt-9 inline-flex items-center gap-2 label" style={{ color: ACCENT }}>
+            See the Aavira study
             <ArrowUpRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </a>
         </div>

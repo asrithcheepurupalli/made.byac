@@ -17,8 +17,8 @@ const SERVICES = [
     title: "Restaurant & bar ordering",
     line: "Table QR, shared carts and an AI host, wired into the kitchen you already run.",
     tags: ["QR ordering", "AI host", "Loyalty"],
-    proof: "Ordering platform concept",
-    href: "/offer",
+    proof: "Aavira flagship study",
+    href: "/work/aavira",
   },
   {
     id: "agents",

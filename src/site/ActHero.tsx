@@ -106,7 +106,8 @@ export function ActHero() {
           <p className="mt-4 text-[13px] leading-relaxed text-ink/65">
             Live now: a clinic books, pays and queues on a system we built (
             <a href="/work/ramachandra-ortho" className="underline underline-offset-4 decoration-ink/30 hover:text-ink">Ramachandra Ortho Care</a>
-            ), in three languages.
+            ), in three languages. And our restaurant platform study,{" "}
+            <a href="/work/aavira" className="underline underline-offset-4 decoration-ink/30 hover:text-ink">Aavira</a>.
           </p>
         </div>
 

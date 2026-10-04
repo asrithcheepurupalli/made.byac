@@ -49,7 +49,7 @@ const TRUST: Record<Cluster, { k: string; n?: number; s?: string; v: string }[]>
     { k: "Based in Vizag", v: "In person here, over video everywhere else" },
   ],
   restaurant: [
-    { k: "A working platform", v: "Scan, order together and pay, built and demoed end to end" },
+    { k: "A working platform", v: "Scan, order together and pay, built and shown end to end in our Aavira study" },
     { k: "No app", v: "Guests scan a code and the menu opens in the browser" },
     { k: "Your kitchen", v: "Orders can flow into the point-of-sale you already run" },
     { k: "The waiter stays", v: "It takes the order, not the hospitality" },
@@ -278,7 +278,9 @@ const SHOTS: Record<Cluster, { src: string; cap: string; kind: "phone" | "wide";
     { src: "/case/ortho/rc-chat-m.webp", cap: "An assistant answers and books, with one-tap replies", kind: "phone", alt: "Clinic assistant chat" },
     { src: "/case/ortho/admin-d.webp", cap: "The front desk runs the day from one live queue", kind: "wide", alt: "Front desk queue dashboard" },
   ],
-  restaurant: [],
+  restaurant: [
+    { src: "/case/aavira/hero.webp", cap: "The Aavira study: brand and guest ordering", kind: "wide", alt: "Aavira restaurant study hero" },
+  ],
   web: [
     { src: "/case/ortho/hero-d.webp", cap: "A clinic's booking site, live", kind: "wide", alt: "Clinic booking website" },
     { src: "/case/ortho/admin-d.webp", cap: "A front desk dashboard, live", kind: "wide", alt: "Front desk queue dashboard" },
@@ -288,7 +290,7 @@ const SHOTS: Record<Cluster, { src: string; cap: string; kind: "phone" | "wide";
 };
 const SHOT_NOTE: Record<Cluster, string> = {
   clinic: "Real screens from a live clinic. The front desk view is shown with demo patients.",
-  restaurant: "",
+  restaurant: "Our flagship study, not a client project. The prototype is on the case page.",
   web: "Real work: a clinic booking site and dashboard, and a regional campaign.",
   guide: "",
 };

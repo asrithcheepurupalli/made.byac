@@ -4,6 +4,7 @@ import { ArrowUpRight, Zap, Truck, Gift, Package } from "lucide-react";
 // else hangs on a quiet wall you can hover to view.
 const CASE_STUDIES = [
   { slug: "ramachandra-ortho", client: "Ramachandra Ortho Care", line: "A clinic where the visit starts before the call.", img: "/case/ortho/reception.webp", tag: "Clinic booking" },
+  { slug: "aavira", client: "Aavira", line: "A guest platform for\nevery waiter.", img: "/case/aavira/hero.webp", tag: "Flagship study" },
   { slug: "innovolt", client: "Innovolt", line: "Used EVs, made\na safe bet.", img: "/images/Hyd'Tel.webp", tag: "EV campaigns" },
   { slug: "mithai-maharaja", client: "Mithai Maharaja", line: "Sweets dressed\nlike heirlooms.", img: "/images/thumb_1778155198_f88efc2a-69f8-4b24-b07b-26e8a339b684.webp", tag: "Luxury packaging" },
 ];
@@ -34,12 +35,12 @@ export function SelectedWork() {
 
         {/* the one featured client study: Ramachandra Ortho Care */}
         <div className="flex flex-col gap-16 md:gap-24">
-          {CASE_STUDIES.slice(0, 1).map((feat, idx) => (
+          {CASE_STUDIES.slice(0, 2).map((feat, idx) => (
                 <a key={feat.slug} href={`/work/${feat.slug}`} data-cursor="View" className="group grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
           <div className={`lg:col-span-7 ${idx % 2 ? "lg:order-2" : ""}`}>
             <div className="relative overflow-hidden rounded-2xl border border-ink-line bg-ink-soft aspect-[16/10]">
               <img src={feat.img} alt={feat.client} loading="lazy" className="w-full h-full object-cover transition-transform duration-[1.1s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.05]" />
-              <span className="absolute top-5 left-6 label text-[10px] bg-red text-white rounded-full px-3 py-1.5 z-10">Featured case study</span>
+              <span className="absolute top-5 left-6 label text-[10px] bg-red text-white rounded-full px-3 py-1.5 z-10">{feat.slug === "aavira" ? "Flagship study" : "Featured case study"}</span>
             </div>
           </div>
           <div className={`lg:col-span-5 ${idx % 2 ? "lg:order-1" : ""}`}>

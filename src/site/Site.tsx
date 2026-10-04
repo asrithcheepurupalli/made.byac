@@ -38,6 +38,7 @@ const MotionPage = lazyRoute(() => import("./MotionPage").then((m) => ({ default
 const CraftPage = lazyRoute(() => import("./CraftPage").then((m) => ({ default: m.CraftPage })));
 const TeardownPage = lazyRoute(() => import("./TeardownPage").then((m) => ({ default: m.TeardownPage })));
 const SeoRoute = lazyRoute<{ path: string }>(() => import("../seo/SeoRoute").then((m) => ({ default: m.SeoRoute })));
+const AaviraCaseStudy = lazyRoute(() => import("./case/aavira/AaviraCaseStudy").then((m) => ({ default: m.AaviraCaseStudy })));
 const OrthoCaseStudy = lazyRoute(() => import("./case/OrthoCaseStudy").then((m) => ({ default: m.OrthoCaseStudy })));
 const CampaignCaseStudy = lazyRoute<{ slug: string }>(() => import("./case/CampaignCaseStudy").then((m) => ({ default: m.CampaignCaseStudy })));
 
@@ -57,6 +58,7 @@ registerRoute("/motion", MotionPage.preload);
 registerRoute("/craft", CraftPage.preload);
 registerRoute("/teardown", TeardownPage.preload);
 registerRoute("/work/ramachandra-ortho", OrthoCaseStudy.preload);
+registerRoute("/work/aavira", AaviraCaseStudy.preload);
 registerRoute("/work/innovolt", CampaignCaseStudy.preload);
 registerRoute("/work/mithai-maharaja", CampaignCaseStudy.preload);
 registerFallback(SeoRoute.preload);
@@ -131,10 +133,12 @@ export function Site() {
   // deep link wins over the /work archive.
   const caseSlug = path.startsWith("/work/") ? path.slice("/work/".length) : "";
   const KNOWN = ["", "/index", "/offer", "/ai", "/kitchen", "/work", "/labs", "/laws", "/live", "/system", "/worth", "/motion", "/craft", "/teardown"];
-  const isKnownCase = caseSlug === "ramachandra-ortho" || !!CAMPAIGN_CASES[caseSlug];
+  const isKnownCase = caseSlug === "ramachandra-ortho" || caseSlug === "aavira" || !!CAMPAIGN_CASES[caseSlug];
   const isHashPage = route.startsWith("#/");
   let content: ReactNode;
-  if (caseSlug === "ramachandra-ortho") {
+  if (caseSlug === "aavira") {
+    content = <AaviraCaseStudy />;
+  } else if (caseSlug === "ramachandra-ortho") {
     content = <OrthoCaseStudy />;
   } else if (caseSlug && CAMPAIGN_CASES[caseSlug]) {
     content = <CampaignCaseStudy slug={caseSlug} />;

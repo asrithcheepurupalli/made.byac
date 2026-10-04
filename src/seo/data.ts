@@ -194,6 +194,7 @@ export const SERVICES: Service[] = [
       { q: "Can the menu match our branding?", a: "Yes. It is designed for your place, not a generic template." },
       { q: "How is this different from a plain QR menu?", a: "A plain QR menu is a PDF on a phone. This is ordering, group carts, an AI host, loyalty and feedback, working as one system." },
     ],
+    proof: { label: "Our flagship study", title: "Aavira, a restaurant platform", text: "Our own study of table QR ordering, an AI host and loyalty, with a photo-led menu and a prototype you can tap through. It is a study, not a client job.", href: "/work/aavira", cta: "See the Aavira study", img: "/case/aavira/hero.webp", alt: "Aavira wordmark over pepper prawns" },
     related: ["whatsapp-business-automation", "web-development-company-visakhapatnam"],
     ctaMessage: "Hi, we run a restaurant and want to know about QR ordering.",
     ctaLabel: "Talk to us on WhatsApp",
@@ -347,6 +348,19 @@ export const CASES: CaseShell[] = [
       "We designed and built a booking site in Telugu, English and Hindi, a WhatsApp assistant on Meta's official API, pay-to-confirm with automatic refunds, and a live token queue for the front desk.",
     ],
     img: "/case/ortho/hero-d.webp",
+    datePublished: "2026-10-04",
+  },
+  {
+    slug: "aavira",
+    path: "/work/aavira",
+    title: "Restaurant ordering platform study · Aavira",
+    description: "Our own flagship study: a QR ordering, AI host and loyalty platform for a restaurant, with an original brand, illustrated menu and a prototype you can tap through.",
+    h1: "Aavira: a guest platform that makes every waiter three times more effective",
+    summary: [
+      "Aavira is a fictional coastal kitchen and bar, and our own flagship study of a restaurant platform. It is not a client project.",
+      "The study covers the brand, an illustrated menu, per-table QR ordering, a menu-grounded AI host, loyalty and feedback, with a working prototype on the page.",
+    ],
+    img: "/case/aavira/hero.webp",
     datePublished: "2026-10-04",
   },
   {

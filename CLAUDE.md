@@ -61,3 +61,4 @@ speaks in **team voice** — "we / our studio", never "I".
   working name was removed from the public site (trademark and photo-rights reasons). The old
   demo is kept unlisted; never link it from this site, never put it in a sitemap, and never reuse
   its photography. Any impact figures must be labelled as modelled, never as measured.
+- Aavira (`/work/aavira`, `src/site/case/aavira/`) is that flagship study: an original brand, code-drawn dishes and a front-end-only prototype. Keep it labelled as a study, never as a client, and keep any ROI figures user-set.
