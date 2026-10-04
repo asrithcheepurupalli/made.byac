@@ -85,7 +85,6 @@ const startVT = (cb: () => void): VT | null => {
 
 /** Run a swap with the best transition the browser offers. */
 async function transition(swap: () => void, hero?: HTMLElement | null) {
-  const root = document.documentElement;
   if (reduced()) { swap(); return; }
 
   // A shared element can only be named once per snapshot: clear any hero on the page we are
@@ -95,18 +94,12 @@ async function transition(swap: () => void, hero?: HTMLElement | null) {
     document.querySelectorAll<HTMLElement>("[data-vt-hero]").forEach((el) => { el.style.viewTransitionName = "none"; cleared.push(el); });
     hero.style.viewTransitionName = "proj";
   }
-  root.classList.add("vt-active");
   const vt = startVT(() => { flushSync(swap); });
   if (vt) {
     try { await vt.finished; } catch { /* aborted transitions are fine */ }
   } else {
-    // fallback: quick fade out, swap, and let the route-fade animation bring it in
-    root.classList.add("route-leaving");
-    await new Promise((r) => setTimeout(r, 170));
-    swap();
-    root.classList.remove("route-leaving");
+    swap(); // no View Transitions: swap instantly, the route-rise animation gives the entrance
   }
-  root.classList.remove("vt-active");
   if (hero) hero.style.viewTransitionName = "";
   cleared.forEach((el) => { el.style.viewTransitionName = ""; });
 }
@@ -133,6 +126,9 @@ let current = "";
 export function installNavigation() {
   if (installed || typeof window === "undefined") return () => {};
   installed = true;
+  if (typeof (document as unknown as { startViewTransition?: unknown }).startViewTransition === "function" && !reduced()) {
+    document.documentElement.classList.add("has-vt");
+  }
   window.history.scrollRestoration = "manual";
   if (!window.history.state || !window.history.state.k) window.history.replaceState({ k: "0" }, "");
 
