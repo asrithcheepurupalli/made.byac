@@ -332,11 +332,11 @@ export function AaviraPrototype({
   }, []);
 
   const tab = (s: Screen, label: string, d: string) => (
-    <button type="button" onClick={() => go(s)} className="flex flex-col items-center gap-1 py-2 px-3 relative min-w-[64px]" aria-current={screen === s} aria-label={label}>
+    <button type="button" onClick={() => go(s)} className="av-press flex flex-col items-center gap-1 py-2 px-3 relative min-w-[64px]" aria-current={screen === s} aria-label={label}>
       <Icon d={d} active={screen === s} />
       <span className="text-[11px] tracking-wide" style={{ color: screen === s ? AV.turmeric : AV.muted }}>{label}</span>
       {s === "cart" && count > 0 && (
-        <span className="absolute top-0.5 right-2 min-w-[16px] h-4 px-1 rounded-full text-[10px] font-semibold grid place-items-center" style={{ background: AV.ember, color: "#fff" }}>{count}</span>
+        <span key={count} className="av-pop absolute top-0.5 right-2 min-w-[16px] h-4 px-1 rounded-full text-[10px] font-semibold grid place-items-center" style={{ background: AV.ember, color: "#fff" }}>{count}</span>
       )}
     </button>
   );
@@ -401,7 +401,7 @@ export function AaviraPrototype({
                       <div className="text-[11.5px] leading-snug mt-0.5" style={{ color: AV.muted }}>{d.line}</div>
                       <div className="text-[13px] mt-1.5 font-medium">{inr(d.price)}</div>
                     </div>
-                    <button type="button" onClick={() => add(d.id)} aria-label={`Add ${d.name}`} className="w-9 h-9 rounded-full text-[20px] leading-none grid place-items-center shrink-0 active:scale-90 transition-transform" style={{ background: AV.turmeric, color: AV.ink }}>+</button>
+                    <button type="button" onClick={() => add(d.id)} aria-label={`Add ${d.name}`} className="av-press w-9 h-9 rounded-full text-[20px] leading-none grid place-items-center shrink-0" style={{ background: AV.turmeric, color: AV.ink }}>+</button>
                   </div>
                 ))}
               </div>
@@ -418,7 +418,7 @@ export function AaviraPrototype({
               <p className="px-5 pb-2 text-[10.5px] leading-snug" style={{ color: AV.dim }}>Demo host with scripted replies. The real one runs on Claude, grounded in the live menu.</p>
               <div className="flex-1 min-h-0 overflow-y-auto px-5 pb-3 flex flex-col gap-3">
                 {chat.map((m, i) => (
-                  <div key={i} className={m.from === "me" ? "self-end max-w-[80%]" : "self-start max-w-[90%]"}>
+                  <div key={i} className={`av-rise ${m.from === "me" ? "self-end max-w-[80%]" : "self-start max-w-[90%]"}`}>
                     <div className="rounded-2xl px-4 py-2.5 text-[13.5px] leading-snug" style={{ background: m.from === "me" ? AV.turmeric : AV.surface, color: m.from === "me" ? AV.ink : AV.cream, border: m.from === "me" ? "none" : `1px solid ${AV.line}` }}>{m.text}</div>
                     {m.chef && <div className="mt-1 text-[10.5px] tracking-wide" style={{ color: AV.turmeric }}>{m.chef}</div>}
                     {m.picks && (
@@ -459,7 +459,7 @@ export function AaviraPrototype({
                 </div>
               </div>
               <div className="px-5 pb-2 flex gap-1.5 overflow-x-auto" style={{ scrollbarWidth: "none" }} aria-label="Ask for something at the table">
-                {SERVICES.map((s) => <button key={s.k} type="button" onClick={() => service(s.k)} className="px-3 py-1.5 rounded-full text-[11.5px] whitespace-nowrap" style={{ border: `1px solid ${AV.line}`, color: AV.cream, background: AV.surface }}>{s.label}</button>)}
+                {SERVICES.map((s) => <button key={s.k} type="button" onClick={() => service(s.k)} className="av-press px-3 py-1.5 rounded-full text-[11.5px] whitespace-nowrap" style={{ border: `1px solid ${AV.line}`, color: AV.cream, background: AV.surface }}>{s.label}</button>)}
               </div>
               <div className="flex-1 min-h-0 overflow-y-auto px-5 flex flex-col gap-2.5 pb-3">
                 {cart.length === 0 && (
@@ -486,7 +486,7 @@ export function AaviraPrototype({
                   <>
                     <dl className="text-[13px] grid gap-1">
                       <div className="flex justify-between"><dt style={{ color: AV.muted }}>Subtotal · {count} item{count === 1 ? "" : "s"}</dt><dd>{inr(subtotal)}</dd></div>
-                      {perk > 0 ? <div className="flex justify-between" style={{ color: "#9ccf8f" }}><dt>Meera's birthday dessert, on us</dt><dd>−{inr(perk)}</dd></div> : <div className="flex justify-between text-[12px]" style={{ color: AV.muted }}><dt>Add a dessert and Meera's is on us</dt><dd>−</dd></div>}
+                      {perk > 0 ? <div className="av-rise flex justify-between" style={{ color: "#9ccf8f" }}><dt>Meera's birthday dessert, on us</dt><dd>−{inr(perk)}</dd></div> : <div className="flex justify-between text-[12px]" style={{ color: AV.muted }}><dt>Add a dessert and Meera's is on us</dt><dd>−</dd></div>}
                       <div className="flex justify-between pt-1.5 mt-1 font-semibold text-[16px]" style={{ borderTop: `1px solid ${AV.line}` }}><dt>Total</dt><dd>{inr(total)}</dd></div>
                       <p className="text-[11px]" style={{ color: AV.dim }}>Taxes are shown on the final bill. One offer applies, never two.</p>
                     </dl>
@@ -568,8 +568,8 @@ export function AaviraPrototype({
             const d = BY_ID[open];
             const pair = BY_ID[d.pair];
             return (
-              <div className="absolute inset-0 z-20 flex flex-col justify-end" role="dialog" aria-label={d.name} style={{ background: "rgba(5,4,4,.62)" }} onClick={() => setOpen(null)}>
-                <div className="rounded-t-[28px] overflow-hidden max-h-[88%] overflow-y-auto" style={{ background: AV.surface, borderTop: `1px solid ${AV.line}` }} onClick={(e) => e.stopPropagation()}>
+              <div className="av-fade absolute inset-0 z-20 flex flex-col justify-end" role="dialog" aria-label={d.name} style={{ background: "rgba(5,4,4,.62)" }} onClick={() => setOpen(null)}>
+                <div className="av-sheet rounded-t-[28px] overflow-hidden max-h-[88%] overflow-y-auto" style={{ background: AV.surface, borderTop: `1px solid ${AV.line}` }} onClick={(e) => e.stopPropagation()}>
                   <div className="relative">
                     <img src={`/case/aavira/dishes/${open}.webp`} alt={d.name} className="w-full h-[210px] object-cover" />
                     <button type="button" onClick={() => setOpen(null)} aria-label="Close" className="absolute top-3 right-3 w-9 h-9 rounded-full grid place-items-center text-[18px]" style={{ background: "rgba(14,12,11,.75)", color: AV.cream }}>×</button>

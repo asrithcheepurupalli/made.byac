@@ -83,7 +83,7 @@ function Header({ solid, showMark }: { solid: boolean; showMark: boolean }) {
             <a href="#nights" className="hidden sm:inline hover:opacity-70 transition-opacity">Nights</a>
           </div>
           <a href="#top" aria-label="Aavira, back to top" className="justify-self-center transition-opacity duration-500" style={{ opacity: showMark ? 1 : 0, pointerEvents: showMark ? "auto" : "none" }}><Wordmark steam height={20} /></a>
-          <a href="#reserve" className="justify-self-end text-[0.72rem] uppercase tracking-[0.22em] rounded-full px-4 py-2 transition-colors" style={{ border: `1px solid ${AV.turmeric}`, color: AV.turmeric }}>Reserve</a>
+          <a href="#reserve" className="av-press justify-self-end text-[0.72rem] uppercase tracking-[0.22em] rounded-full px-4 py-2 transition-colors hover:!bg-[#e9a23b] hover:!text-[#0e0c0b]" style={{ border: `1px solid ${AV.turmeric}`, color: AV.turmeric }}>Reserve</a>
         </div>
       </nav>
     </header>
@@ -119,14 +119,14 @@ function Deck() {
           );
         })}
       </div>
-      <div className="text-center lg:text-left" aria-live="polite">
+      <div key={id} className="av-rise text-center lg:text-left" aria-live="polite">
         <div className={KICK} style={{ color: AV.ember }}>Signature {String(i + 1).padStart(2, "0")} / {String(n).padStart(2, "0")}</div>
         <h3 className="mt-5 font-display text-6xl md:text-7xl leading-[0.98]" style={{ color: AV.ink }}>{dish.name}</h3>
         <p className="mt-5 text-lg leading-relaxed max-w-md mx-auto lg:mx-0" style={{ color: "#4a3f35" }}>{SIG_COPY[id]}</p>
         <div className="mt-6 font-display text-3xl" style={{ color: AV.ember }}>{inr(dish.price)}</div>
         <div className="mt-8 flex gap-3 justify-center lg:justify-start">
           {[["Previous dish", -1, "←"], ["Next dish", 1, "→"]].map(([l, d, g]) => (
-            <button key={l as string} type="button" onClick={() => go(d as number)} aria-label={l as string} className="w-12 h-12 rounded-full grid place-items-center text-lg transition-colors hover:bg-[#d9622b] hover:text-white" style={{ border: `1.5px solid ${AV.ember}`, color: AV.ember }}>{g}</button>
+            <button key={l as string} type="button" onClick={() => go(d as number)} aria-label={l as string} className="av-press w-12 h-12 rounded-full grid place-items-center text-lg transition-colors hover:bg-[#d9622b] hover:text-white" style={{ border: `1.5px solid ${AV.ember}`, color: AV.ember }}>{g}</button>
           ))}
         </div>
       </div>
@@ -205,8 +205,8 @@ function Strips() {
   return (
     <div className="flex gap-2 md:gap-3 h-[64vh] md:h-[74vh] overflow-x-auto md:overflow-visible snap-x snap-mandatory px-6 md:px-0" style={{ scrollbarWidth: "none" }}>
       {STRIPS.map(([id, label], k) => (
-        <figure key={id} onMouseEnter={() => setHot(k)} onMouseLeave={() => setHot(null)} className={`relative snap-center shrink-0 w-[62vw] md:w-auto md:shrink rounded-2xl overflow-hidden transition-[flex] duration-700 ease-[cubic-bezier(.16,1,.3,1)] ${hot === k ? "md:[flex:3_1_0%]" : "md:[flex:1_1_0%]"}`} style={{ border: `1px solid ${AV.line}` }}>
-          <img src={`${SITE}/${id}.webp`} alt={label} loading="lazy" draggable={false} className="absolute inset-0 w-full h-full object-cover" />
+        <figure key={id} onMouseEnter={() => setHot(k)} onMouseLeave={() => setHot(null)} className={`group relative snap-center shrink-0 w-[62vw] md:w-auto md:shrink rounded-2xl overflow-hidden transition-[flex] duration-700 ease-[cubic-bezier(.16,1,.3,1)] ${hot === k ? "md:[flex:3_1_0%]" : "md:[flex:1_1_0%]"}`} style={{ border: `1px solid ${AV.line}` }}>
+          <img src={`${SITE}/${id}.webp`} alt={label} loading="lazy" draggable={false} className="absolute inset-0 w-full h-full object-cover transition-transform duration-[900ms] ease-[cubic-bezier(.16,1,.3,1)] group-hover:scale-[1.07]" />
           <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(14,12,11,.75), transparent 45%)" }} />
           <figcaption className="absolute bottom-4 left-4 right-4 font-display text-xl md:text-2xl leading-tight" style={{ color: AV.cream, opacity: hot === null || hot === k ? 1 : 0.6 }}>{label}</figcaption>
         </figure>
@@ -222,7 +222,7 @@ function Pass() {
   const row = (k: number) => (
     <div key={k} className="flex shrink-0 gap-3 pr-3" aria-hidden={k === 1}>
       {PASS.map(([id, label], n) => (
-        <figure key={id} className="relative shrink-0 w-[44vw] sm:w-[26vw] lg:w-[17vw] rounded-2xl overflow-hidden" style={{ height: n % 2 ? "52vh" : "62vh", alignSelf: n % 2 ? "flex-end" : "flex-start", border: `1px solid ${AV.line}` }}>
+        <figure key={id} className="av-lift relative shrink-0 w-[44vw] sm:w-[26vw] lg:w-[17vw] rounded-2xl overflow-hidden" style={{ height: n % 2 ? "52vh" : "62vh", alignSelf: n % 2 ? "flex-end" : "flex-start", border: `1px solid ${AV.line}` }}>
           <img src={`${SITE}/${id}.webp`} alt={k === 0 ? label : ""} loading="lazy" draggable={false} className="absolute inset-0 w-full h-full object-cover" />
           <figcaption className="absolute bottom-3 left-3 text-[0.68rem] uppercase tracking-[0.2em] rounded-full px-3 py-1" style={{ background: "rgba(14,12,11,.7)", color: AV.cream }}>{label}</figcaption>
         </figure>
@@ -250,6 +250,7 @@ export function AaviraSite() {
   const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "18%"]);
   const markScale = useTransform(scrollYProgress, [0, 0.7], [1, 0.82]);
   const fade = useTransform(scrollYProgress, [0, 0.65], [1, 0]);
+  const { scrollYProgress: pageP } = useScroll();
   const [slide, setSlide] = useState(0);
   useEffect(() => {
     if (reduce) return;
@@ -276,6 +277,7 @@ export function AaviraSite() {
     <div id="top" style={{ background: AV.ink, color: AV.cream }} className="av-type font-sans antialiased selection:bg-[#e9a23b] selection:text-black overflow-x-clip">
       <style>{`@keyframes av-marquee{to{transform:translateX(-50%)}}@keyframes av-cue{0%,100%{opacity:.4;transform:scaleY(.6)}50%{opacity:1;transform:scaleY(1)}}`}</style>
       <Intro />
+      <motion.div aria-hidden className="fixed top-0 inset-x-0 h-[2px] z-[60] origin-left" style={{ scaleX: pageP, background: AV.turmeric }} />
       <Header solid={solid} showMark={showMark} />
 
       {/* HERO */}
@@ -321,7 +323,7 @@ export function AaviraSite() {
           <SplitReveal text="The coast, on a plate." className="mt-6 font-display text-6xl md:text-8xl leading-[0.98]" />
           <div className="reveal-up">
             <p className="mt-8 text-lg md:text-xl leading-relaxed max-w-lg" style={{ color: AV.muted }}>Aavira cooks the way the coast eats. Fish bought at first light, curry leaf popped in hot oil, pickle masala that tastes like somebody's grandmother's kitchen. Nothing fancy, everything turned up.</p>
-            <a href="#menu" className="mt-8 inline-flex items-center gap-2 text-sm uppercase tracking-[0.2em] pb-1" style={{ color: AV.cream, borderBottom: `1px solid ${AV.turmeric}` }}>See what is cooking <ArrowUpRight className="w-4 h-4" /></a>
+            <a href="#menu" className="av-underline mt-8 inline-flex items-center gap-2 text-sm uppercase tracking-[0.2em] pb-1" style={{ color: AV.cream, borderBottom: `1px solid ${AV.turmeric}` }}>See what is cooking <ArrowUpRight className="w-4 h-4" /></a>
           </div>
         </div>
         <div className="lg:col-span-6">
@@ -392,7 +394,7 @@ export function AaviraSite() {
                   <div className="label mt-4 flex justify-between text-[10px] pb-2" style={{ color: AV.dim, borderBottom: `1px solid ${AV.line}` }}><span>Item</span><span>Price</span></div>
                   <ul>
                     {MENU.filter((d) => d.cat === cat).map((d) => (
-                      <li key={d.id} className="py-3" style={{ borderBottom: `1px solid ${AV.line}` }}>
+                      <li key={d.id} className="av-row py-3" style={{ borderBottom: `1px solid ${AV.line}` }}>
                         <div className="flex items-baseline justify-between gap-4"><span className="flex items-center gap-2" style={{ color: AV.cream }}><span className="inline-flex w-[11px] h-[11px] rounded-[2px] border items-center justify-center shrink-0" style={{ borderColor: d.veg ? "#5fa05a" : "#c0431f" }} aria-label={d.veg ? "Vegetarian" : "Non vegetarian"}><i className="w-[5px] h-[5px] rounded-full" style={{ background: d.veg ? "#5fa05a" : "#c0431f" }} /></span>{d.name}</span><span style={{ color: AV.turmeric }}>{inr(d.price)}</span></div>
                         <p className="text-[12.5px] mt-1 pl-[19px]" style={{ color: AV.muted }}>{d.line}</p>
                       </li>
@@ -415,11 +417,11 @@ export function AaviraSite() {
             {NIGHTS.map((n) => {
               const on = interest.includes(n.what);
               return (
-                <article key={n.what} className="rounded-3xl p-7 flex flex-col" style={{ background: "#0c211f", border: `1px solid #1d4a47` }}>
+                <article key={n.what} className="av-lift rounded-3xl p-7 flex flex-col" style={{ background: "#0c211f", border: `1px solid #1d4a47` }}>
                   <div className={KICK} style={{ color: AV.turmeric }}>{n.when}</div>
                   <h3 className="mt-5 font-display text-3xl md:text-4xl">{n.what}</h3>
                   <p className="mt-3 leading-relaxed" style={{ color: AV.muted }}>{n.note}</p>
-                  <button type="button" aria-pressed={on} onClick={() => setInterest((x) => (on ? x.filter((y) => y !== n.what) : [...x, n.what]))} className="mt-8 self-start rounded-full px-5 py-2.5 text-sm font-semibold" style={{ background: on ? "transparent" : AV.turmeric, color: on ? AV.turmeric : AV.ink, border: `1px solid ${AV.turmeric}` }}>{on ? "You're on the list" : "I'm interested"}</button>
+                  <button type="button" aria-pressed={on} onClick={() => setInterest((x) => (on ? x.filter((y) => y !== n.what) : [...x, n.what]))} className={`av-press mt-8 self-start rounded-full px-5 py-2.5 text-sm font-semibold ${on ? "av-pop" : ""}`} style={{ background: on ? "transparent" : AV.turmeric, color: on ? AV.turmeric : AV.ink, border: `1px solid ${AV.turmeric}` }}>{on ? "You're on the list" : "I'm interested"}</button>
                 </article>
               );
             })}
@@ -439,6 +441,7 @@ export function AaviraSite() {
           <div className="lg:col-span-7">
             {sent ? (
               <div className="rounded-3xl p-8 md:p-10" style={{ background: AV.ink, color: AV.cream }} role="status">
+                <svg viewBox="0 0 24 24" width="38" height="38" className="av-check mb-4" fill="none" stroke={AV.turmeric} strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden><circle cx="12" cy="12" r="10.5" strokeWidth="1.2" opacity=".5" /><path d="M7 12.5l3.2 3.2L17 9" /></svg>
                 <div className={KICK} style={{ color: AV.turmeric }}>Request received</div>
                 <h3 className="mt-4 font-display text-4xl">See you soon, {sent.name}.</h3>
                 <p className="mt-4 text-lg" style={{ color: AV.muted }}>A table for {sent.guests} on {sent.date} at {sent.time}.</p>
@@ -465,7 +468,7 @@ export function AaviraSite() {
                 <div className="text-sm" style={{ color: "#4a3f35" }}><span className="block mb-2">Guests</span>
                   <div className="inline-flex items-center rounded-xl" style={{ background: "#fffaf1", border: `1.5px solid ${AV.ember}66` }}>
                     <button type="button" aria-label="Fewer guests" onClick={() => setGuests((g) => Math.max(1, g - 1))} className="w-12 h-[52px] text-xl">−</button>
-                    <span className="w-10 text-center text-base" aria-live="polite">{guests}</span>
+                    <span key={guests} className="av-pop w-10 text-center text-base" aria-live="polite">{guests}</span>
                     <button type="button" aria-label="More guests" onClick={() => setGuests((g) => Math.min(12, g + 1))} className="w-12 h-[52px] text-xl">+</button>
                   </div>
                 </div>
