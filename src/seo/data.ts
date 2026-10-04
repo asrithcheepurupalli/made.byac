@@ -103,7 +103,7 @@ export const SERVICES: Service[] = [
     description: "A Vizag studio that designs and builds fast, search-ready websites and web apps for businesses in Visakhapatnam, Andhra Pradesh and across India.",
     eyebrow: "Web design and development",
     h1: "Web development company in Visakhapatnam",
-    lede: "We are a design and development studio in Visakhapatnam. We build websites and web apps that load fast, work in more than one language, and are set up properly for search from day one. Design and code come from the same small team, so what we draw is what ships.",
+    lede: "We are a design and development studio in Visakhapatnam. We build websites and web apps that load fast, work in more than one language, and are set up properly for search from day one. Design and code come from the same team, so what we draw is what ships.",
     serviceType: "Web design and development",
     keywords: ["web development company in Visakhapatnam", "website design Vizag", "web development agency Vizag", "website developers in Visakhapatnam", "web app development Andhra Pradesh"],
     outcomes: [

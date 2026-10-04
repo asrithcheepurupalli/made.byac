@@ -101,7 +101,7 @@ const FIT: Record<Cluster, { yes: string[]; no: string[] }> = {
   },
   web: {
     yes: [
-      "You want design and code from one small team",
+      "You want design and code from one team",
       "You care how it looks and how fast it loads on a mid-range phone",
       "You want it set up for search from day one",
       "You would like us around after launch",

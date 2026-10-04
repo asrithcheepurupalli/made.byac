@@ -40,7 +40,7 @@ export const GUIDES: Content[] = [
         "You do not get the admin login or the source code",
         "Nobody can show you something that is live",
       ] },
-      { h: "Where a small studio fits", p: ["A smaller studio gives you senior attention and fast decisions, and a limit on how many projects it takes at once. A large agency gives you depth in numbers. Neither is better in general. Pick based on the size and risk of your project, and talk to the people who will actually do the work."] },
+      { h: "Where a focused studio fits", p: ["A focused studio gives you senior attention and fast decisions, and a limit on how many projects it takes at once. A large agency gives you depth in numbers. Neither is better in general. Pick based on the size and risk of your project, and talk to the people who will actually do the work."] },
     ],
     faqs: [
       { q: "How much should a website cost in Vizag?", a: "It depends on pages, integrations and whether it needs a database. Beware any number quoted before someone has asked about your business. See our guide on what drives website cost." },

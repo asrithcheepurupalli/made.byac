@@ -40,7 +40,7 @@ const FIXES: Fix[] = [
     promise: "Order from the table. The waiter stays the hero.",
     line: "Scan, order together and let an AI host suggest the second round, wired into the kitchen you already run.",
     href: "/work/somaa",
-    cta: "See the restobar, live",
+    cta: "See the ordering concept",
     proof: "0",
     proofLabel: "apps for guests to download",
   },

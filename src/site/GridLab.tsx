@@ -17,7 +17,7 @@ const SERVICES = [
     title: "Restaurant & bar ordering",
     line: "Table QR, shared carts and an AI host, wired into the kitchen you already run.",
     tags: ["QR ordering", "AI host", "Loyalty"],
-    proof: "Somaa",
+    proof: "Ordering platform concept",
     href: "/work/somaa",
   },
   {

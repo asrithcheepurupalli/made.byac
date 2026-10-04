@@ -2,6 +2,7 @@ import type { FC, ReactNode } from "react";
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, useScroll, useTransform, useInView, useMotionValueEvent } from "motion/react";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
+import { NextCase } from "./NextCase";
 
 // ---- Ramachandra Ortho Care's own world: bone, emerald, a single coral. ----
 // This is the clinic's identity, not ours. The page borrows it the way the Somaa study borrows amber.
@@ -553,6 +554,8 @@ export function OrthoCaseStudy() {
           </div>
         </div>
       </section>
+
+      <NextCase current="ramachandra-ortho" bg={C.deep} text={C.onDeep} muted={C.onDeepMuted} line={C.lineDeep} accent={C.emeraldHi} />
 
       <footer className="border-t" style={{ borderColor: C.lineDeep, background: C.deep }}>
         <div className="mx-auto max-w-[1400px] px-6 md:px-10 py-10 flex flex-col sm:flex-row justify-between gap-3 label" style={{ color: C.onDeepMuted }}>

@@ -1,3 +1,4 @@
+import { NextCase } from "./NextCase";
 import type { FC } from "react";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import { PROJECTS } from "../../data";
@@ -98,6 +99,8 @@ export function CampaignCaseStudy({ slug }: { slug: string }) {
           </div>
         </div>
       </section>
+
+      <NextCase current={c.slug} bg="#0b0b0c" text="#f6f3ee" muted="#9a948b" line="#262320" accent={c.accent} />
 
       <footer className="border-t border-ink-line">
         <div className="mx-auto max-w-[1400px] px-6 md:px-10 py-10 flex flex-col sm:flex-row justify-between gap-3 label text-grey">

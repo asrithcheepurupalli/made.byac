@@ -3,7 +3,7 @@ import { motion } from "motion/react";
 // "Why we do this": the belief, then the facts. Editorial, paper. The facts row is the
 // About a visitor needs in five seconds: where, since when, and what we do.
 const FACTS = [
-  { k: "Where", v: "Visakhapatnam, India" },
+  { k: "Where", v: "Based in India, working worldwide" },
   { k: "Since", v: "2026" },
   { k: "What", v: "Design, software and AI, under one roof" },
 ];
@@ -29,9 +29,8 @@ export function Manifesto() {
         </motion.p>
 
         <p className="mt-10 max-w-2xl text-lg leading-relaxed text-ink/75">
-          We are a small team that designs and builds together, so what you approve is what ships. Our
-          live work runs in Visakhapatnam today: a clinic that books on its website and WhatsApp, and
-          a restobar that orders from the table.
+          We design and build together, so what you approve is what ships. We work remotely with clients
+          anywhere, from brand to booking system, and we stay on after launch.
         </p>
 
         <dl className="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-px bg-paper-line border border-paper-line rounded-2xl overflow-hidden max-w-4xl">

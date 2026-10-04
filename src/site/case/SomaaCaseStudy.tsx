@@ -2,6 +2,7 @@ import type { FC, ReactNode } from "react";
 import { useEffect, useRef, useState } from "react";
 import { motion, useScroll, useTransform, useInView, useMotionValueEvent, useReducedMotion } from "motion/react";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
+import { NextCase } from "./NextCase";
 
 // ---- Somaa's own world: dark charcoal, warm amber, cream. ----
 const C = {
@@ -540,6 +541,8 @@ export function SomaaCaseStudy() {
           </div>
         </div>
       </section>
+
+      <NextCase current="somaa" bg={C.bg} text={C.text} muted={C.muted} line={C.line} accent={C.amber} />
 
       {/* footer strip */}
       <footer className="border-t" style={{ borderColor: C.line }}>

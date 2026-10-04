@@ -333,7 +333,7 @@ export const LANDINGS: Content[] = [
     title: "Software development company in Visakhapatnam",
     description: "A Vizag software studio building custom web software, booking and ordering systems, dashboards and integrations for businesses across India.",
     eyebrow: "Custom software", h1: "Software development company in Visakhapatnam",
-    lede: "We build custom software for businesses in Visakhapatnam and across India: booking systems, ordering platforms, admin dashboards and the integrations between them. It is designed and built by the same small team, and we run what we build, so we care how it behaves in daily use.",
+    lede: "We build custom software for businesses in Visakhapatnam and across India: booking systems, ordering platforms, admin dashboards and the integrations between them. It is designed and built by the same team, and we run what we build, so we care how it behaves in daily use.",
     sections: [
       { h: "What we build", p: [], bullets: [
         "Appointment and queue systems for clinics",
@@ -471,9 +471,9 @@ export const LANDINGS: Content[] = [
     title: "Website development company for Hyderabad businesses",
     description: "Design-led websites and web apps for Hyderabad and Telangana businesses, with Telugu support, built by a Visakhapatnam studio working remotely.",
     eyebrow: "Hyderabad and Telangana", h1: "Website development company for Hyderabad and Telangana",
-    lede: "We build design-led websites and web apps for businesses in Hyderabad and across Telangana, working remotely from Visakhapatnam. If you want a smaller team that designs and builds together, and writes Telugu and Hindi properly, we are a good fit.",
+    lede: "We build design-led websites and web apps for businesses in Hyderabad and across Telangana, working remotely from Visakhapatnam. If you want one team that designs and builds together, and writes Telugu and Hindi properly, we are a good fit.",
     sections: [
-      { h: "A small team, not an account manager", p: ["You speak to the people drawing and building your site. That keeps decisions quick and the design intact all the way to code."] },
+      { h: "The people drawing it, not an account manager", p: ["You speak to the people drawing and building your site. That keeps decisions quick and the design intact all the way to code."] },
       { h: "Multilingual from the start", p: ["Telugu, Hindi and English, with type that renders well and layouts that cope with longer scripts. Our campaign work for a Hyderabad and Bengaluru brand included custom Telugu typography."] },
       { h: "What we are not", p: ["We are not a large Hyderabad agency with a floor of developers. We are a focused studio, which means senior attention on every project and a limit on how many we take at once."] },
     ],

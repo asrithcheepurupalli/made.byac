@@ -39,7 +39,7 @@ export function Footer() {
               made<span className="not-italic text-red">.</span>
             </a>
             <p className="mt-4 text-ink/65 leading-relaxed">
-              A design and development studio in Visakhapatnam, building for businesses across Andhra Pradesh and India.
+              A design and software studio based in Visakhapatnam, India, working with clients worldwide.
             </p>
             <a href={`mailto:${EMAIL}`} className="mt-4 inline-block text-ink/80 hover:text-[#8a6d2f] transition-colors text-sm">{EMAIL}</a>
           </div>

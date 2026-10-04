@@ -18,7 +18,7 @@ export const organization = {
   url: SITE,
   logo: `${SITE}/favicon.png`,
   image: `${SITE}/og.png`,
-  description: "A design and development studio in Visakhapatnam building websites, appointment booking systems for clinics, restaurant ordering, WhatsApp automation and brands.",
+  description: "A design and software studio based in Visakhapatnam, India, working with clients worldwide: websites, appointment booking for clinics, restaurant ordering, WhatsApp and AI automation, and brand identity.",
   email: EMAIL,
   telephone: `+${WHATSAPP}`,
   address: { "@type": "PostalAddress", addressLocality: "Visakhapatnam", addressRegion: "Andhra Pradesh", addressCountry: "IN" },

@@ -1,6 +1,6 @@
 # made. by ac
 
-> A design and development studio in Visakhapatnam (Vizag), India. We build websites, appointment booking systems for clinics and hospitals, restaurant QR ordering, WhatsApp automation, AI agents, and brand and packaging design for businesses in Vizag, Andhra Pradesh and across India.
+> A design and software studio based in Visakhapatnam (Vizag), India, working with clients worldwide. We build appointment booking systems for clinics and hospitals, restaurant QR ordering, WhatsApp automation, AI agents, websites and brand identity, for businesses in Vizag, across India and overseas.
 
 ## Services
 - [All services](https://made-by-ac.com/services)

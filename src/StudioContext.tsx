@@ -2,6 +2,7 @@
 // Lifted out of App.tsx so view sections can be split into their own components.
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { Project } from "./types";
+import { trackEvent } from "./site/track";
 import { PROJECTS } from "./data";
 import { INITIAL_POSTERS } from "./posters";
 
@@ -116,15 +117,18 @@ function useStudioValue() {
         setContactSentName(name.trim().split(" ")[0]);
         setContactForm({ name: "", email: "", phone: "", message: "", website: "" });
         setContactStatus("sent");
+        trackEvent("contact_form_submit", { status: "sent", page: window.location.pathname });
         return;
       }
       let detail = "";
       try { detail = (await response.json()).detail || ""; } catch { /* not json */ }
       setContactError(detail);
       setContactStatus("error");
+      trackEvent("contact_form_submit", { status: "error", code: response.status, page: window.location.pathname });
     } catch {
       setContactError("");
       setContactStatus("error");
+      trackEvent("contact_form_submit", { status: "error", code: 0, page: window.location.pathname });
     }
   };
 

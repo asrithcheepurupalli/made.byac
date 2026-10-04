@@ -17,33 +17,24 @@ const FEATURED: { slug: string; client: string; line: string; img: string; tag: 
   { slug: "mithai-maharaja", client: "Mithai Maharaja", line: "Sweets dressed like heirlooms.", img: "/images/thumb_1778155198_f88efc2a-69f8-4b24-b07b-26e8a339b684.webp", tag: "Luxury packaging", accent: "#c8a24b" },
 ];
 
+// The wall shows the strongest 12 of the 19 projects: four per big client, two from each of the rest.
+const WALL_TITLES = [
+  "Regal Mysore Pak", "Royal Kaju Katli", "Heritage Karnataka Combo", "Raksha Bandhan Special",
+  "Hyderabad Regional EV Campaign", "Euler Hiload Performance Showcase", "Bengaluru Fleet Solutions Campaign", "Your Vehicle, Your Price",
+  "Choose Your Speed", "Business Identity Card",
+  "World Photography Day Contest", "Wildlife Week Challenge",
+];
+const WALL = WALL_TITLES.map((t) => PROJECTS.find((p) => p.title === t)).filter((p): p is (typeof PROJECTS)[number] => !!p);
+
 const FILTERS = ["All", "Innovolt", "Mithai Maharaja", "Telyport", "Mr. Snapper International"];
 const FILTER_LABEL: Record<string, string> = { "Mr. Snapper International": "Mr. Snapper" };
-
-// The design system, shown not told — "how we design".
-const PALETTE = [
-  { name: "Ink", hex: "#0b0b0c" },
-  { name: "Paper", hex: "#f6f3ee" },
-  { name: "Red", hex: "#c8102e" },
-  { name: "Gold", hex: "#bd9b4e" },
-];
-const TYPESET = [
-  { role: "Display", font: "Fraunces", sample: "Aa", note: "Editorial serif. The voice." , cls: "font-display" },
-  { role: "Text", font: "Hanken Grotesk", sample: "Aa", note: "Grotesk. The workhorse.", cls: "font-sans" },
-  { role: "Detail", font: "Space Mono", sample: "Aa", note: "Mono. Labels and meta.", cls: "font-mono" },
-];
-const PRINCIPLES = [
-  { k: "01", t: "Type is the design", d: "Before colour or image, the typography carries the idea." },
-  { k: "02", t: "Make, don't decorate", d: "We build what we draw, so the idea survives contact with reality." },
-  { k: "03", t: "The remembered 2%", d: "The detail nobody asks for is the one everybody remembers." },
-];
 
 export function WorkPage() {
   const [filter, setFilter] = useState("All");
   const [view, setView] = useState<"grid" | "index">("grid");
 
   const shown = useMemo(
-    () => (filter === "All" ? PROJECTS : PROJECTS.filter((p) => p.client === filter)),
+    () => (filter === "All" ? WALL : WALL.filter((p) => p.client === filter)),
     [filter]
   );
 
@@ -273,56 +264,18 @@ export function WorkPage() {
         </div>
       </section>
 
-      {/* how we design — the system, shown not told */}
-      <section className="mx-auto max-w-[1500px] px-6 md:px-10 py-20 md:py-32">
-        <div className="reveal-up max-w-2xl">
-          <span className="label text-red">· how we design</span>
-          <h2 className="mt-6 font-display text-4xl md:text-6xl leading-[0.95]">Not a style. A system<span className="text-red">.</span></h2>
-          <p className="mt-6 text-grey-dim text-base md:text-lg leading-relaxed">
-            Every project runs on the same quiet machinery: a tight palette, three typefaces with clear jobs,
-            and a few principles we don't break. It is what lets the work feel made, not assembled.
-          </p>
-        </div>
-
-        <div className="mt-12 grid grid-cols-1 lg:grid-cols-12 gap-4 md:gap-5">
-          {/* palette */}
-          <div className="reveal-up lg:col-span-5 rounded-2xl border border-ink-line p-7 md:p-8">
-            <span className="label text-grey">The palette</span>
-            <div className="mt-6 grid grid-cols-4 gap-3">
-              {PALETTE.map((c) => (
-                <div key={c.name} className="group">
-                  <div className="aspect-square rounded-xl border border-ink-line transition-transform duration-300 group-hover:-translate-y-1 active:scale-[0.98]" style={{ background: c.hex }} />
-                  <div className="mt-2.5 font-display text-sm text-paper">{c.name}</div>
-                  <div className="label text-[8px] text-grey">{c.hex}</div>
-                </div>
-              ))}
-            </div>
+      {/* the system lives on its own page now */}
+      <section className="mx-auto max-w-[1500px] px-6 md:px-10 pb-16 md:pb-24">
+        <a href="/system" data-cursor="Open" className="reveal-up group flex flex-col sm:flex-row sm:items-center justify-between gap-6 rounded-2xl border border-ink-line p-8 md:p-10 hover:border-grey transition-colors">
+          <div>
+            <span className="label text-red">· how we design</span>
+            <h2 className="mt-4 font-display text-3xl md:text-4xl leading-tight">Not a style. A system<span className="text-red">.</span></h2>
+            <p className="mt-3 text-grey-dim max-w-xl leading-relaxed">Four colours, three typefaces with clear jobs, and a few rules we do not break. See it live, and change it.</p>
           </div>
-
-          {/* type */}
-          <div className="reveal-up lg:col-span-7 rounded-2xl border border-ink-line p-7 md:p-8">
-            <span className="label text-grey">The type</span>
-            <div className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-5">
-              {TYPESET.map((t) => (
-                <div key={t.role} className="group rounded-xl border border-ink-line p-5 hover:border-grey transition-colors">
-                  <div className={`${t.cls} text-6xl leading-none text-paper transition-transform duration-300 group-hover:-translate-y-0.5`}>{t.sample}</div>
-                  <div className="mt-4 label text-[9px] text-gold">{t.role}</div>
-                  <div className="mt-1.5 font-display text-base text-paper">{t.font}</div>
-                  <div className="mt-1 text-grey-dim text-[12px] leading-snug">{t.note}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* principles */}
-          {PRINCIPLES.map((p) => (
-            <div key={p.k} className="reveal-up lg:col-span-4 rounded-2xl border border-ink-line p-7 md:p-8 hover:border-grey transition-colors">
-              <span className="font-mono text-sm text-red">{p.k}</span>
-              <h3 className="mt-4 font-display text-2xl leading-tight text-paper">{p.t}</h3>
-              <p className="mt-3 text-grey-dim text-[14px] leading-relaxed">{p.d}</p>
-            </div>
-          ))}
-        </div>
+          <span className="inline-flex items-center gap-2 label text-[11px] text-paper group-hover:text-gold transition-colors shrink-0">
+            See the living system <ArrowUpRight className="w-4 h-4" />
+          </span>
+        </a>
       </section>
 
       {/* CTA */}

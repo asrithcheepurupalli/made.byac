@@ -86,8 +86,8 @@ export function ActHero() {
       <div className="relative z-10 pb-10 md:pb-12 px-6 md:px-10 mx-auto max-w-[1600px] w-full flex flex-col md:flex-row md:items-end justify-between gap-8">
         <div className="rise max-w-xl" style={{ animationDelay: "0.6s" }}>
           <p className="font-display text-xl md:text-2xl leading-relaxed text-ink/80">
-            We are <em className="text-red-deep">made.</em> A studio in Visakhapatnam that designs brands and builds
-            the software behind them: clinic booking, restaurant ordering, WhatsApp and AI.
+            We are <em className="text-red-deep">made.</em> A design and software studio. We design brands and build
+            the systems behind them: clinic and restaurant platforms, WhatsApp and AI, for clients anywhere.
           </p>
           <div className="mt-5 flex flex-wrap items-center gap-x-7 gap-y-4">
             <a
@@ -104,10 +104,9 @@ export function ActHero() {
             </a>
           </div>
           <p className="mt-4 text-[13px] leading-relaxed text-ink/65">
-            Live now: a Vizag clinic books on our system (
+            Live now: a clinic books, pays and queues on a system we built (
             <a href="/work/ramachandra-ortho" className="underline underline-offset-4 decoration-ink/30 hover:text-ink">Ramachandra Ortho Care</a>
-            ) and a Vizag restobar orders on it (
-            <a href="/work/somaa" className="underline underline-offset-4 decoration-ink/30 hover:text-ink">Somaa</a>).
+            ), in three languages.
           </p>
         </div>
 

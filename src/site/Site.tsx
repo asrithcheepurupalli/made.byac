@@ -1,5 +1,6 @@
 import { lazy, Suspense, useEffect, useSyncExternalStore, type ReactNode } from "react";
 import { lazyRoute } from "./lazyRoute";
+import { installTracking } from "./track";
 import { installNavigation, normPath, registerFallback, registerRoute, snapshot, subscribe } from "./nav";
 import { ScrollProgress } from "./ScrollProgress";
 import { SmoothScroll } from "./SmoothScroll";
@@ -79,6 +80,7 @@ export function Site() {
 
   // Internal links swap pages inside the app (with a transition) instead of reloading.
   useEffect(() => installNavigation(), []);
+  useEffect(() => installTracking(), []);
 
   // The #/ variants of the pages are kept as in-app fallbacks.
   // Case studies live at real paths (/work/<slug>) so search engines can index them.

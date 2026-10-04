@@ -454,7 +454,7 @@ function LabsCapabilities() {
         </h2>
         <p className="reveal-up mt-8 text-grey text-lg max-w-2xl mx-auto leading-relaxed">
           Every world here went from a blank page to a working product (brand, interface, motion and
-          demo) by the same small team that would build yours.
+          demo) by the same team that would build yours.
         </p>
         <a href={LABS_MAIL} data-cursor="Hello" data-magnetic
           className="reveal-up mt-12 inline-flex items-center gap-2 bg-red text-white label rounded-full px-8 py-4 hover:bg-red-deep transition-colors">
