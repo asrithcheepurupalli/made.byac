@@ -14,7 +14,6 @@ import { Defer } from "./Defer";
 import { CAMPAIGN_CASES } from "./case/caseData";
 
 const ProblemPicker = lazy(() => import("./ProblemPicker").then((m) => ({ default: m.ProblemPicker })));
-const BeforeAfter = lazy(() => import("./BeforeAfter").then((m) => ({ default: m.BeforeAfter })));
 const SelectedWork = lazy(() => import("./SelectedWork").then((m) => ({ default: m.SelectedWork })));
 const ProductsTease = lazy(() => import("./ProductsTease").then((m) => ({ default: m.ProductsTease })));
 const ExploreTease = lazy(() => import("./ExploreTease").then((m) => ({ default: m.ExploreTease })));
@@ -174,16 +173,15 @@ export function Site() {
         <SiteNav />
         <main>
           <ActHero />
-          <Defer Component={ProblemPicker} id="fix" dark bg="bg-ink" minHeight="100svh" delay={1800} />
-          <Defer Component={BeforeAfter} dark bg="bg-ink" minHeight="90svh" delay={2300} />
-          <Defer Component={SelectedWork} id="work" dark bg="bg-ink" minHeight="200svh" delay={2800} />
-          <Defer Component={ProductsTease} id="products" bg="bg-paper-dim" minHeight="120svh" delay={3300} />
-          <Defer Component={ExploreTease} dark bg="bg-ink" minHeight="60svh" delay={3800} />
-          <Defer Component={GridLab} id="studio" bg="bg-paper-dim" minHeight="100svh" delay={4300} />
-          <Defer Component={Manifesto} id="why" bg="bg-paper" minHeight="80svh" delay={4800} />
-          <Defer Component={Invitation} id="say-hi" dark bg="bg-ink" minHeight="100svh" delay={5300} />
+          <Defer Component={SelectedWork} id="work" dark bg="bg-ink" minHeight="200svh" delay={1500} />
+          <Defer Component={ProblemPicker} id="fix" dark bg="bg-ink" minHeight="100svh" delay={2000} />
+          <Defer Component={ExploreTease} dark bg="bg-ink" minHeight="80svh" delay={2500} />
+          <Defer Component={GridLab} id="studio" bg="bg-paper-dim" minHeight="120svh" delay={3000} />
+          <Defer Component={ProductsTease} id="products" bg="bg-paper-dim" minHeight="120svh" delay={3500} />
+          <Defer Component={Manifesto} id="why" bg="bg-paper" minHeight="100svh" delay={4000} />
+          <Defer Component={Invitation} id="say-hi" dark bg="bg-ink" minHeight="100svh" delay={4500} />
         </main>
-        <Defer Component={PlayCanvas} bg="bg-paper" minHeight="60svh" delay={5800} />
+        <Defer Component={PlayCanvas} bg="bg-paper" minHeight="60svh" delay={5000} />
         <SiteFooter />
       </div>
     );

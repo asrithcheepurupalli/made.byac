@@ -1,11 +1,10 @@
 import { useRef, useEffect, type CSSProperties } from "react";
 import { motion, useScroll, useTransform, useReducedMotion } from "motion/react";
-import { useStudio } from "../StudioContext";
+import { UtcClock } from "./Clocks";
 
 // ACT I — Editorial Brutalist hero. Type is the design: oversized Fraunces on a
 // faint grid that lights up under the cursor, one decisive red rule, a gold seal.
 export function ActHero() {
-  const { currentTime } = useStudio();
   const ref = useRef<HTMLElement>(null);
   const reduce = useReducedMotion();
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
@@ -54,16 +53,16 @@ export function ActHero() {
       </motion.div>
 
       {/* top meta row */}
-      <div className="relative z-10 pt-28 md:pt-32 px-6 md:px-10 mx-auto max-w-[1600px] w-full flex items-start justify-between label text-grey">
+      <div className="relative z-10 pt-24 md:pt-28 px-6 md:px-10 mx-auto max-w-[1600px] w-full flex items-start justify-between label text-grey">
         <span>made.™ · design &amp; development studio</span>
-        <span className="hidden sm:inline">{currentTime || "··"}</span>
+        <span className="hidden sm:inline"><UtcClock /></span>
       </div>
 
       {/* headline */}
       <motion.div style={{ y: contentY, opacity: fade }} className="relative z-10 px-6 md:px-10 mx-auto max-w-[1600px] w-full">
         <div>
           <span className="rise label text-red block max-sm:tracking-[0.14em]" style={{ animationDelay: "0.05s" }}>·001 / a design practice from india, for the world</span>
-          <h1 className="mt-6 font-display font-semibold uppercase leading-[0.9] sm:leading-[0.86] tracking-[-0.02em] text-[12.5vw] sm:text-[13vw] lg:text-[10.5rem]">
+          <h1 className="mt-6 font-display font-semibold uppercase leading-[0.9] sm:leading-[0.86] tracking-[-0.02em] text-[12vw] sm:text-[11vw] lg:text-[min(8.6rem,14vh)]">
             <span className="line-mask"><span className="line-inner" style={line("0.05s")}>We make</span></span>
             <span className="line-mask">
               <span className="line-inner" style={line("0.16s")}>
@@ -79,16 +78,38 @@ export function ActHero() {
             </span>
             <span className="line-mask"><span className="line-inner" style={line("0.27s")}>to ignore<span className="text-red">.</span></span></span>
           </h1>
-          <div className="draw-x mt-8 h-[5px] w-40 md:w-56 bg-red rounded-full" style={{ animationDelay: "0.5s" }} />
+          <div className="draw-x mt-6 h-[5px] w-40 md:w-56 bg-red rounded-full" style={{ animationDelay: "0.5s" }} />
         </div>
       </motion.div>
 
       {/* bottom row: manifesto line + scroll cue + gold seal */}
-      <div className="relative z-10 pb-12 md:pb-16 px-6 md:px-10 mx-auto max-w-[1600px] w-full flex flex-col md:flex-row md:items-end justify-between gap-10">
-        <p className="rise font-display text-xl md:text-2xl leading-relaxed max-w-xl text-ink/80" style={{ animationDelay: "0.6s" }}>
-          We are <em className="text-red-deep">made.</em> A studio crafting brand systems,
-          packaging, and digital experiences that people remember.
-        </p>
+      <div className="relative z-10 pb-10 md:pb-12 px-6 md:px-10 mx-auto max-w-[1600px] w-full flex flex-col md:flex-row md:items-end justify-between gap-8">
+        <div className="rise max-w-xl" style={{ animationDelay: "0.6s" }}>
+          <p className="font-display text-xl md:text-2xl leading-relaxed text-ink/80">
+            We are <em className="text-red-deep">made.</em> A studio in Visakhapatnam that designs brands and builds
+            the software behind them: clinic booking, restaurant ordering, WhatsApp and AI.
+          </p>
+          <div className="mt-5 flex flex-wrap items-center gap-x-7 gap-y-4">
+            <a
+              href="#say-hi"
+              data-cursor="Hello"
+              data-magnetic
+              className="inline-flex items-center gap-2 bg-red text-white label rounded-full px-7 py-4 hover:bg-red-deep transition-colors"
+            >
+              Start a project <span aria-hidden>→</span>
+            </a>
+            <a href="#work" className="group label text-ink/80 hover:text-ink transition-colors inline-flex items-center gap-3">
+              See the work
+              <span className="inline-block w-8 h-px bg-ink/50 transition-all duration-500 group-hover:w-12 group-hover:bg-ink" />
+            </a>
+          </div>
+          <p className="mt-4 text-[13px] leading-relaxed text-ink/65">
+            Live now: a Vizag clinic books on our system (
+            <a href="/work/ramachandra-ortho" className="underline underline-offset-4 decoration-ink/30 hover:text-ink">Ramachandra Ortho Care</a>
+            ) and a Vizag restobar orders on it (
+            <a href="/work/somaa" className="underline underline-offset-4 decoration-ink/30 hover:text-ink">Somaa</a>).
+          </p>
+        </div>
 
         <div className="rise flex items-end gap-8" style={{ animationDelay: "0.7s" }}>
           <a href="#why" className="group label text-ink/70 hover:text-ink transition-colors flex items-center gap-3">

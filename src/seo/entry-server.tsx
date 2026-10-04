@@ -7,6 +7,8 @@ import { NotFoundPage } from "./NotFoundPage";
 import { ContentPage } from "./ContentPage";
 import { IndexPage } from "./IndexPage";
 import { CONTENT, INDEXES } from "./registry";
+import { LEGAL } from "./legal";
+import { LegalPage } from "./LegalPage";
 import { Header, Footer, Page } from "./Shell";
 
 // Build-time only. Renders the search-facing pages to static HTML so crawlers (and
@@ -72,6 +74,12 @@ export function getPages(): PageOut[] {
       ogImage: `${SITE}/og.png`, robots: "index, follow", ld: indexLd(i), html: renderToString(<IndexPage i={i} />),
     });
   }
+  for (const l of LEGAL) {
+    out.push({
+      file: `${l.slug}.html`, url: l.path, title: l.title, description: l.description,
+      ogImage: `${SITE}/og.png`, robots: "index, follow", ld: null, html: renderToString(<LegalPage page={l} />),
+    });
+  }
   out.push({
     file: "404.html", url: "/404", title: "Page not found · made. by ac", description: "That page isn't here. Search the site or pick a page below.",
     ogImage: `${SITE}/og.png`, robots: "noindex, follow", ld: null, html: renderToString(<NotFoundPage />),
@@ -89,6 +97,7 @@ export function sitemapUrls() {
     ...INDEXES.map((i) => ({ path: i.path, priority: "0.8" })),
     ...CONTENT.map((c) => ({ path: c.path, priority: c.kind === "guide" ? "0.7" : "0.8" })),
     ...CASES.map((c) => ({ path: c.path, priority: "0.7" })),
+    ...LEGAL.map((l) => ({ path: l.path, priority: "0.2" })),
     ...EXISTING_PAGES,
   ];
 }

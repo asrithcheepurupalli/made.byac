@@ -19,7 +19,7 @@ const MAIL_HREF =
   )}`;
 const WA_HREF =
   `https://wa.me/${PHONE_WA}?text=${encodeURIComponent(
-    "Hi made. by ac — I came across your work and I'd love to talk about a project."
+    "Hi made. by ac, I came across your work and I'd love to talk about a project."
   )}`;
 
 function WhatsAppIcon({ className }: { className?: string }) {
@@ -38,13 +38,22 @@ export function Invitation() {
     setContactForm,
     handleContactSubmit,
     isSubmittingContact,
-    submittedInquiry,
+    contactStatus,
+    contactError,
+    contactSentName,
   } = useStudio();
+
+  // If the form cannot deliver, hand the visitor's own words to WhatsApp and email.
+  const typed = contactForm.message.trim();
+  const fallbackWa = `https://wa.me/${PHONE_WA}?text=${encodeURIComponent(
+    `Hi made. by ac, this is ${contactForm.name.trim() || "a new enquiry"}.${typed ? `\n\n${typed}` : " I would like to talk about a project."}`
+  )}`;
+  const fallbackMail = `mailto:${EMAIL}?subject=${encodeURIComponent("Hi made., a project idea")}&body=${encodeURIComponent(typed)}`;
 
   return (
     <section id="say-hi" data-nav-dark className="relative bg-ink text-paper py-28 md:py-32 overflow-hidden">
-      {/* seam: blend down from the paper-dim studio above */}
-      <div aria-hidden className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-paper-dim to-ink pointer-events-none" />
+      {/* seam: blend down from the paper manifesto above */}
+      <div aria-hidden className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-paper to-ink pointer-events-none" />
       {/* soft red glow — kept well below the seam so it warms the body, not the
           paper-to-ink transition (the glow over the light edge read as muddy brown) */}
       <div
@@ -55,7 +64,7 @@ export function Invitation() {
       <div className="relative z-10 mx-auto max-w-[1600px] px-6 md:px-10 grid grid-cols-1 lg:grid-cols-12 gap-14 lg:gap-20 items-center">
         {/* the warm message */}
         <div className="lg:col-span-7">
-          <span className="label text-red">·009 / say hi</span>
+          <span className="label text-red">·008 / say hi</span>
           <motion.h2
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -124,15 +133,21 @@ export function Invitation() {
 
         {/* the quiet form */}
         <div className="lg:col-span-5">
-          {submittedInquiry ? (
+          {contactStatus === "sent" ? (
             <motion.div
               initial={{ opacity: 0, scale: 0.97 }}
               animate={{ opacity: 1, scale: 1 }}
               className="rounded-2xl border border-ink-line bg-ink-soft p-8 md:p-10"
+              role="status"
             >
               <span className="label text-gold">Received</span>
-              <p className="mt-5 font-display text-2xl leading-snug">Thank you, {submittedInquiry.name.split(" ")[0]}.</p>
-              <p className="mt-4 text-grey-dim leading-relaxed text-[15px]">{submittedInquiry.aiFeedback}</p>
+              <p className="mt-5 font-display text-2xl leading-snug">Thank you{contactSentName ? `, ${contactSentName}` : ""}.</p>
+              <p className="mt-4 text-grey-dim leading-relaxed text-[15px]">
+                Your message is in our inbox and we will reply personally. If it is urgent, WhatsApp is quickest.
+              </p>
+              <a href={WA_HREF} target="_blank" rel="noreferrer" className="mt-6 inline-flex items-center gap-2 text-paper/85 hover:text-gold transition-colors text-sm underline underline-offset-4 decoration-ink-line">
+                Message us on WhatsApp <ArrowUpRight className="w-4 h-4" />
+              </a>
             </motion.div>
           ) : (
             <form
@@ -140,9 +155,27 @@ export function Invitation() {
               className="rounded-2xl border border-ink-line bg-ink-soft p-7 md:p-9 flex flex-col gap-5"
             >
               <span className="label text-grey-dim">Tell us a little</span>
+
+              {contactStatus === "error" && (
+                <div role="alert" className="rounded-xl border border-red/50 bg-red/10 p-4 text-[14px] leading-relaxed text-paper/90">
+                  <p>
+                    {contactError ||
+                      "That did not go through, and we do not want you to think we got it. Your message is still here. Send it on WhatsApp or by email and we will see it straight away."}
+                  </p>
+                  {!contactError && (
+                    <div className="mt-3 flex flex-wrap gap-3">
+                      <a href={fallbackWa} target="_blank" rel="noreferrer" className="label text-[10px] rounded-full bg-[#25d366] text-black px-4 py-2.5">WhatsApp it</a>
+                      <a href={fallbackMail} className="label text-[10px] rounded-full border border-paper/40 px-4 py-2.5 hover:bg-paper hover:text-ink transition-colors">Email it</a>
+                    </div>
+                  )}
+                </div>
+              )}
+
               <input
                 type="text"
                 required
+                autoComplete="name"
+                aria-label="Your name"
                 placeholder="Your name"
                 value={contactForm.name}
                 onChange={(e) => setContactForm({ ...contactForm, name: e.target.value })}
@@ -150,28 +183,56 @@ export function Invitation() {
               />
               <input
                 type="email"
-                required
+                autoComplete="email"
+                aria-label="Email"
                 placeholder="Email"
                 value={contactForm.email}
                 onChange={(e) => setContactForm({ ...contactForm, email: e.target.value })}
                 className="bg-transparent border-b border-ink-line py-3 text-paper placeholder:text-grey focus:border-gold focus:outline-none transition-colors"
               />
+              <input
+                type="tel"
+                inputMode="tel"
+                autoComplete="tel"
+                aria-label="WhatsApp number"
+                placeholder="WhatsApp number"
+                value={contactForm.phone}
+                onChange={(e) => setContactForm({ ...contactForm, phone: e.target.value })}
+                className="bg-transparent border-b border-ink-line py-3 text-paper placeholder:text-grey focus:border-gold focus:outline-none transition-colors"
+              />
               <textarea
                 required
                 rows={3}
-                placeholder="What are you imagining?"
+                aria-label="What do you run, and what would you like to change?"
+                placeholder="What do you run, and what would you like to change?"
                 value={contactForm.message}
                 onChange={(e) => setContactForm({ ...contactForm, message: e.target.value })}
                 className="bg-transparent border-b border-ink-line py-3 text-paper placeholder:text-grey focus:border-gold focus:outline-none transition-colors resize-none"
               />
-              <button
-                type="submit"
-                disabled={isSubmittingContact}
-                data-cursor="Send"
-                className="mt-2 self-start bg-red text-white label rounded-full px-7 py-3.5 hover:bg-red-deep hover:-translate-y-0.5 transition-all duration-300 disabled:opacity-60 disabled:translate-y-0"
-              >
-                {isSubmittingContact ? "Sending…" : "Send it over"}
-              </button>
+              {/* honeypot: invisible to people, tempting to bots */}
+              <input
+                type="text"
+                name="website"
+                tabIndex={-1}
+                autoComplete="off"
+                aria-hidden="true"
+                value={contactForm.website}
+                onChange={(e) => setContactForm({ ...contactForm, website: e.target.value })}
+                className="absolute -left-[9999px] h-0 w-0 opacity-0"
+              />
+              <div className="mt-2 flex flex-wrap items-center gap-x-6 gap-y-3">
+                <button
+                  type="submit"
+                  disabled={isSubmittingContact}
+                  data-cursor="Send"
+                  className="bg-red text-white label rounded-full px-7 py-3.5 hover:bg-red-deep hover:-translate-y-0.5 transition-all duration-300 disabled:opacity-60 disabled:translate-y-0"
+                >
+                  {isSubmittingContact ? "Sending…" : "Send it over"}
+                </button>
+                <p className="text-[12px] leading-relaxed text-grey-dim">
+                  Add an email or a WhatsApp number, either is fine. We use your details only to reply. <a href="/privacy" className="underline underline-offset-4 hover:text-gold">Privacy</a>
+                </p>
+              </div>
             </form>
           )}
         </div>

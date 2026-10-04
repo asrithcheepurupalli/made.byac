@@ -1,17 +1,18 @@
 import { motion } from "motion/react";
 
-// "Why we do this" — the bridge from the hero into the work. Editorial, paper.
-const PRINCIPLES = [
-  { n: "01", t: "Feeling first", d: "A brand is the feeling someone is left with. We design the feeling, then the artefacts." },
-  { n: "02", t: "Detail is the work", d: "The 2% nobody asks for is the 2% everybody remembers. We obsess over it." },
-  { n: "03", t: "Make, don't decorate", d: "We build what we draw, from packaging to sites to systems, so the idea survives contact with reality." },
+// "Why we do this": the belief, then the facts. Editorial, paper. The facts row is the
+// About a visitor needs in five seconds: where, since when, and what we do.
+const FACTS = [
+  { k: "Where", v: "Visakhapatnam, India" },
+  { k: "Since", v: "2026" },
+  { k: "What", v: "Design, software and AI, under one roof" },
 ];
 
 export function Manifesto() {
   return (
     <section id="why" className="relative bg-paper text-ink py-28 md:py-32">
       <div className="mx-auto max-w-[1600px] px-6 md:px-10">
-        <span className="label text-red">·008 / why we do this</span>
+        <span className="label text-red">·007 / why we do this</span>
 
         <motion.p
           initial={{ opacity: 0, y: 24 }}
@@ -27,14 +28,26 @@ export function Manifesto() {
           <span className="underline decoration-gold decoration-2 underline-offset-[6px]">remembered</span>.
         </motion.p>
 
-        <div className="mt-20 md:mt-28 grid grid-cols-1 md:grid-cols-3 gap-px bg-paper-line border border-paper-line rounded-2xl overflow-hidden">
-          {PRINCIPLES.map((p) => (
-            <div key={p.n} className="bg-paper p-8 md:p-10 flex flex-col gap-4">
-              <span className="font-mono text-red text-sm">{p.n}</span>
-              <h3 className="font-display text-2xl md:text-3xl">{p.t}</h3>
-              <p className="text-grey leading-relaxed text-[15px] max-w-[34ch]">{p.d}</p>
+        <p className="mt-10 max-w-2xl text-lg leading-relaxed text-ink/75">
+          We are a small team that designs and builds together, so what you approve is what ships. Our
+          live work runs in Visakhapatnam today: a clinic that books on its website and WhatsApp, and
+          a restobar that orders from the table.
+        </p>
+
+        <dl className="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-px bg-paper-line border border-paper-line rounded-2xl overflow-hidden max-w-4xl">
+          {FACTS.map((f) => (
+            <div key={f.k} className="bg-paper p-6 md:p-7">
+              <dt className="label text-[10px] text-red">{f.k}</dt>
+              <dd className="mt-3 font-display text-xl md:text-2xl leading-snug">{f.v}</dd>
             </div>
           ))}
+        </dl>
+
+        <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-4">
+          <a href="#say-hi" className="inline-flex items-center gap-2 bg-ink text-paper label rounded-full px-7 py-4 hover:bg-red transition-colors">
+            Say hi <span aria-hidden>→</span>
+          </a>
+          <a href="#work" className="label text-ink/80 hover:text-ink underline underline-offset-[6px] decoration-ink/30">See the work</a>
         </div>
       </div>
     </section>

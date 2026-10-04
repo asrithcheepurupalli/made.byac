@@ -3,9 +3,8 @@ import { AnimatePresence, motion, useInView } from "motion/react";
 import { ArrowUpRight } from "lucide-react";
 
 // "What's eating you?" — the visitor taps THEIR problem and the panel transforms
-// to show the exact fix, in motion. Doubles as the product router (kitchen / staff
-// / AI / build / brand), so it replaces the four separate product bands with one
-// interactive "we know your problem and here's the cure" moment.
+// to show the exact fix, in motion. Each fix points at something we have really built and
+// can show, on this site, rather than at a product somewhere else.
 
 type Fix = {
   id: string;
@@ -22,33 +21,33 @@ type Fix = {
 
 const FIXES: Fix[] = [
   {
-    id: "apps",
-    pain: "The delivery apps own my customers",
-    tag: "made. kitchen",
-    accent: "#e8702a",
-    promise: "We hand your customers back.",
-    line: "Acquire on the apps, then keep them on a channel you own: QR capture, CRM, WhatsApp and loyalty.",
-    href: "https://kitchen.made-by-ac.com",
-    cta: "See made. kitchen",
-    proof: "+27%",
-    proofLabel: "repeat orders (modelled)",
+    id: "clinic",
+    pain: "Phone calls, no-shows and a messy front desk",
+    tag: "clinic booking",
+    accent: "#2bbfa5",
+    promise: "A booking is only real once it's paid.",
+    line: "Online and WhatsApp booking in Telugu, English and Hindi, a slot held for payment, and one live queue for your front desk.",
+    href: "/work/ramachandra-ortho",
+    cta: "See the clinic, live",
+    proof: "15 min",
+    proofLabel: "a slot waits for payment, then goes back",
   },
   {
-    id: "time",
-    pain: "I've no time for the busywork",
-    tag: "made. crew",
-    accent: "#bd9b4e",
-    promise: "Your crew. Without the headcount.",
-    line: "A chief of staff + back office that runs your day-to-day, then automates it. Big-4 calibre, a fraction of the cost.",
-    href: "https://crew.made-by-ac.com",
-    cta: "See made. crew",
+    id: "tables",
+    pain: "Guests wait to be noticed",
+    tag: "restaurant ordering",
+    accent: "#d99547",
+    promise: "Order from the table. The waiter stays the hero.",
+    line: "Scan, order together and let an AI host suggest the second round, wired into the kitchen you already run.",
+    href: "/work/somaa",
+    cta: "See the restobar, live",
     proof: "0",
-    proofLabel: "hires added to your payroll",
+    proofLabel: "apps for guests to download",
   },
   {
     id: "vanish",
     pain: "Customers come once, then vanish",
-    tag: "ai automations",
+    tag: "ai and whatsapp",
     accent: "#27d17c",
     promise: "We win them back, automatically.",
     line: "Agents that watch behaviour, score intent and close on WhatsApp. Your best salesperson, never asleep.",
@@ -60,10 +59,10 @@ const FIXES: Fix[] = [
   {
     id: "generic",
     pain: "My brand looks like everyone else",
-    tag: "brand & design",
+    tag: "brand and design",
     accent: "#c8102e",
     promise: "We make you impossible to ignore.",
-    line: "Identity, packaging and sites that are unmistakably yours. We design them; we never assemble them from a template.",
+    line: "Colour, type, voice and motion that are unmistakably yours. We design them; we never assemble them from a template.",
     href: "/work",
     cta: "See the work",
     proof: "1 of 1",
@@ -72,26 +71,14 @@ const FIXES: Fix[] = [
   {
     id: "build",
     pain: "I need it built, not just drawn",
-    tag: "design → build",
+    tag: "design and build",
     accent: "#6d7bf4",
     promise: "The studio that draws it, ships it.",
-    line: "Real products in front of real users, like Somaa's full AI dining platform, live in Vizag.",
-    href: "/work/somaa",
-    cta: "See Somaa, live",
-    proof: "110+",
-    proofLabel: "components shipped on Somaa",
-  },
-  {
-    id: "noise",
-    pain: "My notifications never stop",
-    tag: "pingless.",
-    accent: "#c8102e",
-    promise: "Only the pings that matter.",
-    line: "Pingless is our own shipped app — an on-device AI gateway that delivers what's real and quiets the rest. No cloud, no account, zero bytes off your phone.",
-    href: "https://pingless.made-by-ac.com",
-    cta: "Get Pingless",
-    proof: "100%",
-    proofLabel: "on-device, nothing uploaded",
+    line: "One team designs and codes, so what you approve is what goes live. No hand-off to lose the idea in.",
+    href: "/offer",
+    cta: "See what we build",
+    proof: "1 team",
+    proofLabel: "design and code, no hand-off",
   },
 ];
 
@@ -129,8 +116,6 @@ export function ProblemPicker() {
 
   return (
     <section id="fix" data-nav-dark className="relative bg-ink text-paper py-28 md:py-32 overflow-hidden">
-      {/* seam down from the paper hero/manifesto above */}
-      <div aria-hidden className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-paper to-ink pointer-events-none" />
       {/* accent glow tracks the selected fix */}
       <motion.div
         aria-hidden
@@ -144,7 +129,7 @@ export function ProblemPicker() {
 
       <div className="relative z-10 mx-auto max-w-[1600px] px-6 md:px-10">
         <div className="reveal-up max-w-3xl">
-          <span className="label text-red">·002 / your problem, our move</span>
+          <span className="label text-red">·003 / your problem, our move</span>
           <h2 className="mt-6 font-display text-5xl md:text-8xl leading-[0.9] tracking-[-0.02em]">
             What's eating<br />your time<span className="text-red">?</span>
           </h2>

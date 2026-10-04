@@ -1,8 +1,7 @@
-import { useStudio } from "../StudioContext";
+import { VizagClock } from "./Clocks";
 
 // Minimal editorial footer.
 export function SiteFooter() {
-  const { vizagTime } = useStudio();
   return (
     <footer data-nav-dark className="bg-ink text-paper border-t border-ink-line">
       <div className="mx-auto max-w-[1600px] px-6 md:px-10 py-14 md:py-20">
@@ -41,8 +40,8 @@ export function SiteFooter() {
         </div>
 
         <div className="mt-14 pt-7 border-t border-ink-line flex flex-col sm:flex-row justify-between gap-3 label text-grey">
-          <span>© 2026 made. by ac · all rights reserved</span>
-          <span>Vizag {vizagTime || "··"}</span>
+          <span>© 2026 made. by ac · all rights reserved · <a href="/privacy" className="hover:text-gold transition-colors">Privacy</a> · <a href="/terms" className="hover:text-gold transition-colors">Terms</a></span>
+          <span>Vizag <VizagClock /></span>
           <span>made with intent</span>
         </div>
       </div>

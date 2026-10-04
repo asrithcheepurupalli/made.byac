@@ -1,7 +1,7 @@
 // Studio-wide state, handlers and derived values for made. by ac.
 // Lifted out of App.tsx so view sections can be split into their own components.
 import React, { createContext, useContext, useState, useEffect } from "react";
-import { Project, ContactSubmission } from "./types";
+import { Project } from "./types";
 import { PROJECTS } from "./data";
 import { INITIAL_POSTERS } from "./posters";
 
@@ -61,10 +61,12 @@ function useStudioValue() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   // Contact Form State
-  const [contactForm, setContactForm] = useState({ name: "", email: "", message: "" });
-  const [isSubmittingContact, setIsSubmittingContact] = useState<boolean>(false);
-  const [submittedInquiry, setSubmittedInquiry] = useState<ContactSubmission | null>(null);
-  const [inquiryLedger, setInquiryLedger] = useState<ContactSubmission[]>([]);
+  // "website" is a honeypot: hidden from people, filled by bots.
+  const [contactForm, setContactForm] = useState({ name: "", email: "", phone: "", message: "", website: "" });
+  const [contactStatus, setContactStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const [contactError, setContactError] = useState<string>("");
+  const [contactSentName, setContactSentName] = useState<string>("");
+  const isSubmittingContact = contactStatus === "sending";
 
   // Studio Telemetry Chat State (Generic & elegant assistant, unrelated to any system brand)
   const [chatMessages, setChatMessages] = useState([
@@ -77,8 +79,6 @@ function useStudioValue() {
   const [isTyping, setIsTyping] = useState<boolean>(false);
 
   // Dynamic Workspace Clock
-  const [currentTime, setCurrentTime] = useState<string>("");
-  const [vizagTime, setVizagTime] = useState<string>("");
 
   const enterMainAndScroll = (anchorId: string) => {
     setViewMode("main");
@@ -90,83 +90,41 @@ function useStudioValue() {
     }, 150);
   };
 
-  useEffect(() => {
-    const update = () => {
-      const now = new Date();
-      setCurrentTime(now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false }) + " UTC");
-      
-      try {
-        const parts = new Intl.DateTimeFormat("en-US", {
-          timeZone: "Asia/Kolkata",
-          hour: "2-digit",
-          minute: "2-digit",
-          hour12: false
-        }).formatToParts(now);
-        const hour = parts.find(p => p.type === 'hour')?.value || "";
-        const minute = parts.find(p => p.type === 'minute')?.value || "";
-        setVizagTime(`${hour} ${minute} IST`);
-      } catch (err) {
-        setVizagTime(now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false }) + " IST");
-      }
-    };
-    update();
-    const interval = setInterval(update, 1000);
-    return () => clearInterval(interval);
-  }, []);
 
-  // Sync / Load submissions from simple Express backend
-  const fetchSubmissions = async () => {
-    try {
-      const res = await fetch("/api/contact/submissions");
-      if (res.ok) {
-        const data = await res.json();
-        setInquiryLedger(data);
-      }
-    } catch (e) {
-      console.warn("Telemetry ledger unavailable.", e);
-    }
-  };
-
-  useEffect(() => {
-    fetchSubmissions();
-  }, []);
-
-  // Submit contact form to Express server api
+  // Send the enquiry. We only ever show "sent" when the server confirms the email was
+  // handed to the mail provider; anything else is an honest error with other ways to reach us.
   const handleContactSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!contactForm.name || !contactForm.email || !contactForm.message) return;
+    if (contactStatus === "sending") return;
+    const { name, email, phone, message } = contactForm;
+    if (!name.trim() || !message.trim()) return;
+    if (!email.trim() && phone.replace(/\D/g, "").length < 8) {
+      setContactError("Add an email or a WhatsApp number so we can reply.");
+      setContactStatus("error");
+      return;
+    }
 
-    setIsSubmittingContact(true);
-    setSubmittedInquiry(null);
-
+    setContactStatus("sending");
+    setContactError("");
     try {
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(contactForm)
+        body: JSON.stringify(contactForm),
       });
       if (response.ok) {
-        const data = await response.json();
-        setSubmittedInquiry(data.submission);
-        setContactForm({ name: "", email: "", message: "" });
-        fetchSubmissions();
-      } else {
-        throw new Error("Local ledger connection timeout.");
+        setContactSentName(name.trim().split(" ")[0]);
+        setContactForm({ name: "", email: "", phone: "", message: "", website: "" });
+        setContactStatus("sent");
+        return;
       }
-    } catch (err) {
-      // Offline fallback
-      const offlineInquiry: ContactSubmission = {
-        id: "offline-" + Math.random().toString(36).substr(2, 6),
-        name: contactForm.name,
-        email: contactForm.email,
-        message: contactForm.message,
-        timestamp: new Date().toISOString(),
-        aiFeedback: "Thank you for sharing your thoughts. Your query was recorded locally on your device. Let us connect soon."
-      };
-      setSubmittedInquiry(offlineInquiry);
-      setContactForm({ name: "", email: "", message: "" });
-    } finally {
-      setIsSubmittingContact(false);
+      let detail = "";
+      try { detail = (await response.json()).detail || ""; } catch { /* not json */ }
+      setContactError(detail);
+      setContactStatus("error");
+    } catch {
+      setContactError("");
+      setContactStatus("error");
     }
   };
 
@@ -268,23 +226,17 @@ function useStudioValue() {
     contactForm,
     setContactForm,
     isSubmittingContact,
-    setIsSubmittingContact,
-    submittedInquiry,
-    setSubmittedInquiry,
-    inquiryLedger,
-    setInquiryLedger,
+    contactStatus,
+    setContactStatus,
+    contactError,
+    contactSentName,
     chatMessages,
     setChatMessages,
     chatInput,
     setChatInput,
     isTyping,
     setIsTyping,
-    currentTime,
-    setCurrentTime,
-    vizagTime,
-    setVizagTime,
     enterMainAndScroll,
-    fetchSubmissions,
     handleContactSubmit,
     handleSendChat,
     filteredProjects,

@@ -3,6 +3,7 @@ import path from "path";
 import { createServer as createViteServer } from "vite";
 import { getGeminiClient, GEMINI_MODEL, ASRITH_SYSTEM_INSTRUCTION } from "./lib/gemini";
 import dotenv from "dotenv";
+import contactHandler from "./api/contact";
 
 dotenv.config();
 
@@ -18,16 +19,6 @@ app.get("/favicon.ico", (req, res) => {
   res.sendFile(path.join(process.cwd(), "public", "favicon.png"));
 });
 
-// In-memory contact submission log
-interface ContactSubmission {
-  id: string;
-  name: string;
-  email: string;
-  message: string;
-  timestamp: string;
-  aiFeedback?: string;
-}
-const submissions: ContactSubmission[] = [];
 
 // Gemini client + studio persona are shared with the serverless API in lib/gemini.ts.
 
@@ -77,62 +68,9 @@ app.post("/api/chat", async (req, res) => {
   }
 });
 
-// API Contact form submission with automated premium AI acknowledgment receipt
-app.post("/api/contact", async (req, res) => {
-  try {
-    const { name, email, message } = req.body;
-    if (!name || !email || !message) {
-      res.status(400).json({ error: "Name, email, and message are required." });
-      return;
-    }
+// Contact form: same handler the Vercel function runs, so local dev behaves like production.
+app.post("/api/contact", (req, res) => contactHandler(req as never, res as never));
 
-    let aiFeedback = "";
-    const hasKey = !!process.env.GEMINI_API_KEY;
-
-    if (hasKey) {
-      try {
-        const ai = getGeminiClient();
-        const prompt = `
-          The client '${name}' with email '${email}' left this message:
-          "${message}"
-
-          As the made. by ac studio team, write a short, extremely warm, specific 2-sentence and supportive acknowledgment feedback receipt for this idea.
-          Use the first-person plural ("we" / "our studio"). Express subtle design interest in their specific field or idea. Do not refer to yourself as an AI. Keep it elegant.
-        `;
-        const response = await ai.models.generateContent({
-          model: GEMINI_MODEL,
-          contents: prompt,
-          config: {
-            systemInstruction: "You are the made. by ac studio team, responding to a collaborative inquiry with premium calm elegance in the first-person plural (we/our studio).",
-            temperature: 0.8,
-          },
-        });
-        aiFeedback = response.text || "";
-      } catch (geminiError) {
-        console.warn("AI Feedback generation failed, skipping feedback.", geminiError);
-      }
-    }
-
-    const newSubmission: ContactSubmission = {
-      id: Math.random().toString(36).substring(2, 9),
-      name,
-      email,
-      message,
-      timestamp: new Date().toISOString(),
-      aiFeedback: aiFeedback || "Thank you. Your inquiry has been registered on our secure studio log. We will respond to you personally within 24 hours.",
-    };
-
-    submissions.push(newSubmission);
-    res.json({ success: true, submission: newSubmission });
-  } catch (err: any) {
-    res.status(500).json({ error: err.message || "Something went wrong." });
-  }
-});
-
-// Get submissions (for simulation / showing the interaction in a premium dashboard)
-app.get("/api/contact/submissions", (req, res) => {
-  res.json(submissions);
-});
 
 // Start Express and integrate Vite
 async function startServer() {

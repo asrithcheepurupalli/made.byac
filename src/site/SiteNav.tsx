@@ -4,12 +4,12 @@ import { useEffect, useState } from "react";
 // legible against both the paper (light) acts and the ink (dark) gallery.
 const LINKS = [
   { label: "Work", href: "/work" },
+  { label: "Products", href: "#products" },
   { label: "Labs", href: "/labs" },
   { label: "AI", href: "/ai" },
   { label: "Craft", href: "/craft" },
   { label: "Offer", href: "/offer" },
-  { label: "Why", href: "#why" },
-  { label: "Studio", href: "#studio" },
+  { label: "About", href: "#why" },
 ];
 
 export function SiteNav() {

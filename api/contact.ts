@@ -1,61 +1,106 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
-import { getGeminiClient, GEMINI_MODEL } from "../lib/gemini";
 
-// NOTE: Serverless functions are stateless, so submissions are not persisted
-// across invocations here. The form still returns a warm AI acknowledgment.
-// A real datastore (Vercel KV / Postgres) can be wired in during the upgrade pass.
+// Contact form delivery. An enquiry is emailed to the studio inbox through Resend.
+//
+// Rules this file keeps:
+//  - It only answers "success" when the email provider accepted the message. If delivery is
+//    not configured or fails, the visitor is told so and pointed at WhatsApp and email instead
+//    of being shown a confirmation for a message that went nowhere.
+//  - Nothing is stored. The enquiry lives in the studio mailbox, and nowhere else.
+//
+// Environment (set in Vercel):
+//   RESEND_API_KEY   required
+//   CONTACT_TO       optional, defaults to thebrain@made-by-ac.com
+//   CONTACT_FROM     optional, defaults to Resend's onboarding sender, which can only deliver
+//                    to the Resend account owner's own address. Verify made-by-ac.com in Resend
+//                    and use e.g. "made. by ac <hello@made-by-ac.com>" to send to any inbox.
+//   RESEND_API_URL   optional, for testing against a stub
+
+const clean = (v: unknown, max: number) => (typeof v === "string" ? v.trim().slice(0, max) : "");
+const esc = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+const validEmail = (s: string) => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(s);
+const digits = (s: string) => s.replace(/\D/g, "");
+
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== "POST") {
-    res.status(405).json({ error: "Method not allowed." });
+    res.status(405).json({ error: "method_not_allowed" });
     return;
   }
 
+  const b = (req.body ?? {}) as Record<string, unknown>;
+
+  // Honeypot: real visitors never fill this hidden field. Pretend it worked, send nothing.
+  if (clean(b.website, 200)) {
+    res.json({ success: true });
+    return;
+  }
+
+  const name = clean(b.name, 120);
+  const email = clean(b.email, 160);
+  const phone = clean(b.phone, 40);
+  const message = clean(b.message, 4000);
+
+  if (!name || !message) {
+    res.status(400).json({ error: "missing_fields", detail: "Name and message are required." });
+    return;
+  }
+  const hasEmail = validEmail(email);
+  const hasPhone = digits(phone).length >= 8;
+  if (!hasEmail && !hasPhone) {
+    res.status(400).json({ error: "no_contact", detail: "Add an email or a WhatsApp number so we can reply." });
+    return;
+  }
+
+  const key = process.env.RESEND_API_KEY;
+  if (!key) {
+    console.error("[contact] RESEND_API_KEY is not set; enquiry from %s could not be delivered", name);
+    res.status(503).json({ error: "not_configured" });
+    return;
+  }
+
+  const to = process.env.CONTACT_TO || "thebrain@made-by-ac.com";
+  const from = process.env.CONTACT_FROM || "made. by ac <onboarding@resend.dev>";
+  const url = process.env.RESEND_API_URL || "https://api.resend.com/emails";
+
+  const lines = [
+    `Name: ${name}`,
+    hasEmail ? `Email: ${email}` : null,
+    hasPhone ? `WhatsApp / phone: ${phone}` : null,
+    "",
+    message,
+    "",
+    `Sent from made-by-ac.com at ${new Date().toISOString()}`,
+  ].filter((l) => l !== null) as string[];
+
+  const html =
+    `<div style="font-family:system-ui,sans-serif;font-size:15px;line-height:1.55;color:#111">` +
+    `<p><strong>${esc(name)}</strong><br>` +
+    (hasEmail ? `<a href="mailto:${esc(email)}">${esc(email)}</a><br>` : "") +
+    (hasPhone ? `<a href="https://wa.me/${digits(phone)}">${esc(phone)}</a> (WhatsApp / phone)` : "") +
+    `</p><p style="white-space:pre-wrap">${esc(message)}</p>` +
+    `<p style="color:#777;font-size:12px">Sent from made-by-ac.com</p></div>`;
+
   try {
-    const { name, email, message } = req.body ?? {};
-    if (!name || !email || !message) {
-      res.status(400).json({ error: "Name, email, and message are required." });
+    const r = await fetch(url, {
+      method: "POST",
+      headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
+      body: JSON.stringify({
+        from,
+        to: [to],
+        ...(hasEmail ? { reply_to: email } : {}),
+        subject: `New enquiry from ${name}`,
+        text: lines.join("\n"),
+        html,
+      }),
+    });
+    if (!r.ok) {
+      console.error("[contact] provider rejected the message: %s %s", r.status, (await r.text()).slice(0, 300));
+      res.status(502).json({ error: "delivery_failed" });
       return;
     }
-
-    let aiFeedback = "";
-    if (process.env.GEMINI_API_KEY) {
-      try {
-        const ai = getGeminiClient();
-        const prompt = `
-          The client '${name}' with email '${email}' left this message:
-          "${message}"
-
-          As the made. by ac studio team, write a short, extremely warm, specific 2-sentence and supportive acknowledgment feedback receipt for this idea.
-          Use the first-person plural ("we" / "our studio"). Express subtle design interest in their specific field or idea. Do not refer to yourself as an AI. Keep it elegant.
-        `;
-        const response = await ai.models.generateContent({
-          model: GEMINI_MODEL,
-          contents: prompt,
-          config: {
-            systemInstruction:
-              "You are the made. by ac studio team, responding to a collaborative inquiry with premium calm elegance in the first-person plural (we/our studio).",
-            temperature: 0.8,
-          },
-        });
-        aiFeedback = response.text || "";
-      } catch (geminiError) {
-        console.warn("AI Feedback generation failed, skipping feedback.", geminiError);
-      }
-    }
-
-    const submission = {
-      id: Math.random().toString(36).substring(2, 9),
-      name,
-      email,
-      message,
-      timestamp: new Date().toISOString(),
-      aiFeedback:
-        aiFeedback ||
-        "Thank you. Your inquiry has been registered on our secure studio log. We will respond to you personally within 24 hours.",
-    };
-
-    res.json({ success: true, submission });
-  } catch (err: any) {
-    res.status(500).json({ error: err.message || "Something went wrong." });
+    res.json({ success: true });
+  } catch (err) {
+    console.error("[contact] delivery error", err);
+    res.status(502).json({ error: "delivery_failed" });
   }
 }

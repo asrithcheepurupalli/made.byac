@@ -15,13 +15,11 @@ const PRODUCTS = [
 export function ProductsTease() {
   return (
     <section id="products" className="relative bg-paper-dim text-ink py-24 md:py-32 overflow-hidden">
-      {/* seam: blend down from the ink work section above */}
-      <div aria-hidden className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-ink to-paper-dim pointer-events-none" />
       <div className="relative mx-auto max-w-[1600px] px-6 md:px-10">
         {/* header */}
         <div className="reveal-up flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-12 md:mb-16">
           <div>
-            <span className="label text-red">·005 / products</span>
+            <span className="label text-red">·006 / products</span>
             <h2 className="mt-6 font-display text-6xl md:text-8xl leading-[0.9] tracking-[-0.02em]">Things we've<br />made<span className="text-red">.</span></h2>
           </div>
           <p className="font-display text-xl md:text-2xl text-grey max-w-md leading-relaxed">Real products we design, build and ship, the same way we do for clients.</p>

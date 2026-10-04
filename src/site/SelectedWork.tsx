@@ -3,7 +3,7 @@ import { ArrowUpRight, Zap, Truck, Gift, Package } from "lucide-react";
 // ACT II — the work, under the lights. Three case studies carry it; everything
 // else hangs on a quiet wall you can hover to view.
 const CASE_STUDIES = [
-  { slug: "ramachandra-ortho", client: "Ramachandra Ortho Care", line: "A clinic where the visit\nstarts before the call.", img: "/case/ortho/reception.webp", tag: "Clinic booking" },
+  { slug: "ramachandra-ortho", client: "Ramachandra Ortho Care", line: "A clinic where the visit starts before the call.", img: "/case/ortho/reception.webp", tag: "Clinic booking" },
   { slug: "somaa", client: "Somaa", line: "A restobar that\nremembers you.", img: "/case/somaa/biryani.webp", tag: "AI dining platform" },
   { slug: "innovolt", client: "Innovolt", line: "Used EVs, made\na safe bet.", img: "/images/Hyd'Tel.webp", tag: "EV campaigns" },
   { slug: "mithai-maharaja", client: "Mithai Maharaja", line: "Sweets dressed\nlike heirlooms.", img: "/images/thumb_1778155198_f88efc2a-69f8-4b24-b07b-26e8a339b684.webp", tag: "Luxury packaging" },
@@ -21,12 +21,13 @@ const CASE_IMG: Record<string, string> = Object.fromEntries(CASE_STUDIES.map((c)
 export function SelectedWork() {
   return (
     <section id="work" data-nav-dark className="relative bg-ink text-paper py-28 md:py-32 overflow-hidden">
-      {/* sits under the ink before/after section — no seam needed */}
+      {/* seam down from the paper hero above */}
+      <div aria-hidden className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-paper to-ink pointer-events-none" />
       <div className="relative mx-auto max-w-[1600px] px-6 md:px-10">
         {/* header */}
         <div className="reveal-up flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-16 md:mb-24">
           <div>
-            <span className="label text-red">·004 / selected work</span>
+            <span className="label text-red">·002 / selected work</span>
             <h2 className="mt-6 font-display text-6xl md:text-8xl leading-[0.9] tracking-[-0.02em]">The work<span className="text-red">.</span></h2>
           </div>
           <p className="font-display text-xl md:text-2xl text-grey-dim max-w-md leading-relaxed">A few studies we are proud of. The rest lives in the work archive.</p>

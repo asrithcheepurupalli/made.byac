@@ -68,7 +68,7 @@ export function Footer() {
         </div>
         <div className="mt-14 pt-7 border-t border-paper-line flex flex-col sm:flex-row justify-between gap-3 label text-ink/60">
           <span>© 2026 made. by ac</span>
-          <span>Visakhapatnam, Andhra Pradesh, India</span>
+          <span className="flex gap-5"><a href="/privacy" className="hover:text-ink">Privacy</a><a href="/terms" className="hover:text-ink">Terms</a><span>Visakhapatnam, Andhra Pradesh, India</span></span>
         </div>
       </div>
     </footer>
