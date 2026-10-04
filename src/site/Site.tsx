@@ -34,6 +34,7 @@ const MotionPage = lazy(() => import("./MotionPage").then((m) => ({ default: m.M
 const CraftPage = lazy(() => import("./CraftPage").then((m) => ({ default: m.CraftPage })));
 const TeardownPage = lazy(() => import("./TeardownPage").then((m) => ({ default: m.TeardownPage })));
 const SomaaCaseStudy = lazy(() => import("./case/SomaaCaseStudy").then((m) => ({ default: m.SomaaCaseStudy })));
+const OrthoCaseStudy = lazy(() => import("./case/OrthoCaseStudy").then((m) => ({ default: m.OrthoCaseStudy })));
 const CampaignCaseStudy = lazy(() => import("./case/CampaignCaseStudy").then((m) => ({ default: m.CampaignCaseStudy })));
 
 // Tiny hash router so case-study pages get their own URL + back button,
@@ -107,6 +108,8 @@ export function Site() {
   let content: ReactNode;
   if (route === "#/work/somaa") {
     content = <SomaaCaseStudy />;
+  } else if (route === "#/work/ramachandra-ortho") {
+    content = <OrthoCaseStudy />;
   } else if (campaignSlug && CAMPAIGN_CASES[campaignSlug]) {
     content = <CampaignCaseStudy slug={campaignSlug} />;
   } else if (path === "/offer" || route === "#/offer") {

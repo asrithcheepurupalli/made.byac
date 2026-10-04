@@ -10,8 +10,9 @@ const CASE_SLUG: Record<string, string> = {
 };
 
 // Featured studies carried at the top of the page.
-const FEATURED = [
-  { slug: "somaa", client: "Somaa", line: "A restobar that remembers you.", img: "/case/somaa/biryani.webp", tag: "AI dining platform", accent: "#d99547", overlay: "/case/somaa/wordmark-cream.png" },
+const FEATURED: { slug: string; client: string; line: string; img: string; tag: string; accent: string; overlay?: string }[] = [
+  { slug: "ramachandra-ortho", client: "Ramachandra Ortho Care", line: "A clinic where the visit starts before the phone rings.", img: "/case/ortho/reception.webp", tag: "Clinic booking & WhatsApp", accent: "#2bbfa5" },
+  { slug: "somaa", client: "Somaa", line: "A restobar that remembers you.", img: "/case/somaa/biryani.webp", tag: "AI dining platform", accent: "#d99547", },
   { slug: "innovolt", client: "Innovolt", line: "Used EVs, made a safe bet.", img: "/images/Hyd'Tel.png", tag: "EV marketplace campaigns", accent: "#27d17c" },
   { slug: "mithai-maharaja", client: "Mithai Maharaja", line: "Sweets dressed like heirlooms.", img: "/images/thumb_1778155198_f88efc2a-69f8-4b24-b07b-26e8a339b684.jpg", tag: "Luxury packaging", accent: "#c8a24b" },
 ];
@@ -88,35 +89,32 @@ export function WorkPage() {
         </div>
       </section>
 
-      {/* featured case studies — Somaa large, the other two small */}
+      {/* featured case studies — Ortho + Somaa large, the rest small */}
       <section className="mx-auto max-w-[1500px] px-6 md:px-10 pb-8 md:pb-12">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 md:gap-6">
-          {/* Somaa — the hero study */}
-          {(() => {
-            const f = FEATURED[0];
-            return (
-              <a href={`#/work/${f.slug}`} className="reveal-up group relative rounded-2xl overflow-hidden border border-ink-line bg-ink-soft lg:col-span-8 aspect-[16/12] sm:aspect-[16/9] lg:aspect-auto lg:min-h-[480px]">
-                <img src={f.img} alt={f.client} loading="lazy" referrerPolicy="no-referrer" className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1.1s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.05]" />
-                <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/30 to-ink/15" />
-                {f.overlay && (
-                  <img src={f.overlay} alt="" className="absolute left-1/2 top-[40%] -translate-x-1/2 -translate-y-1/2 w-[46%] max-w-[300px] drop-shadow-[0_4px_24px_rgba(0,0,0,0.55)] transition-transform duration-[1.1s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]" />
-                )}
-                <span className="absolute top-5 left-5 label text-[10px] rounded-full px-3 py-1.5" style={{ background: f.accent, color: "#0b0b0c" }}>Featured case study</span>
-                <div className="absolute inset-x-0 bottom-0 p-7 md:p-9">
-                  <div className="label text-[10px]" style={{ color: f.accent }}>{f.tag}</div>
-                  <h3 className="mt-2 font-display text-4xl md:text-6xl leading-[0.96] text-paper">{f.client}</h3>
-                  <p className="mt-3 text-grey-dim text-[15px] md:text-base leading-snug max-w-sm">{f.line}</p>
-                  <span className="mt-5 inline-flex items-center gap-1.5 label text-[11px] text-paper/85 group-hover:text-paper transition-colors">
-                    Read the study <ArrowUpRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                  </span>
-                </div>
-              </a>
-            );
-          })()}
+          {/* the two flagship studies: Ramachandra Ortho first, then Somaa */}
+          {FEATURED.slice(0, 2).map((f) => (
+            <a key={f.slug} href={`#/work/${f.slug}`} className="reveal-up group relative rounded-2xl overflow-hidden border border-ink-line bg-ink-soft lg:col-span-6 aspect-[16/12] sm:aspect-[16/9] lg:aspect-auto lg:min-h-[440px]">
+              <img src={f.img} alt={f.client} loading="lazy" referrerPolicy="no-referrer" className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1.1s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.05]" />
+              <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/30 to-ink/15" />
+              {f.overlay && (
+                <img src={f.overlay} alt="" className="absolute left-1/2 top-[40%] -translate-x-1/2 -translate-y-1/2 w-[46%] max-w-[300px] drop-shadow-[0_4px_24px_rgba(0,0,0,0.55)] transition-transform duration-[1.1s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]" />
+              )}
+              <span className="absolute top-5 left-5 label text-[10px] rounded-full px-3 py-1.5" style={{ background: f.accent, color: "#0b0b0c" }}>Featured case study</span>
+              <div className="absolute inset-x-0 bottom-0 p-7 md:p-9">
+                <div className="label text-[10px]" style={{ color: f.accent }}>{f.tag}</div>
+                <h3 className="mt-2 font-display text-4xl md:text-5xl leading-[0.96] text-paper">{f.client}</h3>
+                <p className="mt-3 text-grey-dim text-[15px] md:text-base leading-snug max-w-sm">{f.line}</p>
+                <span className="mt-5 inline-flex items-center gap-1.5 label text-[11px] text-paper/85 group-hover:text-paper transition-colors">
+                  Read the study <ArrowUpRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                </span>
+              </div>
+            </a>
+          ))}
 
-          {/* Innovolt + Mithai — small, stacked */}
-          <div className="lg:col-span-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-5 md:gap-6">
-            {FEATURED.slice(1).map((f) => (
+          {/* the rest, smaller */}
+          <div className="lg:col-span-12 grid grid-cols-1 sm:grid-cols-2 gap-5 md:gap-6">
+            {FEATURED.slice(2).map((f) => (
               <a key={f.slug} href={`#/work/${f.slug}`} className="reveal-up group relative rounded-2xl overflow-hidden border border-ink-line bg-ink-soft aspect-[16/10] lg:aspect-auto lg:min-h-[228px]">
                 <img src={f.img} alt={f.client} loading="lazy" referrerPolicy="no-referrer" className="absolute inset-0 w-full h-full object-cover opacity-90 transition-transform duration-[1.1s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.06]" />
                 <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/45 to-ink/15" />

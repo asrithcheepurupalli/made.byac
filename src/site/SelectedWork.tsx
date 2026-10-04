@@ -3,6 +3,7 @@ import { ArrowUpRight, Zap, Truck, Gift, Package } from "lucide-react";
 // ACT II — the work, under the lights. Three case studies carry it; everything
 // else hangs on a quiet wall you can hover to view.
 const CASE_STUDIES = [
+  { slug: "ramachandra-ortho", client: "Ramachandra Ortho Care", line: "A clinic where the visit\nstarts before the call.", img: "/case/ortho/reception.webp", tag: "Clinic booking" },
   { slug: "somaa", client: "Somaa", line: "A restobar that\nremembers you.", img: "/case/somaa/biryani.webp", tag: "AI dining platform" },
   { slug: "innovolt", client: "Innovolt", line: "Used EVs, made\na safe bet.", img: "/images/Hyd'Tel.png", tag: "EV campaigns" },
   { slug: "mithai-maharaja", client: "Mithai Maharaja", line: "Sweets dressed\nlike heirlooms.", img: "/images/thumb_1778155198_f88efc2a-69f8-4b24-b07b-26e8a339b684.jpg", tag: "Luxury packaging" },
@@ -18,8 +19,6 @@ const MORE = [
 const CASE_IMG: Record<string, string> = Object.fromEntries(CASE_STUDIES.map((c) => [c.slug, c.img]));
 
 export function SelectedWork() {
-  const somaa = CASE_STUDIES[0];
-
   return (
     <section id="work" data-nav-dark className="relative bg-ink text-paper py-28 md:py-32 overflow-hidden">
       {/* sits under the ink before/after section — no seam needed */}
@@ -33,29 +32,35 @@ export function SelectedWork() {
           <p className="font-display text-xl md:text-2xl text-grey-dim max-w-md leading-relaxed">A few studies we are proud of. The rest lives in the work archive.</p>
         </div>
 
-        {/* featured case study — Somaa */}
-        <a href={`#/work/${somaa.slug}`} data-cursor="View" className="group grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
-          <div className="lg:col-span-7">
+        {/* featured case studies: Ramachandra Ortho first, then Somaa */}
+        <div className="flex flex-col gap-16 md:gap-24">
+          {CASE_STUDIES.slice(0, 2).map((feat, idx) => (
+                <a key={feat.slug} href={`#/work/${feat.slug}`} data-cursor="View" className="group grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
+          <div className={`lg:col-span-7 ${idx % 2 ? "lg:order-2" : ""}`}>
             <div className="relative overflow-hidden rounded-2xl border border-ink-line bg-ink-soft aspect-[16/10]">
-              <img src={somaa.img} alt="Somaa chicken biryani" loading="lazy" className="w-full h-full object-cover transition-transform duration-[1.1s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.05]" />
-              {/* recreate the Somaa hero: wordmark over the biryani */}
+              <img src={feat.img} alt={feat.client} loading="lazy" className="w-full h-full object-cover transition-transform duration-[1.1s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.05]" />
+              {/* Somaa only: wordmark over the biryani */}
               <div className="absolute inset-0 bg-gradient-to-t from-ink/75 via-ink/15 to-ink/35" />
-              <img
+              {feat.slug === "somaa" && (
+                <img
                 src="/case/somaa/wordmark-cream.png"
                 alt="Somaa"
                 className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[46%] max-w-[280px] drop-shadow-[0_4px_24px_rgba(0,0,0,0.55)] transition-transform duration-[1.1s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]"
               />
+              )}
               <span className="absolute top-5 left-6 label text-[10px] bg-red text-white rounded-full px-3 py-1.5 z-10">Featured case study</span>
             </div>
           </div>
-          <div className="lg:col-span-5">
-            <div className="flex items-center gap-3 label text-gold"><span>{somaa.client}</span><span className="w-6 h-px bg-gold/50" /><span className="text-grey-dim">{somaa.tag}</span></div>
-            <h3 className="mt-5 font-display text-5xl md:text-6xl leading-[0.98] text-paper whitespace-pre-line">{somaa.line}</h3>
+          <div className={`lg:col-span-5 ${idx % 2 ? "lg:order-1" : ""}`}>
+            <div className="flex items-center gap-3 label text-gold"><span>{feat.client}</span><span className="w-6 h-px bg-gold/50" /><span className="text-grey-dim">{feat.tag}</span></div>
+            <h3 className="mt-5 font-display text-5xl md:text-6xl leading-[0.98] text-paper whitespace-pre-line">{feat.line}</h3>
             <span className="mt-7 inline-flex items-center gap-2 label text-paper border-b border-gold/50 pb-1 group-hover:text-gold transition-colors">Read the case study <ArrowUpRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" /></span>
           </div>
         </a>
+          ))}
+        </div>
 
-        {/* secondary case studies — wide brand tiles (only two for now; shrink the grid when more are added) */}
+        {/* secondary case studies — wide brand tiles (Innovolt + Mithai) */}
         <div className="mt-12 md:mt-16 grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
           {MORE.map((c) => (
             <a
