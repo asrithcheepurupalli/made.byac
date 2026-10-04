@@ -1,9 +1,12 @@
 import { renderToString } from "react-dom/server";
 import { SERVICES, HUB, CASES, SITE, EXISTING_PAGES } from "./data";
-import { serviceLd, hubLd, caseLd, homeLd } from "./jsonld";
+import { serviceLd, hubLd, caseLd, homeLd, contentLd, indexLd } from "./jsonld";
 import { ServicePage } from "./ServicePage";
 import { ServicesHub } from "./ServicesHub";
 import { NotFoundPage } from "./NotFoundPage";
+import { ContentPage } from "./ContentPage";
+import { IndexPage } from "./IndexPage";
+import { CONTENT, INDEXES } from "./registry";
 import { Header, Footer, Page } from "./Shell";
 
 // Build-time only. Renders the search-facing pages to static HTML so crawlers (and
@@ -57,6 +60,18 @@ export function getPages(): PageOut[] {
       ogImage: `${SITE}${c.img.startsWith("/case/ortho") ? "/og.png" : c.img}`, robots: "index, follow", ld: caseLd(c), html: renderToString(<CaseShellBody i={i} />),
     });
   });
+  for (const c of CONTENT) {
+    out.push({
+      file: `${c.path.slice(1)}.html`, url: c.path, title: c.title, description: c.description,
+      ogImage: `${SITE}/og.png`, robots: "index, follow", ld: contentLd(c), html: renderToString(<ContentPage c={c} />),
+    });
+  }
+  for (const i of INDEXES) {
+    out.push({
+      file: `${i.path.slice(1)}.html`, url: i.path, title: i.title, description: i.description,
+      ogImage: `${SITE}/og.png`, robots: "index, follow", ld: indexLd(i), html: renderToString(<IndexPage i={i} />),
+    });
+  }
   out.push({
     file: "404.html", url: "/404", title: "Page not found · made. by ac", description: "That page isn't here. Search the site or pick a page below.",
     ogImage: `${SITE}/og.png`, robots: "noindex, follow", ld: null, html: renderToString(<NotFoundPage />),
@@ -71,6 +86,8 @@ export function sitemapUrls() {
     { path: "/", priority: "1.0" },
     { path: HUB.path, priority: "0.9" },
     ...SERVICES.map((s) => ({ path: s.path, priority: "0.9" })),
+    ...INDEXES.map((i) => ({ path: i.path, priority: "0.8" })),
+    ...CONTENT.map((c) => ({ path: c.path, priority: c.kind === "guide" ? "0.7" : "0.8" })),
     ...CASES.map((c) => ({ path: c.path, priority: "0.7" })),
     ...EXISTING_PAGES,
   ];
@@ -84,12 +101,6 @@ export function homeFallback() {
         We design and build websites, appointment booking systems for clinics, restaurant QR ordering, WhatsApp automation and
         brands, for businesses in Vizag, across Andhra Pradesh and throughout India.
       </p>
-      <ul style={{ marginTop: "1.5rem", lineHeight: 1.9 }}>
-        {SERVICES.map((s) => <li key={s.slug}><a href={s.path}>{s.h1}</a></li>)}
-        <li><a href="/ai">AI automation</a></li>
-        <li><a href="/work">Work and case studies</a></li>
-        <li><a href={HUB.path}>All services</a></li>
-      </ul>
     </div>,
   );
 }

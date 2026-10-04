@@ -93,7 +93,7 @@ export const SERVICES: Service[] = [
     related: ["whatsapp-business-automation", "web-development-company-visakhapatnam"],
     ctaMessage: "Hi, we run a clinic and want to know about appointment booking software.",
     ctaLabel: "Talk to us on WhatsApp",
-    accent: "#2bbfa5",
+    accent: "#0c7a68",
   },
   {
     slug: "web-development-company-visakhapatnam",
@@ -132,7 +132,7 @@ export const SERVICES: Service[] = [
       text: "A restobar's whole at-table experience, designed and built end to end: brand-matched menu, group ordering and an AI host.",
       href: "/work/somaa",
       cta: "Read the case study",
-      img: "/case/somaa/hero.png",
+      img: "/case/somaa/hero.webp",
       alt: "Somaa restobar signature dish used in the case study",
     },
     coverage: {
@@ -150,7 +150,7 @@ export const SERVICES: Service[] = [
     related: ["appointment-booking-software-for-clinics", "branding-and-packaging-design-visakhapatnam"],
     ctaMessage: "Hi, we are looking for a web development partner in Vizag.",
     ctaLabel: "Message us on WhatsApp",
-    accent: "#bd9b4e",
+    accent: "#8a6d2f",
   },
   {
     slug: "restaurant-qr-ordering-system",
@@ -189,7 +189,7 @@ export const SERVICES: Service[] = [
       text: "A coastal-Andhra restobar with live music runs its at-table experience on the platform we designed and built, connected to its kitchen's point-of-sale.",
       href: "/work/somaa",
       cta: "Read the case study",
-      img: "/case/somaa/step-order.png",
+      img: "/case/somaa/step-order.webp",
       alt: "Somaa table ordering screen on a phone",
     },
     coverage: {
@@ -206,7 +206,7 @@ export const SERVICES: Service[] = [
     related: ["whatsapp-business-automation", "web-development-company-visakhapatnam"],
     ctaMessage: "Hi, we run a restaurant and want to know about QR ordering.",
     ctaLabel: "Talk to us on WhatsApp",
-    accent: "#d99547",
+    accent: "#a8651c",
   },
   {
     slug: "whatsapp-business-automation",
@@ -262,7 +262,7 @@ export const SERVICES: Service[] = [
     related: ["appointment-booking-software-for-clinics", "restaurant-qr-ordering-system"],
     ctaMessage: "Hi, we want to automate bookings on WhatsApp for our business.",
     ctaLabel: "Message us on WhatsApp",
-    accent: "#25d366",
+    accent: "#128c4a",
   },
   {
     slug: "branding-and-packaging-design-visakhapatnam",
@@ -301,7 +301,7 @@ export const SERVICES: Service[] = [
       text: "Regional sweets dressed as the heirloom gift they are, with hot-stamped foil, rigid structures and a festive gifting system.",
       href: "/work/mithai-maharaja",
       cta: "Read the case study",
-      img: "/images/thumb_1778155198_f88efc2a-69f8-4b24-b07b-26e8a339b684.jpg",
+      img: "/images/thumb_1778155198_f88efc2a-69f8-4b24-b07b-26e8a339b684.webp",
       alt: "Mithai Maharaja luxury sweets packaging",
     },
     coverage: {
@@ -318,7 +318,7 @@ export const SERVICES: Service[] = [
     related: ["web-development-company-visakhapatnam", "restaurant-qr-ordering-system"],
     ctaMessage: "Hi, we want help with branding and packaging for our business.",
     ctaLabel: "Message us on WhatsApp",
-    accent: "#c8a24b",
+    accent: "#8a6d2f",
   },
 ];
 
@@ -368,7 +368,7 @@ export const CASES: CaseShell[] = [
       "Somaa is a coastal-Andhra restobar with live music. It wanted ordering that felt as considered as the room, and that plugged into the kitchen's existing point-of-sale.",
       "We designed and built per-table QR ordering, group carts, an AI host, a loyalty and occasions engine, and a feedback-to-reward loop.",
     ],
-    img: "/case/somaa/hero.png",
+    img: "/case/somaa/hero.webp",
     datePublished: "2026-06-12",
   },
   {
@@ -381,7 +381,7 @@ export const CASES: CaseShell[] = [
       "Innovolt sells certified pre-owned commercial electric vehicles. The challenge was trust, not product.",
       "We designed a benefit-led campaign system adapted for Hyderabad and Bengaluru, with custom Telugu typography and city-specific creative.",
     ],
-    img: "/images/Inv'08.png",
+    img: "/images/Inv'08.webp",
     datePublished: "2026-06-12",
   },
   {
@@ -394,7 +394,7 @@ export const CASES: CaseShell[] = [
       "Traditional Indian sweets are often sold in generic boxes. Mithai Maharaja wanted its sweets to feel like the heirloom gift they are.",
       "We designed packaging systems with hot-stamped foil, rigid structures and a festive gifting sub-system, plus launch creative and illustration.",
     ],
-    img: "/images/thumb_1778155198_f88efc2a-69f8-4b24-b07b-26e8a339b684.jpg",
+    img: "/images/thumb_1778155198_f88efc2a-69f8-4b24-b07b-26e8a339b684.webp",
     datePublished: "2026-06-12",
   },
 ];

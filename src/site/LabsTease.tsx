@@ -79,7 +79,7 @@ export function LabsTease() {
               <span className="ml-3 font-mono text-[9px] text-grey-dim">vane.made-by-ac.com</span>
             </div>
             <img
-              src="/labs/vane/home.png"
+              src="/labs/vane/home.webp"
               alt="VANE, a closure with no slider, taken from a feather"
               loading="lazy"
               className="w-full block"

@@ -13,7 +13,7 @@ const CARDS = [
     featured: {
       name: "VANE",
       note: "zips jam, feathers don't",
-      shot: "/labs/vane/home.png",
+      shot: "/labs/vane/home.webp",
       accent: "#27499b",
     },
   },

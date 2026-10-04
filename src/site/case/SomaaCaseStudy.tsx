@@ -238,13 +238,13 @@ export function SomaaCaseStudy() {
       {/* HERO — parallax */}
       <section ref={heroRef} className="relative h-[100svh] w-full overflow-hidden flex flex-col justify-end">
         <motion.div style={{ y: bgY }} className="absolute inset-0 z-0">
-          <img src={`${A}/hero.png`} alt="Somaa signature dish" className="w-full h-[120%] object-cover" />
+          <img src={`${A}/hero.webp`} alt="Somaa signature dish" className="w-full h-[120%] object-cover" />
           <div className="absolute inset-0" style={{ background: "linear-gradient(to top, #0c0a09 8%, rgba(12,10,9,0.45) 45%, rgba(12,10,9,0.65) 100%)" }} />
         </motion.div>
 
         <motion.div style={{ opacity: fade }} className="relative z-10 mx-auto max-w-[1400px] w-full px-6 md:px-10 pb-16 md:pb-24">
           <span className="label" style={{ color: C.amber }}>·01 · case study · hospitality</span>
-          <img src={`${A}/wordmark-cream.png`} alt="Somaa" className="mt-8 h-16 md:h-28 w-auto object-contain object-left" />
+          <img src={`${A}/wordmark-cream.webp`} alt="Somaa" className="mt-8 h-16 md:h-28 w-auto object-contain object-left" />
           <p className="mt-8 font-display text-2xl md:text-4xl leading-snug max-w-2xl" style={{ color: C.text }}>
             A coastal-Andhra restobar in Vizag, and the AI-powered dining experience platform we
             designed and built to match the room.
@@ -367,7 +367,7 @@ export function SomaaCaseStudy() {
                   {WALK.map((s, i) => (
                     <img
                       key={s.img}
-                      src={`${A}/${s.img}.png`}
+                      src={`${A}/${s.img}.webp`}
                       alt={`Somaa · ${s.t}`}
                       className="absolute inset-0 w-full h-full object-cover object-top transition-opacity duration-500 ease-out"
                       style={{ opacity: active === i ? 1 : 0 }}
@@ -516,7 +516,7 @@ export function SomaaCaseStudy() {
         <div className="lg:col-span-7">
           <Reveal>
             <div className="rounded-2xl overflow-hidden shadow-2xl" style={{ border: `1px solid ${C.line}` }}>
-              <img src={`${A}/og.png`} alt="Somaa brand · order from your table, talk to the AI host" className="w-full" />
+              <img src={`${A}/og.webp`} alt="Somaa brand · order from your table, talk to the AI host" className="w-full" />
             </div>
           </Reveal>
         </div>

@@ -1,4 +1,6 @@
 import { SITE, EMAIL, WHATSAPP, SERVICES, type Service, type CaseShell, HUB } from "./data";
+import type { Content } from "./content-types";
+import type { Index } from "./registry";
 
 const ORG_ID = `${SITE}/#org`;
 
@@ -84,4 +86,35 @@ export const caseLd = (c: CaseShell) =>
       inLanguage: "en-IN",
     },
     crumbs([{ name: "Home", url: SITE }, { name: "Work", url: `${SITE}/work` }, { name: c.h1.split(":")[0], url: `${SITE}${c.path}` }]),
+  );
+
+const faqNode = (c: Content) => ({ "@type": "FAQPage", mainEntity: c.faqs.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })) });
+
+export const contentLd = (c: Content) => {
+  const crumb =
+    c.kind === "guide"
+      ? [{ name: "Home", url: SITE }, { name: "Guides", url: `${SITE}/guides` }, { name: c.navLabel, url: `${SITE}${c.path}` }]
+      : [{ name: "Home", url: SITE }, { name: "Services", url: `${SITE}${HUB.path}` }, { name: c.navLabel, url: `${SITE}${c.path}` }];
+  const main =
+    c.kind === "guide"
+      ? {
+          "@type": "Article", "@id": `${SITE}${c.path}#article`, headline: c.h1, description: c.description, url: `${SITE}${c.path}`,
+          datePublished: c.datePublished, dateModified: c.datePublished, inLanguage: "en-IN",
+          author: { "@id": ORG_ID }, publisher: { "@id": ORG_ID }, mainEntityOfPage: `${SITE}${c.path}`,
+        }
+      : {
+          "@type": "Service", "@id": `${SITE}${c.path}#service`, name: c.h1, serviceType: c.navLabel, description: c.description,
+          url: `${SITE}${c.path}`, provider: { "@id": ORG_ID }, areaServed,
+        };
+  return graph(organization, main, faqNode(c), crumbs(crumb));
+};
+
+export const indexLd = (i: Index) =>
+  graph(
+    organization,
+    {
+      "@type": "CollectionPage", name: i.h1, url: `${SITE}${i.path}`, description: i.description,
+      mainEntity: { "@type": "ItemList", itemListElement: i.items.map((it, n) => ({ "@type": "ListItem", position: n + 1, url: `${SITE}${it.path}`, name: it.label })) },
+    },
+    crumbs([{ name: "Home", url: SITE }, { name: i.eyebrow, url: `${SITE}${i.path}` }]),
   );

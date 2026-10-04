@@ -1,35 +1,57 @@
 import { useEffect } from "react";
 import Lenis from "lenis";
 
-// Buttery smooth scrolling — the same Lenis setup used on the Somaa pages.
-// Skipped for visitors who prefer reduced motion.
+// Light smooth scrolling for desktop wheels and trackpads.
+//
+// The old setup ran a requestAnimationFrame loop forever and used a slow, floaty curve,
+// which read as lag. This version:
+//  - uses a quick lerp, so the page settles in a fraction of a second,
+//  - runs its frame loop only while a scroll is actually happening, then sleeps,
+//  - stays off touch devices (native momentum is better there) and under reduced motion.
 export function SmoothScroll() {
   useEffect(() => {
     if (typeof window === "undefined") return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    // Desktop only. On touch devices Lenis fights native momentum scrolling, which
-    // reads as a dead, stop-mid-flick scroll on phones and makes scroll-driven
-    // animations stutter. Native scroll on mobile is smooth and reliable, and the
-    // parallax + scroll reveals read the native scroll position just fine.
     if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+    // A/B switch for comparing feel: add ?scroll=native to any URL to use plain browser scrolling.
+    try { if (new URLSearchParams(window.location.search).get("scroll") === "native") return; } catch { /* ignore */ }
 
     const lenis = new Lenis({
-      duration: 1.1,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      lerp: 0.2,          // higher = snappier; the old duration/easing felt slow
       smoothWheel: true,
+      wheelMultiplier: 1,
       anchors: true,
+      autoRaf: false,     // we drive frames ourselves, only when needed
     });
-    // expose for cross-page deep-link scrolling (see Site.tsx)
     (window as unknown as { __lenis?: Lenis }).__lenis = lenis;
 
     let raf = 0;
+    let quiet = 0;
     const loop = (time: number) => {
       lenis.raf(time);
-      raf = requestAnimationFrame(loop);
+      quiet = lenis.isScrolling ? 0 : quiet + 1;
+      raf = quiet > 20 ? 0 : requestAnimationFrame(loop); // sleep ~⅓s after it settles
     };
-    raf = requestAnimationFrame(loop);
+    const wake = () => {
+      quiet = 0;
+      if (!raf) raf = requestAnimationFrame(loop);
+    };
+
+    // anything that can start a scroll wakes the loop
+    window.addEventListener("wheel", wake, { passive: true });
+    window.addEventListener("keydown", wake, { passive: true });
+    window.addEventListener("resize", wake, { passive: true });
+    const scrollTo = lenis.scrollTo.bind(lenis);
+    lenis.scrollTo = ((...args: Parameters<Lenis["scrollTo"]>) => {
+      wake();
+      return scrollTo(...args);
+    }) as Lenis["scrollTo"];
+    wake();
 
     return () => {
+      window.removeEventListener("wheel", wake);
+      window.removeEventListener("keydown", wake);
+      window.removeEventListener("resize", wake);
       cancelAnimationFrame(raf);
       lenis.destroy();
       delete (window as unknown as { __lenis?: Lenis }).__lenis;

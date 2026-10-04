@@ -1,13 +1,12 @@
 import { ArrowUpRight, Zap, Truck, Gift, Package } from "lucide-react";
-import { SERVICES } from "../seo/data";
 
 // ACT II — the work, under the lights. Three case studies carry it; everything
 // else hangs on a quiet wall you can hover to view.
 const CASE_STUDIES = [
   { slug: "ramachandra-ortho", client: "Ramachandra Ortho Care", line: "A clinic where the visit\nstarts before the call.", img: "/case/ortho/reception.webp", tag: "Clinic booking" },
   { slug: "somaa", client: "Somaa", line: "A restobar that\nremembers you.", img: "/case/somaa/biryani.webp", tag: "AI dining platform" },
-  { slug: "innovolt", client: "Innovolt", line: "Used EVs, made\na safe bet.", img: "/images/Hyd'Tel.png", tag: "EV campaigns" },
-  { slug: "mithai-maharaja", client: "Mithai Maharaja", line: "Sweets dressed\nlike heirlooms.", img: "/images/thumb_1778155198_f88efc2a-69f8-4b24-b07b-26e8a339b684.jpg", tag: "Luxury packaging" },
+  { slug: "innovolt", client: "Innovolt", line: "Used EVs, made\na safe bet.", img: "/images/Hyd'Tel.webp", tag: "EV campaigns" },
+  { slug: "mithai-maharaja", client: "Mithai Maharaja", line: "Sweets dressed\nlike heirlooms.", img: "/images/thumb_1778155198_f88efc2a-69f8-4b24-b07b-26e8a339b684.webp", tag: "Luxury packaging" },
 ];
 
 // secondary case studies — small brand tiles, no design thumbnails (Somaa stays the hero)
@@ -44,7 +43,7 @@ export function SelectedWork() {
               <div className="absolute inset-0 bg-gradient-to-t from-ink/75 via-ink/15 to-ink/35" />
               {feat.slug === "somaa" && (
                 <img
-                src="/case/somaa/wordmark-cream.png"
+                src="/case/somaa/wordmark-cream.webp"
                 alt="Somaa"
                 className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[46%] max-w-[280px] drop-shadow-[0_4px_24px_rgba(0,0,0,0.55)] transition-transform duration-[1.1s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]"
               />
@@ -90,23 +89,6 @@ export function SelectedWork() {
         </div>
 
 
-        {/* what we build: crawlable links to the service pages */}
-        <div className="mt-20 md:mt-28 border-t border-ink-line pt-12 md:pt-16">
-          <span className="label text-gold">·what we build, for whom</span>
-          <ul className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-x-12">
-            {SERVICES.map((s) => (
-              <li key={s.slug}>
-                <a href={s.path} className="group flex items-center justify-between gap-6 border-b border-ink-line py-5">
-                  <span>
-                    <span className="block font-display text-2xl md:text-3xl text-paper group-hover:text-gold transition-colors">{s.navLabel}</span>
-                    <span className="mt-1 block text-sm text-grey-dim">{s.eyebrow}</span>
-                  </span>
-                  <ArrowUpRight className="w-5 h-5 shrink-0 text-grey-dim group-hover:text-paper transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" aria-hidden />
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
       </div>
     </section>
   );

@@ -1,5 +1,4 @@
 import { useStudio } from "../StudioContext";
-import { SERVICES } from "../seo/data";
 
 // Minimal editorial footer.
 export function SiteFooter() {
@@ -24,13 +23,6 @@ export function SiteFooter() {
               <a href="#studio" className="text-paper/80 hover:text-gold transition-colors text-sm">Studio</a>
             </div>
             <div className="flex flex-col gap-3">
-              <span className="label text-grey">Services</span>
-              <a href="/services" className="text-paper/80 hover:text-gold transition-colors text-sm">All services</a>
-              {SERVICES.map((s) => (
-                <a key={s.slug} href={s.path} className="text-paper/80 hover:text-gold transition-colors text-sm">{s.navLabel}</a>
-              ))}
-            </div>
-            <div className="flex flex-col gap-3">
               <span className="label text-grey">Products</span>
               <a href="https://table.made-by-ac.com" target="_blank" rel="noreferrer" className="text-paper/80 hover:text-gold transition-colors text-sm">made. table</a>
               <a href="https://kitchen.made-by-ac.com" target="_blank" rel="noreferrer" className="text-paper/80 hover:text-gold transition-colors text-sm">made. kitchen</a>
@@ -43,6 +35,7 @@ export function SiteFooter() {
             <div className="flex flex-col gap-3">
               <span className="label text-grey">Elsewhere</span>
               <a href="mailto:thebrain@made-by-ac.com" className="text-paper/80 hover:text-gold transition-colors text-sm">Email</a>
+              <a href="/services" className="text-paper/50 hover:text-gold transition-colors text-xs">All services</a>
             </div>
           </div>
         </div>

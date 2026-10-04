@@ -1,24 +1,25 @@
 import { lazy, Suspense, useEffect, useState, type ReactNode } from "react";
-import { SmoothScroll } from "./SmoothScroll";
 import { ScrollProgress } from "./ScrollProgress";
+import { SmoothScroll } from "./SmoothScroll";
 import { Cursor } from "./Cursor";
 import { Intro } from "./Intro";
 import { useScrollReveal } from "./useScrollReveal";
 import { useMagnetic } from "./useMagnetic";
 import { SiteNav } from "./SiteNav";
 import { ActHero } from "./ActHero";
-import { ProblemPicker } from "./ProblemPicker";
-import { BeforeAfter } from "./BeforeAfter";
-import { Manifesto } from "./Manifesto";
-import { SelectedWork } from "./SelectedWork";
-import { GridLab } from "./GridLab";
-import { Invitation } from "./Invitation";
 import { SiteFooter } from "./SiteFooter";
-import { ExploreTease } from "./ExploreTease";
-import { PlayCanvas } from "./PlayCanvas";
-import { ProductsTease } from "./ProductsTease";
+import { Defer } from "./Defer";
 import { CAMPAIGN_CASES } from "./case/caseData";
-import { SERVICE_BY_SLUG, HUB } from "../seo/data";
+
+const ProblemPicker = lazy(() => import("./ProblemPicker").then((m) => ({ default: m.ProblemPicker })));
+const BeforeAfter = lazy(() => import("./BeforeAfter").then((m) => ({ default: m.BeforeAfter })));
+const SelectedWork = lazy(() => import("./SelectedWork").then((m) => ({ default: m.SelectedWork })));
+const ProductsTease = lazy(() => import("./ProductsTease").then((m) => ({ default: m.ProductsTease })));
+const ExploreTease = lazy(() => import("./ExploreTease").then((m) => ({ default: m.ExploreTease })));
+const GridLab = lazy(() => import("./GridLab").then((m) => ({ default: m.GridLab })));
+const Manifesto = lazy(() => import("./Manifesto").then((m) => ({ default: m.Manifesto })));
+const Invitation = lazy(() => import("./Invitation").then((m) => ({ default: m.Invitation })));
+const PlayCanvas = lazy(() => import("./PlayCanvas").then((m) => ({ default: m.PlayCanvas })));
 
 // Route pages load on demand, so the homepage ships only its own code instead of all
 // eleven pages in one bundle (that monolith is what made the site slow).
@@ -35,9 +36,7 @@ const MotionPage = lazy(() => import("./MotionPage").then((m) => ({ default: m.M
 const CraftPage = lazy(() => import("./CraftPage").then((m) => ({ default: m.CraftPage })));
 const TeardownPage = lazy(() => import("./TeardownPage").then((m) => ({ default: m.TeardownPage })));
 const SomaaCaseStudy = lazy(() => import("./case/SomaaCaseStudy").then((m) => ({ default: m.SomaaCaseStudy })));
-const ServicePage = lazy(() => import("../seo/ServicePage").then((m) => ({ default: m.ServicePage })));
-const ServicesHub = lazy(() => import("../seo/ServicesHub").then((m) => ({ default: m.ServicesHub })));
-const NotFoundPage = lazy(() => import("../seo/NotFoundPage").then((m) => ({ default: m.NotFoundPage })));
+const SeoRoute = lazy(() => import("../seo/SeoRoute").then((m) => ({ default: m.SeoRoute })));
 const OrthoCaseStudy = lazy(() => import("./case/OrthoCaseStudy").then((m) => ({ default: m.OrthoCaseStudy })));
 const CampaignCaseStudy = lazy(() => import("./case/CampaignCaseStudy").then((m) => ({ default: m.CampaignCaseStudy })));
 
@@ -116,9 +115,8 @@ export function Site() {
   // Pick the page for the current route. Case studies first, so a #/work/<slug>
   // deep link wins over the /work archive.
   const caseSlug = path.startsWith("/work/") ? path.slice("/work/".length) : "";
-  const KNOWN = ["", "/index", "/offer", "/ai", "/kitchen", "/work", "/labs", "/laws", "/live", "/system", "/worth", "/motion", "/craft", "/teardown", HUB.path];
+  const KNOWN = ["", "/index", "/offer", "/ai", "/kitchen", "/work", "/labs", "/laws", "/live", "/system", "/worth", "/motion", "/craft", "/teardown"];
   const isKnownCase = caseSlug === "somaa" || caseSlug === "ramachandra-ortho" || !!CAMPAIGN_CASES[caseSlug];
-  const serviceSlug = path.slice(1);
   const isHashPage = route.startsWith("#/");
   let content: ReactNode;
   if (caseSlug === "somaa") {
@@ -127,12 +125,8 @@ export function Site() {
     content = <OrthoCaseStudy />;
   } else if (caseSlug && CAMPAIGN_CASES[caseSlug]) {
     content = <CampaignCaseStudy slug={caseSlug} />;
-  } else if (path === HUB.path) {
-    content = <ServicesHub />;
-  } else if (SERVICE_BY_SLUG[serviceSlug]) {
-    content = <ServicePage slug={serviceSlug} />;
   } else if (!isHashPage && !KNOWN.includes(path) && !isKnownCase) {
-    content = <NotFoundPage />;
+    content = <SeoRoute path={path} />;
   } else if (path === "/offer" || route === "#/offer") {
     content = <OfferPage />;
   } else if (path === "/ai" || route === "#/ai") {
@@ -164,16 +158,16 @@ export function Site() {
         <SiteNav />
         <main>
           <ActHero />
-          <ProblemPicker />
-          <BeforeAfter />
-          <SelectedWork />
-          <ProductsTease />
-          <ExploreTease />
-          <GridLab />
-          <Manifesto />
-          <Invitation />
+          <Defer Component={ProblemPicker} id="fix" dark bg="bg-ink" minHeight="100svh" delay={1800} />
+          <Defer Component={BeforeAfter} dark bg="bg-ink" minHeight="90svh" delay={2300} />
+          <Defer Component={SelectedWork} id="work" dark bg="bg-ink" minHeight="200svh" delay={2800} />
+          <Defer Component={ProductsTease} id="products" bg="bg-paper-dim" minHeight="120svh" delay={3300} />
+          <Defer Component={ExploreTease} dark bg="bg-ink" minHeight="60svh" delay={3800} />
+          <Defer Component={GridLab} id="studio" bg="bg-paper-dim" minHeight="100svh" delay={4300} />
+          <Defer Component={Manifesto} id="why" bg="bg-paper" minHeight="80svh" delay={4800} />
+          <Defer Component={Invitation} id="say-hi" dark bg="bg-ink" minHeight="100svh" delay={5300} />
         </main>
-        <PlayCanvas />
+        <Defer Component={PlayCanvas} bg="bg-paper" minHeight="60svh" delay={5800} />
         <SiteFooter />
       </div>
     );

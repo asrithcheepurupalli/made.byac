@@ -13,8 +13,8 @@ const CASE_SLUG: Record<string, string> = {
 const FEATURED: { slug: string; client: string; line: string; img: string; tag: string; accent: string; overlay?: string }[] = [
   { slug: "ramachandra-ortho", client: "Ramachandra Ortho Care", line: "A clinic where the visit starts before the phone rings.", img: "/case/ortho/reception.webp", tag: "Clinic booking & WhatsApp", accent: "#2bbfa5" },
   { slug: "somaa", client: "Somaa", line: "A restobar that remembers you.", img: "/case/somaa/biryani.webp", tag: "AI dining platform", accent: "#d99547", },
-  { slug: "innovolt", client: "Innovolt", line: "Used EVs, made a safe bet.", img: "/images/Hyd'Tel.png", tag: "EV marketplace campaigns", accent: "#27d17c" },
-  { slug: "mithai-maharaja", client: "Mithai Maharaja", line: "Sweets dressed like heirlooms.", img: "/images/thumb_1778155198_f88efc2a-69f8-4b24-b07b-26e8a339b684.jpg", tag: "Luxury packaging", accent: "#c8a24b" },
+  { slug: "innovolt", client: "Innovolt", line: "Used EVs, made a safe bet.", img: "/images/Hyd'Tel.webp", tag: "EV marketplace campaigns", accent: "#27d17c" },
+  { slug: "mithai-maharaja", client: "Mithai Maharaja", line: "Sweets dressed like heirlooms.", img: "/images/thumb_1778155198_f88efc2a-69f8-4b24-b07b-26e8a339b684.webp", tag: "Luxury packaging", accent: "#c8a24b" },
 ];
 
 const FILTERS = ["All", "Innovolt", "Mithai Maharaja", "Telyport", "Mr. Snapper International"];

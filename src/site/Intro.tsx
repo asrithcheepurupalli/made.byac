@@ -31,11 +31,11 @@ export function Intro() {
       /* ignore */
     }
     document.body.style.overflow = "hidden";
-    const t1 = window.setTimeout(() => setStage("lift"), 1300);
+    const t1 = window.setTimeout(() => setStage("lift"), 650);
     const t2 = window.setTimeout(() => {
       setStage("done");
       document.body.style.overflow = "";
-    }, 2300);
+    }, 1250);
     return () => {
       window.clearTimeout(t1);
       window.clearTimeout(t2);

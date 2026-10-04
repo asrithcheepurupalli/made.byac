@@ -7,7 +7,7 @@ const LINKS = [
   { label: "Labs", href: "/labs" },
   { label: "AI", href: "/ai" },
   { label: "Craft", href: "/craft" },
-  { label: "Services", href: "/services" },
+  { label: "Offer", href: "/offer" },
   { label: "Why", href: "#why" },
   { label: "Studio", href: "#studio" },
 ];
@@ -20,12 +20,10 @@ export function SiteNav() {
   const [navDark, setNavDark] = useState(false);
 
   useEffect(() => {
+    // Scroll position only: no layout reads in the scroll path (those forced a style +
+    // layout pass on every frame). The nav tone is handled by an IntersectionObserver below.
     let last = window.scrollY;
     let ticking = false;
-    // Read once per frame (rAF-throttled) instead of on every scroll event. Lenis
-    // fires many scroll events per frame, and the old handler did a querySelectorAll
-    // + getBoundingClientRect on each one, thrashing layout. setState bails when the
-    // boolean is unchanged, so the nav only re-renders when a state actually flips.
     const read = () => {
       ticking = false;
       const y = window.scrollY;
@@ -33,12 +31,6 @@ export function SiteNav() {
       if (y > 240 && y > last + 6) setHidden(true);
       else if (y < last - 6) setHidden(false);
       last = y;
-      let over = false;
-      document.querySelectorAll<HTMLElement>("[data-nav-dark]").forEach((el) => {
-        const r = el.getBoundingClientRect();
-        if (r.top <= 44 && r.bottom >= 44) over = true;
-      });
-      setNavDark(over);
     };
     const onScroll = () => {
       if (!ticking) {
@@ -48,8 +40,48 @@ export function SiteNav() {
     };
     read();
     window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll, { passive: true });
-    return () => { window.removeEventListener("scroll", onScroll); window.removeEventListener("resize", onScroll); };
+
+    // Flip to light text whenever a dark section sits behind the nav. The observer watches
+    // a 1px line at the nav's height, so it only fires when a section crosses it.
+    let io: IntersectionObserver | null = null;
+    const dark = new Set<Element>();
+    const seen = new WeakSet<Element>();
+    const build = () => {
+      io?.disconnect();
+      dark.clear();
+      io = new IntersectionObserver(
+        (entries) => {
+          for (const e of entries) (e.isIntersecting ? dark.add(e.target) : dark.delete(e.target));
+          setNavDark(dark.size > 0);
+        },
+        { rootMargin: `-44px 0px -${Math.max(0, window.innerHeight - 45)}px 0px` }
+      );
+      document.querySelectorAll("[data-nav-dark]").forEach((el) => io!.observe(el));
+    };
+    build();
+    // sections that mount later (lazy) register themselves
+    let moRaf = 0;
+    const mo = new MutationObserver(() => {
+      if (moRaf) return;
+      moRaf = requestAnimationFrame(() => {
+        moRaf = 0;
+        document.querySelectorAll("[data-nav-dark]").forEach((el) => {
+          if (!seen.has(el)) { seen.add(el); io?.observe(el); }
+        });
+      });
+    });
+    mo.observe(document.body, { childList: true, subtree: true });
+    let rz = 0;
+    const onResize = () => { window.clearTimeout(rz); rz = window.setTimeout(build, 200); };
+    window.addEventListener("resize", onResize, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onResize);
+      mo.disconnect();
+      io?.disconnect();
+      window.clearTimeout(rz);
+    };
   }, []);
 
   const tone = navDark ? "text-paper" : "text-ink";

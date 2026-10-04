@@ -66,7 +66,13 @@ export function Cursor() {
         imgWrap.style.transform = `translate3d(${lx}px, ${ly}px, 0) rotate(${skew}deg)`;
       }
       pmx = mx;
-      raf = requestAnimationFrame(loop);
+      // sleep once every eased value has caught up; onMove wakes it again
+      const settled =
+        Math.abs(tx - rx) + Math.abs(ty - ry) + Math.abs(mx - lx) + Math.abs(my - ly) < 0.15 && !imgOn;
+      raf = settled ? 0 : requestAnimationFrame(loop);
+    };
+    const wake = () => {
+      if (!raf) raf = requestAnimationFrame(loop);
     };
 
     const setImg = (on: boolean, src?: string) => {
@@ -89,6 +95,7 @@ export function Cursor() {
     const onMove = (e: MouseEvent) => {
       mx = e.clientX;
       my = e.clientY;
+      wake();
       if (!started) {
         started = true;
         [dot, ring, trail].forEach((el) => el.classList.remove("mc-idle"));
