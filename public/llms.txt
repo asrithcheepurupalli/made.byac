@@ -1,0 +1,20 @@
+# made. by ac
+
+> A design and development studio in Visakhapatnam (Vizag), India. We build websites, appointment booking systems for clinics and hospitals, restaurant QR ordering, WhatsApp automation, AI agents, and brand and packaging design for businesses in Vizag, Andhra Pradesh and across India.
+
+## Services
+- [All services](https://made-by-ac.com/services)
+- [Appointment booking software for clinics](https://made-by-ac.com/appointment-booking-software-for-clinics)
+- [Web development company in Visakhapatnam](https://made-by-ac.com/web-development-company-visakhapatnam)
+- [Restaurant QR ordering system](https://made-by-ac.com/restaurant-qr-ordering-system)
+- [WhatsApp business automation](https://made-by-ac.com/whatsapp-business-automation)
+- [Brand identity and packaging design](https://made-by-ac.com/branding-and-packaging-design-visakhapatnam)
+- [AI automation](https://made-by-ac.com/ai)
+
+## Proof
+- [Ramachandra Ortho Care, clinic booking case study](https://made-by-ac.com/work/ramachandra-ortho)
+- [Somaa, restaurant ordering case study](https://made-by-ac.com/work/somaa)
+
+## Contact
+- Email: thebrain@made-by-ac.com
+- WhatsApp: +91 93908 52636

@@ -661,7 +661,7 @@ function Proof() {
             order and knows the menu, wired straight into the kitchen's POS. The agents on this page
             aren't a concept. They're already how we work.
           </p>
-          <a href="#/work/somaa" className="group mt-9 inline-flex items-center gap-2 label" style={{ color: ACCENT }}>
+          <a href="/work/somaa" className="group mt-9 inline-flex items-center gap-2 label" style={{ color: ACCENT }}>
             See the Somaa build
             <ArrowUpRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </a>

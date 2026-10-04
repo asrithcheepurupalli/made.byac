@@ -1,28 +1,91 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": "vite",
-  "buildCommand": "vite build",
+  "buildCommand": "vite build && vite build --ssr src/seo/entry-server.tsx --outDir .ssr && node scripts/prerender.mjs",
   "outputDirectory": "dist",
   "redirects": [
-    { "source": "/table", "destination": "https://table.made-by-ac.com", "permanent": false },
-    { "source": "/kitchen", "destination": "https://kitchen.made-by-ac.com", "permanent": false },
-    { "source": "/crew", "destination": "https://crew.made-by-ac.com", "permanent": false },
-    { "source": "/staff", "destination": "https://crew.made-by-ac.com", "permanent": false },
-    { "source": "/pingless", "destination": "https://pingless.made-by-ac.com", "permanent": false },
-    { "source": "/(.*)", "has": [{ "type": "host", "value": "labs.made-by-ac.com" }], "destination": "https://made-by-ac.com/labs", "permanent": false }
+    {
+      "source": "/table",
+      "destination": "https://table.made-by-ac.com",
+      "permanent": false
+    },
+    {
+      "source": "/kitchen",
+      "destination": "https://kitchen.made-by-ac.com",
+      "permanent": false
+    },
+    {
+      "source": "/crew",
+      "destination": "https://crew.made-by-ac.com",
+      "permanent": false
+    },
+    {
+      "source": "/staff",
+      "destination": "https://crew.made-by-ac.com",
+      "permanent": false
+    },
+    {
+      "source": "/pingless",
+      "destination": "https://pingless.made-by-ac.com",
+      "permanent": false
+    },
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "labs.made-by-ac.com"
+        }
+      ],
+      "destination": "https://made-by-ac.com/labs",
+      "permanent": false
+    }
   ],
   "rewrites": [
-    { "source": "/offer", "destination": "/offer.html" },
-    { "source": "/ai", "destination": "/ai.html" },
-    { "source": "/work", "destination": "/work.html" },
-    { "source": "/labs", "destination": "/labs.html" },
-    { "source": "/laws", "destination": "/laws.html" },
-    { "source": "/live", "destination": "/live.html" },
-    { "source": "/system", "destination": "/system.html" },
-    { "source": "/worth", "destination": "/worth.html" },
-    { "source": "/motion", "destination": "/motion.html" },
-    { "source": "/craft", "destination": "/craft.html" },
-    { "source": "/teardown", "destination": "/teardown.html" },
-    { "source": "/((?!api/).*)", "destination": "/index.html" }
-  ]
+    {
+      "source": "/offer",
+      "destination": "/offer.html"
+    },
+    {
+      "source": "/ai",
+      "destination": "/ai.html"
+    },
+    {
+      "source": "/work",
+      "destination": "/work.html"
+    },
+    {
+      "source": "/labs",
+      "destination": "/labs.html"
+    },
+    {
+      "source": "/laws",
+      "destination": "/laws.html"
+    },
+    {
+      "source": "/live",
+      "destination": "/live.html"
+    },
+    {
+      "source": "/system",
+      "destination": "/system.html"
+    },
+    {
+      "source": "/worth",
+      "destination": "/worth.html"
+    },
+    {
+      "source": "/motion",
+      "destination": "/motion.html"
+    },
+    {
+      "source": "/craft",
+      "destination": "/craft.html"
+    },
+    {
+      "source": "/teardown",
+      "destination": "/teardown.html"
+    }
+  ],
+  "cleanUrls": true
 }

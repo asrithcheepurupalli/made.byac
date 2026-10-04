@@ -18,6 +18,7 @@ import { ExploreTease } from "./ExploreTease";
 import { PlayCanvas } from "./PlayCanvas";
 import { ProductsTease } from "./ProductsTease";
 import { CAMPAIGN_CASES } from "./case/caseData";
+import { SERVICE_BY_SLUG, HUB } from "../seo/data";
 
 // Route pages load on demand, so the homepage ships only its own code instead of all
 // eleven pages in one bundle (that monolith is what made the site slow).
@@ -34,6 +35,9 @@ const MotionPage = lazy(() => import("./MotionPage").then((m) => ({ default: m.M
 const CraftPage = lazy(() => import("./CraftPage").then((m) => ({ default: m.CraftPage })));
 const TeardownPage = lazy(() => import("./TeardownPage").then((m) => ({ default: m.TeardownPage })));
 const SomaaCaseStudy = lazy(() => import("./case/SomaaCaseStudy").then((m) => ({ default: m.SomaaCaseStudy })));
+const ServicePage = lazy(() => import("../seo/ServicePage").then((m) => ({ default: m.ServicePage })));
+const ServicesHub = lazy(() => import("../seo/ServicesHub").then((m) => ({ default: m.ServicesHub })));
+const NotFoundPage = lazy(() => import("../seo/NotFoundPage").then((m) => ({ default: m.NotFoundPage })));
 const OrthoCaseStudy = lazy(() => import("./case/OrthoCaseStudy").then((m) => ({ default: m.OrthoCaseStudy })));
 const CampaignCaseStudy = lazy(() => import("./case/CampaignCaseStudy").then((m) => ({ default: m.CampaignCaseStudy })));
 
@@ -63,6 +67,13 @@ export function Site() {
     typeof window !== "undefined"
       ? window.location.pathname.replace(/\/$/, "").replace(/\.html$/, "")
       : "";
+  // Case studies live at real paths (/work/<slug>) so search engines can index them.
+  // Old #/work/<slug> links redirect to the path.
+  useEffect(() => {
+    const h = window.location.hash;
+    if (h.startsWith("#/work/")) window.location.replace(`/work/${h.slice("#/work/".length)}`);
+  }, []);
+
   // Only PAGE routes (#/...) swap content. In-page scroll anchors (#say-hi, #why…)
   // must NOT re-key the tree, or every anchor click remounts the whole page and the
   // scroll is thrown away (the "dead loop").
@@ -73,7 +84,7 @@ export function Site() {
   useMagnetic(`${pageRoute}|${path}`);
 
   useEffect(() => {
-    if (route.startsWith("#/work/") || route === "#/offer" || route === "#/work" || route === "#/ai" || route === "#/kitchen" || route === "#/labs" || route === "#/laws" || route === "#/live" || route === "#/system" || route === "#/worth" || route === "#/motion" || route === "#/craft" || route === "#/teardown") window.scrollTo(0, 0);
+    if (route === "#/offer" || route === "#/work" || route === "#/ai" || route === "#/kitchen" || route === "#/labs" || route === "#/laws" || route === "#/live" || route === "#/system" || route === "#/worth" || route === "#/motion" || route === "#/craft" || route === "#/teardown") window.scrollTo(0, 0);
   }, [route]);
 
   // Deep-link to a homepage section from another page (e.g. /#say-hi from /laws) is a
@@ -104,14 +115,24 @@ export function Site() {
 
   // Pick the page for the current route. Case studies first, so a #/work/<slug>
   // deep link wins over the /work archive.
-  const campaignSlug = route.startsWith("#/work/") ? route.slice("#/work/".length) : "";
+  const caseSlug = path.startsWith("/work/") ? path.slice("/work/".length) : "";
+  const KNOWN = ["", "/index", "/offer", "/ai", "/kitchen", "/work", "/labs", "/laws", "/live", "/system", "/worth", "/motion", "/craft", "/teardown", HUB.path];
+  const isKnownCase = caseSlug === "somaa" || caseSlug === "ramachandra-ortho" || !!CAMPAIGN_CASES[caseSlug];
+  const serviceSlug = path.slice(1);
+  const isHashPage = route.startsWith("#/");
   let content: ReactNode;
-  if (route === "#/work/somaa") {
+  if (caseSlug === "somaa") {
     content = <SomaaCaseStudy />;
-  } else if (route === "#/work/ramachandra-ortho") {
+  } else if (caseSlug === "ramachandra-ortho") {
     content = <OrthoCaseStudy />;
-  } else if (campaignSlug && CAMPAIGN_CASES[campaignSlug]) {
-    content = <CampaignCaseStudy slug={campaignSlug} />;
+  } else if (caseSlug && CAMPAIGN_CASES[caseSlug]) {
+    content = <CampaignCaseStudy slug={caseSlug} />;
+  } else if (path === HUB.path) {
+    content = <ServicesHub />;
+  } else if (SERVICE_BY_SLUG[serviceSlug]) {
+    content = <ServicePage slug={serviceSlug} />;
+  } else if (!isHashPage && !KNOWN.includes(path) && !isKnownCase) {
+    content = <NotFoundPage />;
   } else if (path === "/offer" || route === "#/offer") {
     content = <OfferPage />;
   } else if (path === "/ai" || route === "#/ai") {

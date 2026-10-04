@@ -94,7 +94,7 @@ export function WorkPage() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 md:gap-6">
           {/* the two flagship studies: Ramachandra Ortho first, then Somaa */}
           {FEATURED.slice(0, 2).map((f) => (
-            <a key={f.slug} href={`#/work/${f.slug}`} className="reveal-up group relative rounded-2xl overflow-hidden border border-ink-line bg-ink-soft lg:col-span-6 aspect-[16/12] sm:aspect-[16/9] lg:aspect-auto lg:min-h-[440px]">
+            <a key={f.slug} href={`/work/${f.slug}`} className="reveal-up group relative rounded-2xl overflow-hidden border border-ink-line bg-ink-soft lg:col-span-6 aspect-[16/12] sm:aspect-[16/9] lg:aspect-auto lg:min-h-[440px]">
               <img src={f.img} alt={f.client} loading="lazy" referrerPolicy="no-referrer" className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1.1s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.05]" />
               <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/30 to-ink/15" />
               {f.overlay && (
@@ -115,7 +115,7 @@ export function WorkPage() {
           {/* the rest, smaller */}
           <div className="lg:col-span-12 grid grid-cols-1 sm:grid-cols-2 gap-5 md:gap-6">
             {FEATURED.slice(2).map((f) => (
-              <a key={f.slug} href={`#/work/${f.slug}`} className="reveal-up group relative rounded-2xl overflow-hidden border border-ink-line bg-ink-soft aspect-[16/10] lg:aspect-auto lg:min-h-[228px]">
+              <a key={f.slug} href={`/work/${f.slug}`} className="reveal-up group relative rounded-2xl overflow-hidden border border-ink-line bg-ink-soft aspect-[16/10] lg:aspect-auto lg:min-h-[228px]">
                 <img src={f.img} alt={f.client} loading="lazy" referrerPolicy="no-referrer" className="absolute inset-0 w-full h-full object-cover opacity-90 transition-transform duration-[1.1s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.06]" />
                 <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/45 to-ink/15" />
                 <span className="absolute top-3.5 left-3.5 label text-[8px] rounded-full px-2.5 py-1" style={{ background: f.accent, color: "#0b0b0c" }}>Case study</span>
@@ -230,7 +230,7 @@ export function WorkPage() {
                       transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
                     >
                       <Tag
-                        {...(slug ? { href: `#/work/${slug}` } : {})}
+                        {...(slug ? { href: `/work/${slug}` } : {})}
                         className="group relative block rounded-xl overflow-hidden border border-ink-line bg-ink-soft aspect-[4/5]"
                       >
                         <img src={p.imageUrl} alt={p.altText} loading="lazy" referrerPolicy="no-referrer" className="absolute inset-0 w-full h-full object-cover grayscale-[0.4] opacity-85 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-[1.05]" />
@@ -257,7 +257,7 @@ export function WorkPage() {
                   const Tag = slug ? "a" : "div";
                   return (
                     <motion.div key={p.id} layout initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }}>
-                      <Tag {...(slug ? { href: `#/work/${slug}` } : {})} data-cursor-img={p.imageUrl} className="group grid grid-cols-12 items-center gap-4 py-5 border-b border-ink-line hover:bg-ink/40 transition-colors px-2">
+                      <Tag {...(slug ? { href: `/work/${slug}` } : {})} data-cursor-img={p.imageUrl} className="group grid grid-cols-12 items-center gap-4 py-5 border-b border-ink-line hover:bg-ink/40 transition-colors px-2">
                         <span className="col-span-1 font-mono text-xs text-grey">{String(i + 1).padStart(2, "0")}</span>
                         <span className="col-span-6 md:col-span-5 font-display text-xl md:text-2xl text-paper group-hover:text-gold transition-colors">{p.title}</span>
                         <span className="hidden md:block col-span-3 text-grey-dim text-sm">{p.category}</span>

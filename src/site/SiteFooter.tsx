@@ -1,4 +1,5 @@
 import { useStudio } from "../StudioContext";
+import { SERVICES } from "../seo/data";
 
 // Minimal editorial footer.
 export function SiteFooter() {
@@ -21,6 +22,13 @@ export function SiteFooter() {
               <a href="#work" className="text-paper/80 hover:text-gold transition-colors text-sm">Work</a>
               <a href="#why" className="text-paper/80 hover:text-gold transition-colors text-sm">Why</a>
               <a href="#studio" className="text-paper/80 hover:text-gold transition-colors text-sm">Studio</a>
+            </div>
+            <div className="flex flex-col gap-3">
+              <span className="label text-grey">Services</span>
+              <a href="/services" className="text-paper/80 hover:text-gold transition-colors text-sm">All services</a>
+              {SERVICES.map((s) => (
+                <a key={s.slug} href={s.path} className="text-paper/80 hover:text-gold transition-colors text-sm">{s.navLabel}</a>
+              ))}
             </div>
             <div className="flex flex-col gap-3">
               <span className="label text-grey">Products</span>

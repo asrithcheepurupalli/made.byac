@@ -225,11 +225,11 @@ export function SomaaCaseStudy() {
       {/* back nav */}
       <header className="fixed top-0 inset-x-0 z-50 backdrop-blur-md" style={{ background: "rgba(12,10,9,0.6)", borderBottom: `1px solid ${C.line}`, paddingTop: "env(safe-area-inset-top)" }}>
         <div className="mx-auto max-w-[1400px] px-6 md:px-10 h-16 flex items-center justify-between">
-          <a href="#" className="label flex items-center gap-2 text-[10px]" style={{ color: C.muted }}>
+          <a href="/" className="label flex items-center gap-2 text-[10px]" style={{ color: C.muted }}>
             <ArrowLeft className="w-4 h-4" /> made.
           </a>
           <span className="label text-[10px]" style={{ color: C.dim }}>Case study · 01</span>
-          <a href="#say-hi" className="label text-[10px] rounded-full px-4 py-2 transition-colors" style={{ border: `1px solid ${C.amber}`, color: C.amber }}>
+          <a href="/#say-hi" className="label text-[10px] rounded-full px-4 py-2 transition-colors" style={{ border: `1px solid ${C.amber}`, color: C.amber }}>
             Start a project
           </a>
         </div>
@@ -534,7 +534,7 @@ export function SomaaCaseStudy() {
             <a href="https://somaa.made-by-ac.com" target="_blank" rel="noreferrer" className="group label rounded-full px-7 py-4 flex items-center gap-2 transition-transform duration-300 hover:-translate-y-0.5" style={{ background: C.amber, color: "#1a1206" }}>
               Visit Somaa <ArrowUpRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </a>
-            <a href="#say-hi" className="label rounded-full px-7 py-4 transition-transform duration-300 hover:-translate-y-0.5" style={{ border: `1px solid ${C.line}`, color: C.text }}>
+            <a href="/#say-hi" className="label rounded-full px-7 py-4 transition-transform duration-300 hover:-translate-y-0.5" style={{ border: `1px solid ${C.line}`, color: C.text }}>
               Want one like this? →
             </a>
           </div>
@@ -544,7 +544,7 @@ export function SomaaCaseStudy() {
       {/* footer strip */}
       <footer className="border-t" style={{ borderColor: C.line }}>
         <div className="mx-auto max-w-[1400px] px-6 md:px-10 py-10 flex flex-col sm:flex-row justify-between gap-3 label" style={{ color: C.dim }}>
-          <a href="#" className="hover:opacity-80 flex items-center gap-2"><ArrowLeft className="w-3.5 h-3.5" /> back to made.</a>
+          <a href="/" className="hover:opacity-80 flex items-center gap-2"><ArrowLeft className="w-3.5 h-3.5" /> back to made.</a>
           <span>Somaa · made. by ac · 2026</span>
         </div>
       </footer>

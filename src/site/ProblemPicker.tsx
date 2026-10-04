@@ -76,7 +76,7 @@ const FIXES: Fix[] = [
     accent: "#6d7bf4",
     promise: "The studio that draws it, ships it.",
     line: "Real products in front of real users, like Somaa's full AI dining platform, live in Vizag.",
-    href: "#/work/somaa",
+    href: "/work/somaa",
     cta: "See Somaa, live",
     proof: "110+",
     proofLabel: "components shipped on Somaa",

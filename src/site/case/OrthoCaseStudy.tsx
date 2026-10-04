@@ -259,11 +259,11 @@ export function OrthoCaseStudy() {
       {/* back nav */}
       <header className="fixed top-0 inset-x-0 z-50 backdrop-blur-md" style={{ background: "rgba(10,31,26,0.94)", borderBottom: `1px solid ${C.lineDeep}`, paddingTop: "env(safe-area-inset-top)" }}>
         <div className="mx-auto max-w-[1400px] px-6 md:px-10 h-16 flex items-center justify-between">
-          <a href="#" className="label flex items-center gap-2 text-[10px]" style={{ color: C.onDeepMuted }}>
+          <a href="/" className="label flex items-center gap-2 text-[10px]" style={{ color: C.onDeepMuted }}>
             <ArrowLeft className="w-4 h-4" /> made.
           </a>
           <span className="label text-[10px] hidden sm:block" style={{ color: C.onDeepMuted }}>Case study · 04</span>
-          <a href="#say-hi" className="label text-[10px] rounded-full px-4 py-2 transition-colors" style={{ border: `1px solid ${C.emeraldHi}`, color: C.emeraldHi }}>
+          <a href="/#say-hi" className="label text-[10px] rounded-full px-4 py-2 transition-colors" style={{ border: `1px solid ${C.emeraldHi}`, color: C.emeraldHi }}>
             Start a project
           </a>
         </div>
@@ -547,7 +547,7 @@ export function OrthoCaseStudy() {
             <a href="https://ramachandraorthocare.com" target="_blank" rel="noreferrer" className="group label rounded-full px-7 py-4 flex items-center gap-2 transition-transform duration-300 hover:-translate-y-0.5" style={{ background: C.emeraldHi, color: C.deep }}>
               Visit the clinic site <ArrowUpRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </a>
-            <a href="#say-hi" className="label rounded-full px-7 py-4 transition-transform duration-300 hover:-translate-y-0.5" style={{ border: `1px solid ${C.lineDeep}`, color: C.onDeep }}>
+            <a href="/#say-hi" className="label rounded-full px-7 py-4 transition-transform duration-300 hover:-translate-y-0.5" style={{ border: `1px solid ${C.lineDeep}`, color: C.onDeep }}>
               Want one like this? →
             </a>
           </div>
@@ -556,7 +556,7 @@ export function OrthoCaseStudy() {
 
       <footer className="border-t" style={{ borderColor: C.lineDeep, background: C.deep }}>
         <div className="mx-auto max-w-[1400px] px-6 md:px-10 py-10 flex flex-col sm:flex-row justify-between gap-3 label" style={{ color: C.onDeepMuted }}>
-          <a href="#" className="hover:opacity-80 flex items-center gap-2"><ArrowLeft className="w-3.5 h-3.5" /> back to made.</a>
+          <a href="/" className="hover:opacity-80 flex items-center gap-2"><ArrowLeft className="w-3.5 h-3.5" /> back to made.</a>
           <span>Ramachandra Ortho Care · made. by ac · 2026</span>
         </div>
       </footer>

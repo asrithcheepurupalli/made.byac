@@ -1,4 +1,5 @@
 import { ArrowUpRight, Zap, Truck, Gift, Package } from "lucide-react";
+import { SERVICES } from "../seo/data";
 
 // ACT II — the work, under the lights. Three case studies carry it; everything
 // else hangs on a quiet wall you can hover to view.
@@ -35,7 +36,7 @@ export function SelectedWork() {
         {/* featured case studies: Ramachandra Ortho first, then Somaa */}
         <div className="flex flex-col gap-16 md:gap-24">
           {CASE_STUDIES.slice(0, 2).map((feat, idx) => (
-                <a key={feat.slug} href={`#/work/${feat.slug}`} data-cursor="View" className="group grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
+                <a key={feat.slug} href={`/work/${feat.slug}`} data-cursor="View" className="group grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
           <div className={`lg:col-span-7 ${idx % 2 ? "lg:order-2" : ""}`}>
             <div className="relative overflow-hidden rounded-2xl border border-ink-line bg-ink-soft aspect-[16/10]">
               <img src={feat.img} alt={feat.client} loading="lazy" className="w-full h-full object-cover transition-transform duration-[1.1s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.05]" />
@@ -65,7 +66,7 @@ export function SelectedWork() {
           {MORE.map((c) => (
             <a
               key={c.slug}
-              href={`#/work/${c.slug}`}
+              href={`/work/${c.slug}`}
               data-cursor="View"
               data-cursor-img={CASE_IMG[c.slug]}
               className="group reveal-up rounded-2xl border border-ink-line p-9 md:p-11 min-h-[200px] flex flex-col gap-6 transition-transform duration-300 hover:-translate-y-1 active:scale-[0.98]"
@@ -88,6 +89,24 @@ export function SelectedWork() {
           ))}
         </div>
 
+
+        {/* what we build: crawlable links to the service pages */}
+        <div className="mt-20 md:mt-28 border-t border-ink-line pt-12 md:pt-16">
+          <span className="label text-gold">·what we build, for whom</span>
+          <ul className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-x-12">
+            {SERVICES.map((s) => (
+              <li key={s.slug}>
+                <a href={s.path} className="group flex items-center justify-between gap-6 border-b border-ink-line py-5">
+                  <span>
+                    <span className="block font-display text-2xl md:text-3xl text-paper group-hover:text-gold transition-colors">{s.navLabel}</span>
+                    <span className="mt-1 block text-sm text-grey-dim">{s.eyebrow}</span>
+                  </span>
+                  <ArrowUpRight className="w-5 h-5 shrink-0 text-grey-dim group-hover:text-paper transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" aria-hidden />
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </section>
   );
