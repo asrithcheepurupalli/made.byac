@@ -41,6 +41,7 @@ const CraftPage = lazyRoute(() => import("./CraftPage").then((m) => ({ default: 
 const TeardownPage = lazyRoute(() => import("./TeardownPage").then((m) => ({ default: m.TeardownPage })));
 const SeoRoute = lazyRoute<{ path: string }>(() => import("../seo/SeoRoute").then((m) => ({ default: m.SeoRoute })));
 import { ON_AAVIRA_HOST } from "./case/aavira/host";
+const ContentRetainerPage = lazyRoute(() => import("./ContentRetainerPage").then((m) => ({ default: m.ContentRetainerPage })));
 const AaviraSite = lazyRoute(() => import("./case/aavira/AaviraSite").then((m) => ({ default: m.AaviraSite })));
 const AaviraCaseStudy = lazyRoute(() => import("./case/aavira/AaviraCaseStudy").then((m) => ({ default: m.AaviraCaseStudy })));
 const OrthoCaseStudy = lazyRoute(() => import("./case/OrthoCaseStudy").then((m) => ({ default: m.OrthoCaseStudy })));
@@ -64,6 +65,7 @@ registerRoute("/teardown", TeardownPage.preload);
 registerRoute("/work/ramachandra-ortho", OrthoCaseStudy.preload);
 registerRoute("/work/aavira", AaviraCaseStudy.preload);
 registerRoute("/aavira", AaviraSite.preload);
+registerRoute("/monthly-content-marketing-retainer", ContentRetainerPage.preload);
 registerRoute("/work/innovolt", CampaignCaseStudy.preload);
 registerRoute("/work/mithai-maharaja", CampaignCaseStudy.preload);
 registerFallback(SeoRoute.preload);
@@ -139,7 +141,7 @@ export function Site() {
   // Pick the page for the current route. Case studies first, so a #/work/<slug>
   // deep link wins over the /work archive.
   const caseSlug = path.startsWith("/work/") ? path.slice("/work/".length) : "";
-  const KNOWN = ["", "/index", "/offer", "/ai", "/kitchen", "/work", "/labs", "/laws", "/live", "/system", "/worth", "/motion", "/craft", "/teardown", "/aavira"];
+  const KNOWN = ["", "/index", "/offer", "/ai", "/kitchen", "/work", "/labs", "/laws", "/live", "/system", "/worth", "/motion", "/craft", "/teardown", "/aavira", "/monthly-content-marketing-retainer"];
   const isKnownCase = caseSlug === "ramachandra-ortho" || caseSlug === "aavira" || !!CAMPAIGN_CASES[caseSlug];
   const isHashPage = route.startsWith("#/");
   let content: ReactNode;
@@ -153,6 +155,8 @@ export function Site() {
     content = <SeoRoute path={path} />;
   } else if (path === "/aavira") {
     content = <AaviraSite />;
+  } else if (path === "/monthly-content-marketing-retainer") {
+    content = <ContentRetainerPage />;
   } else if (path === "/offer" || route === "#/offer") {
     content = <OfferPage />;
   } else if (path === "/ai" || route === "#/ai") {
