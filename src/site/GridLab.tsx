@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { ArrowUpRight } from "lucide-react";
 
-// "How we make it": what we actually build, each with the thing we built it for. Five
-// services that match our real, live work, and one provenance tile. Paper-dim canvas.
+// "How we make it": what we actually build, each with the thing we built it for. Six
+// services (the newest, the content retainer, has no case study yet) and one provenance tile. Paper-dim canvas.
 const SERVICES = [
   {
     id: "clinic",
@@ -35,6 +35,14 @@ const SERVICES = [
     tags: ["Design", "Build", "Search-ready"],
     proof: "See the work",
     href: "/work",
+  },
+  {
+    id: "content",
+    title: "Monthly content retainer",
+    line: "A blog and a newsletter, drafted, edited and signed off for you every month, for a flat fee.",
+    tags: ["Blog", "Newsletter", "Edited"],
+    proof: "New: see how it works",
+    href: "/monthly-content-marketing-retainer",
   },
   {
     id: "brand",
@@ -111,12 +119,12 @@ export function GridLab() {
           ))}
 
           {/* provenance */}
-          <div className="reveal-up md:col-span-2 lg:col-span-4 rounded-2xl bg-ink text-paper p-8 md:p-10 flex flex-col justify-between min-h-[270px]">
-            <span className="label text-gold">Provenance</span>
+          <div className="reveal-up md:col-span-2 lg:col-span-12 rounded-2xl bg-ink text-paper px-8 py-9 md:px-10 flex flex-col md:flex-row md:items-center justify-between gap-5">
             <div>
-              <div className="font-display text-4xl md:text-5xl">Vizag → world</div>
-              <p className="mt-3 text-grey-dim text-[15px] max-w-xs">A studio on the coast of Andhra, building for businesses anywhere.</p>
+              <span className="label text-gold">Provenance</span>
+              <div className="mt-3 font-display text-4xl md:text-5xl">Vizag → world</div>
             </div>
+            <p className="text-grey-dim text-[15px] max-w-sm">A studio on the coast of Andhra, building for businesses anywhere.</p>
           </div>
         </div>
 

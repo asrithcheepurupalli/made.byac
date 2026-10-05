@@ -15,6 +15,7 @@ export const SERVICE_CLUSTER: Record<string, Cluster> = {
   "restaurant-qr-ordering-system": "restaurant",
   "whatsapp-business-automation": "web",
   "branding-and-packaging-design-visakhapatnam": "web",
+  "monthly-content-marketing-retainer": "content",
 };
 
 export interface Index {

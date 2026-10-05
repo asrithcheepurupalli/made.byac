@@ -54,6 +54,12 @@ const TRUST: Record<Cluster, { k: string; n?: number; s?: string; v: string }[]>
     { k: "Your kitchen", v: "Orders can flow into the point-of-sale you already run" },
     { k: "The waiter stays", v: "It takes the order, not the hospitality" },
   ],
+  content: [
+    { k: "One brief", v: "You tell us once. We write to it every month" },
+    { k: "Edited by a person", v: "Every piece is rewritten and signed off before you see it" },
+    { k: "Flat monthly fee", v: "Agreed up front, with the writing included" },
+    { k: "You approve", v: "Nothing is published without your yes" },
+  ],
   guide: [
     { k: "From the desk", v: "Written by the people who build and run these systems" },
     { k: "No invented numbers", v: "We only quote what we have actually measured" },
@@ -125,6 +131,20 @@ const FIT: Record<Cluster, { yes: string[]; no: string[] }> = {
       "Your kitchen cannot receive digital orders and you will not change that",
     ],
   },
+  content: {
+    yes: [
+      "You know content matters but nobody has the time to write it",
+      "You want a steady blog and newsletter without managing writers",
+      "You are happy to give one clear brief and review the pieces",
+      "You would rather pay a flat monthly fee than per word",
+    ],
+    no: [
+      "You want hundreds of cheap posts a week",
+      "You want a ranking guarantee, which nobody honest can sell",
+      "You want deep expert interviews for every single piece",
+      "You want to publish without reading anything first",
+    ],
+  },
   guide: { yes: [], no: [] },
 };
 
@@ -166,6 +186,7 @@ const SEND: Record<Cluster, string[]> = {
   clinic: ["What kind of clinic you run, and in which city", "How patients reach you today: calls, WhatsApp, walk-ins", "The one thing at the front desk you would fix first"],
   web: ["What your business does, and who you sell to", "What the website or software needs to do", "Any site or product you admire, and any deadline"],
   restaurant: ["Your venue, your city and how many tables", "Whether your kitchen uses a point-of-sale system", "What slows down service on a busy night"],
+  content: ["What your business does and who you write for", "The topics you want to be known for, and how you want to sound", "Posts or pages of yours that already sound like you"],
   guide: ["What you run and where", "What you are trying to decide", "Anything you would like a second opinion on"],
 };
 
@@ -246,6 +267,14 @@ const GETS: Record<Cluster, { t: string; d: string }[]> = {
     { t: "Loyalty and occasions", d: "Birthday and anniversary perks, and a rating that earns a coupon for next time." },
     { t: "A line to your kitchen", d: "Orders can flow into the point-of-sale system you already run." },
   ],
+  content: [
+    { t: "A written brief", d: "Your audience, tone, topics, words to use and words to avoid, in one page we both agree on." },
+    { t: "A plan for the first month", d: "Titles and angles for approval before anyone writes a word." },
+    { t: "A sample piece", d: "One piece on a topic you choose, so you can judge the quality before you commit." },
+    { t: "Blog posts and newsletters", d: "Edited, formatted and ready to publish or paste into the email tool you already use." },
+    { t: "A simple approval routine", d: "You read, you ask for changes, you approve. Nothing goes out without your yes." },
+    { t: "A person to ask", d: "One contact for questions, changes to the brief and anything that is not working." },
+  ],
   guide: [],
 };
 
@@ -286,12 +315,14 @@ const SHOTS: Record<Cluster, { src: string; cap: string; kind: "phone" | "wide";
     { src: "/case/ortho/admin-d.webp", cap: "A front desk dashboard, live", kind: "wide", alt: "Front desk queue dashboard" },
     { src: "/images/Hyd'Tel.webp", cap: "Regional campaign creative, in Telugu", kind: "wide", alt: "Telugu campaign creative" },
   ],
+  content: [],
   guide: [],
 };
 const SHOT_NOTE: Record<Cluster, string> = {
   clinic: "Real screens from a live clinic. The front desk view is shown with demo patients.",
   restaurant: "Our flagship study, not a client project. The prototype is on the case page.",
   web: "Real work: a clinic booking site and dashboard, and a regional campaign.",
+  content: "",
   guide: "",
 };
 
@@ -322,6 +353,7 @@ const PRICE: Record<Cluster, string[]> = {
   clinic: ["The number of doctors and locations", "Which payment, WhatsApp and records integrations you need", "How much training and on-site support you want"],
   web: ["How many pages, and whether it needs a database or logins", "How custom the design is", "Integrations such as payments, WhatsApp and booking"],
   restaurant: ["The number of tables and outlets", "Whether it connects to your point-of-sale", "How custom the menu and brand design are"],
+  content: ["How many blog posts and newsletters you want each month", "How much interviewing or review you want to do", "Whether you also want help publishing and scheduling"],
   guide: [],
 };
 
@@ -596,10 +628,43 @@ export function DeviceSwitch() {
   );
 }
 
+/* ───────────────────────────── content retainer: from one brief to a month */
+const FLOW = [
+  { k: "Brief", you: "Tell us once: who you write for, how you sound, what to cover and what is off limits.", we: "We capture it in a one-page brief we both agree on, and keep it up to date as your business changes." },
+  { k: "Plan", you: "Look at the proposed titles and angles for the month. Swap, cut or add.", we: "We propose the month's pieces ahead of time, tied to what your customers search for and ask." },
+  { k: "Draft and edit", you: "Nothing. This is the part you never touch.", we: "AI helps with the first draft. A person rewrites every piece for voice, accuracy and clarity, and signs it off." },
+  { k: "Approve", you: "Read in your own time, ask for changes, approve.", we: "We revise, deliver in a publish-ready format, and start planning next month." },
+];
+export function ContentFlow() {
+  const [i, setI] = useState(0);
+  const f = FLOW[i];
+  const tab = (on: boolean) => `rounded-full border px-4 py-2 label text-[10px] transition-colors ${on ? "bg-ink text-paper border-ink" : "border-paper-line text-ink/70 hover:border-ink"}`;
+  return (
+    <div className="rounded-3xl border border-paper-line bg-white p-5 md:p-8 shadow-[0_20px_60px_-30px_rgba(11,11,12,0.25)]">
+      <span className="label text-[10px] text-[#5b4bd6]">Try it · from one brief to a month of content</span>
+      <div className="mt-5 flex flex-wrap gap-2" role="tablist" aria-label="Steps">
+        {FLOW.map((x, k) => <button key={x.k} type="button" role="tab" aria-selected={i === k} className={tab(i === k)} onClick={() => setI(k)}>{k + 1} · {x.k}</button>)}
+      </div>
+      <div className="mt-8 grid md:grid-cols-2 gap-4" key={i}>
+        <div className="reveal-up rounded-2xl border border-paper-line bg-paper p-6">
+          <div className="label text-[10px] text-ink/55">What you do</div>
+          <p className="mt-3 font-display text-2xl leading-snug">{f.you}</p>
+        </div>
+        <div className="reveal-up rounded-2xl border border-paper-line p-6" style={{ background: "#efecff" }}>
+          <div className="label text-[10px] text-[#5b4bd6]">What we do</div>
+          <p className="mt-3 font-display text-2xl leading-snug">{f.we}</p>
+        </div>
+      </div>
+      <p className="mt-6 text-[13px] leading-relaxed text-ink/65 text-center">An illustration of the process. Your own plan, number of pieces and schedule are agreed with you.</p>
+    </div>
+  );
+}
+
 export function Moment({ cluster }: { cluster: Cluster }) {
   if (cluster === "clinic") return <BookingSim />;
   if (cluster === "restaurant") return <TableSim />;
   if (cluster === "web") return <DeviceSwitch />;
+  if (cluster === "content") return <ContentFlow />;
   return null;
 }
 

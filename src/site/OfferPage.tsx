@@ -19,6 +19,7 @@ import {
   Volume2,
   VolumeX,
   Check,
+  Newspaper,
 } from "lucide-react";
 
 type Offering = {
@@ -111,6 +112,18 @@ const OFFERINGS: Offering[] = [
     body:
       "Launch moments and always-on content. Social systems, ad creative and campaign art direction that carries the brand into the feed without losing its voice.",
     deliverables: ["Social systems", "Ad creative", "Launch campaigns", "Content direction", "Templates"],
+  },
+  {
+    id: "content",
+    no: "07",
+    title: "Content retainer",
+    line: "A blog and a newsletter, handled every month.",
+    accent: "#8b7cf6",
+    icon: Newspaper,
+    badge: "New",
+    body:
+      "A fixed monthly retainer. You give us one brief, and we draft, edit and sign off every blog post and newsletter. You approve before anything goes out, and the writing is included in one flat fee.",
+    deliverables: ["Blog posts", "Newsletters", "Monthly plan", "Editing & sign-off", "Search basics"],
   },
 ];
 

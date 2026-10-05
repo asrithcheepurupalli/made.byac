@@ -69,6 +69,18 @@ const FIXES: Fix[] = [
     proofLabel: "a world that's only yours",
   },
   {
+    id: "content",
+    pain: "Nobody has time to write",
+    tag: "content",
+    accent: "#8b7cf6",
+    promise: "One brief, then a month of content.",
+    line: "We draft, an editor rewrites, you approve. Blog posts and newsletters on a flat monthly fee, written in your voice.",
+    href: "/monthly-content-marketing-retainer",
+    cta: "See the retainer",
+    proof: "1",
+    proofLabel: "brief, and we handle the rest",
+  },
+  {
     id: "build",
     pain: "I need it built, not just drawn",
     tag: "design and build",

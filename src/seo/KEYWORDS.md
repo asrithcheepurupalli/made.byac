@@ -15,6 +15,7 @@ One page per intent. Each page targets a cluster, not a single phrase.
 | /branding-and-packaging-design-visakhapatnam | brand identity design Visakhapatnam | packaging design Vizag, logo and branding agency Vizag, luxury sweet box packaging India | Transactional (local) | Mithai Maharaja, Innovolt |
 | /ai | AI automation for businesses India | AI sales agent, WhatsApp commerce bot | Commercial | Aavira (flagship study) |
 | /services | made. by ac services (hub) | studio in Vizag | Navigational | all of the above |
+| /monthly-content-marketing-retainer | monthly content marketing retainer | blog and newsletter writing service, content marketing for startups, outsourced content writing for small business, done for you blog posts | Commercial | (no case study yet) |
 
 ## Rules we are following
 - Do not clone a page per city. Vizag, Andhra Pradesh and India are covered inside each page
