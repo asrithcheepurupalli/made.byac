@@ -2,11 +2,8 @@
 // shells, the sitemap, JSON-LD. Copy rules: team voice ("we"), sentence case, no dashes,
 // no invented numbers, no real third-party brand names for competitors.
 
-export const SITE = "https://www.made-by-ac.com";
-export const WHATSAPP = "919390852636";
-export const EMAIL = "thebrain@made-by-ac.com";
-
-export const waLink = (msg: string) => `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`;
+import { SITE, WHATSAPP, EMAIL, waLink } from "./contact";
+export { SITE, WHATSAPP, EMAIL, waLink };
 
 export interface Faq { q: string; a: string }
 export interface Block { t: string; d: string }

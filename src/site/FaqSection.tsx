@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Plus } from "lucide-react";
-import { waLink } from "../seo/data";
+import { waLink } from "../seo/contact";
 
 // Questions a prospect asks before writing in. Answers use only what the studio already says
 // elsewhere on the site, so nothing here promises a price, a date or a policy that is not stated.

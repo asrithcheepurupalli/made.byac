@@ -1,5 +1,5 @@
 import { VizagClock } from "./Clocks";
-import { waLink } from "../seo/data";
+import { waLink } from "../seo/contact";
 
 // Minimal editorial footer.
 export function SiteFooter() {

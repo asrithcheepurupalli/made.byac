@@ -63,3 +63,42 @@ for (const p of mod.getPages()) {
 const urls = mod.sitemapUrls().map((u) => `  <url><loc>${SITE}${u.path}</loc><priority>${u.priority}</priority></url>`).join("\n");
 fs.writeFileSync(path.join(dist, "sitemap.xml"), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`);
 console.log(`prerendered ${count} pages + sitemap (${mod.sitemapUrls().length} urls)`);
+
+// 3) kill the chunk waterfall: main.js boots, THEN fetches the page chunk. Tell the browser
+// about the page chunk (and its shared imports) up front so both download in parallel.
+const assets = fs.readdirSync(path.join(dist, "assets"));
+const chunk = (name) => assets.find((f) => f.startsWith(name + "-") && f.endsWith(".js"));
+const chunkFor = (file) => {
+  const f = file.replace(/\\/g, "/");
+  const direct = { "offer.html": "OfferPage", "ai.html": "AiPage", "kitchen.html": "KitchenPage", "work.html": "WorkPage", "labs.html": "LabsPage", "laws.html": "LawsPage", "live.html": "LivePage", "system.html": "SystemPage", "worth.html": "WorthPage", "motion.html": "MotionPage", "craft.html": "CraftPage", "teardown.html": "TeardownPage", "aavira.html": "AaviraSite", "monthly-content-marketing-retainer.html": "ContentRetainerPage", "work/ramachandra-ortho.html": "OrthoCaseStudy", "work/aavira.html": "AaviraCaseStudy", "work/innovolt.html": "CampaignCaseStudy", "work/mithai-maharaja.html": "CampaignCaseStudy" };
+  if (direct[f]) return direct[f];
+  if (f === "index.html" || f === "404.html") return null;
+  return "SeoRoute";
+};
+const withDeps = (name) => {
+  const out = new Set([name]);
+  const src = fs.readFileSync(path.join(dist, "assets", name), "utf8");
+  for (const m of src.matchAll(/(?:from|import)\s*["']\.\/([^"']+\.js)["']/g)) out.add(m[1]);
+  return [...out];
+};
+const htmlFiles = [];
+const walk = (d) => { for (const e of fs.readdirSync(d, { withFileTypes: true })) { const fp = path.join(d, e.name); if (e.isDirectory()) { if (e.name !== "assets" && e.name !== "fonts" && e.name !== "images") walk(fp); } else if (e.name.endsWith(".html")) htmlFiles.push(fp); } };
+walk(dist);
+let deferred = 0;
+for (const fp of htmlFiles) {
+  const rel = path.relative(dist, fp);
+  const base = chunkFor(rel);
+  const c = base && chunk(base);
+  let html = fs.readFileSync(fp, "utf8");
+  const tag = html.match(/<script type="module"[^>]*src="(\/assets\/main-[^"]+\.js)"[^>]*><\/script>/);
+  if (!tag || html.includes("__boot")) continue;
+  const mainSrc = tag[1];
+  const pre = c ? withDeps(c).filter((n) => `/assets/${n}` !== mainSrc).map((n) => `/assets/${n}`) : [];
+  // The entry bundle (~140 KB gz) competes with CSS and fonts for the first paint on slow
+  // connections. The prerendered HTML already shows the page, so paint first, then boot.
+  const loader = `<script>(function __boot(){var d=0;function go(){if(d)return;d=1;${JSON.stringify(pre)}.forEach(function(h){var l=document.createElement("link");l.rel="modulepreload";l.href=h;document.head.appendChild(l)});var s=document.createElement("script");s.type="module";s.src=${JSON.stringify(mainSrc)};document.head.appendChild(s)}function after(){requestAnimationFrame(function(){setTimeout(go,0)})}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",after);else after();setTimeout(go,2500)})()</script>`;
+  html = html.replace(tag[0], loader);
+  fs.writeFileSync(fp, html);
+  deferred++;
+}
+console.log(`entry script deferred past first paint on ${deferred} pages`);
