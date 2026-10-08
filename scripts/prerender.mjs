@@ -9,7 +9,7 @@ const root = path.resolve(import.meta.dirname, "..");
 const dist = path.join(root, "dist");
 const mod = await import(pathToFileURL(path.join(root, ".ssr", "entry-server.js")).href);
 const template = fs.readFileSync(path.join(dist, "index.html"), "utf8");
-const SITE = "https://made-by-ac.com";
+const SITE = "https://www.made-by-ac.com";
 const esc = (s) => s.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");
 
 const ROOT_RE = /<!--seo-fallback-->[\s\S]*?<!--\/seo-fallback-->/;
@@ -60,7 +60,6 @@ for (const p of mod.getPages()) {
 }
 
 // sitemap, from the same data
-const today = new Date().toISOString().slice(0, 10);
-const urls = mod.sitemapUrls().map((u) => `  <url><loc>${SITE}${u.path}</loc><lastmod>${today}</lastmod><priority>${u.priority}</priority></url>`).join("\n");
+const urls = mod.sitemapUrls().map((u) => `  <url><loc>${SITE}${u.path}</loc><priority>${u.priority}</priority></url>`).join("\n");
 fs.writeFileSync(path.join(dist, "sitemap.xml"), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`);
 console.log(`prerendered ${count} pages + sitemap (${mod.sitemapUrls().length} urls)`);

@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /api/
 
-Sitemap: https://made-by-ac.com/sitemap.xml
+Sitemap: https://www.made-by-ac.com/sitemap.xml

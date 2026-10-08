@@ -437,7 +437,7 @@ export const LANDINGS: Content[] = [
     kind: "landing", cluster: "web", slug: "website-development-company-andhra-pradesh",
     path: "/website-development-company-andhra-pradesh", navLabel: "Web development in Andhra Pradesh",
     title: "Website development company in Andhra Pradesh",
-    description: "Design and development for businesses across Andhra Pradesh: Vijayawada, Guntur, Tirupati, Rajahmundry and beyond, built in Telugu and English by a Vizag studio.",
+    description: "Design and development for businesses across Andhra Pradesh: Vijayawada, Guntur, Tirupati, Rajahmundry and beyond, in Telugu and English, by a Vizag studio.",
     eyebrow: "Andhra Pradesh", h1: "Website development company in Andhra Pradesh",
     lede: "We build websites and web apps for businesses across Andhra Pradesh, from our studio in Visakhapatnam. Clients in Vijayawada, Guntur, Tirupati, Rajahmundry, Kakinada and Nellore work with us over video, and we are happy to travel when it helps.",
     sections: [

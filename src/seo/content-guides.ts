@@ -55,7 +55,7 @@ export const GUIDES: Content[] = [
     ...g, cluster: "clinic", slug: "clinic-appointment-booking-software-buyers-checklist",
     path: "/guides/clinic-appointment-booking-software-buyers-checklist", navLabel: "Clinic booking software buyer's checklist",
     title: "Clinic appointment booking software: a buyer's checklist",
-    description: "What to check before you buy appointment booking software for a clinic in India: WhatsApp, payments, Telugu, queue, data and support, as an interactive checklist.",
+    description: "What to check before buying appointment booking software for a clinic in India: WhatsApp, payments, Telugu, queue, data and support, as a checklist.",
     eyebrow: "Guide · buying clinic software", h1: "Clinic appointment booking software: a buyer's checklist", readMins: 7,
     lede: "Most clinic booking tools demo well and disappoint at the front desk. This checklist covers what actually matters for an Indian clinic: how patients book, how they pay, what the desk sees, what happens to patient data, and who picks up the phone when something breaks.",
     sections: [
@@ -106,7 +106,7 @@ export const GUIDES: Content[] = [
     ...g, cluster: "clinic", slug: "how-to-reduce-no-shows-at-a-clinic",
     path: "/guides/how-to-reduce-no-shows-at-a-clinic", navLabel: "How to reduce no-shows at a clinic",
     title: "How to reduce no-shows at a clinic: what works in India",
-    description: "Practical ways to cut missed appointments at an Indian clinic: pay to confirm, WhatsApp reminders, easy rescheduling and a front desk that can see who is coming.",
+    description: "Practical ways to cut missed appointments at an Indian clinic: pay to confirm, WhatsApp reminders, easy rescheduling and a front desk that sees who is coming.",
     eyebrow: "Guide · fewer missed appointments", h1: "How to reduce no-shows at a clinic", readMins: 5,
     lede: "Patients miss appointments mostly because it is easy to. Three things make it harder without making it unpleasant: ask for commitment when they book, remind them at the right time, and let them move the slot in a tap. Here is how each works, with what we have seen running a live clinic.",
     sections: [

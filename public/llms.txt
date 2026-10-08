@@ -3,19 +3,19 @@
 > A design and software studio based in Visakhapatnam (Vizag), India, working with clients worldwide. We build appointment booking systems for clinics and hospitals, restaurant QR ordering, WhatsApp automation, AI agents, websites and brand identity, for businesses in Vizag, across India and overseas.
 
 ## Services
-- [All services](https://made-by-ac.com/services)
-- [Appointment booking software for clinics](https://made-by-ac.com/appointment-booking-software-for-clinics)
-- [Web development company in Visakhapatnam](https://made-by-ac.com/web-development-company-visakhapatnam)
-- [Restaurant QR ordering system](https://made-by-ac.com/restaurant-qr-ordering-system)
-- [WhatsApp business automation](https://made-by-ac.com/whatsapp-business-automation)
-- [Brand identity and packaging design](https://made-by-ac.com/branding-and-packaging-design-visakhapatnam)
-- [AI automation](https://made-by-ac.com/ai)
+- [All services](https://www.made-by-ac.com/services)
+- [Appointment booking software for clinics](https://www.made-by-ac.com/appointment-booking-software-for-clinics)
+- [Web development company in Visakhapatnam](https://www.made-by-ac.com/web-development-company-visakhapatnam)
+- [Restaurant QR ordering system](https://www.made-by-ac.com/restaurant-qr-ordering-system)
+- [WhatsApp business automation](https://www.made-by-ac.com/whatsapp-business-automation)
+- [Brand identity and packaging design](https://www.made-by-ac.com/branding-and-packaging-design-visakhapatnam)
+- [AI automation](https://www.made-by-ac.com/ai)
 
 ## Proof
-- [Ramachandra Ortho Care, clinic booking case study](https://made-by-ac.com/work/ramachandra-ortho)
-- [Aavira, our flagship restaurant platform study](https://made-by-ac.com/work/aavira)
-- [Monthly content retainer: blog posts and newsletters](https://made-by-ac.com/monthly-content-marketing-retainer)
-- [Aavira, a concept restaurant website we designed (fictional brand)](https://made-by-ac.com/aavira)
+- [Ramachandra Ortho Care, clinic booking case study](https://www.made-by-ac.com/work/ramachandra-ortho)
+- [Aavira, our flagship restaurant platform study](https://www.made-by-ac.com/work/aavira)
+- [Monthly content retainer: blog posts and newsletters](https://www.made-by-ac.com/monthly-content-marketing-retainer)
+- [Aavira, a concept restaurant website we designed (fictional brand)](https://www.made-by-ac.com/aavira)
 
 ## Contact
 - Email: thebrain@made-by-ac.com

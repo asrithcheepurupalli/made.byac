@@ -2,7 +2,7 @@
 // shells, the sitemap, JSON-LD. Copy rules: team voice ("we"), sentence case, no dashes,
 // no invented numbers, no real third-party brand names for competitors.
 
-export const SITE = "https://made-by-ac.com";
+export const SITE = "https://www.made-by-ac.com";
 export const WHATSAPP = "919390852636";
 export const EMAIL = "thebrain@made-by-ac.com";
 
@@ -369,7 +369,7 @@ export const SERVICE_BY_SLUG: Record<string, Service> = Object.fromEntries(SERVI
 export const HUB = {
   path: "/services",
   title: "Web, software & design services in Vizag · made. by ac",
-  description: "Appointment booking for clinics, restaurant QR ordering, WhatsApp automation, websites and brand design from a Visakhapatnam studio serving Andhra Pradesh and India.",
+  description: "Clinic appointment booking, restaurant QR ordering, WhatsApp automation, websites and brand design from a Visakhapatnam studio serving India.",
   h1: "What we build, and who it is for",
   lede: "made. by ac is a Visakhapatnam studio that designs and builds software and brands. We work with clinics, restaurants, consumer brands and growing businesses in Vizag, across Andhra Pradesh and throughout India. Pick the problem you have.",
 };
@@ -403,7 +403,7 @@ export const CASES: CaseShell[] = [
     slug: "aavira",
     path: "/work/aavira",
     title: "Restaurant ordering platform study · Aavira",
-    description: "Our own flagship study: a QR ordering, AI host and loyalty platform for a restaurant, with an original brand, illustrated menu and a prototype you can tap through.",
+    description: "Our own flagship study: a restaurant QR ordering, AI host and loyalty platform with an original brand, a photo-led menu and a prototype you can tap through.",
     h1: "Aavira: a guest platform that gives every waiter more time for the guests",
     summary: [
       "Aavira is a fictional coastal kitchen and bar, and our own flagship study of a restaurant platform. It is not a client project.",
