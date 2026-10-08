@@ -22,7 +22,7 @@ export const LEGAL: LegalPageData[] = [
     title: "Privacy policy · made. by ac",
     description: "What made. by ac collects through this website, why, who processes it, how long we keep it and how to ask us to change or delete it.",
     h1: "Privacy policy",
-    updated: "4 October 2026",
+    updated: "8 October 2026",
     intro: "made. by ac is a design and development studio in Visakhapatnam, India. This page explains, in plain words, what this website collects about you and what we do with it. We collect very little.",
     sections: [
       {
@@ -31,18 +31,18 @@ export const LEGAL: LegalPageData[] = [
         bullets: [
           "Contact form: the name, email address, WhatsApp or phone number and message you type in. The email and phone number are optional, but we need at least one to reply.",
           "WhatsApp, email and phone: if you message or call us, we receive whatever you send and your number or address. Those services have their own privacy terms.",
-          "Visit statistics: we use Vercel Web Analytics to count page views. It does not use cookies and does not follow you across other websites. It records things like the page visited, referring site, device type, browser and country.",
+          "Visit statistics: we use Vercel Web Analytics and Google Analytics to count visits and see which pages help. Vercel Web Analytics does not use cookies. Google Analytics sets cookies in your browser and records things like the pages visited, referring site, device type, browser and approximate location. We do not send it your name, email or phone number.",
         ],
       },
       {
         h: "What we do not do",
         p: [
-          "We do not use advertising trackers, we do not build profiles of visitors and we do not sell or rent your details. The fonts on this site are served from our own address, so no font provider sees your visit.",
+          "We do not run ads, we do not build profiles of individual visitors and we do not sell or rent your details. The fonts on this site are served from our own address, so no font provider sees your visit.",
         ],
       },
       {
         h: "What the site stores in your browser",
-        p: ["No tracking cookies. The site keeps a few small settings so it behaves nicely, and they never leave your device:"],
+        p: ["Google Analytics sets its own cookies (named _ga and similar) to tell visits apart. You can block them in your browser settings or with Google's opt-out add-on, and the site works the same. Besides those, the site keeps a few small settings so it behaves nicely, and they never leave your device:"],
         bullets: [
           "made-temp: your choice of light (amber, paper or slate) on the studio section.",
           "made-intro-seen: remembers, for this visit only, that you have already seen the opening animation.",
@@ -59,7 +59,8 @@ export const LEGAL: LegalPageData[] = [
         h: "Who handles it for us",
         p: ["A few providers process data so the site works. They act on our instructions:"],
         bullets: [
-          "Vercel hosts the website and provides the analytics. Its servers can be outside India.",
+          "Vercel hosts the website and provides one of the analytics tools. Its servers can be outside India.",
+          "Google provides Google Analytics. It processes visit data on our behalf, and its servers can be outside India.",
           "Resend delivers the contact form to our inbox as an email. It processes your name, contact details and message while delivering them, and its servers can be outside India.",
           "Our email provider holds the messages we receive in the studio mailbox.",
         ],
@@ -92,7 +93,7 @@ export const LEGAL: LegalPageData[] = [
         h: "Contact",
         p: [`Questions, requests and complaints about your data go to ${EMAIL}. We read every message ourselves.`],
       },
-      { h: "Version history", p: ["4 October 2026: first published."] },
+      { h: "Version history", p: ["8 October 2026: added Google Analytics and its cookies.", "4 October 2026: first published."] },
     ],
   },
   {
