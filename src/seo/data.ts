@@ -442,6 +442,7 @@ export const EXISTING_PAGES = [
   { path: "/ai", priority: "0.8" },
   { path: "/work", priority: "0.8" },
   { path: "/offer", priority: "0.6" },
+  { path: "/about", priority: "0.6" },
   { path: "/labs", priority: "0.6" },
   { path: "/craft", priority: "0.5" },
   { path: "/laws", priority: "0.4" },

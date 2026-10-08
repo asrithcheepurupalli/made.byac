@@ -70,7 +70,7 @@ const assets = fs.readdirSync(path.join(dist, "assets"));
 const chunk = (name) => assets.find((f) => f.startsWith(name + "-") && f.endsWith(".js"));
 const chunkFor = (file) => {
   const f = file.replace(/\\/g, "/");
-  const direct = { "offer.html": "OfferPage", "ai.html": "AiPage", "kitchen.html": "KitchenPage", "work.html": "WorkPage", "labs.html": "LabsPage", "laws.html": "LawsPage", "live.html": "LivePage", "system.html": "SystemPage", "worth.html": "WorthPage", "motion.html": "MotionPage", "craft.html": "CraftPage", "teardown.html": "TeardownPage", "aavira.html": "AaviraSite", "monthly-content-marketing-retainer.html": "ContentRetainerPage", "work/ramachandra-ortho.html": "OrthoCaseStudy", "work/aavira.html": "AaviraCaseStudy", "work/innovolt.html": "CampaignCaseStudy", "work/mithai-maharaja.html": "CampaignCaseStudy" };
+  const direct = { "offer.html": "OfferPage", "about.html": "AboutPage", "ai.html": "AiPage", "kitchen.html": "KitchenPage", "work.html": "WorkPage", "labs.html": "LabsPage", "laws.html": "LawsPage", "live.html": "LivePage", "system.html": "SystemPage", "worth.html": "WorthPage", "motion.html": "MotionPage", "craft.html": "CraftPage", "teardown.html": "TeardownPage", "aavira.html": "AaviraSite", "monthly-content-marketing-retainer.html": "ContentRetainerPage", "work/ramachandra-ortho.html": "OrthoCaseStudy", "work/aavira.html": "AaviraCaseStudy", "work/innovolt.html": "CampaignCaseStudy", "work/mithai-maharaja.html": "CampaignCaseStudy" };
   if (direct[f]) return direct[f];
   if (f === "index.html" || f === "404.html") return null;
   return "SeoRoute";

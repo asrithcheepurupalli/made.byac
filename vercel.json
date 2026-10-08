@@ -52,6 +52,10 @@
       "destination": "/offer.html"
     },
     {
+      "source": "/about",
+      "destination": "/about.html"
+    },
+    {
       "source": "/ai",
       "destination": "/ai.html"
     },

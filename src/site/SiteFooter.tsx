@@ -19,7 +19,7 @@ export function SiteFooter() {
             <div className="flex flex-col gap-3">
               <span className="label text-grey">Studio</span>
               <a href="#work" className="text-paper/80 hover:text-gold transition-colors text-sm">Work</a>
-              <a href="#why" className="text-paper/80 hover:text-gold transition-colors text-sm">Why</a>
+              <a href="/about" className="text-paper/80 hover:text-gold transition-colors text-sm">The founder story</a>
               <a href="#studio" className="text-paper/80 hover:text-gold transition-colors text-sm">Studio</a>
               <a href="/#faq" className="text-paper/80 hover:text-gold transition-colors text-sm">Questions</a>
               <a href="/aavira" className="text-paper/80 hover:text-gold transition-colors text-sm">Aavira, a concept</a>

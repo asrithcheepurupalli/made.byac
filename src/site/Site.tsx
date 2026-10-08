@@ -28,6 +28,7 @@ const PlayCanvas = lazy(() => import("./PlayCanvas").then((m) => ({ default: m.P
 // Route pages load on demand, so the homepage ships only its own code instead of all
 // eleven pages in one bundle (that monolith is what made the site slow).
 const OfferPage = lazyRoute(() => import("./OfferPage").then((m) => ({ default: m.OfferPage })));
+const AboutPage = lazyRoute(() => import("./AboutPage").then((m) => ({ default: m.AboutPage })));
 const AiPage = lazyRoute(() => import("./AiPage").then((m) => ({ default: m.AiPage })));
 const KitchenPage = lazyRoute(() => import("./KitchenPage").then((m) => ({ default: m.KitchenPage })));
 const WorkPage = lazyRoute(() => import("./WorkPage").then((m) => ({ default: m.WorkPage })));
@@ -51,6 +52,7 @@ const CampaignCaseStudy = lazyRoute<{ slug: string }>(() => import("./case/Campa
 // chunk ready before the swap and the transition never shows a blank frame.
 registerRoute("", () => Promise.resolve());
 registerRoute("/offer", OfferPage.preload);
+registerRoute("/about", AboutPage.preload);
 registerRoute("/ai", AiPage.preload);
 registerRoute("/kitchen", KitchenPage.preload);
 registerRoute("/work", WorkPage.preload);
@@ -141,7 +143,7 @@ export function Site() {
   // Pick the page for the current route. Case studies first, so a #/work/<slug>
   // deep link wins over the /work archive.
   const caseSlug = path.startsWith("/work/") ? path.slice("/work/".length) : "";
-  const KNOWN = ["", "/index", "/offer", "/ai", "/kitchen", "/work", "/labs", "/laws", "/live", "/system", "/worth", "/motion", "/craft", "/teardown", "/aavira", "/monthly-content-marketing-retainer"];
+  const KNOWN = ["", "/index", "/offer", "/about", "/ai", "/kitchen", "/work", "/labs", "/laws", "/live", "/system", "/worth", "/motion", "/craft", "/teardown", "/aavira", "/monthly-content-marketing-retainer"];
   const isKnownCase = caseSlug === "ramachandra-ortho" || caseSlug === "aavira" || !!CAMPAIGN_CASES[caseSlug];
   const isHashPage = route.startsWith("#/");
   let content: ReactNode;
@@ -157,6 +159,8 @@ export function Site() {
     content = <AaviraSite />;
   } else if (path === "/monthly-content-marketing-retainer") {
     content = <ContentRetainerPage />;
+  } else if (path === "/about") {
+    content = <AboutPage />;
   } else if (path === "/offer" || route === "#/offer") {
     content = <OfferPage />;
   } else if (path === "/ai" || route === "#/ai") {

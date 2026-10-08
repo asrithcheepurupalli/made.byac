@@ -9,7 +9,7 @@ const LINKS = [
   { label: "AI", href: "/ai" },
   { label: "Craft", href: "/craft" },
   { label: "Offer", href: "/offer" },
-  { label: "About", href: "#why" },
+  { label: "About", href: "/about" },
 ];
 
 export function SiteNav() {
