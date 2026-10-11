@@ -16,6 +16,7 @@ export const SERVICE_CLUSTER: Record<string, Cluster> = {
   "whatsapp-business-automation": "web",
   "branding-and-packaging-design-visakhapatnam": "web",
   "monthly-content-marketing-retainer": "content",
+  "property-listing-pages-for-real-estate-agents": "property",
 };
 
 export interface Index {
@@ -33,6 +34,11 @@ const clinicItems = [
   ...LANDINGS.filter((l) => l.cluster === "clinic").map((l) => ({ path: l.path, label: l.h1, hint: l.description })),
 ];
 
+const propertyItems = [
+  ...SERVICES.filter((s) => SERVICE_CLUSTER[s.slug] === "property").map((s: Service) => ({ path: s.path, label: s.h1, hint: s.description })),
+  ...LANDINGS.filter((l) => l.cluster === "property").map((l) => ({ path: l.path, label: l.h1, hint: l.description })),
+];
+
 export const INDEXES: Index[] = [
   {
     path: "/clinic-software",
@@ -42,6 +48,15 @@ export const INDEXES: Index[] = [
     h1: "Appointment booking for every kind of clinic, in every city we serve",
     lede: "Online and WhatsApp booking, pay to confirm and a live front desk queue, set up for your speciality and your city. Start with the one that sounds like you.",
     items: clinicItems,
+  },
+  {
+    path: "/property-listing-pages",
+    title: "Property listing pages for agents, brokers and builders",
+    description: "Branded property listing pages, WhatsApp catalogues and project pages for real estate agents, brokers and builders in Visakhapatnam and across India.",
+    eyebrow: "Real estate",
+    h1: "Listing pages for agents, brokers and builders",
+    lede: "Clean property pages with your name on them, an enquiry button that opens your WhatsApp, and one link to share. Start with the one that sounds like you.",
+    items: propertyItems,
   },
   {
     path: "/guides",

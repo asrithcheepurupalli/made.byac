@@ -1,4 +1,5 @@
 import type { Content } from "./content-types";
+import { PROPERTY_LANDINGS } from "./content-property";
 
 // Targeted landing pages. Each one is written for a distinct search intent and carries
 // details that are true and specific to that intent. No invented clients, numbers or prices.
@@ -15,7 +16,7 @@ const ORTHO = {
 
 const clinicCta = { ctaLabel: "Talk to us on WhatsApp", accent: "#0c7a68" };
 
-export const LANDINGS: Content[] = [
+const BASE_LANDINGS: Content[] = [
   // ---------------------------------------------------------------- clinic: places
   {
     kind: "landing", cluster: "clinic", slug: "clinic-appointment-booking-software-visakhapatnam",
@@ -537,3 +538,5 @@ export const LANDINGS: Content[] = [
     ctaMessage: "Hi, we want a digital menu for our restaurant.", ctaLabel: "Talk to us on WhatsApp", accent: "#a8651c",
   },
 ];
+
+export const LANDINGS: Content[] = [...BASE_LANDINGS, ...PROPERTY_LANDINGS];

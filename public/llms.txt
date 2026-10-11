@@ -1,6 +1,15 @@
 # made. by ac
 
-> A design and software studio based in Visakhapatnam (Vizag), India, working with clients worldwide. We build appointment booking systems for clinics and hospitals, restaurant QR ordering, WhatsApp automation, AI agents, websites and brand identity, for businesses in Vizag, across India and overseas.
+> made. by ac is a design and software studio based in Visakhapatnam (Vizag), India, founded and led by Asrith Cheepurupalli. We build appointment booking systems for clinics and hospitals, restaurant QR ordering, WhatsApp and AI automation, websites and brand identity, for businesses in Vizag, across India and overseas.
+
+Full text of every service, case study and answer: https://www.made-by-ac.com/llms-full.txt
+
+## Facts
+- Location: Visakhapatnam, Andhra Pradesh, India. Languages: English, Telugu, Hindi.
+- Founder: Asrith Cheepurupalli (https://www.made-by-ac.com/about)
+- Real client work: Ramachandra Ortho Care (a clinic booking system), Innovolt and Mithai Maharaja (campaign and packaging design).
+- Aavira is our own flagship study of a restaurant platform. It is a study, not a client project.
+- We do not run portal listings and we do not promise rankings or guaranteed mentions.
 
 ## Services
 - [All services](https://www.made-by-ac.com/services)
@@ -15,7 +24,12 @@
 - [Ramachandra Ortho Care, clinic booking case study](https://www.made-by-ac.com/work/ramachandra-ortho)
 - [Aavira, our flagship restaurant platform study](https://www.made-by-ac.com/work/aavira)
 - [Monthly content retainer: blog posts and newsletters](https://www.made-by-ac.com/monthly-content-marketing-retainer)
+- [Property listing pages for real estate agents and builders](https://www.made-by-ac.com/property-listing-pages-for-real-estate-agents)
 - [Aavira, a concept restaurant website we designed (fictional brand)](https://www.made-by-ac.com/aavira)
+
+## About
+- [The founder story](https://www.made-by-ac.com/about)
+- [Listing page maker, a free tool for real estate agents](https://www.made-by-ac.com/listing-builder)
 
 ## Contact
 - Email: thebrain@made-by-ac.com

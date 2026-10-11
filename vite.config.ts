@@ -17,6 +17,8 @@ export default defineConfig(() => {
           main: path.resolve(__dirname, 'index.html'),
           offer: path.resolve(__dirname, 'offer.html'),
           about: path.resolve(__dirname, 'about.html'),
+          sample: path.resolve(__dirname, 'sample-listing.html'),
+          listing: path.resolve(__dirname, 'listing-builder.html'),
           ai: path.resolve(__dirname, 'ai.html'),
           kitchen: path.resolve(__dirname, 'kitchen.html'),
           work: path.resolve(__dirname, 'work.html'),

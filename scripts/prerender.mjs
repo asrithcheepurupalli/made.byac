@@ -64,13 +64,30 @@ const urls = mod.sitemapUrls().map((u) => `  <url><loc>${SITE}${u.path}</loc><pr
 fs.writeFileSync(path.join(dist, "sitemap.xml"), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`);
 console.log(`prerendered ${count} pages + sitemap (${mod.sitemapUrls().length} urls)`);
 
+// 2b) the same facts as plain HTML for crawlers that do not run JavaScript, plus llms-full.txt
+fs.writeFileSync(path.join(dist, "llms-full.txt"), mod.llmsFull());
+{
+  const walkHtml = (d) => fs.readdirSync(d, { withFileTypes: true }).flatMap((e) => e.isDirectory() ? (["assets", "fonts", "images", "mascots", "case", "products", "labs", "sample"].includes(e.name) ? [] : walkHtml(path.join(d, e.name))) : e.name.endsWith(".html") ? [path.join(d, e.name)] : []);
+  let n = 0;
+  for (const fp of walkHtml(dist)) {
+    const rel = path.relative(dist, fp).replace(/\\/g, "/");
+    const block = mod.rootNoscript(rel);
+    if (!block) continue;
+    const html = fs.readFileSync(fp, "utf8");
+    if (html.includes("<!--crawler-text-->")) continue;
+    fs.writeFileSync(fp, html.replace("</body>", `<!--crawler-text--><noscript>${block}</noscript>\n  </body>`));
+    n++;
+  }
+  console.log(`crawler text added to ${n} pages, llms-full.txt written`);
+}
+
 // 3) kill the chunk waterfall: main.js boots, THEN fetches the page chunk. Tell the browser
 // about the page chunk (and its shared imports) up front so both download in parallel.
 const assets = fs.readdirSync(path.join(dist, "assets"));
 const chunk = (name) => assets.find((f) => f.startsWith(name + "-") && f.endsWith(".js"));
 const chunkFor = (file) => {
   const f = file.replace(/\\/g, "/");
-  const direct = { "offer.html": "OfferPage", "about.html": "AboutPage", "ai.html": "AiPage", "kitchen.html": "KitchenPage", "work.html": "WorkPage", "labs.html": "LabsPage", "laws.html": "LawsPage", "live.html": "LivePage", "system.html": "SystemPage", "worth.html": "WorthPage", "motion.html": "MotionPage", "craft.html": "CraftPage", "teardown.html": "TeardownPage", "aavira.html": "AaviraSite", "monthly-content-marketing-retainer.html": "ContentRetainerPage", "work/ramachandra-ortho.html": "OrthoCaseStudy", "work/aavira.html": "AaviraCaseStudy", "work/innovolt.html": "CampaignCaseStudy", "work/mithai-maharaja.html": "CampaignCaseStudy" };
+  const direct = { "offer.html": "OfferPage", "about.html": "AboutPage", "sample-listing.html": "SampleListingPage", "listing-builder.html": "ListingBuilderPage", "ai.html": "AiPage", "kitchen.html": "KitchenPage", "work.html": "WorkPage", "labs.html": "LabsPage", "laws.html": "LawsPage", "live.html": "LivePage", "system.html": "SystemPage", "worth.html": "WorthPage", "motion.html": "MotionPage", "craft.html": "CraftPage", "teardown.html": "TeardownPage", "aavira.html": "AaviraSite", "monthly-content-marketing-retainer.html": "ContentRetainerPage", "work/ramachandra-ortho.html": "OrthoCaseStudy", "work/aavira.html": "AaviraCaseStudy", "work/innovolt.html": "CampaignCaseStudy", "work/mithai-maharaja.html": "CampaignCaseStudy" };
   if (direct[f]) return direct[f];
   if (f === "index.html" || f === "404.html") return null;
   return "SeoRoute";

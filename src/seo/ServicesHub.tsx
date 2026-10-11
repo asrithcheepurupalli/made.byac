@@ -54,6 +54,7 @@ export function ServicesHub() {
               { h: "Clinics and hospitals", c: "clinic", index: INDEXES[0] },
               { h: "Websites and software", c: "web", index: null },
               { h: "Restaurants and bars", c: "restaurant", index: null },
+              { h: "Real estate agents and builders", c: "property", index: INDEXES.find((i) => i.path === "/property-listing-pages") ?? null },
             ].map((g) => (
               <div key={g.c}>
                 <h2 className="font-display text-2xl">{g.h}</h2>
@@ -61,7 +62,7 @@ export function ServicesHub() {
                   {LANDINGS.filter((l) => l.cluster === g.c).map((l) => (
                     <li key={l.path}><a href={l.path} className="text-[15px] text-ink/80 hover:text-[#8a6d2f] transition-colors">{l.navLabel}</a></li>
                   ))}
-                  {g.index && <li><a href={g.index.path} className="text-[15px] text-[#8a6d2f] underline underline-offset-4">See all clinic pages</a></li>}
+                  {g.index && <li><a href={g.index.path} className="text-[15px] text-[#8a6d2f] underline underline-offset-4">See all pages</a></li>}
                 </ul>
               </div>
             ))}

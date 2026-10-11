@@ -16,6 +16,7 @@ One page per intent. Each page targets a cluster, not a single phrase.
 | /ai | AI automation for businesses India | AI sales agent, WhatsApp commerce bot | Commercial | Aavira (flagship study) |
 | /services | made. by ac services (hub) | studio in Vizag | Navigational | all of the above |
 | /monthly-content-marketing-retainer | monthly content marketing retainer | blog and newsletter writing service, content marketing for startups, outsourced content writing for small business, done for you blog posts | Commercial | (no case study yet) |
+| /property-listing-pages-for-real-estate-agents | property listing website for real estate agents | real estate agent website India, property listing page for brokers, WhatsApp property catalogue | Commercial | (no client yet, stated on the page) |
 
 ## Rules we are following
 - Do not clone a page per city. Vizag, Andhra Pradesh and India are covered inside each page

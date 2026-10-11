@@ -1,4 +1,5 @@
 import { SITE, EMAIL, WHATSAPP, SERVICES, type Service, type CaseShell, HUB } from "./data";
+import { FAQ_TOPICS } from "../site/FaqSection";
 import type { Content } from "./content-types";
 import type { Index } from "./registry";
 
@@ -24,6 +25,27 @@ export const organization = {
   address: { "@type": "PostalAddress", addressLocality: "Visakhapatnam", addressRegion: "Andhra Pradesh", addressCountry: "IN" },
   areaServed,
   sameAs: ["https://github.com/asrithcheepurupalli"],
+  founder: { "@id": `${SITE}/about#founder` },
+  slogan: "Design and software, built by one team.",
+  knowsAbout: [
+    "Appointment booking software for clinics",
+    "Restaurant QR ordering",
+    "WhatsApp Business automation",
+    "AI agents for businesses",
+    "Website design and development",
+    "Brand identity and packaging design",
+  ],
+  contactPoint: [{ "@type": "ContactPoint", contactType: "customer support", email: EMAIL, telephone: `+${WHATSAPP}`, availableLanguage: ["English", "Telugu", "Hindi"] }],
+};
+
+export const founderNode = {
+  "@type": "Person",
+  "@id": `${SITE}/about#founder`,
+  name: "Asrith Cheepurupalli",
+  jobTitle: "Founder",
+  worksFor: { "@id": ORG_ID },
+  url: `${SITE}/about`,
+  sameAs: ["https://github.com/asrithcheepurupalli"],
 };
 
 export const websiteNode = { "@type": "WebSite", "@id": `${SITE}/#website`, url: SITE, name: "made. by ac", publisher: { "@id": ORG_ID }, inLanguage: "en-IN" };
@@ -35,7 +57,16 @@ const crumbs = (items: { name: string; url: string }[]) => ({
 
 export const graph = (...nodes: object[]) => ({ "@context": "https://schema.org", "@graph": nodes });
 
-export const homeLd = () => graph(organization, websiteNode);
+export const homeLd = () =>
+  graph(
+    organization,
+    founderNode,
+    websiteNode,
+    {
+      "@type": "FAQPage",
+      mainEntity: (FAQ_TOPICS.flatMap((t) => t.qs as readonly (readonly [string, string])[]) as (readonly [string, string])[]).map(([q, a]) => ({ "@type": "Question", name: q, acceptedAnswer: { "@type": "Answer", text: a } })),
+    },
+  );
 
 export const serviceLd = (s: Service) =>
   graph(

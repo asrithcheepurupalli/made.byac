@@ -7,7 +7,7 @@ export interface Section {
   checklist?: string[];   // rendered as an interactive, checkable list
 }
 
-export type Cluster = "clinic" | "web" | "restaurant" | "content" | "guide";
+export type Cluster = "clinic" | "web" | "restaurant" | "content" | "property" | "guide";
 
 export interface Content {
   kind: "landing" | "guide";

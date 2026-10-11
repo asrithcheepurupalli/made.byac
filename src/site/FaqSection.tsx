@@ -4,7 +4,7 @@ import { waLink } from "../seo/contact";
 
 // Questions a prospect asks before writing in. Answers use only what the studio already says
 // elsewhere on the site, so nothing here promises a price, a date or a policy that is not stated.
-const TOPICS = [
+export const FAQ_TOPICS = [
   {
     t: "Working with us",
     qs: [
@@ -42,12 +42,12 @@ export function FaqSection({ dark = false }: { dark?: boolean }) {
         <span className="label text-red reveal-up">· questions</span>
         <h2 id="faq-h" className="reveal-up mt-6 font-display text-5xl md:text-7xl leading-[0.95] tracking-[-0.02em]">Questions, <span className="italic font-normal">answered</span><span className="text-red">.</span></h2>
         <div className="reveal-up mt-10 flex flex-wrap gap-2" role="tablist" aria-label="Topics">
-          {TOPICS.map((x, i) => (
+          {FAQ_TOPICS.map((x, i) => (
             <button key={x.t} type="button" role="tab" aria-selected={topic === i} onClick={() => setTopic(i)} className={`label text-[11px] rounded-full px-5 py-2.5 border transition-colors ${topic === i ? "bg-red text-white border-red" : `${rule} ${muted} hover:border-red`}`}>{x.t}</button>
           ))}
         </div>
         <div className={`mt-8 border-t ${rule}`} role="tabpanel">
-          {TOPICS[topic].qs.map(([q, a]) => (
+          {FAQ_TOPICS[topic].qs.map(([q, a]) => (
             <details key={q} className={`group border-b ${rule} py-5`}>
               <summary className="flex items-center justify-between gap-6 cursor-pointer list-none font-display text-xl md:text-2xl leading-snug">
                 <span>{q}</span>

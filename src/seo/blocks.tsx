@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { ArrowUpRight, Check } from "lucide-react";
 import type { Cluster, Content } from "./content-types";
+import { ListingTool } from "../site/listing/ListingTool";
 import { waLink, WHATSAPP } from "./data";
 
 // Shared, SSR-safe building blocks for the search-facing pages. They render real content
@@ -59,6 +60,12 @@ const TRUST: Record<Cluster, { k: string; n?: number; s?: string; v: string }[]>
     { k: "Edited by a person", v: "Every piece is rewritten and signed off before you see it" },
     { k: "Flat monthly fee", v: "Agreed up front, with the writing included" },
     { k: "You approve", v: "Nothing is published without your yes" },
+  ],
+  property: [
+    { k: "Your brand", v: "Your name, your colours and your own link on every listing" },
+    { k: "WhatsApp first", v: "Enquiries land on your number with the property already named" },
+    { k: "One link", v: "Share one page, not twenty photos and a block of text" },
+    { k: "Early clients", v: "We are taking our first real estate clients, so you get our full attention" },
   ],
   guide: [
     { k: "From the desk", v: "Written by the people who build and run these systems" },
@@ -145,6 +152,19 @@ const FIT: Record<Cluster, { yes: string[]; no: string[] }> = {
       "You want to publish without reading anything first",
     ],
   },
+  property: {
+    yes: [
+      "You send property details on WhatsApp and want them to look worth the price",
+      "You want buyers to remember your name, not a portal's",
+      "You list several properties and keep having to resend photos and prices",
+      "You would rather enquiries came straight to your WhatsApp",
+    ],
+    no: [
+      "You want us to bring you buyers or run portal listings for you",
+      "You want a guaranteed number of leads, which nobody honest can sell",
+      "You need a full CRM and agent payroll system on day one",
+    ],
+  },
   guide: { yes: [], no: [] },
 };
 
@@ -187,6 +207,7 @@ const SEND: Record<Cluster, string[]> = {
   web: ["What your business does, and who you sell to", "What the website or software needs to do", "Any site or product you admire, and any deadline"],
   restaurant: ["Your venue, your city and how many tables", "Whether your kitchen uses a point-of-sale system", "What slows down service on a busy night"],
   content: ["What your business does and who you write for", "The topics you want to be known for, and how you want to sound", "Posts or pages of yours that already sound like you"],
+  property: ["Whether you are an agent, a broker or a builder, and which city", "How many properties you are listing right now", "One listing you are proud of, or one you find hard to present"],
   guide: ["What you run and where", "What you are trying to decide", "Anything you would like a second opinion on"],
 };
 
@@ -275,6 +296,14 @@ const GETS: Record<Cluster, { t: string; d: string }[]> = {
     { t: "A simple approval routine", d: "You read, you ask for changes, you approve. Nothing goes out without your yes." },
     { t: "A person to ask", d: "One contact for questions, changes to the brief and anything that is not working." },
   ],
+  property: [
+    { t: "A branded listing page", d: "Your logo, colours and contact details, set up once and used on every property." },
+    { t: "Your first property, live", d: "One real listing built with you, so you see exactly how a buyer will see it." },
+    { t: "A WhatsApp enquiry button", d: "One tap opens a chat with the property name already filled in." },
+    { t: "A simple way to add and update", d: "Change a price or mark a property sold in one place, and the link stays the same." },
+    { t: "Your RERA details where you have them", d: "Shown on the page the way your listings need them." },
+    { t: "A person to ask", d: "One contact for changes, new listings and anything that is not working." },
+  ],
   guide: [],
 };
 
@@ -316,6 +345,7 @@ const SHOTS: Record<Cluster, { src: string; cap: string; kind: "phone" | "wide";
     { src: "/images/Hyd'Tel.webp", cap: "Regional campaign creative, in Telugu", kind: "wide", alt: "Telugu campaign creative" },
   ],
   content: [],
+  property: [],
   guide: [],
 };
 const SHOT_NOTE: Record<Cluster, string> = {
@@ -323,6 +353,7 @@ const SHOT_NOTE: Record<Cluster, string> = {
   restaurant: "Our flagship study, not a client project. The prototype is on the case page.",
   web: "Real work: a clinic booking site and dashboard, and a regional campaign.",
   content: "",
+  property: "",
   guide: "",
 };
 
@@ -354,6 +385,7 @@ const PRICE: Record<Cluster, string[]> = {
   web: ["How many pages, and whether it needs a database or logins", "How custom the design is", "Integrations such as payments, WhatsApp and booking"],
   restaurant: ["The number of tables and outlets", "Whether it connects to your point-of-sale", "How custom the menu and brand design are"],
   content: ["How many blog posts and newsletters you want each month", "How much interviewing or review you want to do", "Whether you also want help publishing and scheduling"],
+  property: ["How many properties you list and how often they change", "Whether you want your own website as well as listing pages", "Whether you want site visit booking and brochures"],
   guide: [],
 };
 
@@ -660,11 +692,63 @@ export function ContentFlow() {
   );
 }
 
+
+/* ───────────────────────────── a messy listing becomes one clean page (illustration) */
+export function ListingFlow() {
+  const msgs = ["20 photos, one by one", "2BHK, 3rd floor, near the main road", "Price? Call for price", "Which one are you asking about?"];
+  return (
+    <div className="rounded-3xl border border-paper-line bg-white p-6 md:p-10">
+      <div className="grid md:grid-cols-[1fr_auto_1fr] gap-8 md:gap-6 items-center">
+        <div>
+          <span className="label text-[10px] text-ink/60">Today, on WhatsApp</span>
+          <ul className="mt-4 space-y-2.5">
+            {msgs.map((m, i) => (
+              <li key={m} className={`max-w-[88%] rounded-2xl px-4 py-2.5 text-[14px] leading-snug ${i % 2 ? "ml-auto bg-[#d9f5c9]" : "bg-paper-dim"}`}>{m}</li>
+            ))}
+          </ul>
+        </div>
+        <ArrowUpRight className="hidden md:block w-8 h-8 text-ink/40 rotate-45" aria-hidden />
+        <div>
+          <span className="label text-[10px] text-ink/60">With us, one link</span>
+          <div className="mt-4 rounded-2xl border border-paper-line shadow-[0_24px_50px_-28px_rgba(0,0,0,.35)] overflow-hidden">
+            <div className="grid grid-cols-3 gap-0.5 bg-paper-line">
+              <div className="col-span-2 row-span-2 h-28 bg-paper-dim" /><div className="h-14 bg-paper-dim" /><div className="h-14 bg-paper-dim" />
+            </div>
+            <div className="p-4">
+              <p className="font-display text-xl leading-tight">2 BHK apartment</p>
+              <p className="mt-1 text-[13px] text-ink/65">Area, floor, facing and a map link, all in one place</p>
+              <div className="mt-3 flex items-center justify-between">
+                <span className="font-display text-lg">Price shown clearly</span>
+                <span className="rounded-full bg-[#1fa855] px-3 py-1.5 text-[12px] font-semibold text-white">Enquire on WhatsApp</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p className="mt-6 text-[13px] leading-relaxed text-ink/65 text-center">An illustration of the idea, not a real listing. Your pages carry your brand and your own property details.</p>
+    </div>
+  );
+}
+
+
 export function Moment({ cluster }: { cluster: Cluster }) {
   if (cluster === "clinic") return <BookingSim />;
   if (cluster === "restaurant") return <TableSim />;
   if (cluster === "web") return <DeviceSwitch />;
   if (cluster === "content") return <ContentFlow />;
+  if (cluster === "property") {
+    return (
+      <div className="space-y-10 md:space-y-14">
+        <ListingFlow />
+        <div id="try-it" className="rounded-3xl border border-paper-line bg-white p-5 md:p-10">
+          <span className="label text-red">Try it with your own listing</span>
+          <h3 className="mt-3 font-display text-3xl md:text-4xl leading-tight tracking-tight">Paste a listing. Get a clean page. It is free.</h3>
+          <p className="mt-3 max-w-2xl text-[15px] leading-relaxed text-ink/70">Paste the message you would forward, add photos and your name, and download one page you can send. It runs in your browser and nothing is uploaded. We build this for your own website too, with your brand and visit booking.</p>
+          <div className="mt-8"><ListingTool previewHeight={600} /></div>
+        </div>
+      </div>
+    );
+  }
   return null;
 }
 

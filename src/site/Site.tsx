@@ -29,6 +29,8 @@ const PlayCanvas = lazy(() => import("./PlayCanvas").then((m) => ({ default: m.P
 // eleven pages in one bundle (that monolith is what made the site slow).
 const OfferPage = lazyRoute(() => import("./OfferPage").then((m) => ({ default: m.OfferPage })));
 const AboutPage = lazyRoute(() => import("./AboutPage").then((m) => ({ default: m.AboutPage })));
+const SampleListingPage = lazyRoute(() => import("./SampleListingPage").then((m) => ({ default: m.SampleListingPage })));
+const ListingBuilderPage = lazyRoute(() => import("./ListingBuilderPage").then((m) => ({ default: m.ListingBuilderPage })));
 const AiPage = lazyRoute(() => import("./AiPage").then((m) => ({ default: m.AiPage })));
 const KitchenPage = lazyRoute(() => import("./KitchenPage").then((m) => ({ default: m.KitchenPage })));
 const WorkPage = lazyRoute(() => import("./WorkPage").then((m) => ({ default: m.WorkPage })));
@@ -53,6 +55,8 @@ const CampaignCaseStudy = lazyRoute<{ slug: string }>(() => import("./case/Campa
 registerRoute("", () => Promise.resolve());
 registerRoute("/offer", OfferPage.preload);
 registerRoute("/about", AboutPage.preload);
+registerRoute("/listing-builder", ListingBuilderPage.preload);
+registerRoute("/sample-listing", SampleListingPage.preload);
 registerRoute("/ai", AiPage.preload);
 registerRoute("/kitchen", KitchenPage.preload);
 registerRoute("/work", WorkPage.preload);
@@ -143,7 +147,7 @@ export function Site() {
   // Pick the page for the current route. Case studies first, so a #/work/<slug>
   // deep link wins over the /work archive.
   const caseSlug = path.startsWith("/work/") ? path.slice("/work/".length) : "";
-  const KNOWN = ["", "/index", "/offer", "/about", "/ai", "/kitchen", "/work", "/labs", "/laws", "/live", "/system", "/worth", "/motion", "/craft", "/teardown", "/aavira", "/monthly-content-marketing-retainer"];
+  const KNOWN = ["", "/index", "/offer", "/about", "/listing-builder", "/sample-listing", "/ai", "/kitchen", "/work", "/labs", "/laws", "/live", "/system", "/worth", "/motion", "/craft", "/teardown", "/aavira", "/monthly-content-marketing-retainer"];
   const isKnownCase = caseSlug === "ramachandra-ortho" || caseSlug === "aavira" || !!CAMPAIGN_CASES[caseSlug];
   const isHashPage = route.startsWith("#/");
   let content: ReactNode;
@@ -159,6 +163,10 @@ export function Site() {
     content = <AaviraSite />;
   } else if (path === "/monthly-content-marketing-retainer") {
     content = <ContentRetainerPage />;
+  } else if (path === "/listing-builder") {
+    content = <ListingBuilderPage />;
+  } else if (path === "/sample-listing") {
+    content = <SampleListingPage />;
   } else if (path === "/about") {
     content = <AboutPage />;
   } else if (path === "/offer" || route === "#/offer") {
