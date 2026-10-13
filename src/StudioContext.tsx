@@ -118,6 +118,7 @@ function useStudioValue() {
         setContactForm({ name: "", email: "", phone: "", message: "", website: "" });
         setContactStatus("sent");
         trackEvent("contact_form_submit", { status: "sent", page: window.location.pathname });
+        trackEvent("generate_lead", { method: "contact_form", page: window.location.pathname });
         return;
       }
       let detail = "";

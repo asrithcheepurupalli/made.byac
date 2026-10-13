@@ -2,6 +2,10 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { Download, ImagePlus, Trash2 } from "lucide-react";
 import { AMENITY_WORDS, parseListing, SAMPLE_TEXT, type Listing } from "./parse";
 import { renderListingHtml, type Brand } from "./render";
+import { trackEvent } from "../track";
+
+// one "started" event per visit, not one per keystroke
+let parsedOnce = false;
 
 // Paste a messy WhatsApp listing, add photos, get one clean branded page as a single HTML file.
 // Everything runs in the browser: the text and photos are never uploaded anywhere.
@@ -43,6 +47,7 @@ export function ListingTool({ previewHeight = 720 }: { previewHeight?: number })
   const read = (value: string) => {
     setText(value);
     const parsed = parseListing(value);
+    if (!parsedOnce && value.trim().length > 20) { parsedOnce = true; trackEvent("listing_parsed", { used_example: value === SAMPLE_TEXT }); }
     setL(parsed);
     if (parsed.phone && !brand.phone) setBrand((b) => ({ ...b, phone: parsed.phone }));
   };
@@ -63,6 +68,7 @@ export function ListingTool({ previewHeight = 720 }: { previewHeight?: number })
   useEffect(() => { const t = setTimeout(() => setSrc(html), 250); return () => clearTimeout(t); }, [html]);
 
   const download = () => {
+    trackEvent("listing_download", { photos: photos.length, has_brand: Boolean(brand.name) });
     const blob = new Blob([html], { type: "text/html" });
     const a = document.createElement("a");
     a.href = URL.createObjectURL(blob);

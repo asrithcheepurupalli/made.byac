@@ -9,7 +9,12 @@ import { track } from "@vercel/analytics";
 // are recorded regardless. Events are sent from the browser only.
 
 type Props = Record<string, string | number | boolean | null>;
-const safe = (name: string, props: Props) => { try { track(name, props); } catch { /* analytics must never break the page */ } };
+// Every event goes to Google Analytics (the gtag snippet in each page head) and to Vercel Analytics.
+// Both are wrapped so a blocked or missing script can never break the page.
+const safe = (name: string, props: Props) => {
+  try { (window as unknown as { gtag?: (...a: unknown[]) => void }).gtag?.("event", name, props); } catch { /* analytics must never break the page */ }
+  try { track(name, props); } catch { /* same */ }
+};
 
 const whereOf = (a: Element) => {
   if (a.closest("header, nav")) return "header";
@@ -41,6 +46,10 @@ export function installTracking() {
       const m = path.match(/^\/work\/([a-z0-9-]+)$/);
       if (m) return safe("case_study_click", { slug: m[1], from: page, where });
       if (path === "/teardown" || path === "/worth") return safe("lead_magnet_click", { target: path, from: page, where });
+      if (path === "/offer") return safe("offer_click", { from: page, where, label });
+      if (path === "/listing-builder" || path === "/sample-listing") return safe("tool_click", { target: path, from: page, where });
+      if (path === "/about") return safe("about_click", { from: page, where });
+      if (path === "/services" || /-(for|in)-/.test(path)) return safe("service_click", { target: path, from: page, where });
       return;
     }
     if (PRODUCT_HOSTS.some((h) => url!.hostname === h || (h.startsWith(".") && url!.hostname.endsWith(h)))) {
@@ -48,7 +57,24 @@ export function installTracking() {
     }
   };
   document.addEventListener("click", onClick, { capture: true });
-  return () => document.removeEventListener("click", onClick, { capture: true });
+
+  // "Nothing next" check: how many people actually reach the contact section, once per page view.
+  // Polled rather than observed, because the section is lazy-mounted and its element gets replaced.
+  let firedFor = "";
+  const watchContact = () => {
+    const path = window.location.pathname;
+    if (path === firedFor) return;
+    const el = document.getElementById("say-hi");
+    if (!el) return;
+    const r = el.getBoundingClientRect();
+    if (r.top < window.innerHeight * 0.65 && r.bottom > window.innerHeight * 0.35) { firedFor = path; safe("contact_section_view", { page: path }); }
+  };
+  const poll = window.setInterval(watchContact, 1000);
+
+  return () => {
+    document.removeEventListener("click", onClick, { capture: true });
+    window.clearInterval(poll);
+  };
 }
 
 export const trackEvent = safe;
