@@ -1,4 +1,5 @@
 import { ArrowUpRight, Zap, Truck, Gift, Package } from "lucide-react";
+import { useAudience } from "./audience";
 
 // ACT II — the work, under the lights. Three case studies carry it; everything
 // else hangs on a quiet wall you can hover to view.
@@ -19,6 +20,10 @@ const MORE = [
 const CASE_IMG: Record<string, string> = Object.fromEntries(CASE_STUDIES.map((c) => [c.slug, c.img]));
 
 export function SelectedWork() {
+  // restaurant, tech and service readers meet the flagship study first; clinics keep the clinic first
+  const seg = useAudience();
+  const order = seg === "restaurant" || seg === "tech" || seg === "services" ? [1, 0, 2, 3] : [0, 1, 2, 3];
+  const featured = order.map((i) => CASE_STUDIES[i]).slice(0, 2);
   return (
     <section id="work" data-nav-dark className="relative bg-ink text-paper py-28 md:py-32 overflow-hidden">
       {/* seam down from the paper hero above */}
@@ -35,7 +40,7 @@ export function SelectedWork() {
 
         {/* the one featured client study: Ramachandra Ortho Care */}
         <div className="flex flex-col gap-16 md:gap-24">
-          {CASE_STUDIES.slice(0, 2).map((feat, idx) => (
+          {featured.map((feat, idx) => (
                 <div key={feat.slug}>
                 <a href={`/work/${feat.slug}`} data-cursor="View" className="group grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
           <div className={`lg:col-span-7 ${idx % 2 ? "lg:order-2" : ""}`}>

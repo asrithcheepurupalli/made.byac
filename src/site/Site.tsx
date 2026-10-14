@@ -1,6 +1,7 @@
 import { lazy, Suspense, useEffect, useSyncExternalStore, type ReactNode } from "react";
 import { lazyRoute } from "./lazyRoute";
 import { installTracking } from "./track";
+import { AudiencePanel } from "./AudiencePanel";
 import { installNavigation, normPath, registerFallback, registerRoute, snapshot, subscribe } from "./nav";
 import { ScrollProgress } from "./ScrollProgress";
 import { SmoothScroll } from "./SmoothScroll";
@@ -200,6 +201,7 @@ export function Site() {
         <SiteNav />
         <main>
           <ActHero />
+          <AudiencePanel />
           <ClientStrip />
           <Defer Component={SelectedWork} id="work" dark bg="bg-ink" minHeight="200svh" delay={1500} />
           <Defer Component={ProblemPicker} id="fix" dark bg="bg-ink" minHeight="100svh" delay={2000} />

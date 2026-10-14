@@ -485,3 +485,8 @@ html.js-reveal .line-inner { animation: line-rise-kf 0.95s cubic-bezier(0.16, 1,
   @keyframes crp-float-kf { 0%, 100% { translate: 0 0; } 50% { translate: 0 -10px; } }
   .crp-float { animation: crp-float-kf 6s ease-in-out infinite; }
 }
+
+/* audience panel: opens softly once we know who is reading */
+@keyframes aud-in-kf { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+.aud-in { animation: aud-in-kf 0.7s cubic-bezier(0.16, 1, 0.3, 1) both; }
+@media (prefers-reduced-motion: reduce) { .aud-in { animation: none; } }

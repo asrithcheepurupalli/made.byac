@@ -1,12 +1,15 @@
 import { useRef, useEffect, type CSSProperties } from "react";
 import { motion, useScroll, useTransform, useReducedMotion } from "motion/react";
 import { UtcClock } from "./Clocks";
+import { PROFILES, useAudience } from "./audience";
 
 // ACT I — Editorial Brutalist hero. Type is the design: oversized Fraunces on a
 // faint grid that lights up under the cursor, one decisive red rule, a gold seal.
 export function ActHero() {
   const ref = useRef<HTMLElement>(null);
   const reduce = useReducedMotion();
+  const seg = useAudience();
+  const prof = seg ? PROFILES[seg] : null;
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
   // Grid drifts down + the whole hero eases up a touch as you scroll past it.
   const gridY = useTransform(scrollYProgress, [0, 1], ["0%", reduce ? "0%" : "16%"]);
@@ -102,13 +105,24 @@ export function ActHero() {
               See the work
               <span className="inline-block w-8 h-px bg-ink/50 transition-all duration-500 group-hover:w-12 group-hover:bg-ink" />
             </a>
+            <a href="#for-you" className="group label text-ink/80 hover:text-ink transition-colors inline-flex items-center gap-3">
+              {prof ? "Change my view" : "Show me what fits me"}
+              <span className="inline-block w-8 h-px bg-ink/50 transition-all duration-500 group-hover:w-12 group-hover:bg-ink" />
+            </a>
           </div>
+          {prof ? (
+            <p className="mt-4 text-[13px] leading-relaxed text-ink/65">
+              {prof.heroNote}{" "}
+              <a href={prof.heroLink.href} className="underline underline-offset-4 decoration-ink/30 hover:text-ink">{prof.heroLink.label}</a>.
+            </p>
+          ) : (
           <p className="mt-4 text-[13px] leading-relaxed text-ink/65">
-            Live now: a clinic books, pays and queues on a system we built (
-            <a href="/work/ramachandra-ortho" className="underline underline-offset-4 decoration-ink/30 hover:text-ink">Ramachandra Ortho Care</a>
-            ), in three languages. And our restaurant platform study,{" "}
-            <a href="/work/aavira" className="underline underline-offset-4 decoration-ink/30 hover:text-ink">Aavira</a>.
-          </p>
+              Live now: a clinic books, pays and queues on a system we built (
+              <a href="/work/ramachandra-ortho" className="underline underline-offset-4 decoration-ink/30 hover:text-ink">Ramachandra Ortho Care</a>
+              ), in three languages. And our restaurant platform study,{" "}
+              <a href="/work/aavira" className="underline underline-offset-4 decoration-ink/30 hover:text-ink">Aavira</a>.
+            </p>
+          )}
         </div>
 
         <div className="rise flex items-end gap-8" style={{ animationDelay: "0.7s" }}>

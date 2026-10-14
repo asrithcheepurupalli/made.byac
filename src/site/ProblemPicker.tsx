@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, useInView } from "motion/react";
 import { ArrowUpRight } from "lucide-react";
+import { useAudience } from "./audience";
 
 // "What's eating you?" — the visitor taps THEIR problem and the panel transforms
 // to show the exact fix, in motion. Each fix points at something we have really built and
@@ -123,7 +124,12 @@ function Proof({ value, accent }: { value: string; accent: string }) {
 }
 
 export function ProblemPicker() {
-  const [active, setActive] = useState(0);
+  const seg = useAudience();
+  const [picked, setActive] = useState<number | null>(null);
+  // until they pick one themselves, open on the problem that matches who they said they are
+  const SEG_FIX: Record<string, string> = { clinic: "clinic", restaurant: "tables", services: "build", tech: "build", property: "vanish" };
+  const wanted = FIXES.findIndex((f) => f.id === SEG_FIX[seg]);
+  const active = picked ?? (wanted >= 0 ? wanted : 0);
   const fix = FIXES[active];
 
   return (
